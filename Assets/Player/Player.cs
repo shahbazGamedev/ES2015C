@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System;
 
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour {
     private void OnSelectionStart(RTSObject obj)
     {
         Debug.Log("RTS element selected: " + obj.name);
+        GameObject.Find("HUD").GetComponent<HUD>().SetDisplayObject(obj);
     }
 
     /// <summary>
@@ -34,6 +36,7 @@ public class Player : MonoBehaviour {
     private void OnSelectionEnd(RTSObject obj)
     {
         Debug.Log("RTS element unselected: " + obj.name);
+        GameObject.Find("HUD").GetComponent<HUD>().SetDisplayObject(null);
     }
 
     /// <summary>
