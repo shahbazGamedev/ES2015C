@@ -4,7 +4,6 @@ using System.Collections;
 using System;
 
 public class Player : MonoBehaviour {
-
     public string username;
     public bool human;
     public RTSObject SelectedObject { get; set; }
@@ -12,10 +11,12 @@ public class Player : MonoBehaviour {
     public Color teamColor;
 
     private bool findingPlacement = false;
-    
+
+    private HUD hud;
+
     void Start () {
-	
-	}
+        hud = GetComponentInChildren<HUD>();
+    }
 	
 	void Update () {
 	
@@ -26,17 +27,17 @@ public class Player : MonoBehaviour {
     /// </summary>
     private void OnSelectionStart(RTSObject obj)
     {
-        Debug.Log("RTS element selected: " + obj.name);
-        GameObject.Find("HUD").GetComponent<HUD>().SetDisplayObject(obj);
+        if (hud != null)
+            hud.SetDisplayObject(obj);
     }
 
     /// <summary>
-    /// Called when the RTS element selection end.
+    /// Called when the RTS element selection ends.
     /// </summary>
     private void OnSelectionEnd(RTSObject obj)
     {
-        Debug.Log("RTS element unselected: " + obj.name);
-        GameObject.Find("HUD").GetComponent<HUD>().SetDisplayObject(null);
+        if (hud != null)
+            hud.SetDisplayObject(null);
     }
 
     /// <summary>

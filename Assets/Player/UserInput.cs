@@ -47,6 +47,7 @@ public class UserInput : MonoBehaviour
             GameObject objectHit = hit.collider.gameObject;
             objectRtsElement = objectHit.GetComponent<RTSObject>();
         }
+
         // Call the class to change the currently selected RTS element.
         // Note that this will be null if the user clicked on nothing or a non-RTS element object.
         player.ChangeSelectedRtsObject(objectRtsElement);

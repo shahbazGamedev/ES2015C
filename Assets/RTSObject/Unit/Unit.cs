@@ -17,6 +17,8 @@ public class Unit : RTSObject {
 	}
     
     protected override void Update () {
-	
-	}
+        Debug.Log("takedamage " + hitPoints.ToString());
+        TakeDamage(1);
+        objectName = hitPoints.ToString();
+    }
 }
