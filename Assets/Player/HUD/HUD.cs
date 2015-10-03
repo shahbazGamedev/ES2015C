@@ -10,11 +10,7 @@ public class HUD : MonoBehaviour {
     public void SetDisplayObject(RTSObject newDisplayObject)
     {
         // Pass the object to each of the HUD's constituting components
-        foreach (HUDObjectName name in GetComponentsInChildren<HUDObjectName>())
-            name.SetDisplayObject(newDisplayObject);
-        foreach (HUDObjectHealthSlider slider in GetComponentsInChildren<HUDObjectHealthSlider>())
-            slider.SetDisplayObject(newDisplayObject);
-        foreach (HUDObjectHealthText text in GetComponentsInChildren<HUDObjectHealthText>())
-            text.SetDisplayObject(newDisplayObject);
+        foreach (HUDElement elm in GetComponentsInChildren<HUDElement>())
+            elm.SetDisplayObject(newDisplayObject);
     }
 }
