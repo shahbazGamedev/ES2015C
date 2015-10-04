@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Behaviour to control the actions that a player can do over a RTSObject.
+/// </summary>
 public class HUDAction : HUDElement
 {
     /// <summary>
@@ -18,7 +21,7 @@ public class HUDAction : HUDElement
 
     void Start()
     {
-        DisplayObjectPlayerMock = null;// transform.root.GetComponent<Player>();
+        DisplayObjectPlayerMock = transform.root.GetComponent<Player>();
         DisplayObjectActionsMock = new string[] { "Move", "Attack" };
 
         textComponent = GetComponent<Text>();
