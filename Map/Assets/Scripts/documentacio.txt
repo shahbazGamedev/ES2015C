@@ -1,11 +1,11 @@
 minimapa
 --------
 Start() -> Incialitzacio del lminimapa
-Update() -> actualitza les llistes dels objectes perque es mostrin al minimapa els objectes nous
+UpdateMap() -> actualitza les llistes dels objectes perque es mostrin al minimapa els objectes nous
 addEnemyGameObject(GameObject) -> Afegeix un objecte que es veure vermell al minimapa
 deleteEnemyGameObject(GameObject) -> Elimina un objecte del minimapa( s'ha de fer update)
 addAllyGameObject(GameObject) -> Afegeix un objecte que es veura blau al minimapa
-deleteAllyGameObject(GameObject) -> Elimina un objecte del minimapa( s'ha de fer update)
+deleteAllyGameObject(GameObject) -> Elimina un objecte del minimapa( s'ha de fer UpdateMap)
 
 TerrainFoW
 ----------
