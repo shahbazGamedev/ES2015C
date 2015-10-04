@@ -18,21 +18,11 @@ public class MiniMapScript : MonoBehaviour {
 
         addEnemyGameObject(cylinder);//testeig
         createMiniMapObjects();
+
     }
 	
 	// Update is called once per frame
 	void Update () {
-        foreach (GameObject o in trackedRedObjects)
-        { //Anem recorrent la llista dels objectes que volem que sortin al minimapa
-            GameObject k = Instantiate(redColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
-            miniMapObjects.Add(k);
-        }
-
-        foreach (GameObject o in trackedBlueObjects)
-        { //Anem recorrent la llista dels objectes que volem que sortin al minimapa
-            GameObject k = Instantiate(blueColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
-            miniMapObjects.Add(k);
-        }
     }
 
     void createMiniMapObjects()
@@ -51,6 +41,7 @@ public class MiniMapScript : MonoBehaviour {
             GameObject k = Instantiate(blueColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
             miniMapObjects.Add(k);
         }
+
     }
 
     void addEnemyGameObject(GameObject go) {
@@ -69,5 +60,32 @@ public class MiniMapScript : MonoBehaviour {
     void deleteAllyGameObject(GameObject go)
     {
         trackedBlueObjects.Remove(go);
+    }
+
+    void UpdateMap() {
+        foreach (GameObject o in trackedRedObjects)
+        { //Anem recorrent la llista dels objectes que volem que sortin al minimapa
+            GameObject k = Instantiate(redColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
+            miniMapObjects.Remove(k);
+        }
+
+        foreach (GameObject o in trackedBlueObjects)
+        { //Anem recorrent la llista dels objectes que volem que sortin al minimapa
+            GameObject k = Instantiate(blueColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
+            miniMapObjects.Remove(k);
+        }
+
+
+        foreach (GameObject o in trackedRedObjects)
+        { //Anem recorrent la llista dels objectes que volem que sortin al minimapa
+            GameObject k = Instantiate(redColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
+            miniMapObjects.Add(k);
+        }
+
+        foreach (GameObject o in trackedBlueObjects)
+        { //Anem recorrent la llista dels objectes que volem que sortin al minimapa
+            GameObject k = Instantiate(blueColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
+            miniMapObjects.Add(k);
+        }
     }
 }
