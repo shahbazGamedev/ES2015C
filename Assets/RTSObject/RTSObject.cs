@@ -10,7 +10,7 @@ public class RTSObject : MonoBehaviour {
 
     // Variables accessibles per a les subclasses
     protected Player player;
-    public string[] actions = { };
+    protected string[] actions = { };
     protected bool currentlySelected = false;
     protected Rect playingArea = new Rect(0.0f, 0.0f, 0.0f, 0.0f);
     protected float healthPercentage = 1.0f;
@@ -25,6 +25,7 @@ public class RTSObject : MonoBehaviour {
 	}
     
     protected virtual void Update () {
+	
 	}
 
     protected virtual void OnGUI()
@@ -37,7 +38,6 @@ public class RTSObject : MonoBehaviour {
 
     public virtual void PerformAction(string actionToPerform)
     {
-        Debug.Log("Perform Action: " + actionToPerform);
     }
 
     public virtual void MouseClick(GameObject hitObject, Vector3 hitPoint, Player controller)

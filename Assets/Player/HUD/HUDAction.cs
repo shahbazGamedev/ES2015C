@@ -11,8 +11,16 @@ public class HUDAction : HUDElement
 
     private Text textComponent;
 
+    // DisplayObject.actions and DisplayObject.player is not implemented yet.
+    // Use a mock instead and it will require to be changed later.
+    private Player DisplayObjectPlayerMock;
+    private string[] DisplayObjectActionsMock;
+
     void Start()
     {
+        DisplayObjectPlayerMock = null;// transform.root.GetComponent<Player>();
+        DisplayObjectActionsMock = new string[] { "Move", "Attack" };
+
         textComponent = GetComponent<Text>();
         if (textComponent == null)
         {
@@ -28,9 +36,11 @@ public class HUDAction : HUDElement
         if (textComponent == null)
             return;
 
-        if (DisplayObject != null && ActionIndex < DisplayObject.actions.Length)
+        if (DisplayObject != null &&
+            DisplayObjectPlayerMock == transform.root.GetComponent<Player>() &&
+            ActionIndex < DisplayObjectActionsMock.Length)
         {
-            textComponent.text = DisplayObject.actions[ActionIndex];
+            textComponent.text = DisplayObjectActionsMock[ActionIndex];
         }
         else
         {
@@ -38,13 +48,14 @@ public class HUDAction : HUDElement
         }
     }
 
+    /// <summary>
+    /// Calls the action handler in the RTSObject when the user clicks the action.
+    /// </summary>
     public override void HandleClick()
     {
-        Debug.Log("click!");
-
-        if (DisplayObject != null && ActionIndex < DisplayObject.actions.Length)
+        if (DisplayObject != null && ActionIndex < DisplayObjectActionsMock.Length)
         {
-            DisplayObject.PerformAction(DisplayObject.actions[ActionIndex]);
+            DisplayObject.PerformAction(DisplayObjectActionsMock[ActionIndex]);
         }
     }
 }
