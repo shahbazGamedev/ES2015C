@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Unit : RTSObject {
-
-
+public class Unit : RTSObject {	
 
     public float moveSpeed = 5;
 
@@ -13,10 +11,12 @@ public class Unit : RTSObject {
     private GameObject destinationTarget;
     
     protected override void Start () {
-	
+		
 	}
     
     protected override void Update () {
-	
+
 	}
+	
+
 }
