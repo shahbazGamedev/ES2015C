@@ -10,9 +10,9 @@ public class movimentCamera : MonoBehaviour {
 	//int terrainWidth = Terrain.activeTerrain.terrainData.heightmapWidth;
 	int terrainWidth = 500;
 	int terrainHeight = 500;
-	float CamSpeed = 1.00f;
+	float CamSpeed = 10.00f;
 	float percent = 0f;
-	int MarginSize = 50;
+	int MarginSize = 60;
 	
 	// Update is called once per frame
 	void Update () {
