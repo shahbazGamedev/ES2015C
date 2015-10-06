@@ -14,16 +14,8 @@ public class HUDAction : HUDElement
 
     private Text textComponent;
 
-    // DisplayObject.actions and DisplayObject.player is not implemented yet.
-    // Use a mock instead and it will require to be changed later.
-    private Player DisplayObjectPlayerMock;
-    private string[] DisplayObjectActionsMock;
-
     void Start()
     {
-        DisplayObjectPlayerMock = transform.root.GetComponent<Player>();
-        DisplayObjectActionsMock = new string[] { "Move", "Attack" };
-
         textComponent = GetComponent<Text>();
         if (textComponent == null)
         {
@@ -40,10 +32,10 @@ public class HUDAction : HUDElement
             return;
 
         if (DisplayObject != null &&
-            DisplayObjectPlayerMock == transform.root.GetComponent<Player>() &&
-            ActionIndex < DisplayObjectActionsMock.Length)
+            DisplayObject.IsOwnedBy(transform.root.GetComponent<Player>()) &&
+            ActionIndex < DisplayObject.GetActions().Length)
         {
-            textComponent.text = DisplayObjectActionsMock[ActionIndex];
+            textComponent.text = DisplayObject.GetActions()[ActionIndex];
         }
         else
         {
@@ -56,9 +48,11 @@ public class HUDAction : HUDElement
     /// </summary>
     public override void HandleClick()
     {
-        if (DisplayObject != null && ActionIndex < DisplayObjectActionsMock.Length)
+        if (DisplayObject != null &&
+            DisplayObject.IsOwnedBy(transform.root.GetComponent<Player>()) &&
+            ActionIndex < DisplayObject.GetActions().Length)
         {
-            DisplayObject.PerformAction(DisplayObjectActionsMock[ActionIndex]);
+            DisplayObject.PerformAction(DisplayObject.GetActions()[ActionIndex]);
         }
     }
 }

@@ -9,14 +9,8 @@ public class HUDOwner : HUDElement
 {
     private Text textComponent;
 
-    // DisplayObject.player is not implemented yet.
-    // Use a mock instead and it will require to be changed later.
-    private Player DisplayObjectPlayerMock;
-
     void Start()
     {
-        DisplayObjectPlayerMock = transform.root.GetComponent<Player>();
-
         textComponent = GetComponent<Text>();
         if (textComponent == null)
         {
@@ -34,7 +28,14 @@ public class HUDOwner : HUDElement
 
         if (DisplayObject != null)
         {
-            textComponent.text = DisplayObjectPlayerMock.username;
+            if (DisplayObject.GetPlayer() != null)
+            {
+                textComponent.text = DisplayObject.GetPlayer().username;
+            }
+            else
+            {
+                textComponent.text = "No owner";
+            }
         }
         else
         {
