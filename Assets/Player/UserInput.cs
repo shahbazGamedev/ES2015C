@@ -19,10 +19,12 @@ public class UserInput : MonoBehaviour
         if (player && player.human)
         {
             if (Input.GetKeyDown(KeyCode.Escape)) OpenPauseMenu();
-            if (Input.GetMouseButtonDown(0)) // If the left mouse button is clicked...
-            {
-                CheckSelectionChangeByMouse();
-            }
+
+            bool leftClick = Input.GetMouseButtonDown(0);
+            bool rightClick = Input.GetMouseButtonDown(1);
+            if (leftClick || rightClick)
+                HandleMouseClick(leftClick, rightClick);
+
             MoveCamera();
             RotateCamera();
             MouseActivity();
@@ -33,7 +35,7 @@ public class UserInput : MonoBehaviour
     {
     }
 
-    private void CheckSelectionChangeByMouse()
+    private void HandleMouseClick(bool leftClick, bool rightClick)
     {
         EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         if (eventSystem.IsPointerOverGameObject()) // Click on UI element
@@ -46,9 +48,9 @@ public class UserInput : MonoBehaviour
                 element = eventSystem.currentSelectedGameObject.GetComponent<HUDElement>();
             }
 
-            // Notify the element about the selection event
-            if (element != null)
+            if (element != null && leftClick)
             {
+                // Notify the element about the click event
                 element.HandleClick();
             }
         }
@@ -68,9 +70,21 @@ public class UserInput : MonoBehaviour
                 objectRtsElement = objectHit.GetComponent<RTSObject>();
             }
 
-            // Call the class to change the currently selected RTS element.
-            // Note that this will be null if the user clicked on nothing or a non-RTS element object.
-            player.ChangeSelectedRtsObject(objectRtsElement);
+            if (leftClick)
+            {
+                // Call the class to change the currently selected RTS element.
+                // Note that this will be null if the user clicked on nothing or a non-RTS element object.
+                player.ChangeSelectedRtsObject(objectRtsElement);
+            }
+            else if (rightClick)
+            {
+                // If a unit is currently selected, move it to the point clicked by the player
+                Unit selectedUnit = player.SelectedObject as Unit;
+                if (selectedUnit != null)
+                {
+                    selectedUnit.setNewPath(hit.point);
+                }
+            }
         }
     }
 
