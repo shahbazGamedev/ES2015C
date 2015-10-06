@@ -1,22 +1,111 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
-public class Unit : RTSObject {	
+public class Unit : RTSObject {
 
-    public float moveSpeed = 5;
+    public float moveSpeed = 200;             // Velocitat de moviment
 
-    protected bool moving;
+    public CharacterController controller;
+    private Vector3 targetPosition;
+    public Seeker seeker;
+    private Path path;
+    private float nextWaypointDistance = 3.0f;
+    private int currentWaypoint = 0;
 
-    private Vector3 destination;
-    private GameObject destinationTarget;
-    
-    protected override void Start () {
-		
-	}
-    
-    protected override void Update () {
+    protected bool moving;                  // Indica si esta movent-se
 
-	}
-	
+    private Vector3 destination;            // Posicio del desti en el mon
+    private GameObject destinationTarget;   // Indica el objectiu
 
+    /*** Metodes per defecte de Unity ***/
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (Input.GetMouseButton(1))
+        {
+            locatePosition();
+            getNewPath();
+            moving = true;
+        }
+
+        if (path == null || currentWaypoint >= path.vectorPath.Count)
+        {
+            moving = false;
+            return;
+        }
+
+        moveToPosition();
+        Animating();
+    }
+
+    protected override void OnGUI()
+    {
+        base.OnGUI();
+    }
+
+    /*** Metodes privats ***/
+
+    // Metode que usem per animar la unitat
+    private void Animating()
+    {
+        anim.SetBool("IsWalking", moving);
+        anim.SetBool("IsAttacking", attacking);
+    }
+
+    private void locatePosition()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 1000))
+        {
+            targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+        }
+    }
+
+    private void getNewPath()
+    {
+        //Debug.Log("getting new Path!");
+        seeker.StartPath(transform.position, targetPosition, OnPathComplete);
+    }
+
+    private void OnPathComplete(Path newPath)
+    {
+        if (!newPath.error)
+        {
+            path = newPath;
+            currentWaypoint = 0;
+        }
+    }
+
+    private void moveToPosition()
+    {
+        Quaternion newRotation = Quaternion.LookRotation(targetPosition - transform.position);
+
+        newRotation.x = 0f;
+        newRotation.z = 0f;
+        transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10);
+
+        Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
+        dir = dir * moveSpeed * Time.deltaTime;
+        controller.SimpleMove(dir);
+
+        if (Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]) < nextWaypointDistance)
+        {
+            currentWaypoint++;
+            return;
+        }
+    }
 }
