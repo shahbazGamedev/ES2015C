@@ -2,7 +2,8 @@
 using System.Collections;
 using Pathfinding;
 
-public class Unit : RTSObject {
+public class Unit : RTSObject
+{
 
     public float moveSpeed = 200;             // Velocitat de moviment
 
@@ -33,19 +34,11 @@ public class Unit : RTSObject {
     protected override void Update()
     {
         base.Update();
-        if (Input.GetMouseButton(1))
-        {
-            locatePosition();
-            getNewPath();
-            moving = true;
-        }
-
         if (path == null || currentWaypoint >= path.vectorPath.Count)
         {
             moving = false;
             return;
         }
-
         moveToPosition();
         Animating();
     }
@@ -55,6 +48,15 @@ public class Unit : RTSObject {
         base.OnGUI();
     }
 
+    /*** Metodes publics ***/
+
+    public void setNewPath(Vector3 target)
+    {
+        moving = true;
+        targetPosition = target;
+        seeker.StartPath(transform.position, targetPosition, OnPathComplete);
+    }
+
     /*** Metodes privats ***/
 
     // Metode que usem per animar la unitat
@@ -62,23 +64,6 @@ public class Unit : RTSObject {
     {
         anim.SetBool("IsWalking", moving);
         anim.SetBool("IsAttacking", attacking);
-    }
-
-    private void locatePosition()
-    {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit, 1000))
-        {
-            targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-        }
-    }
-
-    private void getNewPath()
-    {
-        //Debug.Log("getting new Path!");
-        seeker.StartPath(transform.position, targetPosition, OnPathComplete);
     }
 
     private void OnPathComplete(Path newPath)
