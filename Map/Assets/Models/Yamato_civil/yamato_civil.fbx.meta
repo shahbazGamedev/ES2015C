@@ -121,6 +121,7 @@ ModelImporter:
     7400004: Armature|Walk_blocking
     7400006: Armature|Walk_polish
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Yamato
   materials:
     importMaterials: 1
@@ -135,7 +136,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
