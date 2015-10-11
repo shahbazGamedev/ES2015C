@@ -8,6 +8,7 @@ public class RTSObject : MonoBehaviour {
     public string objectName = "GenericObject";     // Nom del objecte
     public int cost = 100, sellValue = 10, hitPoints = 100, maxHitPoints = 100; // Cost, valor, punts de vida i vida maxima
     public int ObjectId { get; set; }               // Identificador unic del objecte
+    public enum ResourceType { Gold, Wood, Food, Unknown }    // Declarem els tipus de recursos
 
     // Variables accessibles per a les subclasses
     protected Player player;                        // A quin player correspon

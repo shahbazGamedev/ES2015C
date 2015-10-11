@@ -5,25 +5,26 @@ using Pathfinding;
 public class Unit : RTSObject
 {
 
-    public float moveSpeed = 200;             // Velocitat de moviment
+    public float moveSpeed = 20;             // Velocitat de moviment
 
     public CharacterController controller;
-    private Vector3 targetPosition;
+    private Vector3 targetPosition;         // Indica el vector3 del objectiu
+    private GameObject targetObject;        // Indica el objecte del objectiu
     public Seeker seeker;
     private Path path;
     private float nextWaypointDistance = 3.0f;
     private int currentWaypoint = 0;
 
-    protected bool moving;                  // Indica si esta movent-se
-
-    private Vector3 destination;            // Posicio del desti en el mon
-    private GameObject destinationTarget;   // Indica el objectiu
+    protected bool moving;                  // Indica si esta movent-se          
+    
 
     /*** Metodes per defecte de Unity ***/
 
     protected override void Awake()
     {
         base.Awake();
+        controller = GetComponent<CharacterController>();
+        seeker = GetComponent<Seeker>();
     }
 
     protected override void Start()
