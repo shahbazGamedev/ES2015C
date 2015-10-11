@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Resource : RTSObject {
 
-    public enum ResourceType { Money, Power, Ore, Wood, Unknown }    // Declarem els tipus de recursos
     public float capacity;                          // Capacitat del recurs
 
     protected float amountLeft;                     // Indica la cantitat que queda del recurs
