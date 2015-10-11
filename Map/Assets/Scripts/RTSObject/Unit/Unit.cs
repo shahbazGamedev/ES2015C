@@ -16,7 +16,7 @@ public class Unit : RTSObject
     private int currentWaypoint = 0;
 
     protected bool moving;                  // Indica si esta movent-se          
-    
+
 
     /*** Metodes per defecte de Unity ***/
 
@@ -40,8 +40,10 @@ public class Unit : RTSObject
             moving = false;
             return;
         }
-        moveToPosition();
-        Animating();
+        else
+        {
+            moveToPosition();
+        }
     }
 
     protected override void OnGUI()
@@ -49,23 +51,32 @@ public class Unit : RTSObject
         base.OnGUI();
     }
 
+    protected override void Animating()
+    {
+        base.Animating();
+        anim.SetBool("IsWalking", moving);
+    }
+
     /*** Metodes publics ***/
+
+    public override bool CanAttack()
+    {
+        return true;
+    }
+
+    public override bool CanMove()
+    {
+        return true;
+    }
 
     public void setNewPath(Vector3 target)
     {
-        moving = true;
+        
         targetPosition = target;
         seeker.StartPath(transform.position, targetPosition, OnPathComplete);
     }
 
     /*** Metodes privats ***/
-
-    // Metode que usem per animar la unitat
-    private void Animating()
-    {
-        anim.SetBool("IsWalking", moving);
-        anim.SetBool("IsAttacking", attacking);
-    }
 
     private void OnPathComplete(Path newPath)
     {
@@ -78,6 +89,7 @@ public class Unit : RTSObject
 
     private void moveToPosition()
     {
+        moving = true;
         Quaternion newRotation = Quaternion.LookRotation(targetPosition - transform.position);
 
         newRotation.x = 0f;

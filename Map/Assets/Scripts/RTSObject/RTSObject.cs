@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class RTSObject : MonoBehaviour {
+public class RTSObject : MonoBehaviour
+{
 
     // Variables publiques generals
     public string objectName = "GenericObject";     // Nom del objecte
@@ -17,11 +18,13 @@ public class RTSObject : MonoBehaviour {
     protected Rect playingArea = new Rect(0.0f, 0.0f, 0.0f, 0.0f);  // Area de actuacio de la unitat
     protected float healthPercentage = 1.0f;        // Percentatge de vida
     protected RTSObject target = null;              // Posible objectiu
-    protected bool attacking = false, movingIntoPosition = false;   // Booleans de dos dels estats comuns als objectes
+    protected bool attacking = false, movingIntoPosition = false, aiming = false;   // Booleans dels tres estats comuns a tots els objectes
     protected List<RTSObject> nearbyObjects;        // Llista de objectes propers
 
     protected Animator anim;                        // Referencia al component animator.
     protected Rigidbody objectRigidbody;            // Referencia al component Rigidbody.
+
+    private float currentWeaponChargeTime;
 
     /*** Metodes per defecte de Unity ***/
 
@@ -39,6 +42,7 @@ public class RTSObject : MonoBehaviour {
     protected virtual void Update()
     {
         if (attacking && !movingIntoPosition) PerformAttack();
+        Animating();
     }
 
     protected virtual void OnGUI()
@@ -134,6 +138,14 @@ public class RTSObject : MonoBehaviour {
     {
     }
 
+    // Metode que inicialitza el atac a un objecte
+    private void BeginAttack(RTSObject target)
+    {
+        this.target = target;
+        attacking = true;
+        PerformAttack();
+    }
+
     // Metode que realitza el atac
     private void PerformAttack()
     {
@@ -150,5 +162,23 @@ public class RTSObject : MonoBehaviour {
     protected virtual void CalculateCurrentHealth()
     {
         healthPercentage = (float)hitPoints / (float)maxHitPoints;
+    }
+
+    // Metode que usem per animar el objecte
+    protected virtual void Animating()
+    {
+        anim.SetBool("IsAttacking", attacking);
+    }
+
+    // Metode per disparar
+    protected virtual void UseWeapon()
+    {
+        currentWeaponChargeTime = 0.0f;
+    }
+
+    // Metode per apuntar
+    protected virtual void AimAtTarget()
+    {
+        aiming = true;
     }
 }
