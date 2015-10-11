@@ -42,7 +42,7 @@ public class RTSObject : MonoBehaviour
     protected virtual void Update()
     {
         if (attacking && !movingIntoPosition) PerformAttack();
-        Animating();
+        if (anim) Animating();
     }
 
     protected virtual void OnGUI()

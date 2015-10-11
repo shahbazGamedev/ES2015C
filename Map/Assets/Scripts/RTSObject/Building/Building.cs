@@ -19,6 +19,7 @@ public class Building : RTSObject {
         base.Awake();
         spawnPoint = new Vector3(transform.position.x + 10, 0.0f, transform.position.z + 10);
         buildQueue = new Queue<string>();
+        gameObject.layer = 10;
     }
 
     protected override void Start()
@@ -52,7 +53,7 @@ public class Building : RTSObject {
         return needsBuilding;
     }
 
-    // Metode que construeix un objecte
+    // Metode que va construint el edifici
     public void Construct(int amount)
     {
         hitPoints += amount;
