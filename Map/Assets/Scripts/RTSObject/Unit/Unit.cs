@@ -75,7 +75,6 @@ public class Unit : RTSObject
     public void setNewPath(Vector3 target)
     {
         // We're starting movement, so start the walking animation
-        Debug.Log("startmoving");
         moving = true;
 
         targetPosition = target;
@@ -117,7 +116,6 @@ public class Unit : RTSObject
             // then we need to stop the walking animation
             if (path.vectorPath.Count == currentWaypoint)
             {
-                Debug.Log("endmoving");
                 moving = false;
             }
         }
