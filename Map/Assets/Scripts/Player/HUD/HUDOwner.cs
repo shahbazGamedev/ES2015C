@@ -28,9 +28,9 @@ public class HUDOwner : HUDElement
 
         if (DisplayObject != null)
         {
-            if (DisplayObject.GetPlayer() != null)
+            if (DisplayObject.owner != null)
             {
-                textComponent.text = DisplayObject.GetPlayer().username;
+                textComponent.text = DisplayObject.owner.username;
             }
             else
             {

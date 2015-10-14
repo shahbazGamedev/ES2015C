@@ -10,9 +10,9 @@ public class RTSObject : MonoBehaviour
     public int cost = 100, sellValue = 10, hitPoints = 100, maxHitPoints = 100; // Cost, valor, punts de vida i vida maxima
     public int ObjectId { get; set; }               // Identificador unic del objecte
     public enum ResourceType { Gold, Wood, Food, Unknown }    // Declarem els tipus de recursos
+    public Player owner;                            // A quin player correspon
 
     // Variables accessibles per a les subclasses
-    protected Player player;                        // A quin player correspon
     protected string[] actions = { };               // Accions que pot realitzar
     protected bool currentlySelected = false;       // Indica si esta seleccionat
     protected Rect playingArea = new Rect(0.0f, 0.0f, 0.0f, 0.0f);  // Area de actuacio de la unitat
@@ -36,7 +36,6 @@ public class RTSObject : MonoBehaviour
 
     protected virtual void Start()
     {
-        SetPlayer();
     }
 
     protected virtual void Update()
@@ -51,18 +50,6 @@ public class RTSObject : MonoBehaviour
     }
 
     /*** Metodes publics ***/
-
-    // Metode per declarar el Player
-    public void SetPlayer()
-    {
-        player = transform.root.GetComponentInChildren<Player>();
-    }
-
-    // Metode per obtenir el Player
-    public Player GetPlayer()
-    {
-        return player;
-    }
 
     // Metode per declarar la seleccio del objecte
     public virtual void SetSelection(bool selected, Rect playingArea)
@@ -99,7 +86,7 @@ public class RTSObject : MonoBehaviour
     // Metode per saber si el Player es el propietari del objecte
     public bool IsOwnedBy(Player owner)
     {
-        if (player && player.Equals(owner))
+        if (this.owner && this.owner.Equals(owner))
             return true;
         return false;
     }
