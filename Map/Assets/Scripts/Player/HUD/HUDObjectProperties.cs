@@ -21,7 +21,7 @@ public class HUDObjectProperties : HUDElement
     /// <summary>
     /// Updates the properties of the currently selected object in the HUD.
     /// </summary>
-    protected override void UpdateObjectInformationInHud()
+    void Update()
     {
         if (textComponent == null)
             return;

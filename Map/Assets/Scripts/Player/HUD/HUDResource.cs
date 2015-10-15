@@ -26,12 +26,12 @@ public class HUDResource : HUDElement
     /// <summary>
     /// Updates the quantity of the resource in the HUD.
     /// </summary>
-    protected override void UpdateObjectInformationInHud()
+    void Update()
     {
         if (textComponent == null)
             return;
 
         // TODO: Find the quantity of the resource in the player and update it
-        textComponent.text = "12345";
+        textComponent.text = Player.GetResourceAmount(resourceType).ToString();
     }
 }

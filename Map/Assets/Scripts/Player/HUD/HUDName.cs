@@ -21,7 +21,7 @@ public class HUDName : HUDElement
     /// <summary>
     /// Updates the object name in the HUD.
     /// </summary>
-    protected override void UpdateObjectInformationInHud()
+    void Update()
     {
         if (textComponent == null)
             return;
