@@ -7,41 +7,23 @@ using System;
 /// </summary>
 public abstract class HUDElement : MonoBehaviour
 {
-    /// <summary>The object that is currently displayed in the HUD element.</summary>
-    protected RTSObject DisplayObject { get; private set; }
-
-    /// <summary>
-    /// Called at the beginning to initialize the HUD element.
-    /// </summary>
-    void Start()
+    /// <summary>The player for which the information in the HUD is displayed.</summary>
+    protected Player Player
     {
-        DisplayObject = null;
-
-        UpdateObjectInformationInHud();
+        get
+        {
+            return transform.root.GetComponent<Player>();
+        }
     }
 
-    /// <summary>
-    /// Called every frame to update the information in the HUD element.
-    /// </summary>
-    void Update()
+    /// <summary>Object for which information is displayed in the HUD, or null to specify that no information is shown.</summary>
+    protected RTSObject DisplayObject
     {
-        UpdateObjectInformationInHud();
+        get
+        {
+            return Player.SelectedObject;
+        }
     }
-
-    /// <summary>
-    /// Set the object whose information is displayed in the HUD element.
-    /// </summary>
-    /// <param name="displayObject">The object to display in the HUD element.</param>
-    public void SetDisplayObject(RTSObject newDisplayObject)
-    {
-        DisplayObject = newDisplayObject;
-        UpdateObjectInformationInHud();
-    }
-
-    /// <summary>
-    /// Called when the information about the selected object must be updated in the HUD.
-    /// </summary>
-    protected abstract void UpdateObjectInformationInHud();
 
     /// <summary>
     /// Called when the element is clicked on the UI.
