@@ -74,5 +74,23 @@ public class CivilUnit : Unit
 
     }
 
+    /// <summary>
+    /// Get the current type of resource that the unit is harvesting. If the unit is not harvesting any resource, returns null.
+    /// </summary>
+    /// <returns>The type of the resource being harvested, or null.</returns>
+    public ResourceType? GetHarvestType()
+    {
+        // TODO: Implement this method properly
+        return ResourceType.Wood;
+    }
 
+    /// <summary>
+    /// Get the current amount of resource that the unit has harvested. If the unit is not harvesting any resource, returns null.
+    /// </summary>
+    /// <returns>The amount of resource that has been harvested, or null.</returns>
+    public float? GetHarvestAmount()
+    {
+        // TODO: Implement this method properly
+        return 999;
+    }
 }

@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 
 /// <summary>
-/// Displays the amount of defense that a military unit has.
+/// Displays the amount of harvested resource for a civil unit.
 /// </summary>
-public class HUDMilitaryUnitDefense : HUDElement
+public class HUDCivilUnitResourceAmount : HUDElement
 {
     private Text textComponent;
 
@@ -18,15 +18,21 @@ public class HUDMilitaryUnitDefense : HUDElement
     }
 
     /// <summary>
-    /// Update the defense that is shown in the HUD.
+    /// Update the amount of harvested resource that is shown in the HUD.
     /// </summary>
 	void Update()
     {
-        if (DisplayObject is MilitaryUnit)
+        float? harvestedAmount = null;
+        if (DisplayObject is CivilUnit)
         {
-            MilitaryUnit displayMilitaryUnit = (MilitaryUnit)DisplayObject;
+            CivilUnit displayUnit = (CivilUnit)DisplayObject;
+            harvestedAmount = displayUnit.GetHarvestAmount();
+        }
+
+        if (harvestedAmount.HasValue)
+        {
             textComponent.enabled = true;
-            textComponent.text = displayMilitaryUnit.GetDefense().ToString();
+            textComponent.text = harvestedAmount.ToString();
         }
         else
         {

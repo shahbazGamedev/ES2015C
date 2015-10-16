@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 
 /// <summary>
-/// Displays the amount of attack range that a military unit has.
+/// Displays the amount of attack strength that a unit has.
 /// </summary>
-public class HUDMilitaryUnitAttackRange : HUDElement
+public class HUDUnitAttackStrength : HUDElement
 {
     private Text textComponent;
 
@@ -20,24 +20,17 @@ public class HUDMilitaryUnitAttackRange : HUDElement
     /// <summary>
     /// Update the attack strength that is shown in the HUD.
     /// </summary>
-	void Update()
+	void Update ()
     {
-        float? attackRange = null;
-        if (DisplayObject is MilitaryUnit)
+        if (DisplayObject is Unit)
         {
-            MilitaryUnit displayMilitaryUnit = (MilitaryUnit)DisplayObject;
-            if (displayMilitaryUnit.GetAttackRange() != null)
-                attackRange = displayMilitaryUnit.GetAttackRange();
-        }
-
-        if (attackRange.HasValue)
-        {
+            Unit displayUnit = (Unit)DisplayObject;
             textComponent.enabled = true;
-            textComponent.text = attackRange.ToString();
+            textComponent.text = displayUnit.GetAttackStrengh().ToString();
         }
         else
         {
             textComponent.enabled = false;
         }
-    }
+	}
 }
