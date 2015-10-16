@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 
 /// <summary>
-/// Displays the icon related to amount of attack range that a military unit has.
+/// Displays the icon related to amount of attack range that a unit has.
 /// </summary>
-public class HUDMilitaryUnitAttackRangeIcon : HUDElement
+public class HUDUnitAttackRangeIcon : HUDElement
 {
     private Image imageComponent;
 
@@ -22,7 +22,7 @@ public class HUDMilitaryUnitAttackRangeIcon : HUDElement
     /// </summary>
 	void Update()
     {
-        imageComponent.enabled = (DisplayObject is MilitaryUnit &&
-            ((MilitaryUnit)DisplayObject).GetAttackRange().HasValue);
+        imageComponent.enabled = (DisplayObject is Unit &&
+            ((Unit)DisplayObject).GetAttackRange().HasValue);
     }
 }
