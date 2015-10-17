@@ -11,6 +11,9 @@ public class Building : RTSObject {
 
     private float currentBuildProgress = 0.0f;  // Progres actual de la construccio
     private bool needsBuilding = false;         // Indica si necesita se construit
+	
+	public Transform civil;
+	public int mask = 129; //10000001 checks default and obstacles
 
     /*** Metodes per defecte de Unity ***/
 
@@ -69,6 +72,22 @@ public class Building : RTSObject {
     // Metode per crear unitats
     protected void CreateUnit(string unitName)
     {
+		bool spawned = false;
+		int maximumSpawn = 5; //no podemos instanciar más de 5 unidades a la vez. Para instanciar más hay que mover las otras
+		Vector3 point = spawnPoint; 
+		
+		if (unitName.Equals("CivilUnit")) {		
+			while (spawned == false && maximumSpawn>0) {
+				if (Physics.CheckSphere (point, 0.1f, mask)) {
+					point = new Vector3(point.x + 10, 0.0f, point.z + 10); //si ya hay algo provamos en otra posicion
+				} else {
+					spawned = true;
+					Instantiate(civil, point, Quaternion.identity);
+				}
+				maximumSpawn--;
+			}
+			 		
+		}	
     }
 
     // Metode per administrar el progres de construccio de la cua

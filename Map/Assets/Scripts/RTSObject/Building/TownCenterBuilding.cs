@@ -6,6 +6,7 @@ public class TownCenterBuilding : Building {
 
     /*** Metodes per defecte de Unity ***/
 
+
     protected override void Start()
     {
         base.Start();
