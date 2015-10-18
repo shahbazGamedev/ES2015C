@@ -70,7 +70,10 @@ public class PlaceResources : MonoBehaviour
                         }
                         else
                         {
-                            Instantiate(Resources.Load(PrefabResource, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
+                            int prova = Random.Range(0,2);
+                            if (prova!=0) {
+                                Instantiate(Resources.Load(PrefabResource, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
+                            }
                         }
                     }
                     k = k + 2;

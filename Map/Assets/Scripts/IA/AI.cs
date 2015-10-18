@@ -26,19 +26,20 @@ public class AI : MonoBehaviour {
 
     private void buildTownCenter() {
         //Si no tinc cap centro urbano, tenir-ne una ha de ser la meva prioritat
-        if (townCenters == 0 && food==100 && wood==100) { //Es comproven els recursos
+        if (townCenters == 0 && wood==100) { //Es comproven els recursos
 
-            while ( i < civils.Count && building == true) // Loop with for.
-            {
-                // civilian.buildTownCenter();  //Encara no està implementat
-                food = food - 100;
-                wood = wood - 100;
-                townCenters++;
-                building = true;
+
+            foreach (Unit civilian in civils)
+                if (building == false) // Loop with for.
+                {
+                    // civilian.CreateBuilding("TownCenter");  //Encara no està implementat
+                    townCenters++;
+                    building = true;
+                }
             }
 
 
-        }
+        
     }
 
     private void build(String building) {
@@ -93,9 +94,7 @@ public class AI : MonoBehaviour {
 
                         if (totalDist < 50)
                         {
-                            //civilian.build(building);        Encara no esta implementat aquest mètode
-                            wood = wood - 50;
-                            food = food - 50;
+                            //civilian.CreateBuilding(building); Encara no esta implementat aquest mètode
                         }
 
                     }
