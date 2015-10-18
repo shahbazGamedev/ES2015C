@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Pathfinding;
 
 public class CivilUnit : Unit
 {
@@ -13,7 +14,16 @@ public class CivilUnit : Unit
     private Resource resourceDeposit;                       // Recurs de la recolecció
     private Building currentProject;                        // Edifici actual en construcció
     private float amountBuilt = 0.0f;                       // Porcentatge de construcció feta
-
+	public int mask = 1024; //10000001 checks default and obstacles
+	
+	private static int layer1 = 0;
+	private static int layer2 = 10;
+	private static int layermask1 = 1 << layer1;
+	private static int layermask2 = 1 << layer2;
+	private int finalmask = layermask1 | layermask2;
+	
+	
+	public Transform townCenter;
 
     /*** Metodes per defecte de Unity ***/
 
@@ -21,6 +31,7 @@ public class CivilUnit : Unit
     {
         base.Start();
         objectName = "Civil Unit";
+		actions = new string[] { "TownCenter" };                 //Accions que pot fer la unitat civil
     }
 
     protected override void Update()
@@ -47,10 +58,28 @@ public class CivilUnit : Unit
     /*** Metodes privats ***/
 
     // Metode que crea el edifici
-    private void CreateBuilding(Building project)
+    private void CreateBuilding(string buildingName)
     {
-        currentProject = project;
         building = true;
+		Vector3 point = new Vector3(transform.position.x + 10, 0.0f, transform.position.z + 10);
+		
+		if (buildingName.Equals("TownCenter")) {		
+			if (Physics.CheckSphere (point, 0.8f, finalmask)) {
+				Debug.Log("No podemos construir porque hay otros edificios cerca");
+			} else {
+				float wood = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
+				if (wood >= 100) {
+					Transform centerClone = (Transform)Instantiate(townCenter, point, Quaternion.identity);
+					centerClone.GetComponent<RTSObject>().owner=owner;
+					var guo = new GraphUpdateObject(centerClone.GetComponent<Collider>().bounds);
+					guo.updatePhysics = true;
+					AstarPath.active.UpdateGraphs (guo);
+					owner.resourceAmounts[RTSObject.ResourceType.Wood]=wood-100;
+				} else {
+					Debug.Log("Not enough wood");
+				}
+			}
+		}			 			
     }
 
     // Metode que cridem per a començar a recolectar
@@ -93,4 +122,9 @@ public class CivilUnit : Unit
         // TODO: Implement this method properly
         return 999;
     }
+	
+	public override void PerformAction(string actionToPerform) {
+		base.PerformAction(actionToPerform);
+        CreateBuilding(actionToPerform);
+	}
 }

@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
     /// <summary>
     /// Amount of each resource that can be collected by the player.
     /// </summary>
-    private Dictionary<RTSObject.ResourceType, float> resourceAmounts;
+    public Dictionary<RTSObject.ResourceType, float> resourceAmounts;
 
     void Start () {
         resourceAmounts = new Dictionary<RTSObject.ResourceType, float>();

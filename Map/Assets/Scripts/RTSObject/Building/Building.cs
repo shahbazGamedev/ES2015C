@@ -13,7 +13,12 @@ public class Building : RTSObject {
     private bool needsBuilding = false;         // Indica si necesita se construit
 	
 	public Transform civil;
-	public int mask = 129; //10000001 checks default and obstacles
+	
+	private static int layer1 = 0;
+	private static int layer2 = 10;
+	private static int layermask1 = 1 << layer1;
+	private static int layermask2 = 1 << layer2;
+	private int mask = layermask1 | layermask2;
 
     /*** Metodes per defecte de Unity ***/
 
@@ -82,7 +87,15 @@ public class Building : RTSObject {
 					point = new Vector3(point.x + 10, 0.0f, point.z + 10); //si ya hay algo provamos en otra posicion
 				} else {
 					spawned = true;
-					Instantiate(civil, point, Quaternion.identity);
+					float food = owner.GetResourceAmount(RTSObject.ResourceType.Food);
+					if (food >= 20) {
+						Transform civilClone = (Transform) Instantiate(civil, point, Quaternion.identity);
+						civilClone.GetComponent<RTSObject>().owner=owner;
+						owner.resourceAmounts[RTSObject.ResourceType.Food]=food-20;
+					} else {
+						Debug.Log("Not enough food");
+					}
+					
 				}
 				maximumSpawn--;
 			}
