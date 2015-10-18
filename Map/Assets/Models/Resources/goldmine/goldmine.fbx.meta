@@ -1,0 +1,139 @@
+fileFormatVersion: 2
+guid: b3e4576f48696bd49afdcdbdd4e55001
+timeCreated: 1445010825
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Camera
+    100002: //RootNode
+    100004: Lamp
+    100006: Landscape
+    100008: Landscape.001
+    100010: Landscape.002
+    100012: Landscape.003
+    100014: Landscape.004
+    100016: Landscape.005
+    100018: Landscape.006
+    100020: Landscape.007
+    100022: Landscape.008
+    100024: Landscape.009
+    100026: Landscape.010
+    100028: Landscape.011
+    100030: Landscape.012
+    100032: Landscape.013
+    100034: Landscape.014
+    400000: Camera
+    400002: //RootNode
+    400004: Lamp
+    400006: Landscape
+    400008: Landscape.001
+    400010: Landscape.002
+    400012: Landscape.003
+    400014: Landscape.004
+    400016: Landscape.005
+    400018: Landscape.006
+    400020: Landscape.007
+    400022: Landscape.008
+    400024: Landscape.009
+    400026: Landscape.010
+    400028: Landscape.011
+    400030: Landscape.012
+    400032: Landscape.013
+    400034: Landscape.014
+    2300000: Landscape
+    2300002: Landscape.001
+    2300004: Landscape.002
+    2300006: Landscape.003
+    2300008: Landscape.004
+    2300010: Landscape.005
+    2300012: Landscape.006
+    2300014: Landscape.007
+    2300016: Landscape.008
+    2300018: Landscape.009
+    2300020: Landscape.010
+    2300022: Landscape.011
+    2300024: Landscape.012
+    2300026: Landscape.013
+    2300028: Landscape.014
+    3300000: Landscape
+    3300002: Landscape.001
+    3300004: Landscape.002
+    3300006: Landscape.003
+    3300008: Landscape.004
+    3300010: Landscape.005
+    3300012: Landscape.006
+    3300014: Landscape.007
+    3300016: Landscape.008
+    3300018: Landscape.009
+    3300020: Landscape.010
+    3300022: Landscape.011
+    3300024: Landscape.012
+    3300026: Landscape.013
+    3300028: Landscape.014
+    4300000: Landscape.014
+    4300002: Landscape.006
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
