@@ -5,25 +5,26 @@ using Pathfinding;
 public class Unit : RTSObject
 {
 
-    public float moveSpeed = 200;             // Velocitat de moviment
+    public float moveSpeed = 20;             // Velocitat de moviment
 
     public CharacterController controller;
-    private Vector3 targetPosition;
+    private Vector3 targetPosition;         // Indica el vector3 del objectiu
+    private GameObject targetObject;        // Indica el objecte del objectiu
     public Seeker seeker;
     private Path path;
     private float nextWaypointDistance = 3.0f;
     private int currentWaypoint = 0;
 
-    protected bool moving;                  // Indica si esta movent-se
+    protected bool moving;                  // Indica si esta movent-se          
 
-    private Vector3 destination;            // Posicio del desti en el mon
-    private GameObject destinationTarget;   // Indica el objectiu
 
     /*** Metodes per defecte de Unity ***/
 
     protected override void Awake()
     {
         base.Awake();
+        controller = GetComponent<CharacterController>();
+        seeker = GetComponent<Seeker>();
     }
 
     protected override void Start()
@@ -34,13 +35,13 @@ public class Unit : RTSObject
     protected override void Update()
     {
         base.Update();
-        if (path == null || currentWaypoint >= path.vectorPath.Count)
+
+        // If the unit is currently moving, call the function to update
+        // the position in the path the unit is following
+        if (path != null && currentWaypoint < path.vectorPath.Count)
         {
-            moving = false;
-            return;
+            moveToPosition();
         }
-        moveToPosition();
-        Animating();
     }
 
     protected override void OnGUI()
@@ -48,23 +49,39 @@ public class Unit : RTSObject
         base.OnGUI();
     }
 
+    protected override void Animating()
+    {
+        base.Animating();
+        anim.SetBool("IsWalking", moving);
+    }
+
     /*** Metodes publics ***/
 
+    public override bool CanAttack()
+    {
+        return true;
+    }
+
+    public override bool CanMove()
+    {
+        return true;
+    }
+
+    /// <summary>
+    /// Tells the unit to move to the given position, by generating and
+    /// following a route to the desired position.
+    /// </summary>
+    /// <param name="target">The position we want the unit to move to.</param>
     public void setNewPath(Vector3 target)
     {
+        // We're starting movement, so start the walking animation
         moving = true;
+
         targetPosition = target;
         seeker.StartPath(transform.position, targetPosition, OnPathComplete);
     }
 
     /*** Metodes privats ***/
-
-    // Metode que usem per animar la unitat
-    private void Animating()
-    {
-        anim.SetBool("IsWalking", moving);
-        anim.SetBool("IsAttacking", attacking);
-    }
 
     private void OnPathComplete(Path newPath)
     {
@@ -77,20 +94,60 @@ public class Unit : RTSObject
 
     private void moveToPosition()
     {
+        // Set the rotation of the model to point in the direction of the target
         Quaternion newRotation = Quaternion.LookRotation(targetPosition - transform.position);
-
         newRotation.x = 0f;
         newRotation.z = 0f;
         transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10);
 
+        // Tell the controller to move in the straight-line direction
+        // between the current position and the waypoint
         Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
         dir = dir * moveSpeed * Time.deltaTime;
         controller.SimpleMove(dir);
 
+        // Have we reached the waypoint in the path?
         if (Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]) < nextWaypointDistance)
         {
+            // Advance to the next waypoint
             currentWaypoint++;
-            return;
+
+            // If we have reached the last waypoint in the path,
+            // then we need to stop the walking animation
+            if (path.vectorPath.Count == currentWaypoint)
+            {
+                moving = false;
+            }
         }
+    }
+
+    /// <summary>
+    /// Gets the attack strengh that the unit has when it is attacking.
+    /// </summary>
+    /// <returns>The number of attack sthengh points.</returns>
+    public float GetAttackStrengh()
+    {
+        // TODO: Implement this method properly
+        return 321;
+    }
+
+    /// <summary>
+    /// Gets the defense points that the unit has when it is being attacked.
+    /// </summary>
+    /// <returns>The number of defense points.</returns>
+    public float GetDefense()
+    {
+        // TODO: Implement this method properly
+        return 654;
+    }
+
+    /// <summary>
+    /// Gets the distance at which the unit can attack, if it is a range unit (e.g. an archer). Otherwise, null.
+    /// </summary>
+    /// <returns>The distance at which the unit can attack, or null.</returns>
+    public float? GetAttackRange()
+    {
+        // TODO: Implement this method properly
+        return 987;
     }
 }

@@ -21,7 +21,7 @@ public class HUDHealthSlider : HUDElement
     /// <summary>
     /// Updates the object health in the HUD slider.
     /// </summary>
-    protected override void UpdateObjectInformationInHud()
+    void Update()
     {
         if (sliderComponent == null)
             return;

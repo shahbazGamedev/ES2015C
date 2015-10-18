@@ -21,16 +21,16 @@ public class HUDOwner : HUDElement
     /// <summary>
     /// Updates the object action in the HUD.
     /// </summary>
-    protected override void UpdateObjectInformationInHud()
+    void Update()
     {
         if (textComponent == null)
             return;
 
         if (DisplayObject != null)
         {
-            if (DisplayObject.GetPlayer() != null)
+            if (DisplayObject.owner != null)
             {
-                textComponent.text = DisplayObject.GetPlayer().username;
+                textComponent.text = DisplayObject.owner.username;
             }
             else
             {

@@ -21,7 +21,7 @@ public class HUDHealthText : HUDElement
     /// <summary>
     /// Updates the object health in the HUD.
     /// </summary>
-    protected override void UpdateObjectInformationInHud()
+    void Update()
     {
         if (DisplayObject != null)
         {

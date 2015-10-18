@@ -26,7 +26,7 @@ public class HUDAction : HUDElement
     /// <summary>
     /// Updates the object action in the HUD.
     /// </summary>
-    protected override void UpdateObjectInformationInHud()
+    void Update()
     {
         if (textComponent == null)
             return;

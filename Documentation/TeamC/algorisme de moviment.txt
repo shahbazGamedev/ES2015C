@@ -1,0 +1,20 @@
+Per fer que les unitats es moguin esquivant els obstacles (edifics, recursos), fem servir l'algorisme A* Pathfinding, 
+que utilitza aquesta llibreria: http://arongranberg.com/astar/docs/index.php
+
+Aquest algorisme es basa en crear un graf amb tots els objectes que estiguin a determinats layers (de moment el layer "Obstacles").
+Si afegim un nou objecte que les unitats haurien d'esquivar, també l'hem d'afegir al graf. 
+
+Per fer servir aquestes funcions cal posar "using Pathfinding;" al principi de l'script.
+Si volem actualitzar tot el graf fem servir la funció: 
+
+AstarPath.active.Scan();
+
+Normalment no cal perquè només hem afegit un objecte nou. En aquest cas fem servir:
+
+var guo = new GraphUpdateObject(NOMDELAINSTANCIA.GetComponent<Collider>().bounds);
+guo.updatePhysics = true;
+AstarPath.active.UpdateGraphs (guo);
+
+En comptes de NOMDELAINSTANCIA fiquem el nom de l'objecte que hem afegit, que hauria de tenir un collider.
+
+

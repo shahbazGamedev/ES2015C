@@ -1,21 +1,31 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
+﻿using Mono.Cecil;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Player : MonoBehaviour {
     public string username;
     public bool human;
-    public RTSObject SelectedObject { get; set; }
-    public int startMoney, startPower;
+    public float initialFood, initialGold, initialWood;
     public Color teamColor;
 
     private bool findingPlacement = false;
 
-    private HUD hud;
+    /// <summary>
+    /// Which object does the player have selected for executing actions over it?
+    /// </summary>
+    public RTSObject SelectedObject { get; set; }
+
+    /// <summary>
+    /// Amount of each resource that can be collected by the player.
+    /// </summary>
+    public Dictionary<RTSObject.ResourceType, float> resourceAmounts;
 
     void Start () {
-        hud = GetComponentInChildren<HUD>();
+        resourceAmounts = new Dictionary<RTSObject.ResourceType, float>();
+        resourceAmounts[RTSObject.ResourceType.Food] = initialFood;
+        resourceAmounts[RTSObject.ResourceType.Gold] = initialGold;
+        resourceAmounts[RTSObject.ResourceType.Wood] = initialWood;
     }
 	
 	void Update () {
@@ -27,8 +37,6 @@ public class Player : MonoBehaviour {
     /// </summary>
     private void OnSelectionStart(RTSObject obj)
     {
-        if (hud != null)
-            hud.SetDisplayObject(obj);
     }
 
     /// <summary>
@@ -36,8 +44,6 @@ public class Player : MonoBehaviour {
     /// </summary>
     private void OnSelectionEnd(RTSObject obj)
     {
-        if (hud != null)
-            hud.SetDisplayObject(null);
     }
 
     /// <summary>
@@ -60,5 +66,13 @@ public class Player : MonoBehaviour {
                 OnSelectionStart(SelectedObject);
             }
         }
+    }
+
+    public float GetResourceAmount(RTSObject.ResourceType resourceType)
+    {
+        if (!resourceAmounts.ContainsKey(resourceType))
+            throw new ArgumentOutOfRangeException("resourceType");
+
+        return resourceAmounts[resourceType];
     }
 }

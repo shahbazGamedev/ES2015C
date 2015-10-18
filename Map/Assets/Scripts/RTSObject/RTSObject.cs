@@ -2,25 +2,29 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class RTSObject : MonoBehaviour {
+public class RTSObject : MonoBehaviour
+{
 
     // Variables publiques generals
     public string objectName = "GenericObject";     // Nom del objecte
     public int cost = 100, sellValue = 10, hitPoints = 100, maxHitPoints = 100; // Cost, valor, punts de vida i vida maxima
     public int ObjectId { get; set; }               // Identificador unic del objecte
+    public enum ResourceType { Gold, Wood, Food, Unknown }    // Declarem els tipus de recursos
+    public Player owner;                            // A quin player correspon
 
     // Variables accessibles per a les subclasses
-    protected Player player;                        // A quin player correspon
     protected string[] actions = { };               // Accions que pot realitzar
     protected bool currentlySelected = false;       // Indica si esta seleccionat
     protected Rect playingArea = new Rect(0.0f, 0.0f, 0.0f, 0.0f);  // Area de actuacio de la unitat
     protected float healthPercentage = 1.0f;        // Percentatge de vida
     protected RTSObject target = null;              // Posible objectiu
-    protected bool attacking = false, movingIntoPosition = false;   // Booleans de dos dels estats comuns als objectes
+    protected bool attacking = false, movingIntoPosition = false, aiming = false;   // Booleans dels tres estats comuns a tots els objectes
     protected List<RTSObject> nearbyObjects;        // Llista de objectes propers
 
     protected Animator anim;                        // Referencia al component animator.
     protected Rigidbody objectRigidbody;            // Referencia al component Rigidbody.
+
+    private float currentWeaponChargeTime;
 
     /*** Metodes per defecte de Unity ***/
 
@@ -32,12 +36,12 @@ public class RTSObject : MonoBehaviour {
 
     protected virtual void Start()
     {
-        SetPlayer();
     }
 
     protected virtual void Update()
     {
         if (attacking && !movingIntoPosition) PerformAttack();
+        if (anim) Animating();
     }
 
     protected virtual void OnGUI()
@@ -46,18 +50,6 @@ public class RTSObject : MonoBehaviour {
     }
 
     /*** Metodes publics ***/
-
-    // Metode per declarar el Player
-    public void SetPlayer()
-    {
-        player = transform.root.GetComponentInChildren<Player>();
-    }
-
-    // Metode per obtenir el Player
-    public Player GetPlayer()
-    {
-        return player;
-    }
 
     // Metode per declarar la seleccio del objecte
     public virtual void SetSelection(bool selected, Rect playingArea)
@@ -94,7 +86,7 @@ public class RTSObject : MonoBehaviour {
     // Metode per saber si el Player es el propietari del objecte
     public bool IsOwnedBy(Player owner)
     {
-        if (player && player.Equals(owner))
+        if (this.owner && this.owner.Equals(owner))
             return true;
         return false;
     }
@@ -133,6 +125,14 @@ public class RTSObject : MonoBehaviour {
     {
     }
 
+    // Metode que inicialitza el atac a un objecte
+    private void BeginAttack(RTSObject target)
+    {
+        this.target = target;
+        attacking = true;
+        PerformAttack();
+    }
+
     // Metode que realitza el atac
     private void PerformAttack()
     {
@@ -149,5 +149,23 @@ public class RTSObject : MonoBehaviour {
     protected virtual void CalculateCurrentHealth()
     {
         healthPercentage = (float)hitPoints / (float)maxHitPoints;
+    }
+
+    // Metode que usem per animar el objecte
+    protected virtual void Animating()
+    {
+        anim.SetBool("IsAttacking", attacking);
+    }
+
+    // Metode per disparar
+    protected virtual void UseWeapon()
+    {
+        currentWeaponChargeTime = 0.0f;
+    }
+
+    // Metode per apuntar
+    protected virtual void AimAtTarget()
+    {
+        aiming = true;
     }
 }
