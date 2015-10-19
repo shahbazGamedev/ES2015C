@@ -1,0 +1,21 @@
+PlaceResources.cs
+--------------------------------------------
+
+-PlaceRandomResources(int numberOfResources, String asset) --> Coloca aleatoriament recursos dins del mapa,
+se li ha de passar el numerp de recursos que vulguis que apareguin i l'asset del recurs.(l'asset ha d'estar
+a dins la carpeta Resources)
+Exemple: PlaceRandomResources(100,"arbolYamato1");
+
+
+PlaceGroup(int numGroups, int maxElementsInGroup,string PrefabResource) --> També colcoa els recursos de forma aleatoria,
+però en grups, i com al d'abans tambe se li ha de passar un asset
+Exemple: PlaceGroup(10,30,"arbolYamato1");
+
+
+AI.cs
+------------------------------------------------
+
+buidTownCenter() --> Contstrueix un centro urbano si no en tenia cap.
+
+build(String building) --> Els aldeanos miraran si els i va bé i si poden construir
+el tipus d'edifici building.
