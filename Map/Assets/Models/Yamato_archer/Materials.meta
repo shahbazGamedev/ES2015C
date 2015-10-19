@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: b08666ab044e3e448b2882d5d8c5108f
 folderAsset: yes
 timeCreated: 1445071981
+=======
+guid: 9dea243e05a918f41beaf739badc694e
+folderAsset: yes
+timeCreated: 1445072087
+>>>>>>> refs/remotes/origin/teamDsprint2
 licenseType: Free
 DefaultImporter:
   userData: 
