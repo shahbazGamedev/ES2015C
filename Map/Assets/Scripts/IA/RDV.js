@@ -1,11 +1,12 @@
 ﻿#pragma strict
 //Rango De Vision
 var enemigo : IA;
-var rol = "";
 var otherRol= "";
+var rolAsignado : boolean;
+var recursos = new Array ();
 
 function Start () {
-
+	enemigo.objetivo = null;
 }
 
 function Update () {
@@ -13,37 +14,23 @@ function Update () {
 }
 
 function OnTriggerEnter(other:Collider){
+
 	otherRol = other.gameObject.tag;
-	rol = enemigo.gameObject.tag;
+	recursos.Add(other.transform);	
+	enemigo.objetivo=other.transform;
 	
-	if(otherRol=="arbol" && rol == "lenyador"){
-		enemigo.estado=2;
-		//enemigo.gameObject.GetComponent.<Collider>().isTrigger=false;
-	}else if(otherRol=="mina" && rol == "minero"){
-		enemigo.estado=2;
-		//enemigo.gameObject.GetComponent.<Collider>().isTrigger=false;
-
-	}else if(otherRol=="comida" && rol=="recolector"){
-	
-		//enemigo.gameObject.GetComponent.<Collider>().isTrigger=false;
-
+	if(otherRol == "arbol" && !rolAsignado){
+		enemigo.gameObject.tag="lenyador";
+		rolAsignado=true;
 		enemigo.estado=2;
 	}
 }
+
+
 function OnTriggerExit(other:Collider){
-	if(other.gameObject.tag=="arbol" && gameObject.tag == "lenyador"){
-		enemigo.estado=1;
-		gameObject.GetComponent.<Collider>().isTrigger=true;
-
-	}
-	if(other.gameObject.tag=="mina" && gameObject.tag == "minero"){
-		enemigo.estado=1;
-		gameObject.GetComponent.<Collider>().isTrigger=true;
-
-	}
-	if(other.gameObject.tag=="comida" && gameObject.tag=="recolector"){
-		enemigo.estado=1;
-		gameObject.GetComponent.<Collider>().isTrigger=true;
-
-	}
+	rolAsignado = false;
+	enemigo.estado=1;
+	gameObject.GetComponent.<Collider>().isTrigger=false;
+	gameObject.GetComponent.<Collider>().isTrigger=true;
+	enemigo.gameObject.tag = "neutro";
 }

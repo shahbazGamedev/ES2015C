@@ -11,12 +11,11 @@ function Update () {
 
 function OnTriggerEnter(other: Collider){
 	if(other.gameObject.tag == "mina"||other.gameObject.tag=="arbol" || other.gameObject.tag=="comida"){
-		ataque.estado = 3;
+		ataque.estado = 3; // Pasamos a ataque, ejecutando la animacion oportuna
 	}
 }
 
 function OnTriggerExit(other: Collider){
-	if(other.gameObject.tag == "mina"||other.gameObject.tag=="arbol" || other.gameObject.tag=="comida"){
-		ataque.estado = 2;
-	}
+	ataque.estado = 1; // volvemos a patrullar
+	
 }
