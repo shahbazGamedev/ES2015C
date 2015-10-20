@@ -7,28 +7,20 @@ var caminar : AnimationClip;
 var correr : AnimationClip;
 var morir : AnimationClip;
 var atacar : AnimationClip;
-var otherTag = "";
+
 
 var pat : float = 0;
 var patrullando : boolean = true;
 var direccion : float= 1;
 
-//
-var player : Transform;
-var Mina : Transform;
-var Arbol : Transform;
-var Comida : Transform;
+
+var objetivo : Transform;
 
 var vel_seguir : float = 3;
 
 function Start () {
-	if(this.tag=="recolector"){
-		player=Comida;
-	}else if (this.tag == "minero"){
-		player=Mina;
-	}else if(this.tag=="lenyador"){
-		player = Arbol;
-	}
+	this.tag = "neutro";
+
 }
 
 function Update () {
@@ -68,9 +60,7 @@ function Update () {
 	if(estado == 4){ //morir
 		Morir();
 	} //morir
-	if(estado == 5){// esquivar
-		Esquivar();
-	}
+	
 	
 }
 
@@ -84,17 +74,17 @@ function Patrullar(){
 	
 	transform.rotation.x=0;
 	transform.rotation.z=0;
-	transform.Rotate (Vector3 ( 0,0,0)*Time.deltaTime); //25*direccion en la Y
+	transform.Rotate (Vector3 ( 0,0,0)*Time.deltaTime); //25*direccion en la Y para caminar en semicirculos
 	transform.Translate (Vector3(0,0,1)*Time.deltaTime);
 	GetComponent.<Animation>().Play (caminar.name);
 }
 
 function Perseguir(){
-	
+	 
 	transform.rotation.x=0;
 	transform.rotation.z=0;
 	GetComponent.<Animation>().Play (correr.name);
-	transform.LookAt(player);
+	transform.LookAt(objetivo);
 	transform.Translate(Vector3(0,0,1*vel_seguir*Time.deltaTime));	
 }
 
@@ -108,11 +98,10 @@ function Atacar(){
 
 function Morir(){
 	GetComponent.<Animation>().Play (morir.name);
+	estado = 0;
 }
 
-function Esquivar(){
-	GetComponent.<Animation>().Play (caminar.name);
-}
+
 
 
 
