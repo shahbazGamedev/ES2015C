@@ -150,4 +150,26 @@ public class Unit : RTSObject
         // TODO: Implement this method properly
         return 987;
     }
+
+    public GameObject FindClosest(string tag)
+    {
+
+        GameObject[] TaggedObjects = GameObject.FindGameObjectsWithTag(tag); //Retorna una llista amb els objectes que tenen el tag tag
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+
+        foreach (GameObject go in TaggedObjects) //recorre la llista dels objectes i caculca quin es el més proper
+        {
+            position = (go.transform.position - position);
+            var curDistance = position.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+
+        return closest;    //retorna l'objecte més proper
+    }
 }
