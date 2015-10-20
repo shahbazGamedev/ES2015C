@@ -14,8 +14,8 @@ public class PlaceResources : MonoBehaviour
 
     void Start()
     {
-        PlaceRandomResources(70, "arbolYamato1");
-        PlaceGroup(10, 30, "arbolYamato1");
+        PlaceRandomResources(70, "arbolYamato");
+        PlaceGroup(10, 30, "arbolYamato");
     }
 
     // Update is called once per frame
