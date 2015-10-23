@@ -1,175 +1,212 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 using Pathfinding;
 
 public class Unit : RTSObject
 {
+	public Avatar unitAvatar;				// Referencia al avatar del component Animator.
 
-    public float moveSpeed = 20;             // Velocitat de moviment
+	protected float moveSpeed = 20;             	// Velocitat de moviment
 
-    public CharacterController controller;
-    private Vector3 targetPosition;         // Indica el vector3 del objectiu
-    private GameObject targetObject;        // Indica el objecte del objectiu
-    public Seeker seeker;
-    private Path path;
-    private float nextWaypointDistance = 3.0f;
-    private int currentWaypoint = 0;
+	private CharacterController characterController;	// Referencia al component CharacterController.
+	private Seeker seeker;					// Referencia al component Seeker.
+	private Vector3 targetPosition;         // Indica el vector3 del objectiu
+	private GameObject targetObject;        // Indica el objecte del objectiu
+	
+	private Path path;
+	private float nextWaypointDistance = 3.0f;
+	private int currentWaypoint = 0;
 
-    protected bool moving;                  // Indica si esta movent-se          
+	protected bool moving;                  // Indica si esta movent-se          
 
 
-    /*** Metodes per defecte de Unity ***/
+	/*** Metodes per defecte de Unity ***/
 
-    protected override void Awake()
-    {
-        base.Awake();
-        controller = GetComponent<CharacterController>();
-        seeker = GetComponent<Seeker>();
-    }
+	protected override void Awake ()
+	{
+		base.Awake ();
+		seeker = gameObject.AddComponent<Seeker> ();
 
-    protected override void Start()
-    {
-        base.Start();
-    }
+		// Calculem la dimensio del CharacterController
+		FittedCharacterCollider();
 
-    protected override void Update()
-    {
-        base.Update();
+		// Asignem les propietats del Animator
+		anim = gameObject.AddComponent<Animator>();
+		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/" + this.name + "_AC") as RuntimeAnimatorController;
+		anim.avatar = unitAvatar;
+	}
 
-        // If the unit is currently moving, call the function to update
-        // the position in the path the unit is following
-        if (path != null && currentWaypoint < path.vectorPath.Count)
-        {
-            moveToPosition();
-        }
-    }
+	protected override void Start ()
+	{
+		base.Start ();
+	}
 
-    protected override void OnGUI()
-    {
-        base.OnGUI();
-    }
+	protected override void Update ()
+	{
+		base.Update ();
 
-    protected override void Animating()
-    {
-        base.Animating();
-        anim.SetBool("IsWalking", moving);
-    }
+		// If the unit is currently moving, call the function to update
+		// the position in the path the unit is following
+		if (path != null && currentWaypoint < path.vectorPath.Count) {
+			moveToPosition ();
+		}
+	}
 
-    /*** Metodes publics ***/
+	protected override void OnGUI ()
+	{
+		base.OnGUI ();
+	}
 
-    public override bool CanAttack()
-    {
-        return true;
-    }
+	protected override void Animating ()
+	{
+		base.Animating ();
+		anim.SetBool ("IsWalking", moving);
+	}
 
-    public override bool CanMove()
-    {
-        return true;
-    }
+	/*** Metodes publics ***/
 
-    /// <summary>
-    /// Tells the unit to move to the given position, by generating and
-    /// following a route to the desired position.
-    /// </summary>
-    /// <param name="target">The position we want the unit to move to.</param>
-    public void setNewPath(Vector3 target)
-    {
-        // We're starting movement, so start the walking animation
-        moving = true;
+	/// <summary>
+	/// Tells if the unit can attack
+	/// </summary>
+	/// <returns>Boolean saying if the units can attack or not.</returns>
+	public override bool CanAttack ()
+	{
+		return true;
+	}
 
-        targetPosition = target;
-        seeker.StartPath(transform.position, targetPosition, OnPathComplete);
-    }
+	/// <summary>
+	/// Tells if the unit can move
+	/// </summary>
+	/// <returns>Boolean saying if the units can move or not.</returns>
+	public override bool CanMove ()
+	{
+		return true;
+	}
 
-    /*** Metodes privats ***/
+	/// <summary>
+	/// Tells the unit to move to the given position, by generating and
+	/// following a route to the desired position.
+	/// </summary>
+	/// <param name="target">The position we want the unit to move to.</param>
+	public void setNewPath (Vector3 target)
+	{
+		// We're starting movement, so start the walking animation
+		moving = true;
 
-    private void OnPathComplete(Path newPath)
-    {
-        if (!newPath.error)
-        {
-            path = newPath;
-            currentWaypoint = 0;
-        }
-    }
+		targetPosition = target;
+		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
+	}
 
-    private void moveToPosition()
-    {
-        // Set the rotation of the model to point in the direction of the target
-        Quaternion newRotation = Quaternion.LookRotation(targetPosition - transform.position);
-        newRotation.x = 0f;
-        newRotation.z = 0f;
-        transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10);
+	/// <summary>
+	/// Gets the attack strengh that the unit has when it is attacking.
+	/// </summary>
+	/// <returns>The number of attack sthengh points.</returns>
+	public float GetAttackStrengh ()
+	{
+		// TODO: Implement this method properly
+		return 321;
+	}
+	
+	/// <summary>
+	/// Gets the defense points that the unit has when it is being attacked.
+	/// </summary>
+	/// <returns>The number of defense points.</returns>
+	public float GetDefense ()
+	{
+		// TODO: Implement this method properly
+		return 654;
+	}
+	
+	/// <summary>
+	/// Gets the distance at which the unit can attack, if it is a range unit (e.g. an archer). Otherwise, null.
+	/// </summary>
+	/// <returns>The distance at which the unit can attack, or null.</returns>
+	public float? GetAttackRange ()
+	{
+		// TODO: Implement this method properly
+		return 987;
+	}
+	
+	public GameObject FindClosest (string tag)
+	{
+		
+		GameObject[] TaggedObjects = GameObject.FindGameObjectsWithTag (tag); //Retorna una llista amb els objectes que tenen el tag tag
+		GameObject closest = null;
+		float distance = Mathf.Infinity;
+		Vector3 position = transform.position;
+		
+		foreach (GameObject go in TaggedObjects) { //recorre la llista dels objectes i caculca quin es el més proper
+			position = (go.transform.position - position);
+			var curDistance = position.sqrMagnitude;
+			if (curDistance < distance) {
+				closest = go;
+				distance = curDistance;
+			}
+		}
+		
+		return closest;    //retorna l'objecte més proper
+	}
 
-        // Tell the controller to move in the straight-line direction
-        // between the current position and the waypoint
-        Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
-        dir = dir * moveSpeed * Time.deltaTime;
-        controller.SimpleMove(dir);
+	/*** Metodes privats ***/
 
-        // Have we reached the waypoint in the path?
-        if (Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]) < nextWaypointDistance)
-        {
-            // Advance to the next waypoint
-            currentWaypoint++;
+	private void OnPathComplete (Path newPath)
+	{
+		if (!newPath.error) {
+			path = newPath;
+			currentWaypoint = 0;
+		}
+	}
 
-            // If we have reached the last waypoint in the path,
-            // then we need to stop the walking animation
-            if (path.vectorPath.Count == currentWaypoint)
-            {
-                moving = false;
-            }
-        }
-    }
+	private void moveToPosition ()
+	{
+		// Set the rotation of the model to point in the direction of the target
+		Quaternion newRotation = Quaternion.LookRotation (targetPosition - transform.position);
+		newRotation.x = 0f;
+		newRotation.z = 0f;
+		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 10);
 
-    /// <summary>
-    /// Gets the attack strengh that the unit has when it is attacking.
-    /// </summary>
-    /// <returns>The number of attack sthengh points.</returns>
-    public float GetAttackStrengh()
-    {
-        // TODO: Implement this method properly
-        return 321;
-    }
+		// Tell the controller to move in the straight-line direction
+		// between the current position and the waypoint
+		Vector3 dir = (path.vectorPath [currentWaypoint] - transform.position).normalized;
+		dir = dir * moveSpeed * Time.deltaTime;
+		characterController.SimpleMove (dir);
 
-    /// <summary>
-    /// Gets the defense points that the unit has when it is being attacked.
-    /// </summary>
-    /// <returns>The number of defense points.</returns>
-    public float GetDefense()
-    {
-        // TODO: Implement this method properly
-        return 654;
-    }
+		// Have we reached the waypoint in the path?
+		if (Vector3.Distance (transform.position, path.vectorPath [currentWaypoint]) < nextWaypointDistance) {
+			// Advance to the next waypoint
+			currentWaypoint++;
 
-    /// <summary>
-    /// Gets the distance at which the unit can attack, if it is a range unit (e.g. an archer). Otherwise, null.
-    /// </summary>
-    /// <returns>The distance at which the unit can attack, or null.</returns>
-    public float? GetAttackRange()
-    {
-        // TODO: Implement this method properly
-        return 987;
-    }
+			// If we have reached the last waypoint in the path,
+			// then we need to stop the walking animation
+			if (path.vectorPath.Count == currentWaypoint) {
+				moving = false;
+			}
+		}
+	}
 
-    public GameObject FindClosest(string tag)
-    {
-
-        GameObject[] TaggedObjects = GameObject.FindGameObjectsWithTag(tag); //Retorna una llista amb els objectes que tenen el tag tag
-        GameObject closest = null;
-        float distance = Mathf.Infinity;
-        Vector3 position = transform.position;
-
-        foreach (GameObject go in TaggedObjects) //recorre la llista dels objectes i caculca quin es el més proper
-        {
-            position = (go.transform.position - position);
-            var curDistance = position.sqrMagnitude;
-            if (curDistance < distance)
-            {
-                closest = go;
-                distance = curDistance;
-            }
-        }
-
-        return closest;    //retorna l'objecte més proper
-    }
+	// Calcula el characterController de la unitat
+	private void FittedCharacterCollider ()
+	{
+		Transform transform = this.gameObject.transform;
+		Quaternion rotation = transform.rotation;
+		transform.rotation = Quaternion.identity;
+		
+		characterController = transform.GetComponent<CharacterController> ();
+		
+		if (characterController == null) {
+			transform.gameObject.AddComponent<CharacterController> ();
+			characterController = transform.GetComponent<CharacterController> ();
+		}
+		
+		Bounds bounds = new Bounds (transform.position, Vector3.zero);
+		
+		ExtendBounds (transform, ref bounds);
+		
+		characterController.center = new Vector3(bounds.center.x - transform.position.x, bounds.center.y - transform.position.y + 0.25f, bounds.center.z - transform.position.z);
+		characterController.radius = bounds.size.x / 2;
+		characterController.height = bounds.size.y / transform.localScale.y;
+		
+		transform.rotation = rotation;
+	}
 }

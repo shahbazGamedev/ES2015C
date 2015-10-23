@@ -6,10 +6,9 @@ public class RTSObject : MonoBehaviour
 {
 
     // Variables publiques generals
-    public string objectName = "GenericObject";     // Nom del objecte
+	public string objectName = "GenericObject";     // Nom del objecte
     public int cost = 100, sellValue = 10, hitPoints = 100, maxHitPoints = 100; // Cost, valor, punts de vida i vida maxima
-    public int ObjectId { get; set; }               // Identificador unic del objecte
-    public enum ResourceType { Gold, Wood, Food, Unknown }    // Declarem els tipus de recursos
+	public enum ResourceType { Gold, Wood, Food, Unknown }    // Declarem els tipus de recursos
     public Player owner;                            // A quin player correspon
 
     // Variables accessibles per a les subclasses
@@ -21,17 +20,15 @@ public class RTSObject : MonoBehaviour
     protected bool attacking = false, movingIntoPosition = false, aiming = false;   // Booleans dels tres estats comuns a tots els objectes
     protected List<RTSObject> nearbyObjects;        // Llista de objectes propers
 
-    protected Animator anim;                        // Referencia al component animator.
-    protected Rigidbody objectRigidbody;            // Referencia al component Rigidbody.
+    protected Animator anim;                        // Referencia al component Animator.
 
+	private int ObjectId { get; set; }               // Identificador unic del objecte
     private float currentWeaponChargeTime;
 
     /*** Metodes per defecte de Unity ***/
 
     protected virtual void Awake()
     {
-        anim = GetComponent<Animator>();
-        objectRigidbody = GetComponent<Rigidbody>();
     }
 
     protected virtual void Start()
@@ -41,7 +38,7 @@ public class RTSObject : MonoBehaviour
     protected virtual void Update()
     {
         if (attacking && !movingIntoPosition) PerformAttack();
-        if (anim) Animating();
+        if (anim && anim.runtimeAnimatorController) Animating();
     }
 
     protected virtual void OnGUI()
@@ -91,13 +88,19 @@ public class RTSObject : MonoBehaviour
         return false;
     }
 
-    // Metode per saber si el objecte pot atacar o no
+	/// <summary>
+	/// Tells if the object can attack
+	/// </summary>
+	/// <returns>Boolean saying if the object can attack or not.</returns>
     public virtual bool CanAttack()
     {
         return false;
     }
 
-    // Metode per saber si pot el objecte moures o no
+	/// <summary>
+	/// Tells if the object can move
+	/// </summary>
+	/// <returns>Boolean saying if the object can move or not.</returns>
     public virtual bool CanMove()
     {
         return false;
@@ -144,6 +147,20 @@ public class RTSObject : MonoBehaviour
     }
 
     /*** Metodes interns accessibles per les subclasses ***/
+
+	// Funcio auxiliar per al calcul del BoxCollider i el CharacterController
+	protected void ExtendBounds (Transform t, ref Bounds b)
+	{
+		Renderer rend = t.GetComponent<Renderer> ();
+		if (rend != null) {
+			b.Encapsulate (rend.bounds.min);
+			b.Encapsulate (rend.bounds.max);
+		}
+		
+		foreach (Transform t2 in t) {
+			ExtendBounds (t2, ref b);
+		}
+	}
 
     // Metode per calcular la vida actual del objecte
     protected virtual void CalculateCurrentHealth()
