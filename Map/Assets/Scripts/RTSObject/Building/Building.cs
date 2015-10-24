@@ -28,7 +28,7 @@ public class Building : RTSObject
 		base.Awake ();
 
 		// Calculem la dimensio del BoxCollider
-		FittedBoxCollider ();
+		FittedBoxCollider();
 
 		spawnPoint = new Vector3 (transform.position.x + 10, 0.0f, transform.position.z + 10);
 		buildQueue = new Queue<string> ();
@@ -121,7 +121,7 @@ public class Building : RTSObject
 	}
 
 	// Calcula el boxCollider del edifici
-	private void FittedCollider ()
+	private void FittedBoxCollider ()
 	{
 		Transform transform = this.gameObject.transform;
 		Quaternion rotation = transform.rotation;

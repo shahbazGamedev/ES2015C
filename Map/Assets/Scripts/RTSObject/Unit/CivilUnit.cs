@@ -24,6 +24,7 @@ public class CivilUnit : Unit
 	
 	
 	public Transform townCenter;
+	public Transform armyBuilding;
 
     /*** Metodes per defecte de Unity ***/
 
@@ -31,7 +32,7 @@ public class CivilUnit : Unit
     {
         base.Start();
         objectName = "Civil Unit";
-		actions = new string[] { "TownCenter" };                 //Accions que pot fer la unitat civil
+		actions = new string[] { "TownCenter", "ArmyBuilding" };                 //Accions que pot fer la unitat civil
     }
 
     protected override void Update()
@@ -79,7 +80,25 @@ public class CivilUnit : Unit
 					Debug.Log("Not enough wood");
 				}
 			}
-		}			 			
+		}
+
+		if (buildingName.Equals("ArmyBuilding")) {		
+			if (Physics.CheckSphere (point, 0.8f, finalmask)) {
+				Debug.Log("No podemos construir porque hay otros edificios cerca");
+			} else {
+				float wood = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
+				if (wood >= 100) {
+					Transform armyClone = (Transform)Instantiate(armyBuilding, point, Quaternion.identity);
+					armyClone.GetComponent<RTSObject>().owner=owner;
+					var guo = new GraphUpdateObject(armyClone.GetComponent<Collider>().bounds);
+					guo.updatePhysics = true;
+					AstarPath.active.UpdateGraphs (guo);
+					owner.resourceAmounts[RTSObject.ResourceType.Wood]=wood-100;
+				} else {
+					Debug.Log("Not enough wood");
+				}
+			}
+		}			
     }
 
     // Metode que cridem per a començar a recolectar

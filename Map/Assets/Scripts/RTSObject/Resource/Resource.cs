@@ -52,7 +52,7 @@ public class Resource : RTSObject {
 	/*** Metodes privats ***/
 
 	// Calcula el boxCollider del recurs
-	private void FittedCollider ()
+	private void FittedBoxCollider ()
 	{
 		Transform transform = this.gameObject.transform;
 		Quaternion rotation = transform.rotation;
