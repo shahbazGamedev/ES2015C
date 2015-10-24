@@ -169,7 +169,7 @@ public class Unit : RTSObject
 		// Tell the controller to move in the straight-line direction
 		// between the current position and the waypoint
 		Vector3 dir = (path.vectorPath [currentWaypoint] - transform.position).normalized;
-		dir = dir * moveSpeed * Time.deltaTime;
+		dir = dir * moveSpeed;
 		characterController.SimpleMove (dir);
 
 		// Have we reached the waypoint in the path?
