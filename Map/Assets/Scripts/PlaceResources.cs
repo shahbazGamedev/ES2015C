@@ -7,15 +7,13 @@ public class PlaceResources : MonoBehaviour
     // Use this for initialization
     private int i, j, k; //s'utilitzen per recorrer el fors(PlaceForests)
 
-    int width = 500;//mides del mapa
-    int depth = 500;
 
     Vector3 coords;
 
     void Start()
     {
-        PlaceRandomResources(70, "arbolYamato");
-        PlaceGroup(10, 30, "arbolYamato");
+        PlaceRandomResources(70, "arbolYamato",500,500);
+        PlaceGroup(10, 30, "arbolYamato",500,500);
     }
 
     // Update is called once per frame
@@ -23,7 +21,7 @@ public class PlaceResources : MonoBehaviour
     {
     }
 
-    void PlaceRandomResources(int numberOfResources, string asset)
+    void PlaceRandomResources(int numberOfResources, string asset,float width, float depth)//numero de recursos,prefab del recurs, amplada del mapa, profunditat del mapa
     {
 
         for (i = 0; i < numberOfResources; i++)
@@ -43,7 +41,7 @@ public class PlaceResources : MonoBehaviour
     }
 
 
-    void PlaceGroup(int numGroups, int maxElementsInGroup, string PrefabResource)
+    void PlaceGroup(int numGroups, int maxElementsInGroup, string PrefabResource,float width, float depth)
     {
 
         for (i = 0; i < numGroups; i++) //Numero de boscos que tindra el mapa
