@@ -13,12 +13,14 @@ public class Unit : RTSObject
 	private Seeker seeker;					// Referencia al component Seeker.
 	private Vector3 targetPosition;         // Indica el vector3 del objectiu
 	private GameObject targetObject;        // Indica el objecte del objectiu
-	
+
+	private Quaternion aimRotation;
 	private Path path;
 	private float nextWaypointDistance = 3.0f;
 	private int currentWaypoint = 0;
 
-	protected bool moving;                  // Indica si esta movent-se          
+	protected bool moving;                  // Indica si esta movent-se 
+	protected bool running;					// Indica si esta corrent
 
 
 	/*** Metodes per defecte de Unity ***/
@@ -27,19 +29,18 @@ public class Unit : RTSObject
 	{
 		base.Awake ();
 		seeker = gameObject.AddComponent<Seeker> ();
-
-		// Calculem la dimensio del CharacterController
-		FittedCharacterCollider();
-
-		// Asignem les propietats del Animator
 		anim = gameObject.AddComponent<Animator>();
-		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/" + this.name + "_AC") as RuntimeAnimatorController;
-		anim.avatar = unitAvatar;
 	}
 
 	protected override void Start ()
 	{
 		base.Start ();
+		// Calculem la dimensio del CharacterController
+		FittedCharacterCollider();
+		
+		// Asignem les propietats del Animator
+		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/" + this.name + "_AC") as RuntimeAnimatorController;
+		anim.avatar = unitAvatar;
 	}
 
 	protected override void Update ()
@@ -50,6 +51,9 @@ public class Unit : RTSObject
 		// the position in the path the unit is following
 		if (path != null && currentWaypoint < path.vectorPath.Count) {
 			moveToPosition ();
+		} else if (aiming)
+		{
+			
 		}
 	}
 
@@ -62,6 +66,20 @@ public class Unit : RTSObject
 	{
 		base.Animating ();
 		anim.SetBool ("IsWalking", moving);
+		anim.SetBool ("IsRunning", running);
+	}
+
+	// Metode per disparar
+	protected override void UseWeapon()
+	{
+		base.UseWeapon();
+	}
+	
+	// Metode per apuntar
+	protected override void AimAtTarget()
+	{
+		base.AimAtTarget();
+		aimRotation = Quaternion.LookRotation(target.transform.position - transform.position);
 	}
 
 	/*** Metodes publics ***/

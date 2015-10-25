@@ -6,9 +6,10 @@ public class RTSObject : MonoBehaviour
 {
 
     // Variables publiques generals
-	public string objectName = "GenericObject";     // Nom del objecte
-    public int cost = 100, sellValue = 10, hitPoints = 100, maxHitPoints = 100; // Cost, valor, punts de vida i vida maxima
-	public enum ResourceType { Gold, Wood, Food, Unknown }    // Declarem els tipus de recursos
+	public string objectName = "Generic RTS Object";     // Nom del objecte
+	public int cost = 50, hitPoints = 100, maxHitPoints = 100; // Cost, punts de vida i vida maxima
+	public int hitDamage = 10, defense = 0, attack = 0;		// Punt de atac, Habilitat defensa, Habilitat atac
+	public enum ResourceType { Gold, Wood, Food, Unknown }	// Declarem els tipus de recursos
     public Player owner;                            // A quin player correspon
 
     // Variables accessibles per a les subclasses
@@ -172,6 +173,7 @@ public class RTSObject : MonoBehaviour
     protected virtual void Animating()
     {
         anim.SetBool("IsAttacking", attacking);
+		anim.SetBool("IsDead", hitPoints <= 0);
     }
 
     // Metode per disparar
