@@ -14,8 +14,6 @@ public class RTSObject : MonoBehaviour
 
     // Variables accessibles per a les subclasses
     protected string[] actions = { };               // Accions que pot realitzar
-    protected bool currentlySelected = false;       // Indica si esta seleccionat
-    protected Rect playingArea = new Rect(0.0f, 0.0f, 0.0f, 0.0f);  // Area de actuacio de la unitat
     protected float healthPercentage = 1.0f;        // Percentatge de vida
     protected RTSObject target = null;              // Posible objectiu
     protected bool attacking = false, movingIntoPosition = false, aiming = false;   // Booleans dels tres estats comuns a tots els objectes
@@ -44,26 +42,9 @@ public class RTSObject : MonoBehaviour
 
     protected virtual void OnGUI()
     {
-        if (currentlySelected) DrawGUI();
     }
 
     /*** Metodes publics ***/
-
-    // Metode per declarar la seleccio del objecte
-    public virtual void SetSelection(bool selected, Rect playingArea)
-    {
-        currentlySelected = selected;
-        if (selected)
-        {
-            this.playingArea = playingArea;
-        }
-    }
-
-    // Metode per declarar el area de joc del objecte
-    public void SetPlayingArea(Rect playingArea)
-    {
-        this.playingArea = playingArea;
-    }
 
     // Metode per obtenir les accions del objecte
     public string[] GetActions()
@@ -119,15 +100,48 @@ public class RTSObject : MonoBehaviour
         if (hitPoints <= 0) Destroy(gameObject);
     }
 
-    /*** Metodes privats ***/
+	/*** Metodes interns accessibles per les subclasses ***/
+	
+	// Funcio auxiliar per al calcul del BoxCollider i el CharacterController
+	protected void ExtendBounds (Transform t, ref Bounds b)
+	{
+		Renderer rend = t.GetComponent<Renderer> ();
+		if (rend != null) {
+			b.Encapsulate (rend.bounds.min);
+			b.Encapsulate (rend.bounds.max);
+		}
+		
+		foreach (Transform t2 in t) {
+			ExtendBounds (t2, ref b);
+		}
+	}
+	
+	// Metode per calcular la vida actual del objecte
+	protected virtual void CalculateCurrentHealth()
+	{
+		healthPercentage = (float)hitPoints / (float)maxHitPoints;
+	}
+	
+	// Metode que usem per animar el objecte
+	protected virtual void Animating()
+	{
+		anim.SetBool("IsAttacking", attacking);
+		anim.SetBool("IsDead", hitPoints <= 0);
+	}
+	
+	// Metode per disparar
+	protected virtual void UseWeapon()
+	{
+		currentWeaponChargeTime = 0.0f;
+	}
+	
+	// Metode per apuntar
+	protected virtual void AimAtTarget()
+	{
+		aiming = true;
+	}
 
-    // Metode que canvia la seleccio del Player a un nou objecte
-    private void ChangeSelection(RTSObject rtsObject, Player controller)
-    {
-        SetSelection(false, playingArea);
-        if (controller.SelectedObject) controller.SelectedObject.SetSelection(false, playingArea);
-        controller.SelectedObject = rtsObject;
-    }
+    /*** Metodes privats ***/
 
     // Metode que dibuixa el GUI del objecte
     private void DrawGUI()
@@ -150,46 +164,5 @@ public class RTSObject : MonoBehaviour
             attacking = false;
             return;
         }
-    }
-
-    /*** Metodes interns accessibles per les subclasses ***/
-
-	// Funcio auxiliar per al calcul del BoxCollider i el CharacterController
-	protected void ExtendBounds (Transform t, ref Bounds b)
-	{
-		Renderer rend = t.GetComponent<Renderer> ();
-		if (rend != null) {
-			b.Encapsulate (rend.bounds.min);
-			b.Encapsulate (rend.bounds.max);
-		}
-		
-		foreach (Transform t2 in t) {
-			ExtendBounds (t2, ref b);
-		}
-	}
-
-    // Metode per calcular la vida actual del objecte
-    protected virtual void CalculateCurrentHealth()
-    {
-        healthPercentage = (float)hitPoints / (float)maxHitPoints;
-    }
-
-    // Metode que usem per animar el objecte
-    protected virtual void Animating()
-    {
-        anim.SetBool("IsAttacking", attacking);
-		anim.SetBool("IsDead", hitPoints <= 0);
-    }
-
-    // Metode per disparar
-    protected virtual void UseWeapon()
-    {
-        currentWeaponChargeTime = 0.0f;
-    }
-
-    // Metode per apuntar
-    protected virtual void AimAtTarget()
-    {
-        aiming = true;
     }
 }

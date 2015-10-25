@@ -8,6 +8,8 @@ public class CivilUnit : Unit
     public Building resourceStore;                          // Edifici on es deposita la recolecció
     public int buildSpeed;                                  // Velocitat de construcció
 
+	protected GameObject creationBuilding = null;			// Objecte que indica la unitat a crear actual
+
     private bool harvesting = false, emptying = false, building = false;    // Indicadors d'estat de la unitat
     private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
     private ResourceType harvestType;                       // Tipus de recolecció
@@ -21,10 +23,6 @@ public class CivilUnit : Unit
 	private static int layermask1 = 1 << layer1;
 	private static int layermask2 = 1 << layer2;
 	private int finalmask = layermask1 | layermask2;
-	
-	
-	protected GameObject townCenter;						// El Town Center per a crear
-	protected GameObject armyBuilding;						// El Army Building per a crear
 
     /*** Metodes per defecte de Unity ***/
 
@@ -32,7 +30,7 @@ public class CivilUnit : Unit
     {
         base.Start();
         objectName = "Civil Unit";
-		actions = new string[] { "TownCenter", "ArmyBuilding", "WallTower", "EntranceWall", "Wall" };                 // Accions que pot fer la unitat civil
+		actions = new string[] { "Town Center", "Army Building", "Wall Tower", "Wall Entrance", "Wall", "Civil House" };                 // Accions que pot fer la unitat civil
     }
 
     protected override void Update()
@@ -56,50 +54,63 @@ public class CivilUnit : Unit
         base.OnGUI();
     }
 
-    /*** Metodes privats ***/
+	/*** Metodes publics ***/
+	
+	/// <summary>
+	/// Get the current type of resource that the unit is harvesting. If the unit is not harvesting any resource, returns null.
+	/// </summary>
+	/// <returns>The type of the resource being harvested, or null.</returns>
+	public ResourceType? GetHarvestType()
+	{
+		// TODO: Implement this method properly
+		return ResourceType.Wood;
+	}
+	
+	/// <summary>
+	/// Get the current amount of resource that the unit has harvested. If the unit is not harvesting any resource, returns null.
+	/// </summary>
+	/// <returns>The amount of resource that has been harvested, or null.</returns>
+	public float? GetHarvestAmount()
+	{
+		// TODO: Implement this method properly
+		return 999;
+	}
+	
+	public override void PerformAction(string actionToPerform) {
+		base.PerformAction(actionToPerform);
+		CreateBuilding(actionToPerform);
+	}
 
-    // Metode que crea el edifici
-    private void CreateBuilding(string buildingName)
-    {
-        building = true;
-		Vector3 point = new Vector3(transform.position.x + 10, 0.0f, transform.position.z + 10);
+	/*** Metodes interns accessibles per les subclasses ***/
+
+	// Metode que crea el edifici
+	protected virtual void CreateBuilding(string buildingName)
+	{
+		if (creationBuilding != null) {
+			building = true;
+			Vector3 point = new Vector3 (transform.position.x + 10, 0.0f, transform.position.z + 10);
 		
-		if (buildingName.Equals("TownCenter")) {		
 			if (Physics.CheckSphere (point, 0.8f, finalmask)) {
-				Debug.Log("No podemos construir porque hay otros edificios cerca");
+				Debug.Log ("No podemos construir porque hay otros edificios cerca");
 			} else {
-				float wood = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
+				float wood = owner.GetResourceAmount (RTSObject.ResourceType.Wood);
 				if (wood >= 100) {
-					GameObject centerClone = (GameObject)Instantiate(townCenter, point, Quaternion.identity);
-					centerClone.GetComponent<RTSObject>().owner=owner;
-					var guo = new GraphUpdateObject(centerClone.GetComponent<Collider>().bounds);
+					GameObject buildingClone = (GameObject)Instantiate (creationBuilding, point, Quaternion.identity);
+					buildingClone.GetComponent<RTSObject> ().owner = owner;
+					var guo = new GraphUpdateObject (buildingClone.GetComponent<Collider> ().bounds);
 					guo.updatePhysics = true;
 					AstarPath.active.UpdateGraphs (guo);
-					owner.resourceAmounts[RTSObject.ResourceType.Wood]=wood-100;
+					owner.resourceAmounts [RTSObject.ResourceType.Wood] = wood - 100;
 				} else {
-					Debug.Log("Not enough wood");
+					Debug.Log ("Not enough wood");
 				}
 			}
-		}
 
-		if (buildingName.Equals("ArmyBuilding")) {		
-			if (Physics.CheckSphere (point, 0.8f, finalmask)) {
-				Debug.Log("No podemos construir porque hay otros edificios cerca");
-			} else {
-				float wood = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
-				if (wood >= 100) {
-					GameObject armyClone = (GameObject)Instantiate(armyBuilding, point, Quaternion.identity);
-					armyClone.GetComponent<RTSObject>().owner=owner;
-					var guo = new GraphUpdateObject(armyClone.GetComponent<Collider>().bounds);
-					guo.updatePhysics = true;
-					AstarPath.active.UpdateGraphs (guo);
-					owner.resourceAmounts[RTSObject.ResourceType.Wood]=wood-100;
-				} else {
-					Debug.Log("Not enough wood");
-				}
-			}
-		}			
-    }
+			creationBuilding = null;		
+		}
+	}
+
+    /*** Metodes privats ***/
 
     // Metode que cridem per a començar a recolectar
     private void StartHarvest(Resource resource, Building store)
@@ -121,29 +132,4 @@ public class CivilUnit : Unit
     {
 
     }
-
-    /// <summary>
-    /// Get the current type of resource that the unit is harvesting. If the unit is not harvesting any resource, returns null.
-    /// </summary>
-    /// <returns>The type of the resource being harvested, or null.</returns>
-    public ResourceType? GetHarvestType()
-    {
-        // TODO: Implement this method properly
-        return ResourceType.Wood;
-    }
-
-    /// <summary>
-    /// Get the current amount of resource that the unit has harvested. If the unit is not harvesting any resource, returns null.
-    /// </summary>
-    /// <returns>The amount of resource that has been harvested, or null.</returns>
-    public float? GetHarvestAmount()
-    {
-        // TODO: Implement this method properly
-        return 999;
-    }
-	
-	public override void PerformAction(string actionToPerform) {
-		base.PerformAction(actionToPerform);
-        CreateBuilding(actionToPerform);
-	}
 }

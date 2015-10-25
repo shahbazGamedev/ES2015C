@@ -12,6 +12,17 @@ public class Player : MonoBehaviour {
     private bool findingPlacement = false;
 
     /// <summary>
+    /// Gets the team that this player belongs to.
+    /// </summary>
+    public Team Team
+    {
+        get
+        {
+            return GetComponentInParent<Team>();
+        }
+    }
+
+    /// <summary>
     /// Which object does the player have selected for executing actions over it?
     /// </summary>
     public RTSObject SelectedObject { get; set; }

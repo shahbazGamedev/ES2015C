@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class Building : RTSObject
 {
 
-	protected float maxBuildProgress = 10.0f;      // Maxim progres de construccio
+	protected float maxBuildProgress = 10.0f;	// Maxim progres de construccio
+	protected GameObject creationUnit = null;	// Objecte que indica la unitat a crear actual
 
 	protected Vector3 spawnPoint;               // Punt de creacio de les unitats
 	protected Queue<string> buildQueue;         // Cua de construccio del edifici
@@ -13,13 +14,12 @@ public class Building : RTSObject
 	private BoxCollider boxCollider;			// Referencia al component BoxCollider.
 	private float currentBuildProgress = 0.0f;  // Progres actual de la construccio
 	private bool needsBuilding = false;         // Indica si necesita se construit
-	
-	public Transform civil;
+
 	private static int layer1 = 0;
 	private static int layer2 = 10;
 	private static int layermask1 = 1 << layer1;
 	private static int layermask2 = 1 << layer2;
-	private int mask = layermask1 | layermask2;
+	protected int mask = layermask1 | layermask2;
 
 	/*** Metodes per defecte de Unity ***/
 
@@ -76,17 +76,24 @@ public class Building : RTSObject
 			needsBuilding = false;
 		}
 	}
+	
+	public override void PerformAction(string actionToPerform)
+	{
+		base.PerformAction(actionToPerform);
+		CreateUnit(actionToPerform);
+	}
+
 
 	/*** Metodes interns accessibles per les subclasses ***/
 
 	// Metode per crear unitats
-	protected void CreateUnit (string unitName)
+	protected virtual void CreateUnit (string unitName)
 	{
-		bool spawned = false;
-		int maximumSpawn = 5; //no podemos instanciar más de 5 unidades a la vez. Para instanciar más hay que mover las otras
-		Vector3 point = spawnPoint; 
+		if (creationUnit != null) {
+			bool spawned = false;
+			int maximumSpawn = 5; //no podemos instanciar más de 5 unidades a la vez. Para instanciar más hay que mover las otras
+			Vector3 point = spawnPoint; 
 		
-		if (unitName.Equals ("CivilUnit")) {		
 			while (spawned == false && maximumSpawn>0) {
 				if (Physics.CheckSphere (point, 0.1f, mask)) {
 					point = new Vector3 (point.x + 10, 0.0f, point.z + 10); //si ya hay algo provamos en otra posicion
@@ -94,18 +101,17 @@ public class Building : RTSObject
 					spawned = true;
 					float food = owner.GetResourceAmount (RTSObject.ResourceType.Food);
 					if (food >= 20) {
-						Transform civilClone = (Transform)Instantiate (civil, point, Quaternion.identity);
-						civilClone.GetComponent<RTSObject> ().owner = owner;
+						GameObject unitClone = (GameObject)Instantiate (creationUnit, point, Quaternion.identity);
+						unitClone.GetComponent<RTSObject> ().owner = owner;
 						owner.resourceAmounts [RTSObject.ResourceType.Food] = food - 20;
 					} else {
 						Debug.Log ("Not enough food");
 					}
-					
 				}
 				maximumSpawn--;
 			}
-			 		
-		}	
+			creationUnit = null;
+		}
 	}
 
 	// Metode per administrar el progres de construccio de la cua
