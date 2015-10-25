@@ -79,7 +79,8 @@ public class UserInput : MonoBehaviour
             else if (rightClick)
             {
                 if (player.SelectedObject != null && player.SelectedObject.CanAttack() &&
-                    (targetRtsElement is Unit || targetRtsElement is Building))
+                    targetRtsElement != null && targetRtsElement.owner != null &&
+                    player.Team.IsEnemyOf(targetRtsElement.owner.Team))
                 {
                     // If the player clicked over an unit or building and the selected unit
                     // can attack, start the attacking sequence
