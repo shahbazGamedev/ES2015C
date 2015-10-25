@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class TownCenterBuilding : Building {
 
     /*** Metodes per defecte de Unity ***/
 
-
     protected override void Start()
     {
         base.Start();
         objectName = "Town Center";
-        actions = new string[] { "CivilUnit" };
+		cost = 800;
+		hitPoints = 5000;
+		maxHitPoints = 5000;
+        actions = new string[] { "Civil Unit" };
     }
 
     protected override void Update()
@@ -20,12 +20,6 @@ public class TownCenterBuilding : Building {
     }
 
     /*** Metodes publics ***/
-
-    public override void PerformAction(string actionToPerform)
-    {
-        base.PerformAction(actionToPerform);
-        CreateUnit(actionToPerform);
-    }
 
     public override bool CanAttack()
     {

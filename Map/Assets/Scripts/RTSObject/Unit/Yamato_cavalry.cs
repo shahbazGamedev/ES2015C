@@ -8,7 +8,7 @@ public class Yamato_cavalry : Unit
     {
         base.Start();
         objectName = "Yamato Cavalry";
-		moveSpeed = 40;
+		moveSpeed = 10;
 		cost = 300;
 		hitPoints = 150;
 		maxHitPoints = 150;
