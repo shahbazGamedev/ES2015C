@@ -12,7 +12,7 @@ public abstract class HUDElement : MonoBehaviour
     {
         get
         {
-            return transform.root.GetComponent<Player>();
+            return GetComponentInParent<Player>();
         }
     }
 

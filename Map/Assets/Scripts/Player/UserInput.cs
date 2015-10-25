@@ -10,7 +10,7 @@ public class UserInput : MonoBehaviour
     // Inicialitzem
     void Start()
     {
-        player = transform.root.GetComponent<Player>();
+        player = GetComponentInParent<Player>();
     }
 
     // Actualitzem a cada frame
