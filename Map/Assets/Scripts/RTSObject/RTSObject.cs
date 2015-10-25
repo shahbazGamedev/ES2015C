@@ -107,6 +107,11 @@ public class RTSObject : MonoBehaviour
         return false;
     }
 
+    public void AttackObject(RTSObject target)
+    {
+        Debug.Log("Starting Attack: " + target.name);
+    }
+
     // Metode per extreure vida al objecte
     public void TakeDamage(int damage)
     {
