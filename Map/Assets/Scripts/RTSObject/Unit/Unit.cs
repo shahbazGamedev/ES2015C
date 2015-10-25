@@ -7,7 +7,7 @@ public class Unit : RTSObject
 {
 	public Avatar unitAvatar;				// Referencia al avatar del component Animator.
 
-	protected float moveSpeed = 20;             	// Velocitat de moviment
+	protected float moveSpeed = 5;             	// Velocitat de moviment
 
 	private CharacterController characterController;	// Referencia al component CharacterController.
 	private Seeker seeker;					// Referencia al component Seeker.
@@ -38,8 +38,7 @@ public class Unit : RTSObject
 		// Calculem la dimensio del CharacterController
 		FittedCharacterCollider();
 		
-		// Asignem les propietats del Animator
-		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/" + this.name + "_AC") as RuntimeAnimatorController;
+		// Asignem les propietats el avatar del Animator
 		anim.avatar = unitAvatar;
 	}
 
@@ -60,26 +59,6 @@ public class Unit : RTSObject
 	protected override void OnGUI ()
 	{
 		base.OnGUI ();
-	}
-
-	protected override void Animating ()
-	{
-		base.Animating ();
-		anim.SetBool ("IsWalking", moving);
-		anim.SetBool ("IsRunning", running);
-	}
-
-	// Metode per disparar
-	protected override void UseWeapon()
-	{
-		base.UseWeapon();
-	}
-	
-	// Metode per apuntar
-	protected override void AimAtTarget()
-	{
-		base.AimAtTarget();
-		aimRotation = Quaternion.LookRotation(target.transform.position - transform.position);
 	}
 
 	/*** Metodes publics ***/
@@ -164,6 +143,28 @@ public class Unit : RTSObject
 		}
 		
 		return closest;    //retorna l'objecte més proper
+	}
+
+	/*** Metodes interns accessibles per les subclasses ***/
+
+	protected override void Animating ()
+	{
+		base.Animating ();
+		anim.SetBool ("IsWalking", moving);
+		anim.SetBool ("IsRunning", running);
+	}
+	
+	// Metode per disparar
+	protected override void UseWeapon()
+	{
+		base.UseWeapon();
+	}
+	
+	// Metode per apuntar
+	protected override void AimAtTarget()
+	{
+		base.AimAtTarget();
+		aimRotation = Quaternion.LookRotation(target.transform.position - transform.position);
 	}
 
 	/*** Metodes privats ***/
