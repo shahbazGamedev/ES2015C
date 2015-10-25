@@ -27,9 +27,6 @@ public class Building : RTSObject
 	{
 		base.Awake ();
 
-		// Calculem la dimensio del BoxCollider
-		FittedBoxCollider();
-
 		spawnPoint = new Vector3 (transform.position.x + 10, 0.0f, transform.position.z + 10);
 		buildQueue = new Queue<string> ();
 		gameObject.layer = 10;
@@ -38,6 +35,9 @@ public class Building : RTSObject
 	protected override void Start ()
 	{
 		base.Start ();
+
+		// Calculem la dimensio del BoxCollider
+		FittedBoxCollider();
 	}
 
 	protected override void Update ()

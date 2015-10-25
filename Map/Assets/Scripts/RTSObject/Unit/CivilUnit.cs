@@ -14,7 +14,7 @@ public class CivilUnit : Unit
     private Resource resourceDeposit;                       // Recurs de la recolecció
     private Building currentProject;                        // Edifici actual en construcció
     private float amountBuilt = 0.0f;                       // Porcentatge de construcció feta
-	public int mask = 1024; //10000001 checks default and obstacles
+	public int mask = 1024;									// 10000001 checks default and obstacles
 	
 	private static int layer1 = 0;
 	private static int layer2 = 10;
@@ -23,8 +23,8 @@ public class CivilUnit : Unit
 	private int finalmask = layermask1 | layermask2;
 	
 	
-	public Transform townCenter;
-	public Transform armyBuilding;
+	protected GameObject townCenter;						// El Town Center per a crear
+	protected GameObject armyBuilding;						// El Army Building per a crear
 
     /*** Metodes per defecte de Unity ***/
 
@@ -32,7 +32,7 @@ public class CivilUnit : Unit
     {
         base.Start();
         objectName = "Civil Unit";
-		actions = new string[] { "TownCenter", "ArmyBuilding" };                 //Accions que pot fer la unitat civil
+		actions = new string[] { "TownCenter", "ArmyBuilding", "WallTower", "EntranceWall", "Wall" };                 // Accions que pot fer la unitat civil
     }
 
     protected override void Update()
@@ -70,7 +70,7 @@ public class CivilUnit : Unit
 			} else {
 				float wood = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
 				if (wood >= 100) {
-					Transform centerClone = (Transform)Instantiate(townCenter, point, Quaternion.identity);
+					GameObject centerClone = (GameObject)Instantiate(townCenter, point, Quaternion.identity);
 					centerClone.GetComponent<RTSObject>().owner=owner;
 					var guo = new GraphUpdateObject(centerClone.GetComponent<Collider>().bounds);
 					guo.updatePhysics = true;
@@ -88,7 +88,7 @@ public class CivilUnit : Unit
 			} else {
 				float wood = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
 				if (wood >= 100) {
-					Transform armyClone = (Transform)Instantiate(armyBuilding, point, Quaternion.identity);
+					GameObject armyClone = (GameObject)Instantiate(armyBuilding, point, Quaternion.identity);
 					armyClone.GetComponent<RTSObject>().owner=owner;
 					var guo = new GraphUpdateObject(armyClone.GetComponent<Collider>().bounds);
 					guo.updatePhysics = true;
