@@ -9,7 +9,7 @@ public class Team : MonoBehaviour
     /// <summary>
     /// Display name of the team.
     /// </summary>
-    public string name;
+    public string displayName;
 
     /// <summary>
     /// Determines if the given team is an enemy of this team.
