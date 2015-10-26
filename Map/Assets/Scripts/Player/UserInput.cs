@@ -56,7 +56,7 @@ public class UserInput : MonoBehaviour
         }
         else // Click on non-UI element
         {
-            RTSObject objectRtsElement = null;
+            RTSObject targetRtsElement = null;
 
             // Cast a ray in the direction clicked by the user to detect the currently clicked element,
             // and if it is a RTS element, then save its reference
@@ -67,22 +67,37 @@ public class UserInput : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject objectHit = hit.collider.gameObject;
-                objectRtsElement = objectHit.GetComponent<RTSObject>();
+                targetRtsElement = objectHit.GetComponent<RTSObject>();
             }
 
             if (leftClick)
             {
                 // Call the class to change the currently selected RTS element.
                 // Note that this will be null if the user clicked on nothing or a non-RTS element object.
-                player.ChangeSelectedRtsObject(objectRtsElement);
+                player.ChangeSelectedRtsObject(targetRtsElement);
             }
             else if (rightClick)
             {
-                // If a unit is currently selected, move it to the point clicked by the player
-                Unit selectedUnit = player.SelectedObject as Unit;
-                if (selectedUnit != null)
+                if (player.SelectedObject != null && player.SelectedObject.CanAttack() &&
+                    targetRtsElement != null && targetRtsElement.owner != null &&
+                    player.Team.IsEnemyOf(targetRtsElement.owner.Team))
                 {
-                    selectedUnit.setNewPath(hit.point);
+                    // If the player clicked over an unit or building and the selected unit
+                    // can attack, start the attacking sequence
+                    player.SelectedObject.AttackObject(targetRtsElement);
+                }
+                else if (player.SelectedObject != null && player.SelectedObject.CanMove())
+                {
+                    // Otherwise, if the unit can move, start the movement sequence
+                    // TODO: This is inconsistent. All RTSObjects have the CanMove() API,
+                    // but only Unit has the setNewPath() and movement implementation.
+                    // It would make sense to implement movement as part of object,
+                    // since, e.g. resources (animals) may be able to move.
+                    Unit selectedUnit = player.SelectedObject as Unit;
+                    if (selectedUnit != null)
+                    {
+                        selectedUnit.setNewPath(hit.point);
+                    }
                 }
             }
         }
