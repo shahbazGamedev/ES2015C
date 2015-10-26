@@ -86,7 +86,7 @@ public class Unit : RTSObject
 	/// following a route to the desired position.
 	/// </summary>
 	/// <param name="target">The position we want the unit to move to.</param>
-	public void setNewPath (Vector3 target)
+	public override void SetNewPath (Vector3 target)
 	{
 		// We're starting movement, so start the walking animation
 		moving = true;

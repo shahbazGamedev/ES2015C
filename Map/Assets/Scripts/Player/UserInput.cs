@@ -89,15 +89,7 @@ public class UserInput : MonoBehaviour
                 else if (player.SelectedObject != null && player.SelectedObject.CanMove())
                 {
                     // Otherwise, if the unit can move, start the movement sequence
-                    // TODO: This is inconsistent. All RTSObjects have the CanMove() API,
-                    // but only Unit has the setNewPath() and movement implementation.
-                    // It would make sense to implement movement as part of object,
-                    // since, e.g. resources (animals) may be able to move.
-                    Unit selectedUnit = player.SelectedObject as Unit;
-                    if (selectedUnit != null)
-                    {
-                        selectedUnit.setNewPath(hit.point);
-                    }
+                    player.SelectedObject.SetNewPath(hit.point);
                 }
             }
         }

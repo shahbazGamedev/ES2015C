@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class RTSObject : MonoBehaviour
 {
@@ -86,6 +87,16 @@ public class RTSObject : MonoBehaviour
     public virtual bool CanMove()
     {
         return false;
+    }
+
+    /// <summary>
+    /// Tells the unit to move to the given position, by generating and
+    /// following a route to the desired position.
+    /// </summary>
+    /// <param name="target">The position we want the unit to move to.</param>
+    public virtual void SetNewPath(Vector3 target)
+    {
+        throw new NotImplementedException();
     }
 
     public void AttackObject(RTSObject target)
