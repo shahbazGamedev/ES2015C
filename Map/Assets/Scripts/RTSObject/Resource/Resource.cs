@@ -12,14 +12,20 @@ public class Resource : RTSObject {
 
     /*** Metodes per defecte de Unity ***/
 
+	protected override void Awake()
+	{
+		base.Awake();
+		gameObject.layer = 10;
+		// Calculem la dimensio del BoxCollider
+		FittedBoxCollider ();
+
+		resourceType = ResourceType.Unknown;
+		amountLeft = capacity;
+	}
+
     protected override void Start()
     {
         base.Start();
-
-		FittedBoxCollider ();
-
-        resourceType = ResourceType.Unknown;
-        amountLeft = capacity;
     }
 
     /*** Metodes publics ***/

@@ -30,16 +30,16 @@ public class Unit : RTSObject
 		base.Awake ();
 		seeker = gameObject.AddComponent<Seeker> ();
 		anim = gameObject.AddComponent<Animator>();
-	}
-
-	protected override void Start ()
-	{
-		base.Start ();
 		// Calculem la dimensio del CharacterController
 		FittedCharacterCollider();
 		
 		// Asignem les propietats el avatar del Animator
 		anim.avatar = unitAvatar;
+	}
+
+	protected override void Start ()
+	{
+		base.Start ();
 	}
 
 	protected override void Update ()
