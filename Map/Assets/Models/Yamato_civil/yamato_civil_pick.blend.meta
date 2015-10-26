@@ -1,0 +1,145 @@
+fileFormatVersion: 2
+guid: 85d560c610ee1a3408e66e397ea0a3d2
+timeCreated: 1445783642
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: abdomen
+    100002: antebrazo_L
+    100004: antebrazo_R
+    100006: Armature
+    100008: brazo_L
+    100010: brazo_R
+    100012: cabeza
+    100014: cuello
+    100016: dedos_mano2_L
+    100018: dedos_mano2_R
+    100020: dedos_mano_L
+    100022: dedos_mano_R
+    100024: dedos_pie_L
+    100026: dedos_pie_R
+    100028: femur_L
+    100030: femur_R
+    100032: mano_L
+    100034: mano_L_001
+    100036: mano_R
+    100038: pecho
+    100040: pie_L
+    100042: pie_L_control
+    100044: pie_R
+    100046: pie_R_control
+    100048: pulga2_L
+    100050: pulga2_R
+    100052: pulgar1_L
+    100054: pulgar1_R
+    100056: root
+    100058: tibia_L
+    100060: tibia_R
+    100062: Yamato
+    100064: //RootNode
+    400000: abdomen
+    400002: antebrazo_L
+    400004: antebrazo_R
+    400006: Armature
+    400008: brazo_L
+    400010: brazo_R
+    400012: cabeza
+    400014: cuello
+    400016: dedos_mano2_L
+    400018: dedos_mano2_R
+    400020: dedos_mano_L
+    400022: dedos_mano_R
+    400024: dedos_pie_L
+    400026: dedos_pie_R
+    400028: femur_L
+    400030: femur_R
+    400032: mano_L
+    400034: mano_L_001
+    400036: mano_R
+    400038: pecho
+    400040: pie_L
+    400042: pie_L_control
+    400044: pie_R
+    400046: pie_R_control
+    400048: pulga2_L
+    400050: pulga2_R
+    400052: pulgar1_L
+    400054: pulgar1_R
+    400056: root
+    400058: tibia_L
+    400060: tibia_R
+    400062: Yamato
+    400064: //RootNode
+    4300000: Yamato
+    7400000: Default Take
+    7400002: Dead_001
+    7400004: Run_001
+    7400006: Waiting_001
+    7400008: Walk_001
+    9500000: //RootNode
+    13700000: Yamato
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
