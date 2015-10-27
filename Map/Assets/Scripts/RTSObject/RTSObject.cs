@@ -38,6 +38,7 @@ public class RTSObject : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (attacking && movingIntoPosition) CheckMovedIntoPosition();
         if (attacking && !movingIntoPosition) PerformAttack();
         if (anim && anim.runtimeAnimatorController) Animating();
     }
@@ -73,7 +74,7 @@ public class RTSObject : MonoBehaviour
     }
 
 	/// <summary>
-	/// Tells if the object can move
+	/// Tells if the object can change its position.
 	/// </summary>
 	/// <returns>Boolean saying if the object can move or not.</returns>
     public virtual bool CanMove()
@@ -82,11 +83,34 @@ public class RTSObject : MonoBehaviour
     }
 
     /// <summary>
+    /// Tells the object to start a free (non-attack) movement to the
+    /// given position.
+    /// </summary>
+    /// <param name="target">The position we want the unit to move to.</param>
+    public void MoveTo(Vector3 target)
+    {
+        if (attacking)
+        {
+            EndAttack();
+        }
+
+        SetNewPath(target);
+    }
+
+    /// <summary>
     /// Tells the unit to move to the given position, by generating and
     /// following a route to the desired position.
     /// </summary>
     /// <param name="target">The position we want the unit to move to.</param>
-    public virtual void SetNewPath(Vector3 target)
+    protected virtual void SetNewPath(Vector3 target)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Tell the unit to cancel the movement path to the given position.
+    /// </summary>
+    protected virtual void CancelPath()
     {
         throw new NotImplementedException();
     }
@@ -102,12 +126,19 @@ public class RTSObject : MonoBehaviour
 
     /// <summary>
     /// Begins an attack on the given target object.
+    /// To stop the current attack sequence, pass null to this method.
     /// </summary>
-    /// <param name="target">The target of the attack.</param>
+    /// <param name="target">The target of the attack. If null is given, the attack will stop.</param>
     public void AttackObject(RTSObject target)
     {
-        Debug.Log("Starting Attack: " + target.name);
-        BeginAttack(target);
+        if (target != null)
+        {
+            BeginAttack(target);
+        }
+        else
+        {
+            EndAttack();
+        }
     }
 
     /// <summary>
@@ -211,27 +242,116 @@ public class RTSObject : MonoBehaviour
     {
     }
 
-    // Metode que inicialitza el atac a un objecte
-    private void BeginAttack(RTSObject target)
-    {
-        this.target = target;
-        attacking = true;
-        remainingTimeToAttack = 0;
-        PerformAttack();
-    }
+    /// <summary>
+    /// Since objects can't overlap, we have to give them some tolerance
+    /// for the attacks to be possible for non-range units.
+    /// </summary>
+    const float AttackRangeTolerance = 5;
 
-    // Metode que realitza el atac
-    private void PerformAttack()
+    /// <summary>
+    /// Begins an attack sequence on the given target.
+    /// </summary>
+    /// <param name="newTarget">The target of the attack.</param>
+    private void BeginAttack(RTSObject newTarget)
     {
-        if (target == null)
+        // Calculate the distance to the nearest point in the target
+        var targetAttackPosition = newTarget.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+        var distanceToTarget = (targetAttackPosition - transform.position).magnitude;
+
+        // Check if we need to move to the target to attack it, and if we
+        // need to and the unit can't move, warn the user that the attack can't be done
+        bool needToMoveToTarget = (distanceToTarget >= GetAttackRange() + AttackRangeTolerance);
+        if (needToMoveToTarget && !CanMove())
         {
-            attacking = false;
+            Debug.Log(string.Format("{0} can't attack {1}, because it is {2}m away",
+                objectName, newTarget.objectName, distanceToTarget));
             return;
         }
 
+        // Enable the attack status
+        target = newTarget;
+        attacking = true;
+        movingIntoPosition = needToMoveToTarget;
+        remainingTimeToAttack = 0;
+
+        if (needToMoveToTarget)
+        {
+            // Move to a point near the target to attack
+            var attackPosition = targetAttackPosition - (targetAttackPosition -
+                transform.position).normalized * AttackRangeTolerance / 4;
+            SetNewPath(attackPosition);
+        }
+        else
+        {
+            // Begin attacking immediately if we are close enough the target
+            PerformAttack();
+        }
+    }
+    
+    /// <summary>
+    /// Cancels an attack sequence on the given target.
+    /// </summary>
+    private void EndAttack()
+    {
+        // If we were moving to the target to attack it, cancel this move
+        if (attacking && movingIntoPosition)
+        {
+            CancelPath();
+        }
+
+        // Disable the attack status
+        target = null;
+        attacking = false;
+        movingIntoPosition = false;
+        remainingTimeToAttack = 0;
+    }
+
+    /// <summary>
+    /// If the object is moving into position in order to perform an attack,
+    /// checks if the object is close enough to the target to begin the attack.
+    /// </summary>
+    private void CheckMovedIntoPosition()
+    {
+        // If the enemy is dead (or already destroyed), cancel the attack action
+        // http://answers.unity3d.com/questions/13840/how-to-detect-if-a-gameobject-has-been-destroyed.html
+        if (target == null || target.hitPoints == 0)
+        {
+            EndAttack();
+            return;
+        }
+
+        // Check if we are close enough of the enemy to begin the attack sequence
+        var targetAttackPosition = target.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+        var distanceToTarget = (targetAttackPosition - transform.position).magnitude;
+
+        bool needToMoveToTarget = (distanceToTarget >= GetAttackRange() + AttackRangeTolerance);
+
+        if (!needToMoveToTarget)
+        {
+            movingIntoPosition = false;
+            CancelPath();
+        }
+    }
+    
+    /// <summary>
+    /// If the object is performing an attack, inflicts damage to the target according
+    /// to the attack speed, strength and target defense.
+    /// </summary>
+    private void PerformAttack()
+    {
+        // If the enemy is dead (or already destroyed), cancel the attack action
+        // http://answers.unity3d.com/questions/13840/how-to-detect-if-a-gameobject-has-been-destroyed.html
+        if (target == null || target.hitPoints == 0)
+        {
+            EndAttack();
+            return;
+        }
+
+        // Check if enough time has passed to hit the object again
         remainingTimeToAttack -= Time.deltaTime;
         while (remainingTimeToAttack <= 0)
         {
+            // Take damage according to the same formula used in AOE3
             var finalAttackPointsPerSec = Math.Max(GetAttackStrength() - target.GetDefense(), 1);
             target.TakeDamage(finalAttackPointsPerSec);
 

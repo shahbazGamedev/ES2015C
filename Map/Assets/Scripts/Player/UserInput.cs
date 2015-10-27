@@ -89,7 +89,7 @@ public class UserInput : MonoBehaviour
                 else if (player.SelectedObject != null && player.SelectedObject.CanMove())
                 {
                     // Otherwise, if the unit can move, start the movement sequence
-                    player.SelectedObject.SetNewPath(hit.point);
+                    player.SelectedObject.MoveTo(hit.point);
                 }
             }
         }
