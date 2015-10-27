@@ -27,6 +27,31 @@ public class TownCenterBuilding : Building {
         return true;
     }
 
+    public override int GetAttackStrength()
+    {
+        return 10;
+    }
+
+    public override float GetAttackSpeed()
+    {
+        return 1;
+    }
+
+    public override float GetAttackRange()
+    {
+        return 10;
+    }
+
+    public override bool CanBeAttacked()
+    {
+        return true;
+    }
+
+    public override int GetDefense()
+    {
+        return 10;
+    }
+
 
     /*** Metodes interns accessibles per les subclasses ***/
 

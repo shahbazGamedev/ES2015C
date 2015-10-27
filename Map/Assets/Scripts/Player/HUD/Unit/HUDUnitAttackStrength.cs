@@ -22,11 +22,10 @@ public class HUDUnitAttackStrength : HUDElement
     /// </summary>
 	void Update ()
     {
-        if (DisplayObject is Unit)
+        if (DisplayObject != null && DisplayObject.CanAttack())
         {
-            Unit displayUnit = (Unit)DisplayObject;
             textComponent.enabled = true;
-            textComponent.text = displayUnit.GetAttackStrengh().ToString();
+            textComponent.text = DisplayObject.GetAttackStrength().ToString();
         }
         else
         {

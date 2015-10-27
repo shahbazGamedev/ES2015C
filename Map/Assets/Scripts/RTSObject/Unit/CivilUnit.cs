@@ -54,13 +54,43 @@ public class CivilUnit : Unit
         base.OnGUI();
     }
 
-	/*** Metodes publics ***/
-	
-	/// <summary>
-	/// Get the current type of resource that the unit is harvesting. If the unit is not harvesting any resource, returns null.
-	/// </summary>
-	/// <returns>The type of the resource being harvested, or null.</returns>
-	public ResourceType? GetHarvestType()
+    /*** Metodes publics ***/
+
+    public override bool CanAttack()
+    {
+        return true;
+    }
+
+    public override int GetAttackStrength()
+    {
+        return 150;
+    }
+
+    public override float GetAttackRange()
+    {
+        return 0;
+    }
+
+    public override float GetAttackSpeed()
+    {
+        return 0.5f;
+    }
+
+    public override bool CanBeAttacked()
+    {
+        return true;
+    }
+
+    public override int GetDefense()
+    {
+        return 0;
+    }
+
+    /// <summary>
+    /// Get the current type of resource that the unit is harvesting. If the unit is not harvesting any resource, returns null.
+    /// </summary>
+    /// <returns>The type of the resource being harvested, or null.</returns>
+    public ResourceType? GetHarvestType()
 	{
 		// TODO: Implement this method properly
 		return ResourceType.Wood;
