@@ -69,7 +69,7 @@ public class Unit : RTSObject
 	/// <returns>Boolean saying if the units can attack or not.</returns>
 	public override bool CanAttack ()
 	{
-		return true;
+		return false;
 	}
 
 	/// <summary>

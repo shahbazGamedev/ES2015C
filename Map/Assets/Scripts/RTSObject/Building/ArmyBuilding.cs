@@ -17,4 +17,14 @@ public class ArmyBuilding : Building {
     {
         base.Update();
     }
+
+    public override bool CanBeAttacked()
+    {
+        return true;
+    }
+
+    public override int GetDefense()
+    {
+        return 5;
+    }
 }

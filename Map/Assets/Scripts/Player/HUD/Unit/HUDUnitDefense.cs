@@ -22,11 +22,10 @@ public class HUDUnitDefense : HUDElement
     /// </summary>
 	void Update()
     {
-        if (DisplayObject is Unit)
+        if (DisplayObject != null && DisplayObject.CanBeAttacked())
         {
-            Unit displayUnit = (Unit)DisplayObject;
             textComponent.enabled = true;
-            textComponent.text = displayUnit.GetDefense().ToString();
+            textComponent.text = DisplayObject.GetDefense().ToString();
         }
         else
         {

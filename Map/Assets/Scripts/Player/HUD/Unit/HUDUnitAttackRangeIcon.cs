@@ -22,7 +22,7 @@ public class HUDUnitAttackRangeIcon : HUDElement
     /// </summary>
 	void Update()
     {
-        imageComponent.enabled = (DisplayObject is Unit &&
-            ((Unit)DisplayObject).GetAttackRange().HasValue);
+        imageComponent.enabled = (DisplayObject != null && 
+            DisplayObject.CanAttack() && DisplayObject.GetAttackRange() != 0);
     }
 }

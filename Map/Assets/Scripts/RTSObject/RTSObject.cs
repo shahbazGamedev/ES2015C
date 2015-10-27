@@ -73,15 +73,6 @@ public class RTSObject : MonoBehaviour
     }
 
 	/// <summary>
-	/// Tells if the object can attack
-	/// </summary>
-	/// <returns>Boolean saying if the object can attack or not.</returns>
-    public virtual bool CanAttack()
-    {
-        return false;
-    }
-
-	/// <summary>
 	/// Tells if the object can move
 	/// </summary>
 	/// <returns>Boolean saying if the object can move or not.</returns>
@@ -100,6 +91,19 @@ public class RTSObject : MonoBehaviour
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// Tells if the object can attack.
+    /// </summary>
+    /// <returns>Boolean saying if the object can attack or not.</returns>
+    public virtual bool CanAttack()
+    {
+        return false;
+    }
+
+    /// <summary>
+    /// Begins an attack on the given target object.
+    /// </summary>
+    /// <param name="target">The target of the attack.</param>
     public void AttackObject(RTSObject target)
     {
         Debug.Log("Starting Attack: " + target.name);
@@ -109,41 +113,47 @@ public class RTSObject : MonoBehaviour
     /// <summary>
     /// Gets the attack strengh that the unit has when it is attacking.
     /// </summary>
-    /// <returns>The number of attack sthengh points.</returns>
-    public float GetAttackStrengh()
+    /// <returns>The number of attack strength points.</returns>
+    public virtual int GetAttackStrength()
     {
-        // TODO: Implement this method properly
-        return 654;
+        throw new InvalidOperationException("GetAttackStength must be implemented on objects that can attack.");
     }
 
     /// <summary>
-    /// Gets the attack strengh that the unit has when it is attacking.
+    /// Gets the attack strengh that the unit has when it is attacking, in attack/second.
     /// </summary>
-    /// <returns>The number of attack sthengh points.</returns>
-    public float GetAttackSpeed()
+    /// <returns>The number of attacks per second of this unit.</returns>
+    public virtual float GetAttackSpeed()
     {
-        // TODO: Implement this method properly
-        return 0.5f;
+        throw new InvalidOperationException("GetAttackSpeed must be implemented on objects that can attack.");
+    }
+
+    /// <summary>
+    /// Gets the distance at which the unit can attack, if it is a range unit (e.g. an archer).
+    /// Otherwise, returns zero if the unit is not a range unit.
+    /// </summary>
+    /// <returns>The distance at which the unit can attack, or zero.</returns>
+    public virtual float GetAttackRange()
+    {
+        throw new InvalidOperationException("GetAttackRange must be implemented on objects that can attack.");
+    }
+
+    /// <summary>
+    /// Tell if the object can be attacked by military units.
+    /// </summary>
+    /// <returns>Boolean saying if the object can be attacked or not.</returns>
+    public virtual bool CanBeAttacked()
+    {
+        return false;
     }
 
     /// <summary>
     /// Gets the defense points that the unit has when it is being attacked.
     /// </summary>
     /// <returns>The number of defense points.</returns>
-    public float GetDefense()
+    public virtual int GetDefense()
     {
-        // TODO: Implement this method properly
-        return 321;
-    }
-
-    /// <summary>
-    /// Gets the distance at which the unit can attack, if it is a range unit (e.g. an archer). Otherwise, null.
-    /// </summary>
-    /// <returns>The distance at which the unit can attack, or null.</returns>
-    public float? GetAttackRange()
-    {
-        // TODO: Implement this method properly
-        return 987;
+        throw new InvalidOperationException("GetDefense must be implemented on objects that can defend.");
     }
 
     // Metode per extreure vida al objecte
@@ -220,10 +230,10 @@ public class RTSObject : MonoBehaviour
         }
 
         remainingTimeToAttack -= Time.deltaTime;
-        if (remainingTimeToAttack <= 0)
+        while (remainingTimeToAttack <= 0)
         {
-            var finalAttackPointsPerSec = Math.Max(GetAttackStrengh() - target.GetDefense(), 1);
-            target.TakeDamage((int)(finalAttackPointsPerSec));
+            var finalAttackPointsPerSec = Math.Max(GetAttackStrength() - target.GetDefense(), 1);
+            target.TakeDamage(finalAttackPointsPerSec);
 
             remainingTimeToAttack += GetAttackSpeed();
         }
