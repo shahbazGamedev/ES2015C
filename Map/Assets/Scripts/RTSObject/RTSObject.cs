@@ -17,6 +17,7 @@ public class RTSObject : MonoBehaviour
     protected string[] actions = { };               // Accions que pot realitzar
     protected float healthPercentage = 1.0f;        // Percentatge de vida
     protected RTSObject target = null;              // Posible objectiu
+    protected float remainingTimeToAttack = 0;
     protected bool attacking = false, movingIntoPosition = false, aiming = false;   // Booleans dels tres estats comuns a tots els objectes
     protected List<RTSObject> nearbyObjects;        // Llista de objectes propers
 
@@ -102,6 +103,47 @@ public class RTSObject : MonoBehaviour
     public void AttackObject(RTSObject target)
     {
         Debug.Log("Starting Attack: " + target.name);
+        BeginAttack(target);
+    }
+
+    /// <summary>
+    /// Gets the attack strengh that the unit has when it is attacking.
+    /// </summary>
+    /// <returns>The number of attack sthengh points.</returns>
+    public float GetAttackStrengh()
+    {
+        // TODO: Implement this method properly
+        return 654;
+    }
+
+    /// <summary>
+    /// Gets the attack strengh that the unit has when it is attacking.
+    /// </summary>
+    /// <returns>The number of attack sthengh points.</returns>
+    public float GetAttackSpeed()
+    {
+        // TODO: Implement this method properly
+        return 0.5f;
+    }
+
+    /// <summary>
+    /// Gets the defense points that the unit has when it is being attacked.
+    /// </summary>
+    /// <returns>The number of defense points.</returns>
+    public float GetDefense()
+    {
+        // TODO: Implement this method properly
+        return 321;
+    }
+
+    /// <summary>
+    /// Gets the distance at which the unit can attack, if it is a range unit (e.g. an archer). Otherwise, null.
+    /// </summary>
+    /// <returns>The distance at which the unit can attack, or null.</returns>
+    public float? GetAttackRange()
+    {
+        // TODO: Implement this method properly
+        return 987;
     }
 
     // Metode per extreure vida al objecte
@@ -164,16 +206,26 @@ public class RTSObject : MonoBehaviour
     {
         this.target = target;
         attacking = true;
+        remainingTimeToAttack = 0;
         PerformAttack();
     }
 
     // Metode que realitza el atac
     private void PerformAttack()
     {
-        if (!target)
+        if (target == null)
         {
             attacking = false;
             return;
+        }
+
+        remainingTimeToAttack -= Time.deltaTime;
+        if (remainingTimeToAttack <= 0)
+        {
+            var finalAttackPointsPerSec = Math.Max(GetAttackStrengh() - target.GetDefense(), 1);
+            target.TakeDamage((int)(finalAttackPointsPerSec));
+
+            remainingTimeToAttack += GetAttackSpeed();
         }
     }
 }
