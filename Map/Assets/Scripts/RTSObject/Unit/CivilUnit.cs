@@ -63,7 +63,7 @@ public class CivilUnit : Unit
 
     public override int GetAttackStrength()
     {
-        return 15;
+        return 150;
     }
 
     public override float GetAttackRange()

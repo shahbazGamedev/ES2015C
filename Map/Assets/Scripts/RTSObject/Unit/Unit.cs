@@ -48,9 +48,11 @@ public class Unit : RTSObject
 
 		// If the unit is currently moving, call the function to update
 		// the position in the path the unit is following
-		if (path != null && currentWaypoint < path.vectorPath.Count) {
+		if (path != null && currentWaypoint < path.vectorPath.Count)
+        {
 			moveToPosition ();
-		} else if (aiming)
+		}
+        else if (aiming)
 		{
 			
 		}
@@ -86,7 +88,7 @@ public class Unit : RTSObject
 	/// following a route to the desired position.
 	/// </summary>
 	/// <param name="target">The position we want the unit to move to.</param>
-	public override void SetNewPath (Vector3 target)
+	protected override void SetNewPath (Vector3 target)
 	{
 		// We're starting movement, so start the walking animation
 		moving = true;
@@ -94,6 +96,12 @@ public class Unit : RTSObject
 		targetPosition = target;
 		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
 	}
+
+    protected override void CancelPath()
+    {
+        moving = false;
+        path = null;
+    }
 	
 	public GameObject FindClosest (string tag)
 	{
@@ -168,8 +176,9 @@ public class Unit : RTSObject
 
 			// If we have reached the last waypoint in the path,
 			// then we need to stop the walking animation
-			if (path.vectorPath.Count == currentWaypoint) {
-				moving = false;
+			if (path.vectorPath.Count == currentWaypoint)
+            {
+                CancelPath();
 			}
 		}
 	}
