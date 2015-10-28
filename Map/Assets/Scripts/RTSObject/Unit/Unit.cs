@@ -97,13 +97,24 @@ public class Unit : RTSObject
 		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
 	}
 
+    /// <summary>
+    /// Tell the unit to cancel the movement path to the given position.
+    /// </summary>
     protected override void CancelPath()
     {
         moving = false;
         path = null;
     }
-	
-	public GameObject FindClosest (string tag)
+
+    /// <summary>
+    /// Tell the unit to cancel the movement path to the given position.
+    /// </summary>
+    protected override bool HasPath()
+    {
+        return moving;
+    }
+
+    public GameObject FindClosest (string tag)
 	{
 		
 		GameObject[] TaggedObjects = GameObject.FindGameObjectsWithTag (tag); //Retorna una llista amb els objectes que tenen el tag tag
@@ -149,7 +160,13 @@ public class Unit : RTSObject
 
 	private void OnPathComplete (Path newPath)
 	{
-		if (!newPath.error) {
+        // We need to be careful and check the 'moving' variable here, since
+        // if we started calculating a path, and cancelled it quickly, we will still receive
+        // the OnPathComplete() event even tough the movement was cancelled.
+        // Note that the case where we start a new path, cancel it, and start a new one
+        // quickly works correctly, since in this case the Seeker will cancel the first path
+		if (moving && !newPath.error)
+        {
 			path = newPath;
 			currentWaypoint = 0;
 		}
