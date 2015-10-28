@@ -17,8 +17,13 @@ public class RTSObject : MonoBehaviour
     protected string[] actions = { };               // Accions que pot realitzar
     protected float healthPercentage = 1.0f;        // Percentatge de vida
     protected RTSObject target = null;              // Posible objectiu
+    protected bool aiming = false;
+    /// <summary>true if the unit is attacking or moving into position to attack another unit.</summary>
+    protected bool attacking = false;
+    /// <summary>If attacking, position where the unit is programmed to move in order to attack another unit.</summary>
+    protected Vector3 programmedAttackPosition;
+    /// <summary>If attacking, number of seconds remaining until the unit takes another hit to the target.</summary>
     protected float remainingTimeToAttack = 0;
-    protected bool attacking = false, movingIntoPosition = false, aiming = false;   // Booleans dels tres estats comuns a tots els objectes
     protected List<RTSObject> nearbyObjects;        // Llista de objectes propers
 
     protected Animator anim;                        // Referencia al component Animator.
@@ -38,8 +43,7 @@ public class RTSObject : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (attacking && movingIntoPosition) CheckMovedIntoPosition();
-        if (attacking && !movingIntoPosition) PerformAttack();
+        if (attacking) PerformAttack();
         if (anim && anim.runtimeAnimatorController) Animating();
     }
 
@@ -86,7 +90,7 @@ public class RTSObject : MonoBehaviour
     /// Tells the object to start a free (non-attack) movement to the
     /// given position.
     /// </summary>
-    /// <param name="target">The position we want the unit to move to.</param>
+    /// <param name="target">The position we want the object to move to.</param>
     public void MoveTo(Vector3 target)
     {
         if (attacking)
@@ -98,19 +102,28 @@ public class RTSObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Tells the unit to move to the given position, by generating and
+    /// Tells the object to move to the given position, by generating and
     /// following a route to the desired position.
     /// </summary>
-    /// <param name="target">The position we want the unit to move to.</param>
+    /// <param name="target">The position we want the object to move to.</param>
     protected virtual void SetNewPath(Vector3 target)
     {
         throw new NotImplementedException();
     }
 
     /// <summary>
-    /// Tell the unit to cancel the movement path to the given position.
+    /// Tell the object to cancel the movement path to the given position.
     /// </summary>
     protected virtual void CancelPath()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Returns true if the unit has programmed a movement path to a given position.
+    /// </summary>
+    /// <returns>true if the unit has a movement path, false otherwise.</returns>
+    protected virtual bool HasPath()
     {
         throw new NotImplementedException();
     }
@@ -187,11 +200,17 @@ public class RTSObject : MonoBehaviour
         throw new InvalidOperationException("GetDefense must be implemented on objects that can defend.");
     }
 
-    // Metode per extreure vida al objecte
+    /// <summary>
+    /// Substract health points from this object.
+    /// </summary>
+    /// <param name="damage">The number of health points to substract to this object.</param>
     public void TakeDamage(int damage)
     {
-        hitPoints -= damage;
-        if (hitPoints <= 0) Destroy(gameObject);
+        hitPoints = Math.Max(hitPoints - damage, 0);
+        if (hitPoints == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
 	/*** Metodes interns accessibles per les subclasses ***/
@@ -254,38 +273,11 @@ public class RTSObject : MonoBehaviour
     /// <param name="newTarget">The target of the attack.</param>
     private void BeginAttack(RTSObject newTarget)
     {
-        // Calculate the distance to the nearest point in the target
-        var targetAttackPosition = newTarget.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-        var distanceToTarget = (targetAttackPosition - transform.position).magnitude;
-
-        // Check if we need to move to the target to attack it, and if we
-        // need to and the unit can't move, warn the user that the attack can't be done
-        bool needToMoveToTarget = (distanceToTarget >= GetAttackRange() + AttackRangeTolerance);
-        if (needToMoveToTarget && !CanMove())
-        {
-            Debug.Log(string.Format("{0} can't attack {1}, because it is {2}m away",
-                objectName, newTarget.objectName, distanceToTarget));
-            return;
-        }
-
-        // Enable the attack status
         target = newTarget;
         attacking = true;
-        movingIntoPosition = needToMoveToTarget;
         remainingTimeToAttack = 0;
 
-        if (needToMoveToTarget)
-        {
-            // Move to a point near the target to attack
-            var attackPosition = targetAttackPosition - (targetAttackPosition -
-                transform.position).normalized * AttackRangeTolerance / 4;
-            SetNewPath(attackPosition);
-        }
-        else
-        {
-            // Begin attacking immediately if we are close enough the target
-            PerformAttack();
-        }
+        PerformAttack();
     }
     
     /// <summary>
@@ -294,7 +286,7 @@ public class RTSObject : MonoBehaviour
     private void EndAttack()
     {
         // If we were moving to the target to attack it, cancel this move
-        if (attacking && movingIntoPosition)
+        if (CanMove() && HasPath())
         {
             CancelPath();
         }
@@ -302,40 +294,13 @@ public class RTSObject : MonoBehaviour
         // Disable the attack status
         target = null;
         attacking = false;
-        movingIntoPosition = false;
         remainingTimeToAttack = 0;
-    }
-
-    /// <summary>
-    /// If the object is moving into position in order to perform an attack,
-    /// checks if the object is close enough to the target to begin the attack.
-    /// </summary>
-    private void CheckMovedIntoPosition()
-    {
-        // If the enemy is dead (or already destroyed), cancel the attack action
-        // http://answers.unity3d.com/questions/13840/how-to-detect-if-a-gameobject-has-been-destroyed.html
-        if (target == null || target.hitPoints == 0)
-        {
-            EndAttack();
-            return;
-        }
-
-        // Check if we are close enough of the enemy to begin the attack sequence
-        var targetAttackPosition = target.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-        var distanceToTarget = (targetAttackPosition - transform.position).magnitude;
-
-        bool needToMoveToTarget = (distanceToTarget >= GetAttackRange() + AttackRangeTolerance);
-
-        if (!needToMoveToTarget)
-        {
-            movingIntoPosition = false;
-            CancelPath();
-        }
     }
     
     /// <summary>
     /// If the object is performing an attack, inflicts damage to the target according
-    /// to the attack speed, strength and target defense.
+    /// to the attack speed, strength and target defense, or moves closer to the target
+    /// in order to perform the attack.
     /// </summary>
     private void PerformAttack()
     {
@@ -347,15 +312,52 @@ public class RTSObject : MonoBehaviour
             return;
         }
 
-        // Check if enough time has passed to hit the object again
-        remainingTimeToAttack -= Time.deltaTime;
-        while (remainingTimeToAttack <= 0)
-        {
-            // Take damage according to the same formula used in AOE3
-            var finalAttackPointsPerSec = Math.Max(GetAttackStrength() - target.GetDefense(), 1);
-            target.TakeDamage(finalAttackPointsPerSec);
+        // Calculate the distance to the nearest point in the target
+        var targetAttackPosition = target.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+        var distanceToTarget = (targetAttackPosition - transform.position).magnitude;
+        var targetInRange = (distanceToTarget < GetAttackRange() + AttackRangeTolerance);
 
-            remainingTimeToAttack += GetAttackSpeed();
+        if (targetInRange)
+        {
+            // Cancel movement if we've just reached the target
+            if (CanMove() && HasPath())
+            {
+                CancelPath();
+            }
+
+            // Check if enough time has passed to hit the object again
+            remainingTimeToAttack -= Time.deltaTime;
+            while (remainingTimeToAttack <= 0)
+            {
+                // Take damage according to the same formula used in AOE2
+                var finalAttackPointsPerSec = Math.Max(GetAttackStrength() - target.GetDefense(), 1);
+                target.TakeDamage(finalAttackPointsPerSec);
+
+                remainingTimeToAttack += GetAttackSpeed();
+            }
+        }
+        else
+        {
+            // If we need to and the unit can't move, warn the user that the attack can't be done
+            if (!CanMove())
+            {
+                Debug.Log(string.Format("{0} can't attack {1}, because it is {2}m away",
+                    objectName, target.objectName, distanceToTarget));
+                EndAttack();
+                return;
+            }
+
+            // If necessary, move closer to the attack target. We also need to periodically
+            // check if the target has moved and readjust our path accordingly
+            if (!HasPath() || (HasPath() && (programmedAttackPosition - targetAttackPosition).magnitude > 10))
+            {
+                // Move to a point near the target to attack
+                var attackPosition = targetAttackPosition - (targetAttackPosition -
+                    transform.position).normalized * AttackRangeTolerance / 4;
+                SetNewPath(attackPosition);
+                
+                programmedAttackPosition = attackPosition;
+            }
         }
     }
 }
