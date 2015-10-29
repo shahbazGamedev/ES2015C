@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class RTSObject : MonoBehaviour
 {
@@ -334,10 +335,10 @@ public class RTSObject : MonoBehaviour
 	// Funcio auxiliar per al calcul del BoxCollider i el CharacterController
 	protected void ExtendBounds (Transform t, ref Bounds b)
 	{
-		Renderer rend = t.GetComponent<Renderer> ();
-		if (rend != null) {
-			b.Encapsulate (rend.bounds.min);
-			b.Encapsulate (rend.bounds.max);
+        foreach (var rend in t.GetComponentsInChildren<Renderer>().Where(r => r != null && !r.name.StartsWith("Minimap")))
+        {
+            b.Encapsulate(rend.bounds.min);
+            b.Encapsulate(rend.bounds.max);
 		}
 		
 		foreach (Transform t2 in t) {
