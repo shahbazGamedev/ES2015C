@@ -7,8 +7,6 @@ public class Unit : RTSObject
 {
 	public Avatar unitAvatar;				// Referencia al avatar del component Animator.
 
-	protected float moveSpeed = 5;             	// Velocitat de moviment
-
 	private CharacterController characterController;	// Referencia al component CharacterController.
 	private Seeker seeker;					// Referencia al component Seeker.
 	private Vector3 targetPosition;         // Indica el vector3 del objectiu
@@ -64,33 +62,6 @@ public class Unit : RTSObject
 	}
 
 	/*** Metodes publics ***/
-
-	/// <summary>
-	/// Tells if the unit can attack
-	/// </summary>
-	/// <returns>Boolean saying if the units can attack or not.</returns>
-	public override bool CanAttack ()
-	{
-		return false;
-	}
-
-	/// <summary>
-	/// Tells if the unit can move
-	/// </summary>
-	/// <returns>Boolean saying if the units can move or not.</returns>
-	public override bool CanMove ()
-	{
-		return true;
-	}
-
-    /// <summary>
-    /// Gets the movement speed of a unit.
-    /// </summary>
-    /// <returns>The movement speed of a unit.</returns>
-    public override float GetMovementSpeed()
-    {
-        return moveSpeed;
-    }
 
 	/// <summary>
 	/// Tells the unit to move to the given position, by generating and

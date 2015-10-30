@@ -8,11 +8,14 @@ public class Yamato_archer_advanced : Unit
     {
         base.Start();
         objectName = "Yamato Archer Advanced";
-		moveSpeed = 4;
+		baseMoveSpeed = 4;
 		cost = 200;
 		hitPoints = 150;
 		maxHitPoints = 150;
-		hitDamage = 25;
+		baseAttackStrength = 25;
+        baseDefense = 5;
+        baseAttackSpeed = 2.0f;
+        baseAttackRange = 10;
 		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Yamato_archer_advanced_AC") as RuntimeAnimatorController;
     }
 }

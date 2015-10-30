@@ -9,8 +9,10 @@ public class Yamato_civil : CivilUnit
         base.Start();
         objectName = "Yamato Civil";
 		cost = 50;
-		hitDamage = 10;
-		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Yamato_civil_AC") as RuntimeAnimatorController;
+		baseAttackStrength = 10;
+        baseDefense = 3;
+        baseAttackSpeed = 1.0f;
+        anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Yamato_civil_AC") as RuntimeAnimatorController;
     }
 
 	/*** Metodes interns accessibles per les subclasses ***/

@@ -11,20 +11,11 @@ public class ArmyBuilding : Building {
 		cost = 500;
 		hitPoints = 3000;
 		maxHitPoints = 3000;
+        baseDefense = 5;
     }
 
     protected override void Update()
     {
         base.Update();
-    }
-
-    public override bool CanBeAttacked()
-    {
-        return true;
-    }
-
-    public override int GetDefense()
-    {
-        return 5;
     }
 }

@@ -9,8 +9,17 @@ public class RTSObject : MonoBehaviour
     // Variables publiques generals
 	public string objectName = "Generic RTS Object";     // Nom del objecte
 	public int cost = 50, hitPoints = 100, maxHitPoints = 100; // Cost, punts de vida i vida maxima
-	public int hitDamage = 10, defense = 0, attack = 0;		// Punt de atac, Habilitat defensa, Habilitat atac
-	public enum ResourceType { Gold, Wood, Food, Unknown }	// Declarem els tipus de recursos
+    /// <summary>Default movement speed. Leave at zero if the object can't move.</summary>
+    protected float baseMoveSpeed = 5;
+    /// <summary>Default attack strength. Leave at zero if the object can't attack.</summary>
+    protected int baseAttackStrength = 0;
+    /// <summary>Default attack strength. Leave at zero if the object isn't a range unit.</summary>
+    protected int baseAttackRange = 0;
+    /// <summary>Default number of hits per second of the object. Leave at zero if the object can't attack.</summary>
+    protected float baseAttackSpeed = 0.0f;
+    /// <summary>Default attack defense. Leave at zero if the object can't defend.</summary>
+    protected int baseDefense = 0;                 // Punt de atac, Habilitat defensa, Habilitat atac
+    public enum ResourceType { Gold, Wood, Food, Unknown }	// Declarem els tipus de recursos
     public Player owner;                            // A quin player correspon
 
     // Variables accessibles per a les subclasses
@@ -94,7 +103,7 @@ public class RTSObject : MonoBehaviour
 	/// <returns>Boolean saying if the object can move or not.</returns>
     public virtual bool CanMove()
     {
-        return false;
+        return (!dying && baseMoveSpeed != 0);
     }
 
     /// <summary>
@@ -103,7 +112,10 @@ public class RTSObject : MonoBehaviour
     /// <returns>The movement speed of a object.</returns>
     public virtual float GetMovementSpeed()
     {
-        throw new NotImplementedException();
+        if (!CanMove())
+            throw new InvalidOperationException("Called GetMovementSpeed over an object that can't move.");
+
+        return baseMoveSpeed;
     }
 
     /// <summary>
@@ -113,10 +125,8 @@ public class RTSObject : MonoBehaviour
     /// <param name="target">The position we want the object to move to.</param>
     public void MoveTo(Vector3 target)
     {
-        if (dying)
-        {
-            return;
-        }
+        if (!CanAttack())
+            throw new InvalidOperationException("Called MoveTo over an object that can't move.");
 
         if (attacking)
         {
@@ -159,7 +169,7 @@ public class RTSObject : MonoBehaviour
     /// <returns>Boolean saying if the object can attack or not.</returns>
     public virtual bool CanAttack()
     {
-        return false;
+        return (!dying && baseAttackStrength != 0 && baseAttackSpeed != 0.0f);
     }
 
     /// <summary>
@@ -169,10 +179,8 @@ public class RTSObject : MonoBehaviour
     /// <param name="target">The target of the attack. If null is given, the attack will stop.</param>
     public void AttackObject(RTSObject target)
     {
-        if (dying)
-        {
-            return;
-        }
+        if (!CanAttack())
+            throw new InvalidOperationException("Called AttackObject over an object that can't attack.");
 
         if (target != null)
         {
@@ -190,7 +198,10 @@ public class RTSObject : MonoBehaviour
     /// <returns>The number of attack strength points.</returns>
     public virtual int GetAttackStrength()
     {
-        throw new InvalidOperationException("GetAttackStength must be implemented on objects that can attack.");
+        if (!CanAttack())
+            throw new InvalidOperationException("Called GetAttackStrength over an object that can't attack.");
+
+        return baseAttackStrength;
     }
 
     /// <summary>
@@ -199,7 +210,10 @@ public class RTSObject : MonoBehaviour
     /// <returns>The number of attacks per second of this unit.</returns>
     public virtual float GetAttackSpeed()
     {
-        throw new InvalidOperationException("GetAttackSpeed must be implemented on objects that can attack.");
+        if (!CanAttack())
+            throw new InvalidOperationException("Called GetAttackStrength over an object that can't attack.");
+
+        return baseAttackSpeed;
     }
 
     /// <summary>
@@ -209,7 +223,10 @@ public class RTSObject : MonoBehaviour
     /// <returns>The distance at which the unit can attack, or zero.</returns>
     public virtual float GetAttackRange()
     {
-        throw new InvalidOperationException("GetAttackRange must be implemented on objects that can attack.");
+        if (!CanAttack())
+            throw new InvalidOperationException("Called GetAttackRange over an object that can't attack.");
+
+        return baseAttackRange;
     }
 
     /// <summary>
@@ -218,7 +235,7 @@ public class RTSObject : MonoBehaviour
     /// <returns>Boolean saying if the object can be attacked or not.</returns>
     public virtual bool CanBeAttacked()
     {
-        return false;
+        return (!dying && baseDefense != 0);
     }
 
     /// <summary>
@@ -227,7 +244,10 @@ public class RTSObject : MonoBehaviour
     /// <returns>The number of defense points.</returns>
     public virtual int GetDefense()
     {
-        throw new InvalidOperationException("GetDefense must be implemented on objects that can defend.");
+        if (!CanBeAttacked())
+            throw new InvalidOperationException("Called GetDefense over an object that can't defend.");
+
+        return baseDefense;
     }
 
     /// <summary>
