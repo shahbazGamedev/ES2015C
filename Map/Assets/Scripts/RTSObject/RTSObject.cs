@@ -27,6 +27,10 @@ public class RTSObject : MonoBehaviour
 
     /// <summary>true if the unit is dying (it has zero hit points and it playing the dead animation).</summary>
     protected bool dying = false;
+    /*
+    protected bool deadAnimationStarted = false;
+    protected bool deadAnimationFinished = false;
+    */
     /// <summary>Number of seconds until the unit is considered dead and it disappears from the map.</summary>
     protected float remainingTimeToDead = 0;
 
@@ -50,8 +54,8 @@ public class RTSObject : MonoBehaviour
     protected virtual void Update()
     {
         if (attacking) PerformAttack();
-        if (dying) UpdateDeadTimer();
-        if (anim && anim.runtimeAnimatorController) Animating();
+        if (dying && CheckDestroyDeadUnit()) return; ;
+        if (this != null && anim && anim.runtimeAnimatorController) Animating();
     }
 
     protected virtual void OnGUI()
@@ -91,6 +95,15 @@ public class RTSObject : MonoBehaviour
     public virtual bool CanMove()
     {
         return false;
+    }
+
+    /// <summary>
+    /// Gets the movement speed of a object.
+    /// </summary>
+    /// <returns>The movement speed of a object.</returns>
+    public virtual float GetMovementSpeed()
+    {
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -234,7 +247,7 @@ public class RTSObject : MonoBehaviour
             if (!dying)
             {
                 dying = true;
-                remainingTimeToDead = 3.0f;
+                remainingTimeToDead = 5.0f;
             }
         }
     }
@@ -359,7 +372,7 @@ public class RTSObject : MonoBehaviour
                 var finalAttackPointsPerSec = Math.Max(GetAttackStrength() - target.GetDefense(), 1);
                 target.TakeDamage(finalAttackPointsPerSec);
 
-                remainingTimeToAttack += GetAttackSpeed();
+                remainingTimeToAttack += 1.0f/GetAttackSpeed();
             }
         }
         else
@@ -390,12 +403,23 @@ public class RTSObject : MonoBehaviour
     /// <summary>
     /// Checks if the required time between the unit having zero health points and the unit disappearing has elapsed.
     /// </summary>
-    private void UpdateDeadTimer()
+    private bool CheckDestroyDeadUnit()
     {
+        /*
+        if (!deadAnimationStarted && anim != null && anim.GetCurrentAnimatorStateInfo(0).IsName("dead"))
+            deadAnimationStarted = true;
+        if (deadAnimationStarted && anim != null && !anim.GetCurrentAnimatorStateInfo(0).IsName("dead"))
+            deadAnimationFinished = true;
+        */
+
         remainingTimeToDead -= Time.deltaTime;
+
         if (remainingTimeToDead <= 0)
         {
             Destroy(gameObject);
+            return true;
         }
+
+        return false;
     }
 }
