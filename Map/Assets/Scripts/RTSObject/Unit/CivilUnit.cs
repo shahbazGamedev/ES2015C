@@ -73,7 +73,7 @@ public class CivilUnit : Unit
 
     public override float GetAttackSpeed()
     {
-        return 0.5f;
+        return 2.0f;
     }
 
     public override bool CanBeAttacked()

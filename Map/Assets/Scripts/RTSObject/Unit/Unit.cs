@@ -83,6 +83,15 @@ public class Unit : RTSObject
 		return true;
 	}
 
+    /// <summary>
+    /// Gets the movement speed of a unit.
+    /// </summary>
+    /// <returns>The movement speed of a unit.</returns>
+    public override float GetMovementSpeed()
+    {
+        return moveSpeed;
+    }
+
 	/// <summary>
 	/// Tells the unit to move to the given position, by generating and
 	/// following a route to the desired position.
@@ -183,7 +192,7 @@ public class Unit : RTSObject
 		// Tell the controller to move in the straight-line direction
 		// between the current position and the waypoint
 		Vector3 dir = (path.vectorPath [currentWaypoint] - transform.position).normalized;
-		dir = dir * moveSpeed;
+		dir = dir * GetMovementSpeed();
 		characterController.SimpleMove (dir);
 
 		// Have we reached the waypoint in the path?

@@ -24,6 +24,16 @@ public class RTSObject : MonoBehaviour
     protected Vector3 programmedAttackPosition;
     /// <summary>If attacking, number of seconds remaining until the unit takes another hit to the target.</summary>
     protected float remainingTimeToAttack = 0;
+
+    /// <summary>true if the unit is dying (it has zero hit points and it playing the dead animation).</summary>
+    protected bool dying = false;
+    /*
+    protected bool deadAnimationStarted = false;
+    protected bool deadAnimationFinished = false;
+    */
+    /// <summary>Number of seconds until the unit is considered dead and it disappears from the map.</summary>
+    protected float remainingTimeToDead = 0;
+
     protected List<RTSObject> nearbyObjects;        // Llista de objectes propers
 
     protected Animator anim;                        // Referencia al component Animator.
@@ -44,7 +54,8 @@ public class RTSObject : MonoBehaviour
     protected virtual void Update()
     {
         if (attacking) PerformAttack();
-        if (anim && anim.runtimeAnimatorController) Animating();
+        if (dying && CheckDestroyDeadUnit()) return; ;
+        if (this != null && anim && anim.runtimeAnimatorController) Animating();
     }
 
     protected virtual void OnGUI()
@@ -87,12 +98,26 @@ public class RTSObject : MonoBehaviour
     }
 
     /// <summary>
+    /// Gets the movement speed of a object.
+    /// </summary>
+    /// <returns>The movement speed of a object.</returns>
+    public virtual float GetMovementSpeed()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Tells the object to start a free (non-attack) movement to the
     /// given position.
     /// </summary>
     /// <param name="target">The position we want the object to move to.</param>
     public void MoveTo(Vector3 target)
     {
+        if (dying)
+        {
+            return;
+        }
+
         if (attacking)
         {
             EndAttack();
@@ -144,6 +169,11 @@ public class RTSObject : MonoBehaviour
     /// <param name="target">The target of the attack. If null is given, the attack will stop.</param>
     public void AttackObject(RTSObject target)
     {
+        if (dying)
+        {
+            return;
+        }
+
         if (target != null)
         {
             BeginAttack(target);
@@ -209,7 +239,16 @@ public class RTSObject : MonoBehaviour
         hitPoints = Math.Max(hitPoints - damage, 0);
         if (hitPoints == 0)
         {
-            Destroy(gameObject);
+            if (attacking)
+            {
+                EndAttack();
+            }
+
+            if (!dying)
+            {
+                dying = true;
+                remainingTimeToDead = 5.0f;
+            }
         }
     }
 
@@ -333,7 +372,7 @@ public class RTSObject : MonoBehaviour
                 var finalAttackPointsPerSec = Math.Max(GetAttackStrength() - target.GetDefense(), 1);
                 target.TakeDamage(finalAttackPointsPerSec);
 
-                remainingTimeToAttack += GetAttackSpeed();
+                remainingTimeToAttack += 1.0f/GetAttackSpeed();
             }
         }
         else
@@ -359,5 +398,28 @@ public class RTSObject : MonoBehaviour
                 programmedAttackPosition = attackPosition;
             }
         }
+    }
+
+    /// <summary>
+    /// Checks if the required time between the unit having zero health points and the unit disappearing has elapsed.
+    /// </summary>
+    private bool CheckDestroyDeadUnit()
+    {
+        /*
+        if (!deadAnimationStarted && anim != null && anim.GetCurrentAnimatorStateInfo(0).IsName("dead"))
+            deadAnimationStarted = true;
+        if (deadAnimationStarted && anim != null && !anim.GetCurrentAnimatorStateInfo(0).IsName("dead"))
+            deadAnimationFinished = true;
+        */
+
+        remainingTimeToDead -= Time.deltaTime;
+
+        if (remainingTimeToDead <= 0)
+        {
+            Destroy(gameObject);
+            return true;
+        }
+
+        return false;
     }
 }
