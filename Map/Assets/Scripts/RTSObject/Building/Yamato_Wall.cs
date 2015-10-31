@@ -11,5 +11,6 @@ public class Yamato_Wall : Building {
 		cost = 50;
 		hitPoints = 500;
 		maxHitPoints = 500;
+        baseDefense = 5;
     }
 }

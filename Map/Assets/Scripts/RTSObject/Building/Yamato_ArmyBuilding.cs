@@ -15,7 +15,8 @@ public class Yamato_ArmyBuilding : ArmyBuilding
 			"Samurai",
 			"Samurai Advanced"
 		};
-	}
+        baseDefense = 5;
+    }
 
 	/*** Metodes interns accessibles per les subclasses ***/
 	

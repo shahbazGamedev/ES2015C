@@ -11,5 +11,6 @@ public class Yamato_CivilHouse : Building {
 		cost = 50;
 		hitPoints = 200;
 		maxHitPoints = 200;
+        baseDefense = 5;
     }
 }
