@@ -186,6 +186,9 @@ public class RTSObject : MonoBehaviour
 
         if (target != null)
         {
+            if (!target.CanBeAttacked())
+                throw new InvalidOperationException("Called AttackObject over a target object that can't defend.");
+
             BeginAttack(target);
         }
         else
@@ -358,7 +361,7 @@ public class RTSObject : MonoBehaviour
     {
         // If the enemy is dead (or already destroyed), cancel the attack action
         // http://answers.unity3d.com/questions/13840/how-to-detect-if-a-gameobject-has-been-destroyed.html
-        if (target == null || target.hitPoints == 0)
+        if (target == null || target.hitPoints == 0 || !target.CanBeAttacked())
         {
             EndAttack();
             return;
