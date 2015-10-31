@@ -1,34 +1,42 @@
 fileFormatVersion: 2
-guid: f49e4fdc6724d4a3aa36194718b8595e
-timeCreated: 1446292192
+guid: fc419fef6a1584f51b04e1542672b8ea
+timeCreated: 1446302856
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Circle
-    100002: Cube_000
-    100004: Cube_002
-    100006: Cube_003
-    100008: //RootNode
-    400000: Circle
-    400002: Cube_000
-    400004: Cube_002
-    400006: Cube_003
-    400008: //RootNode
+    100000: Area
+    100002: Camera
+    100004: Camera.001
+    100006: Circle
+    100008: Cube.000
+    100010: Cube.002
+    100012: Cube.003
+    100014: Lamp
+    100016: Point
+    100018: //RootNode
+    400000: Area
+    400002: Camera
+    400004: Camera.001
+    400006: Circle
+    400008: Cube.000
+    400010: Cube.002
+    400012: Cube.003
+    400014: Lamp
+    400016: Point
+    400018: //RootNode
     2300000: Circle
-    2300002: Cube_000
-    2300004: Cube_002
-    2300006: Cube_003
+    2300002: Cube.000
+    2300004: Cube.002
+    2300006: Cube.003
     3300000: Circle
-    3300002: Cube_000
-    3300004: Cube_002
-    3300006: Cube_003
-    4300000: Cube_000
-    4300002: Cube_003
+    3300002: Cube.000
+    3300004: Cube.002
+    3300006: Cube.003
+    4300000: Cube.000
+    4300002: Cube.003
     4300004: Circle
-    4300006: Cube_002
-    7400000: Default Take
-    9500000: //RootNode
+    4300006: Cube.002
   materials:
     importMaterials: 1
     materialName: 0
@@ -85,10 +93,8 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-    hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
-  humanoidOversampling: 1
+  animationType: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
