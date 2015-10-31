@@ -19,7 +19,7 @@ public class MiniMapScript : MonoBehaviour {
         trackedBlueObjects = new List<GameObject>();
         trackedRedObjects = new List<GameObject>();
        // addAllyGameObject(cylinder);//testeig
-        Vector3 coords = new Vector3((float)120f, -1.6f, (float)150f);
+        Vector3 coords = new Vector3((float)120f, 0f, (float)150f);
         Object o = Instantiate(Resources.Load("yamato_civil", typeof(GameObject)), coords, Quaternion.identity);
         addAllyGameObject((GameObject)o);
         createMiniMapObjects();
@@ -33,6 +33,7 @@ public class MiniMapScript : MonoBehaviour {
             nextActionTime += period;
             UpdateMap();
         }
+       // UpdateMap();
     }
 
     void createMiniMapObjects()
@@ -42,13 +43,13 @@ public class MiniMapScript : MonoBehaviour {
 
         foreach (GameObject o in trackedRedObjects)
         { //Anem recorrent la llista dels objectes que volem que sortin al minimapa
-            GameObject k = Instantiate(redColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
+            GameObject k = Instantiate(redColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color vermellS
             miniMapObjects.Add(k);
         }
 
         foreach (GameObject o in trackedBlueObjects)
         { //Anem recorrent la llista dels objectes que volem que sortin al minimapa
-            GameObject k = Instantiate(blueColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
+            GameObject k = Instantiate(blueColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color blau
             miniMapObjects.Add(k);
         }
 
@@ -72,29 +73,21 @@ public class MiniMapScript : MonoBehaviour {
         trackedBlueObjects.Remove(go);
     }
 
-    public void UpdateMinimapUnit(GameObject o) {
-        unitPosition = o.transform.position;
-        GameObject k = Instantiate(redColor, unitPosition, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
-
-    }
-    
 
     public void UpdateMap() {
         foreach (GameObject o in miniMapObjects) {
-            miniMapObjects.Remove(o);
-            Destroy(o);
-            
+            Destroy(o);    
         }
         
         foreach (GameObject o in trackedRedObjects)
         { //Anem recorrent la llista dels objectes que volem que sortin al minimapa
-            GameObject k = Instantiate(redColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
+            GameObject k = Instantiate(redColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color vermellS
             miniMapObjects.Add(k);
         }
 
         foreach (GameObject o in trackedBlueObjects)
         { //Anem recorrent la llista dels objectes que volem que sortin al minimapa
-            GameObject k = Instantiate(blueColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color varmellS
+            GameObject k = Instantiate(blueColor, o.transform.position, Quaternion.identity) as GameObject; //A la posicio de l'objecte hi afegim el color blau
             miniMapObjects.Add(k);
         }
     }
