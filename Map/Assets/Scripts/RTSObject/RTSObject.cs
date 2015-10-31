@@ -17,8 +17,8 @@ public class RTSObject : MonoBehaviour
     protected float baseAttackSpeed = 0.0f;
     /// <summary>Default attack strength. Leave at zero if the object isn't a range unit.</summary>
     protected int baseAttackRange = 0;
-    /// <summary>Default attack defense. Leave at zero if the object can't defend.</summary>
-    protected int baseDefense = 0;                 // Punt de atac, Habilitat defensa, Habilitat atac
+    /// <summary>Default attack defense. Leave at null if the object can't defend.</summary>
+    protected int? baseDefense = 0;                 // Punt de atac, Habilitat defensa, Habilitat atac
     public enum ResourceType { Gold, Wood, Food, Unknown }	// Declarem els tipus de recursos
     public Player owner;                            // A quin player correspon
 
@@ -240,7 +240,7 @@ public class RTSObject : MonoBehaviour
     /// <returns>Boolean saying if the object can be attacked or not.</returns>
     public virtual bool CanBeAttacked()
     {
-        return (!dying && baseDefense != 0);
+        return (!dying && baseDefense.HasValue);
     }
 
     /// <summary>
@@ -252,7 +252,7 @@ public class RTSObject : MonoBehaviour
         if (!CanBeAttacked())
             throw new InvalidOperationException("Called GetDefense over an object that can't defend.");
 
-        return baseDefense;
+        return baseDefense.Value;
     }
 
     /// <summary>
@@ -393,7 +393,6 @@ public class RTSObject : MonoBehaviour
         }
         else
         {
-            Debug.Log(CanMove());
             // If we need to and the unit can't move, warn the user that the attack can't be done
             if (!CanMove())
             {
