@@ -80,6 +80,7 @@ public class UserInput : MonoBehaviour
             {
                 if (player.SelectedObject.CanAttack() &&
                     targetRtsElement != null && targetRtsElement.owner != null &&
+                    targetRtsElement.CanBeAttacked() &&
                     player.Team.IsEnemyOf(targetRtsElement.owner.Team))
                 {
                     // If the player clicked over an unit or building and the selected unit
