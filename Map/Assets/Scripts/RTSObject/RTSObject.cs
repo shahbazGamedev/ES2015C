@@ -13,10 +13,10 @@ public class RTSObject : MonoBehaviour
     protected float baseMoveSpeed = 5;
     /// <summary>Default attack strength. Leave at zero if the object can't attack.</summary>
     protected int baseAttackStrength = 0;
-    /// <summary>Default attack strength. Leave at zero if the object isn't a range unit.</summary>
-    protected int baseAttackRange = 0;
     /// <summary>Default number of hits per second of the object. Leave at zero if the object can't attack.</summary>
     protected float baseAttackSpeed = 0.0f;
+    /// <summary>Default attack strength. Leave at zero if the object isn't a range unit.</summary>
+    protected int baseAttackRange = 0;
     /// <summary>Default attack defense. Leave at zero if the object can't defend.</summary>
     protected int baseDefense = 0;                 // Punt de atac, Habilitat defensa, Habilitat atac
     public enum ResourceType { Gold, Wood, Food, Unknown }	// Declarem els tipus de recursos
@@ -40,6 +40,8 @@ public class RTSObject : MonoBehaviour
     protected bool deadAnimationStarted = false;
     protected bool deadAnimationFinished = false;
     */
+    /// <summary>Default time between the object having 0 HP and the object being destroyed.</summary>
+    private const float DefaultDeadTime = 3.0f;
     /// <summary>Number of seconds until the unit is considered dead and it disappears from the map.</summary>
     protected float remainingTimeToDead = 0;
 
@@ -63,7 +65,7 @@ public class RTSObject : MonoBehaviour
     protected virtual void Update()
     {
         if (attacking) PerformAttack();
-        if (dying && CheckDestroyDeadUnit()) return; ;
+        if (dying && UpdateDeadObject()) return; ;
         if (this != null && anim && anim.runtimeAnimatorController) Animating();
     }
 
@@ -259,16 +261,7 @@ public class RTSObject : MonoBehaviour
         hitPoints = Math.Max(hitPoints - damage, 0);
         if (hitPoints == 0)
         {
-            if (attacking)
-            {
-                EndAttack();
-            }
-
-            if (!dying)
-            {
-                dying = true;
-                remainingTimeToDead = 5.0f;
-            }
+            BeginDead();
         }
     }
 
@@ -421,19 +414,56 @@ public class RTSObject : MonoBehaviour
     }
 
     /// <summary>
+    /// Begins the dead transition.
+    /// </summary>
+    private void BeginDead()
+    {
+        // Make sure that we don't attack while dying
+        if (attacking)
+        {
+            EndAttack();
+        }
+
+        if (!dying)
+        {
+            // Begin the "dying" state
+            dying = true;
+            remainingTimeToDead = DefaultDeadTime;
+
+            // Enable fade mode for each material, for the fade-out animation
+            foreach (Renderer r in GetComponentsInChildren<Renderer>())
+            {
+                foreach (Material m in r.materials)
+                {
+                    // http://sassybot.com/blog/swapping-rendering-mode-in-unity-5-0/
+                    m.SetFloat("_Mode", 2);
+                    m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                    m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                    m.EnableKeyword("_ALPHABLEND_ON");
+                }
+            }
+        }
+    }
+
+    /// <summary>
     /// Checks if the required time between the unit having zero health points and the unit disappearing has elapsed.
     /// </summary>
-    private bool CheckDestroyDeadUnit()
+    private bool UpdateDeadObject()
     {
-        /*
-        if (!deadAnimationStarted && anim != null && anim.GetCurrentAnimatorStateInfo(0).IsName("dead"))
-            deadAnimationStarted = true;
-        if (deadAnimationStarted && anim != null && !anim.GetCurrentAnimatorStateInfo(0).IsName("dead"))
-            deadAnimationFinished = true;
-        */
-
         remainingTimeToDead -= Time.deltaTime;
 
+        // Do a fade-out animation over the object
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            foreach (Material m in r.materials)
+            {
+                Color color = m.color;
+                color.a = (remainingTimeToDead / DefaultDeadTime);
+                m.color = color;
+            }
+        }
+
+        // If the dead timer has elapsed, destroy the object
         if (remainingTimeToDead <= 0)
         {
             Destroy(gameObject);
@@ -441,5 +471,20 @@ public class RTSObject : MonoBehaviour
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// This method is called when the object is destroyed.
+    /// In this case, we need to update the paths for A* to no longer consider our destroyed object.
+    /// </summary>
+    public void OnDestroy()
+    {
+        // Calculate the bounds of our object and tell A*Pathfinder to update that area
+        Bounds bounds = new Bounds(transform.position, Vector3.zero);
+        ExtendBounds(transform, ref bounds);
+        if (AstarPath.active != null) // Can be null when the game is closed
+        {
+            AstarPath.active.UpdateGraphs(bounds);
+        }
     }
 }
