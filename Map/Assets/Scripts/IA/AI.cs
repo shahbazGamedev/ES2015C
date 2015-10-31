@@ -33,7 +33,6 @@ public class AI : Player {
         {
             if (building == false) // Loop with for.
             {
-                //civilian.GetComponent<CivilUnit>().CreateBuilding("TownCenter");
                 Vector3 point = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z + 10);
                 GameObject centerClone = (GameObject)Instantiate(Resources.Load("towncenterYamato"), point, Quaternion.identity);
                 townCenters++;
@@ -44,10 +43,8 @@ public class AI : Player {
 
     private void CreateNewCivil() {
         Vector3 coords = new Vector3(114f, 0f, 111f);
-        //civil = new CivilUnit("yamato_civil",coords);
         GameObject civil= Instantiate(Resources.Load("yamato_civil"), coords, Quaternion.identity) as GameObject;
 
-        //civils.Add(civil);
         civils.Add(civil);
     }
 
