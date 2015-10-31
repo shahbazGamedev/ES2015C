@@ -21,14 +21,14 @@ public class CivilUnit : Unit
 	private static int layermask1 = 1 << layer1;
 	private static int layermask2 = 1 << layer2;
 	private int finalmask = layermask1 | layermask2;
-	
+    public GameObject o;
 	
 	public Transform townCenter;
 
     /*** Metodes per defecte de Unity ***/
 
     public CivilUnit(string asset, Vector3 coords) {
-        Instantiate(Resources.Load(asset), coords, Quaternion.identity);
+       o = Instantiate(Resources.Load(asset), coords, Quaternion.identity) as GameObject;
 
     }
 
