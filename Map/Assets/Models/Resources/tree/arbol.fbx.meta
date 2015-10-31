@@ -1,12 +1,28 @@
 fileFormatVersion: 2
-guid: 968faec369fc3594797d440dbf19b348
-timeCreated: 1445328079
+guid: 5d53ebdab8ec746f4b9471d8ba6bc804
+timeCreated: 1446326844
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Camera
+    100004: Lamp
+    100006: leaves
+    100008: tree
     400000: //RootNode
+    400002: Camera
+    400004: Lamp
+    400006: leaves
+    400008: tree
+    2300000: leaves
+    2300002: tree
+    3300000: leaves
+    3300002: tree
+    4300000: tree
+    4300002: leaves
+    7400000: Default Take
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -63,10 +79,8 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-    hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
-  humanoidOversampling: 1
+  animationType: 2
   additionalBone: 0
   userData: 
   assetBundleName: 
