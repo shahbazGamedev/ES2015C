@@ -30,6 +30,7 @@ public class Unit : RTSObject
 		anim = gameObject.AddComponent<Animator>();
 		// Calculem la dimensio del CharacterController
 		FittedCharacterCollider();
+		gameObject.layer = 11;
 		
 		// Asignem les propietats el avatar del Animator
 		anim.avatar = unitAvatar;

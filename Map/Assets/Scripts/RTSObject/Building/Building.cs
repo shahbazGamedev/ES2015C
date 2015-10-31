@@ -15,11 +15,12 @@ public class Building : RTSObject
 	private float currentBuildProgress = 0.0f;  // Progres actual de la construccio
 	private bool needsBuilding = false;         // Indica si necesita se construit
 
-	private static int layer1 = 0;
+	private static int layer1 = 11; 
 	private static int layer2 = 10;
 	private static int layermask1 = 1 << layer1;
 	private static int layermask2 = 1 << layer2;
 	protected int mask = layermask1 | layermask2;
+
 
 	/*** Metodes per defecte de Unity ***/
 
@@ -90,12 +91,13 @@ public class Building : RTSObject
 	{
 		if (creationUnit != null) {
 			bool spawned = false;
-			int maximumSpawn = 5; //no podemos instanciar más de 5 unidades a la vez. Para instanciar más hay que mover las otras
+			int maximumSpawn = 5; //tenemos cinco intentos para instanciar una unidad. si no se instancian hay que mover las viejas 
 			Vector3 point = spawnPoint; 
 		
 			while (spawned == false && maximumSpawn>0) {
-				if (Physics.CheckSphere (point, 0.1f, mask)) {
-					point = new Vector3 (point.x + 10, 0.0f, point.z + 10); //si ya hay algo provamos en otra posicion
+				if (Physics.CheckSphere (point, 0.4f, mask)) {
+					point = new Vector3 (point.x - 5, 0.0f, point.z); //si ya hay algo provamos en otra posicion
+					Debug.Log("Habia algo en la posicion"+point);
 				} else {
 					spawned = true;
 					float food = owner.GetResourceAmount (RTSObject.ResourceType.Food);
