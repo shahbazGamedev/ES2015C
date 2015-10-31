@@ -16,7 +16,9 @@ public class AI : Player {
     private int i = 0;
 
     void Start () {
-       // CreateNewCivil();
+        townCenters = 0;
+       civils = new List<CivilUnit>();
+       CreateNewCivil();
     }
 	
 	// Update is called once per frame
@@ -27,26 +29,29 @@ public class AI : Player {
 
     private void buildTownCenter() {
         //Si no tinc cap centro urbano, tenir-ne una ha de ser la meva prioritat
+        if (civils.Count == 0 && townCenters==0) {
+            
+        }
+
+        else {  
             foreach (CivilUnit civilian in civils)
                 if (building == false) // Loop with for.
                 {
-                    civilian.CreateBuilding("TownCenter");  //Encara no està implementat
+                    civilian.CreateBuilding("TownCenter"); 
                     townCenters++;
                     building = true;
-                }           
-
-
+                }
+        }
         
     }
 
-    /*private void CreateNewCivil() {
-        Vector3 coords = new Vector3((float)130f, 0f, (float)150f);
-        GameObject civil= Instantiate(Resources.Load("yamato_civil"), coords, Quaternion.identity) as GameObject;
+    private void CreateNewCivil() {
+        Vector3 coords = new Vector3(114f, 0f, 111f);
+        civil = new CivilUnit("yamato_civil",coords);
+        //GameObject civil= Instantiate(Resources.Load("yamato_civil"), coords, Quaternion.identity) as GameObject;
         //civils.Add(civil);
-        CivilUnit u = civil;
-        civils.Add(u);
-
-    }*/
+        civils.Add(civil);
+    }
 
     private void Build(String building) {
 

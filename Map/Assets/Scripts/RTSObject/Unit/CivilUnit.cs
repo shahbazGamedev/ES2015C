@@ -27,6 +27,11 @@ public class CivilUnit : Unit
 
     /*** Metodes per defecte de Unity ***/
 
+    public CivilUnit(string asset, Vector3 coords) {
+        Instantiate(Resources.Load(asset), coords, Quaternion.identity);
+
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -58,7 +63,7 @@ public class CivilUnit : Unit
     /*** Metodes privats ***/
 
     // Metode que crea el edifici
-    private void CreateBuilding(string buildingName)
+    public void CreateBuilding(string buildingName)
     {
         building = true;
 		Vector3 point = new Vector3(transform.position.x + 10, 0.0f, transform.position.z + 10);
