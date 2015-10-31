@@ -8,6 +8,7 @@ public class Yamato_TownCenterBuilding : TownCenterBuilding {
     {
         base.Start();
 		objectName = "Yamato Town Center";
+        baseDefense = 5;
     }
 
 	/*** Metodes interns accessibles per les subclasses ***/

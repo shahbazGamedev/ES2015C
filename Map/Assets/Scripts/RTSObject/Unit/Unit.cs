@@ -7,8 +7,6 @@ public class Unit : RTSObject
 {
 	public Avatar unitAvatar;				// Referencia al avatar del component Animator.
 
-	protected float moveSpeed = 5;             	// Velocitat de moviment
-
 	private CharacterController characterController;	// Referencia al component CharacterController.
 	private Seeker seeker;					// Referencia al component Seeker.
 	private Vector3 targetPosition;         // Indica el vector3 del objectiu
@@ -40,6 +38,7 @@ public class Unit : RTSObject
 	protected override void Start ()
 	{
 		base.Start ();
+        baseMoveSpeed = 5;
 	}
 
 	protected override void Update ()
@@ -66,24 +65,6 @@ public class Unit : RTSObject
 	/*** Metodes publics ***/
 
 	/// <summary>
-	/// Tells if the unit can attack
-	/// </summary>
-	/// <returns>Boolean saying if the units can attack or not.</returns>
-	public override bool CanAttack ()
-	{
-		return false;
-	}
-
-	/// <summary>
-	/// Tells if the unit can move
-	/// </summary>
-	/// <returns>Boolean saying if the units can move or not.</returns>
-	public override bool CanMove ()
-	{
-		return true;
-	}
-
-	/// <summary>
 	/// Tells the unit to move to the given position, by generating and
 	/// following a route to the desired position.
 	/// </summary>
@@ -97,13 +78,24 @@ public class Unit : RTSObject
 		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
 	}
 
+    /// <summary>
+    /// Tell the unit to cancel the movement path to the given position.
+    /// </summary>
     protected override void CancelPath()
     {
         moving = false;
         path = null;
     }
-	
-	public GameObject FindClosest (string tag)
+
+    /// <summary>
+    /// Tell the unit to cancel the movement path to the given position.
+    /// </summary>
+    protected override bool HasPath()
+    {
+        return moving;
+    }
+
+    public GameObject FindClosest (string tag)
 	{
 		
 		GameObject[] TaggedObjects = GameObject.FindGameObjectsWithTag (tag); //Retorna una llista amb els objectes que tenen el tag tag
@@ -149,7 +141,13 @@ public class Unit : RTSObject
 
 	private void OnPathComplete (Path newPath)
 	{
-		if (!newPath.error) {
+        // We need to be careful and check the 'moving' variable here, since
+        // if we started calculating a path, and cancelled it quickly, we will still receive
+        // the OnPathComplete() event even tough the movement was cancelled.
+        // Note that the case where we start a new path, cancel it, and start a new one
+        // quickly works correctly, since in this case the Seeker will cancel the first path
+		if (moving && !newPath.error)
+        {
 			path = newPath;
 			currentWaypoint = 0;
 		}
@@ -166,7 +164,7 @@ public class Unit : RTSObject
 		// Tell the controller to move in the straight-line direction
 		// between the current position and the waypoint
 		Vector3 dir = (path.vectorPath [currentWaypoint] - transform.position).normalized;
-		dir = dir * moveSpeed;
+		dir = dir * GetMovementSpeed();
 		characterController.SimpleMove (dir);
 
 		// Have we reached the waypoint in the path?

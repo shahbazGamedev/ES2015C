@@ -130,6 +130,7 @@ ModelImporter:
     7400014: Armature|Walk
     7400016: Samurai|Untitled
     7400018: Samurai|Untitled.001
+    7400020: Armature|Walk0
     9500000: //RootNode
     13700000: Samurai
   materials:
@@ -162,7 +163,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

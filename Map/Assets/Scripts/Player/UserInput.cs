@@ -76,17 +76,18 @@ public class UserInput : MonoBehaviour
                 // Note that this will be null if the user clicked on nothing or a non-RTS element object.
                 player.ChangeSelectedRtsObject(targetRtsElement);
             }
-            else if (rightClick)
+            else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
             {
-                if (player.SelectedObject != null && player.SelectedObject.CanAttack() &&
+                if (player.SelectedObject.CanAttack() &&
                     targetRtsElement != null && targetRtsElement.owner != null &&
+                    targetRtsElement.CanBeAttacked() &&
                     player.Team.IsEnemyOf(targetRtsElement.owner.Team))
                 {
                     // If the player clicked over an unit or building and the selected unit
                     // can attack, start the attacking sequence
                     player.SelectedObject.AttackObject(targetRtsElement);
                 }
-                else if (player.SelectedObject != null && player.SelectedObject.CanMove())
+                else if (player.SelectedObject.CanMove())
                 {
                     // Otherwise, if the unit can move, start the movement sequence
                     player.SelectedObject.MoveTo(hit.point);

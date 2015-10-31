@@ -8,11 +8,13 @@ public class Yamato_samurai_advanced : Unit
     {
         base.Start();
         objectName = "Yamato Samurai Advanced";
-		moveSpeed = 3;
+		baseMoveSpeed = 3;
 		cost = 300;
 		hitPoints = 200;
 		maxHitPoints = 200;
-		hitDamage = 30;
-		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Yamato_samurai_advanced_AC") as RuntimeAnimatorController;
+		baseAttackStrength = 30;
+        baseDefense = 10;
+        baseAttackSpeed = 2.0f;
+        anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Yamato_samurai_advanced_AC") as RuntimeAnimatorController;
     }
 }
