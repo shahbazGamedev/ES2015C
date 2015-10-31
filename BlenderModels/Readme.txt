@@ -1,0 +1,1 @@
+En aquesta carpeta hi aniran els models blender
