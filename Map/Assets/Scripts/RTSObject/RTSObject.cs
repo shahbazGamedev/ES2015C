@@ -10,7 +10,7 @@ public class RTSObject : MonoBehaviour
 	public string objectName = "Generic RTS Object";     // Nom del objecte
 	public int cost = 50, hitPoints = 100, maxHitPoints = 100; // Cost, punts de vida i vida maxima
     /// <summary>Default movement speed. Leave at zero if the object can't move.</summary>
-    protected float baseMoveSpeed = 5;
+    protected float baseMoveSpeed = 0;
     /// <summary>Default attack strength. Leave at zero if the object can't attack.</summary>
     protected int baseAttackStrength = 0;
     /// <summary>Default number of hits per second of the object. Leave at zero if the object can't attack.</summary>
@@ -393,6 +393,7 @@ public class RTSObject : MonoBehaviour
         }
         else
         {
+            Debug.Log(CanMove());
             // If we need to and the unit can't move, warn the user that the attack can't be done
             if (!CanMove())
             {

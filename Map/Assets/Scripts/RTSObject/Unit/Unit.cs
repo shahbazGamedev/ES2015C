@@ -38,6 +38,7 @@ public class Unit : RTSObject
 	protected override void Start ()
 	{
 		base.Start ();
+        baseMoveSpeed = 5;
 	}
 
 	protected override void Update ()
