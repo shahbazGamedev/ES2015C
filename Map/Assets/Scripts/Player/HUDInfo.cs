@@ -9,7 +9,7 @@ public class HUDInfo : MonoBehaviour
 	public TextAnchor anchorAt = TextAnchor.MiddleLeft;
 	public int numberOfLines = 2;
 	public int pixelXOffset = 5;
-	public int pixelYOffset = -160;
+	public int pixelYOffset = -140;
 	private GameObject guiObj;
 	private GUIText guiTxt;
 	private TextAnchor _anchorAt;

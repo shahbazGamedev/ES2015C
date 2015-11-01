@@ -24,7 +24,7 @@ public class Yamato_civil : CivilUnit
 		switch (actionToPerform) {
 		case "Town Center":
 			creationBuilding = Resources.Load ("Prefabs/Yamato_TownCenter") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_TownCenter") as GameObject;
+            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_TownCenter_onConstruction") as GameObject;
             break;
 		case "Army Building":
 			creationBuilding = Resources.Load ("Prefabs/Yamato_ArmyBuilding") as GameObject;
