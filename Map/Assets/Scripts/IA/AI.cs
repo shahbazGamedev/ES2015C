@@ -32,14 +32,11 @@ public class AI : MonoBehaviour {
             foreach (Unit civilian in civils)
                 if (building == false) // Loop with for.
                 {
-                    // civilian.CreateBuilding("TownCenter");  //Encara no està implementat
+                    //civilian.CreateBuilding("TownCenter");  //Encara no està implementat
                     townCenters++;
                     building = true;
                 }
             }
-
-
-        
     }
 
     private void build(String building) {

@@ -6,17 +6,22 @@ public class CivilUnit : Unit
 
     public float capacity, collectionAmount, depositAmount; // Dades sobre la recolecció
     public Building resourceStore;                          // Edifici on es deposita la recolecció
-    public int buildSpeed;                                  // Velocitat de construcció
+    //public int baseBuildSpeed;                                  // Velocitat de construcció
 
 	protected GameObject creationBuilding = null;			// Objecte que indica la unitat a crear actual
 
-    private bool harvesting = false, emptying = false, building = false;    // Indicadors d'estat de la unitat
+    private bool harvesting = false, emptying = false;      // Indicadors d'estat de la unitat
+	public bool building;    
     private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
     private ResourceType harvestType;                       // Tipus de recolecció
     private Resource resourceDeposit;                       // Recurs de la recolecció
-    private Building currentProject;                        // Edifici actual en construcció
+    
     private float amountBuilt = 0.0f;                       // Porcentatge de construcció feta
-	public int mask = 1024;									// 10000001 checks default and obstacles
+	//public int mask = 1024;									// 10000001 checks default and obstacles
+	private Vector3 constructionPoint;
+	
+	private GameObject buildingClone;
+	public Building currentProject;                        
 	
 	private static int layer1 = 0;
 	private static int layer2 = 10;
@@ -31,6 +36,7 @@ public class CivilUnit : Unit
         base.Start();
         objectName = "Civil Unit";
 		actions = new string[] { "Town Center", "Army Building", "Wall Tower", "Wall Entrance", "Wall", "Civil House" };                 // Accions que pot fer la unitat civil
+		building=false;
     }
 
     protected override void Update()
@@ -38,13 +44,14 @@ public class CivilUnit : Unit
         base.Update();
         if (!moving)
         {
+
             if (harvesting || emptying)
             {
                 // tot el que implica la recoleccio de recursos
             }
-            else if (building && currentProject && currentProject.UnderConstruction())
+            else if (building && currentProject.UnderConstruction())
             {
-                // tot el que implica la construccio d'edificis
+				currentProject.Construct(baseBuildSpeed);
             }
         }
     }
@@ -87,15 +94,18 @@ public class CivilUnit : Unit
 	protected virtual void CreateBuilding(string buildingName)
 	{
 		if (creationBuilding != null) {
-			building = true;
-			Vector3 point = new Vector3 (transform.position.x + 10, 0.0f, transform.position.z + 10);
+			//building = true;
+			constructionPoint = new Vector3 (transform.position.x + 10, 0.0f, transform.position.z + 10);
 		
-			if (Physics.CheckSphere (point, 0.8f, finalmask)) {
+			if (Physics.CheckSphere (constructionPoint, 0.8f, finalmask)) {
 				Debug.Log ("No podemos construir porque hay otros edificios cerca");
 			} else {
 				float wood = owner.GetResourceAmount (RTSObject.ResourceType.Wood);
 				if (wood >= 100) {
-					GameObject buildingClone = (GameObject)Instantiate (creationBuilding, point, Quaternion.identity);
+					buildingClone = (GameObject)Instantiate (creationBuilding, constructionPoint, Quaternion.identity);
+					currentProject = buildingClone.GetComponent<Building>();
+					building = true;
+
 					buildingClone.GetComponent<RTSObject> ().owner = owner;
 					var guo = new GraphUpdateObject (buildingClone.GetComponent<Collider> ().bounds);
 					guo.updatePhysics = true;

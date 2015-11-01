@@ -78,6 +78,10 @@ public class UserInput : MonoBehaviour
             }
             else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
             {
+				if (player.SelectedObject.CanBuild()) {
+					player.SelectedObject.GetComponent<CivilUnit>().building=false;
+				}
+				
                 if (player.SelectedObject.CanAttack() &&
                     targetRtsElement != null && targetRtsElement.owner != null &&
                     targetRtsElement.CanBeAttacked() &&
@@ -87,6 +91,14 @@ public class UserInput : MonoBehaviour
                     // can attack, start the attacking sequence
                     player.SelectedObject.AttackObject(targetRtsElement);
                 }
+				
+				else if (player.SelectedObject.CanBuild()&& targetRtsElement != null && targetRtsElement.owner==player && targetRtsElement.CanBeBuilt()) {
+					player.SelectedObject.MoveTo(hit.point);
+					player.SelectedObject.GetComponent<CivilUnit>().building=true;
+					player.SelectedObject.GetComponent<CivilUnit>().currentProject=targetRtsElement.GetComponent<Building>();
+					targetRtsElement.GetComponent<Building>().needsBuilding=true;
+				}
+				
                 else if (player.SelectedObject.CanMove())
                 {
                     // Otherwise, if the unit can move, start the movement sequence

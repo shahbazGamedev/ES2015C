@@ -12,8 +12,8 @@ public class Building : RTSObject
 	protected Queue<string> buildQueue;         // Cua de construccio del edifici
 
 	private BoxCollider boxCollider;			// Referencia al component BoxCollider.
-	private float currentBuildProgress = 0.0f;  // Progres actual de la construccio
-	private bool needsBuilding = false;         // Indica si necesita se construit
+	  
+	public bool needsBuilding = false;         // Indica si necesita se construit
 
 	private static int layer1 = 11; 
 	private static int layer2 = 10;
@@ -33,6 +33,8 @@ public class Building : RTSObject
 		gameObject.layer = 10;
 		// Calculem la dimensio del BoxCollider
 		FittedBoxCollider();
+		needsBuilding=true;
+		currentBuildProgress = 0.0f; // Progres actual de la construccio
 	}
 
 	protected override void Start ()
@@ -70,7 +72,7 @@ public class Building : RTSObject
 	// Metode que va construint el edifici
 	public void Construct (int amount)
 	{
-		hitPoints += amount;
+		hitPoints = hitPoints + amount;
 		if (hitPoints >= maxHitPoints) {
 			hitPoints = maxHitPoints;
 			needsBuilding = false;

@@ -11,6 +11,9 @@ public class RTSObject : MonoBehaviour
 	public int cost = 50, hitPoints = 100, maxHitPoints = 100; // Cost, punts de vida i vida maxima
     /// <summary>Default movement speed. Leave at zero if the object can't move.</summary>
     protected float baseMoveSpeed = 0;
+	
+	protected float currentBuildProgress = 10.0f;
+	protected int baseBuildSpeed=0;
     /// <summary>Default attack strength. Leave at zero if the object can't attack.</summary>
     protected int baseAttackStrength = 0;
     /// <summary>Default number of hits per second of the object. Leave at zero if the object can't attack.</summary>
@@ -164,6 +167,16 @@ public class RTSObject : MonoBehaviour
     {
         throw new NotImplementedException();
     }
+	
+	public virtual bool CanBuild()
+	{
+		return (baseBuildSpeed !=0);
+	}
+	
+	public virtual bool CanBeBuilt()
+	{
+		return (currentBuildProgress<10.0f);
+	}
 
     /// <summary>
     /// Tells if the object can attack.

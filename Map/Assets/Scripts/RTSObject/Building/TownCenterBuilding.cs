@@ -9,7 +9,7 @@ public class TownCenterBuilding : Building {
         base.Start();
         objectName = "Town Center";
 		cost = 800;
-		hitPoints = 5000;
+		hitPoints = 0;
 		maxHitPoints = 5000;
         baseAttackStrength = 10;
         baseAttackSpeed = 1.0f;
@@ -22,6 +22,11 @@ public class TownCenterBuilding : Building {
     {
         base.Update();
     }
+	
+		protected override void Awake ()
+	{
+		base.Awake ();
+	}
 
 
     /*** Metodes interns accessibles per les subclasses ***/

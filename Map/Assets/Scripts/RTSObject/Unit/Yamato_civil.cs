@@ -12,6 +12,7 @@ public class Yamato_civil : CivilUnit
 		baseAttackStrength = 10;
         baseDefense = 3;
         baseAttackSpeed = 1.0f;
+		baseBuildSpeed=50;
         anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Yamato_civil_AC") as RuntimeAnimatorController;
     }
 

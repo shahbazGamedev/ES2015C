@@ -9,7 +9,7 @@ public class ArmyBuilding : Building {
         base.Start();
         objectName = "Army Building";
 		cost = 500;
-		hitPoints = 3000;
+		hitPoints = 0;
 		maxHitPoints = 3000;
         baseDefense = 5;
     }

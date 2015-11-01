@@ -9,7 +9,7 @@ public class Yamato_WallEntrance : Building {
         base.Start();
 		objectName = "Yamato Wall Entrance";
 		cost = 100;
-		hitPoints = 700;
+		hitPoints = 0;
 		maxHitPoints = 700;
         baseDefense = 5;
     }
