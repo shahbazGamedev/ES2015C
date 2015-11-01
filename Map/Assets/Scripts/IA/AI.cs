@@ -125,39 +125,7 @@ public class AI : MonoBehaviour
         civilian.GetComponent<CivilUnit>().GoTo(position);
         civilian.GetComponent<CivilUnit>().StartHarvest(tree.GetComponent<Resource>());
 
-<<<<<<< HEAD
     }
-=======
-        foreach (GameObject civilian in civils)
-        {
-            unitPosition = civilian.transform.position; //Agafo la posicio del civil
-            townCenter = civilian.GetComponent<CivilUnit>().FindClosest("townCenter"); //Retorna el TownCenter més proper
-            buildingPosition = townCenter.transform.position;//Agafo la posicio
-            closestDistance = new Vector3(unitPosition.x - buildingPosition.x, 0, unitPosition.z - buildingPosition.z);
-            totalDist = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);//i calculo  la distancia euclidania
-   
-                if (totalDist > 50)
-                { //Si les distancia és més petita de 50 no val la pena anar a construir una farm, ja es pot anar al TownCenter
-                    buildingGameObject = civilian.GetComponent<CivilUnit>().FindClosest(building);
-                    buildingPosition = buildingGameObject.transform.position;
-                    closestDistance = new Vector3(unitPosition.x - buildingPosition.x, 0, unitPosition.z - buildingPosition.z);
-                    totalDist = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);//i calculo  la distancia euclidania
-
-                    if (totalDist > 50)
-                    {
-                        resourceGameObject = civilian.GetComponent<CivilUnit>().FindClosest(resource);
-                        buildingPosition = resourceGameObject.transform.position;
-                        closestDistance = new Vector3(unitPosition.x - buildingPosition.x, 0, unitPosition.z - buildingPosition.z);
-                        totalDist = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);//i calculo  la distancia euclidania
-
-                        if (totalDist < 50)
-                        {
-                        civilian.GetComponent<CivilUnit>().CreateBuilding(building); //Encara no esta implementat aquest mètode
-                        }
-
-                    }
-                
->>>>>>> master
 
     private void StartRecollecting(GameObject civilian, String resource)
     {

@@ -52,11 +52,7 @@ public class PlaceResources : MonoBehaviour
             coords = new Vector3((float)randomWidth, y, (float)randomDepth);
             if (!Physics.CheckSphere(coords, 1))     //Comprova si hi ha algun altre objecte a on es crea l'arbre
             {
-<<<<<<< HEAD
                 tree = (GameObject)Instantiate(Resources.Load("Prefabs/" + asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
-=======
-                tree = (GameObject)Instantiate(Resources.Load(asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
->>>>>>> master
                 var guo = new GraphUpdateObject(tree.GetComponent<Collider>().bounds);
                 guo.updatePhysics = true;
                 AstarPath.active.UpdateGraphs(guo);
@@ -99,11 +95,7 @@ public class PlaceResources : MonoBehaviour
                             int placeTree = Random.Range(0, 2);  //Només posa un arbre si no surt el 0, es per que els boscos quedin més realistes
                             if (placeTree != 0)
                             {
-<<<<<<< HEAD
                                 tree = (GameObject)Instantiate(Resources.Load("Prefabs/" + asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
-=======
-                                tree=(GameObject)Instantiate(Resources.Load(PrefabResource, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
->>>>>>> master
                                 var guo = new GraphUpdateObject(tree.GetComponent<Collider>().bounds);
                                 guo.updatePhysics = true;
                                 AstarPath.active.UpdateGraphs(guo);
@@ -139,11 +131,7 @@ public class PlaceResources : MonoBehaviour
                     coords = new Vector3((float)coordX, y, (float)coordZ);
                     if (!Physics.CheckSphere(coords, 1))     //Comprova si hi ha algun altre objecte a on es crea l'arbre
                     {
-<<<<<<< HEAD
                         tree = (GameObject)Instantiate(Resources.Load("Prefabs/" + asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
-=======
-                        tree = (GameObject)Instantiate(Resources.Load(asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
->>>>>>> master
                         var guo = new GraphUpdateObject(tree.GetComponent<Collider>().bounds);
                         guo.updatePhysics = true;
                         AstarPath.active.UpdateGraphs(guo);
