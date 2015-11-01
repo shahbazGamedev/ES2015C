@@ -27,6 +27,7 @@ public class RTSObject : MonoBehaviour
 
     // Variables accessibles per a les subclasses
     protected string[] actions = { };               // Accions que pot realitzar
+	protected bool currentlySelected = false;       // Indica si esta seleccionat
     protected float healthPercentage = 1.0f;        // Percentatge de vida
     protected RTSObject target = null;              // Posible objectiu
     protected bool aiming = false;
@@ -51,6 +52,7 @@ public class RTSObject : MonoBehaviour
     protected List<RTSObject> nearbyObjects;        // Llista de objectes propers
 
     protected Animator anim;                        // Referencia al component Animator.
+	protected Rigidbody rigbody;					// Referenica al component Rigidbody
 
 	private int ObjectId { get; set; }               // Identificador unic del objecte
     private float currentWeaponChargeTime;
@@ -59,6 +61,8 @@ public class RTSObject : MonoBehaviour
 
     protected virtual void Awake()
     {
+		rigbody = gameObject.AddComponent<Rigidbody> ();
+		rigbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     protected virtual void Start()
@@ -67,6 +71,7 @@ public class RTSObject : MonoBehaviour
 
     protected virtual void Update()
     {
+		if (currentlySelected) updateSelection ();
         if (attacking) PerformAttack();
         if (dying && UpdateDeadObject()) return; ;
         if (this != null && anim && anim.runtimeAnimatorController) Animating();
@@ -77,6 +82,12 @@ public class RTSObject : MonoBehaviour
     }
 
     /*** Metodes publics ***/
+
+	// Metode per declarar la seleccio del objecte
+	public virtual void SetSelection(bool selected)
+	{
+		currentlySelected = selected;
+	}
 
     // Metode per obtenir les accions del objecte
     public string[] GetActions()
@@ -324,10 +335,10 @@ public class RTSObject : MonoBehaviour
 
     /*** Metodes privats ***/
 
-    // Metode que dibuixa el GUI del objecte
-    private void DrawGUI()
-    {
-    }
+	// Metode que actualitza segons la posicio del objecte el indicador de seleccio
+	private void updateSelection(){
+
+	}
 
     /// <summary>
     /// Since objects can't overlap, we have to give them some tolerance

@@ -107,7 +107,7 @@ public class CivilUnit : Unit
 					building = true;
 
 					buildingClone.GetComponent<RTSObject> ().owner = owner;
-					var guo = new GraphUpdateObject (buildingClone.GetComponent<Collider> ().bounds);
+					var guo = new GraphUpdateObject (buildingClone.GetComponent<BoxCollider> ().bounds);
 					guo.updatePhysics = true;
 					AstarPath.active.UpdateGraphs (guo);
 					owner.resourceAmounts [RTSObject.ResourceType.Wood] = wood - 100;
