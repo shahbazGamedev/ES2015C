@@ -72,9 +72,23 @@ public class UserInput : MonoBehaviour
 
             if (leftClick)
             {
+				object[] obj = GameObject.FindSceneObjectsOfType(typeof (RTSObject));
+				foreach (object o in obj)
+				{
+					RTSObject g = (RTSObject) o;
+					g.SetSelection(false);
+				}
                 // Call the class to change the currently selected RTS element.
                 // Note that this will be null if the user clicked on nothing or a non-RTS element object.
                 player.ChangeSelectedRtsObject(targetRtsElement);
+				if(targetRtsElement){
+					targetRtsElement.SetSelection(true);
+				} else if (player.SelectedObject != null) {
+					player.SelectedObject.SetSelection(true);
+				}else {
+					GameObject selArea = GameObject.Find("SelectedArea");
+					if (selArea) selArea.GetComponent<MeshRenderer>().enabled = false;
+				}
             }
             else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
             {

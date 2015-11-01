@@ -87,6 +87,10 @@ public class RTSObject : MonoBehaviour
 	public virtual void SetSelection(bool selected)
 	{
 		currentlySelected = selected;
+		if (selected) {
+			GameObject selArea = GameObject.Find("SelectedArea");
+			if (selArea) selArea.GetComponent<MeshRenderer>().enabled = true;
+		}
 	}
 
     // Metode per obtenir les accions del objecte
@@ -337,7 +341,11 @@ public class RTSObject : MonoBehaviour
 
 	// Metode que actualitza segons la posicio del objecte el indicador de seleccio
 	private void updateSelection(){
-
+		GameObject selArea = GameObject.Find("SelectedArea");
+		if (selArea) {
+			selArea.transform.localPosition = new Vector3 (gameObject.GetComponent<Collider> ().bounds.center.x, 0f, gameObject.GetComponent<Collider> ().bounds.center.z);
+			selArea.transform.localScale = new Vector3 (gameObject.GetComponent<Collider> ().bounds.size.x * 1.2f, 0.01f, gameObject.GetComponent<Collider> ().bounds.size.z * 1.2f);
+		}
 	}
 
     /// <summary>
