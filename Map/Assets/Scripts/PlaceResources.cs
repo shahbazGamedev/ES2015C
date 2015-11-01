@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
 public class PlaceResources : MonoBehaviour
 {
 
     // Use this for initialization
     private int i, j, k; //s'utilitzen per recorrer el fors(PlaceForests)
+    GameObject tree;
 
 
     Vector3 coords;
@@ -33,7 +35,10 @@ public class PlaceResources : MonoBehaviour
             coords = new Vector3((float)randomWidth, -1.6f, (float)randomDepth);
             if (!Physics.CheckSphere(coords, 1))     //Comprova si hi ha algun altre objecte a on es crea l'arbre
             {
-                Instantiate(Resources.Load(asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
+                tree = (GameObject)Instantiate(Resources.Load(asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
+                var guo = new GraphUpdateObject(tree.GetComponent<Collider>().bounds);
+                guo.updatePhysics = true;
+                AstarPath.active.UpdateGraphs(guo);
             }
         }
     }
@@ -66,7 +71,10 @@ public class PlaceResources : MonoBehaviour
                             int placeTree = Random.Range(0, 2);  //Només posa un arbre si no surt el 0, es per que els boscos quedin més realistes
                             if (placeTree != 0)
                             {
-                                Instantiate(Resources.Load(PrefabResource, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
+                                tree=(GameObject)Instantiate(Resources.Load(PrefabResource, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
+                                var guo = new GraphUpdateObject(tree.GetComponent<Collider>().bounds);
+                                guo.updatePhysics = true;
+                                AstarPath.active.UpdateGraphs(guo);
                             }
                         }
                     }
@@ -89,7 +97,10 @@ public class PlaceResources : MonoBehaviour
                     coords = new Vector3((float)coordX, -1.6f, (float)coordZ);
                     if (!Physics.CheckSphere(coords, 1))     //Comprova si hi ha algun altre objecte a on es crea l'arbre
                     {
-                        Instantiate(Resources.Load(asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
+                        tree = (GameObject)Instantiate(Resources.Load(asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
+                        var guo = new GraphUpdateObject(tree.GetComponent<Collider>().bounds);
+                        guo.updatePhysics = true;
+                        AstarPath.active.UpdateGraphs(guo);
                     }
                 }
                 coordZ=coordZ+2;

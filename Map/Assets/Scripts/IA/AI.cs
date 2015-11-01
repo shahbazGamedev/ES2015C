@@ -35,6 +35,7 @@ public class AI : Player {
             {
                 Vector3 point = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z + 10);
                 GameObject centerClone = (GameObject)Instantiate(Resources.Load("towncenterYamato"), point, Quaternion.identity);
+                //civilian.GetComponent<CivilUnit>().CreateBuilding("TownCenter");
                 townCenters++;
                 building = true;
             }
@@ -108,5 +109,4 @@ public class AI : Player {
             }
         }
     }
-
 }
