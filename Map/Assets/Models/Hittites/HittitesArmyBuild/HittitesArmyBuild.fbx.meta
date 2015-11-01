@@ -63,6 +63,23 @@ ModelImporter:
     100110: Sun.001
     100112: Sun.002
     100114: Sun.003
+    100116: Cylinder.015
+    100118: Cylinder.016
+    100120: Cylinder.017
+    100122: Cylinder.018
+    100124: Cylinder.019
+    100126: Cylinder.020
+    100128: Cylinder.021
+    100130: Cylinder.022
+    100132: Cylinder.023
+    100134: Cylinder.024
+    100136: Plane.042
+    100138: Cube.004
+    100140: Cube.005
+    100142: Cube.006
+    100144: Cube.007
+    100146: Sphere
+    100148: Sphere.001
     400000: Camera
     400002: Cube
     400004: Cube.001
@@ -121,6 +138,23 @@ ModelImporter:
     400110: Sun.001
     400112: Sun.002
     400114: Sun.003
+    400116: Cylinder.015
+    400118: Cylinder.016
+    400120: Cylinder.017
+    400122: Cylinder.018
+    400124: Cylinder.019
+    400126: Cylinder.020
+    400128: Cylinder.021
+    400130: Cylinder.022
+    400132: Cylinder.023
+    400134: Cylinder.024
+    400136: Plane.042
+    400138: Cube.004
+    400140: Cube.005
+    400142: Cube.006
+    400144: Cube.007
+    400146: Sphere
+    400148: Sphere.001
     2300000: Cube
     2300002: Cube.001
     2300004: Cube.002
@@ -172,6 +206,23 @@ ModelImporter:
     2300096: Plane.037
     2300098: Plane.038
     2300100: Plane.039
+    2300102: Cylinder.015
+    2300104: Cylinder.016
+    2300106: Cylinder.017
+    2300108: Cylinder.018
+    2300110: Cylinder.019
+    2300112: Cylinder.020
+    2300114: Cylinder.021
+    2300116: Cylinder.022
+    2300118: Cylinder.023
+    2300120: Cylinder.024
+    2300122: Plane.042
+    2300124: Cube.004
+    2300126: Cube.005
+    2300128: Cube.006
+    2300130: Cube.007
+    2300132: Sphere
+    2300134: Sphere.001
     3300000: Cube
     3300002: Cube.001
     3300004: Cube.002
@@ -223,6 +274,23 @@ ModelImporter:
     3300096: Plane.037
     3300098: Plane.038
     3300100: Plane.039
+    3300102: Cylinder.015
+    3300104: Cylinder.016
+    3300106: Cylinder.017
+    3300108: Cylinder.018
+    3300110: Cylinder.019
+    3300112: Cylinder.020
+    3300114: Cylinder.021
+    3300116: Cylinder.022
+    3300118: Cylinder.023
+    3300120: Cylinder.024
+    3300122: Plane.042
+    3300124: Cube.004
+    3300126: Cube.005
+    3300128: Cube.006
+    3300130: Cube.007
+    3300132: Sphere
+    3300134: Sphere.001
     4300000: Plane.035
     4300002: Plane.039
     4300004: Cube.003
@@ -232,6 +300,12 @@ ModelImporter:
     4300012: Cylinder
     4300014: Cube.001
     4300016: Cube
+    4300018: Plane.042
+    4300020: Cylinder.024
+    4300022: Cylinder.005
+    4300024: Cylinder.004
+    4300026: Cube.007
+    4300028: Sphere.001
   materials:
     importMaterials: 1
     materialName: 0
