@@ -16,12 +16,13 @@ public class MiniMapScript : MonoBehaviour {
 
     // Use this for initialization
     public void Start() {
+        miniMapObjects = new List<GameObject>();
         trackedBlueObjects = new List<GameObject>();
         trackedRedObjects = new List<GameObject>();
-       // addAllyGameObject(cylinder);//testeig
-        Vector3 coords = new Vector3((float)120f, 0f, (float)150f);
+        addAllyGameObject(cylinder);//testeig
+        /*Vector3 coords = new Vector3((float)120f, 0f, (float)150f);
         Object o = Instantiate(Resources.Load("yamato_civil", typeof(GameObject)), coords, Quaternion.identity);
-        addAllyGameObject((GameObject)o);
+        addAllyGameObject((GameObject)o);*/
         createMiniMapObjects();
 
     }
@@ -38,8 +39,6 @@ public class MiniMapScript : MonoBehaviour {
 
     void createMiniMapObjects()
     {
-        miniMapObjects = new List<GameObject>();    //Inicialització de la llista d'objectes que sortiran al minimapa
-
 
         foreach (GameObject o in trackedRedObjects)
         { //Anem recorrent la llista dels objectes que volem que sortin al minimapa
