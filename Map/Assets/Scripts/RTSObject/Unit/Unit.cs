@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
-using Pathfinding;
+﻿using Pathfinding;
+using UnityEngine;
 
 public class Unit : RTSObject
 {
