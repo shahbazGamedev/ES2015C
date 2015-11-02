@@ -38,7 +38,6 @@ public class CivilUnit : Unit
     {
         base.Start();
         objectName = "Civil Unit";
-		actions = new string[] { "Town Center", "Army Building", "Wall Tower", "Wall Entrance", "Wall", "Civil House" };                 // Accions que pot fer la unitat civil
 		building = false;
         capacity = 50;
         aux = findTownCenter();
