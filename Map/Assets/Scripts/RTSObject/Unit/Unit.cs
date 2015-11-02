@@ -14,6 +14,8 @@ public class Unit : RTSObject
     private Path path;
     private float nextWaypointDistance = 3.0f;
     private int currentWaypoint = 0;
+	public float visibility = 20f;
+	private TerrainFoW tf;
 
     protected bool moving;                  // Indica si esta movent-se          
 
@@ -35,6 +37,13 @@ public class Unit : RTSObject
     protected override void Update()
     {
         base.Update();
+
+		if (Input.GetKey (KeyCode.U)) {
+			visibility = 400f;
+		}
+
+
+		explore ();
 
         // If the unit is currently moving, call the function to update
         // the position in the path the unit is following
@@ -91,6 +100,14 @@ public class Unit : RTSObject
             currentWaypoint = 0;
         }
     }
+
+	private void explore(){
+		tf = GameObject.FindObjectOfType(typeof(TerrainFoW)) as TerrainFoW;
+		
+		Vector3 vec = transform.position;
+		Debug.Log(vec);
+		tf.ExploreArea (vec, visibility);
+	}
 
     private void moveToPosition()
     {
