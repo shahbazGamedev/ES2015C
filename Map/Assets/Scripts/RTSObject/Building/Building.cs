@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class Building : RTSObject
 {
-
 	protected float maxBuildProgress = 10.0f;	// Maxim progres de construccio
 	protected GameObject creationUnit = null;	// Objecte que indica la unitat a crear actual
 

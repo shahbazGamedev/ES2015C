@@ -95,7 +95,7 @@ public class UserInput : MonoBehaviour
 				if (player.SelectedObject.CanBuild()) {
 					player.SelectedObject.GetComponent<CivilUnit>().building=false;
 				}
-				
+				//Atacar
                 if (player.SelectedObject.CanAttack() &&
                     targetRtsElement != null && targetRtsElement.owner != null &&
                     targetRtsElement.CanBeAttacked() &&
@@ -105,13 +105,23 @@ public class UserInput : MonoBehaviour
                     // can attack, start the attacking sequence
                     player.SelectedObject.AttackObject(targetRtsElement);
                 }
-				
+				//Construir un edificio
 				else if (player.SelectedObject.CanBuild()&& targetRtsElement != null && targetRtsElement.owner==player && targetRtsElement.CanBeBuilt()) {
 					player.SelectedObject.MoveTo(hit.point);
 					player.SelectedObject.GetComponent<CivilUnit>().building=true;
 					player.SelectedObject.GetComponent<CivilUnit>().currentProject=targetRtsElement.GetComponent<Building>();
 					targetRtsElement.GetComponent<Building>().needsBuilding=true;
 				}
+                
+                //Recolecto
+                else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.tag == "tree"){
+                    //player.SelectedObject.MoveTo(hit.point);
+                    player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>());//, Building store)
+                    //player.SelectedObject.GetComponent<CivilUnit>().harvesting=true; //el civilunit es recolector
+                    //player.SelectedObject.GetComponent<CivilUnit>().resourceDeposit = targetRtsElement.GetComponent<Resource>(); //este es tu recurso
+                    //player.SelectedObject.GetComponent<CivilUnit>().harvestType = targetRtsElement.GetComponent<Resource>().GetResourceType();
+                    //player.SelectedObject.GetComponent<CivilUnit>().state = 2;
+                }
 				
                 else if (player.SelectedObject.CanMove())
                 {
