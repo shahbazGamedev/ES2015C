@@ -57,6 +57,10 @@ public class RTSObject : MonoBehaviour
 	private int ObjectId { get; set; }               // Identificador unic del objecte
     private float currentWeaponChargeTime;
 
+    //sprite publica
+    public Sprite objectIconSprite;
+
+
     /*** Metodes per defecte de Unity ***/
 
     protected virtual void Awake()
