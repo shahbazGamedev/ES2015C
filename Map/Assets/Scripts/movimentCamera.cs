@@ -42,12 +42,13 @@ public class movimentCamera : MonoBehaviour {
 		
 	}
 
+	public bool margin = false;
 	public bool marginVisible = false;
 	bool marginVisibleUp = false;
 	bool marginVisibleDown = false;
 	bool marginVisibleLeft = false;
 	bool marginVisibleRight = false;
-	public float marginPercent = 0.2f;
+	public float marginPercent = 0.01f;
 	Rect recdown;
 	Rect recup;
 	Rect recleft;
@@ -71,37 +72,58 @@ public class movimentCamera : MonoBehaviour {
 		recdown = new Rect (0, Screen.height-hMargin, Screen.width, hMargin);
 		recleft = new Rect (0, 0, wMargin, Screen.height);
 		recright = new Rect (Screen.width-wMargin, 0, wMargin, Screen.height);
-		
-		if (recup.Contains (Input.mousePosition) && transform.position.z > -60) {
+
+
+		if (margin) {
+
+			if (recup.Contains (Input.mousePosition) && transform.position.z > -60) {
 			
-			marginVisibleDown = true;
-			percent = (hMargin - Input.mousePosition.y) / hMargin;
-			transform.Translate (0, 0, -percent * cspeed, Space.World);
-		} else
-			marginVisibleDown = false;
+				marginVisibleDown = true;
+				percent = (hMargin - Input.mousePosition.y) / hMargin;
+				transform.Translate (0, 0, -percent * cspeed, Space.World);
+			} else
+				marginVisibleDown = false;
 
 		
-		if (recdown.Contains (Input.mousePosition) && transform.position.z < terrainHeight * 0.7) {
-			percent = 1 - (Screen.height - Input.mousePosition.y) / hMargin;
-			transform.Translate (0, 0, percent * cspeed, Space.World);
-			marginVisibleUp = true;
-		} else
-			marginVisibleUp = false;
+			if (recdown.Contains (Input.mousePosition) && transform.position.z < terrainHeight * 0.7) {
+				percent = 1 - (Screen.height - Input.mousePosition.y) / hMargin;
+				transform.Translate (0, 0, percent * cspeed, Space.World);
+				marginVisibleUp = true;
+			} else
+				marginVisibleUp = false;
 		
-		if (recleft.Contains (Input.mousePosition) && transform.position.x > 0) {
-			percent = (wMargin - Input.mousePosition.x) / wMargin;
-			transform.Translate (-percent * cspeed, 0, 0, Space.World);
-			marginVisibleLeft = true;
-		} else
-			marginVisibleLeft = false;
+			if (recleft.Contains (Input.mousePosition) && transform.position.x > 0) {
+				percent = (wMargin - Input.mousePosition.x) / wMargin;
+				transform.Translate (-percent * cspeed, 0, 0, Space.World);
+				marginVisibleLeft = true;
+			} else
+				marginVisibleLeft = false;
 		
-		if (recright.Contains (Input.mousePosition) && transform.position.x < terrainWidth * 0.85) {
-			percent = 1 - (Screen.width - Input.mousePosition.x) / wMargin;
-			transform.Translate (percent * cspeed, 0, 0, Space.World);
-			marginVisibleRight = true;
-		} else
-			marginVisibleRight = false;
-		
+			if (recright.Contains (Input.mousePosition) && transform.position.x < terrainWidth * 0.85) {
+				percent = 1 - (Screen.width - Input.mousePosition.x) / wMargin;
+				transform.Translate (percent * cspeed, 0, 0, Space.World);
+				marginVisibleRight = true;
+			} else
+				marginVisibleRight = false;
+		} else {
+
+			if (recup.Contains (Input.mousePosition) && transform.position.z > -60) {
+				transform.Translate (0, 0, -1 * cspeed, Space.World);
+			}
+			
+			
+			if (recdown.Contains (Input.mousePosition) && transform.position.z < terrainHeight * 0.7) {
+				transform.Translate (0, 0, 1 * cspeed, Space.World);
+			}
+			
+			if (recleft.Contains (Input.mousePosition) && transform.position.x > 0) {
+				transform.Translate (-1 * cspeed, 0, 0, Space.World);
+			}
+			
+			if (recright.Contains (Input.mousePosition) && transform.position.x < terrainWidth * 0.85) {
+				transform.Translate (1 * cspeed, 0, 0, Space.World);
+			}
+		}
 		// Arrows movement
 		if (Input.GetKey (KeyCode.DownArrow) && transform.position.z > -60) {
 			transform.Translate (0, 0, -CamSpeed*5 * Time.deltaTime, Space.World);
