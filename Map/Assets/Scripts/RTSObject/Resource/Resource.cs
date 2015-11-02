@@ -5,7 +5,7 @@ public class Resource : RTSObject {
 
     public float capacity;                          // Capacitat del recurs
 
-    protected float amountLeft;                     // Indica la cantitat que queda del recurs
+    public float amountLeft;                     // Indica la cantitat que queda del recurs
     protected ResourceType resourceType;            // Indica el tipus de recurs
 
 	private BoxCollider boxCollider;			// Referencia al component BoxCollider.
@@ -26,6 +26,28 @@ public class Resource : RTSObject {
     protected override void Start()
     {
         base.Start();
+        if(this.tag == "tree"){
+    		resourceType = ResourceType.Wood;
+    		capacity = 150;
+    		amountLeft = capacity;
+    	}
+    	else if(this.tag == "mine"){
+    		resourceType = ResourceType.Gold;
+    		capacity = 200;
+    		amountLeft = capacity;
+    	}
+    	else if(this.tag == "food"){
+    		resourceType = ResourceType.Food;
+    		capacity = 100;
+    		amountLeft = capacity;
+    	}
+    }
+
+    
+    protected void Update () {
+        if (isEmpty()){
+            Destroy(this.gameObject, 4);
+        }
     }
 
     /*** Metodes publics ***/

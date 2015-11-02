@@ -5,16 +5,19 @@ public class CivilUnit : Unit
 {
 
     public float capacity, collectionAmount, depositAmount; // Dades sobre la recolecció
-    public Building resourceStore;                          // Edifici on es deposita la recolecció
+    public bool llegado = false;                            //he llegado a mi destino
+    public int state;                                       //estado de recoleccion
+    public GameObject aux;
+    public TownCenterBuilding resourceStore;                          // Edifici on es deposita la recolecció
     //public int baseBuildSpeed;                                  // Velocitat de construcció
 
 	protected GameObject creationBuilding = null;			// Objecte que indica la unitat a crear actual
 
-    private bool harvesting = false, emptying = false;      // Indicadors d'estat de la unitat
+    public bool harvesting = false;      // Indicadors d'estat de la unitat
 	public bool building;    
-    private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
-    private ResourceType harvestType;                       // Tipus de recolecció
-    private Resource resourceDeposit;                       // Recurs de la recolecció
+    //private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
+    public ResourceType harvestType;                       // Tipus de recolecció
+    public Resource resourceDeposit;                       // Recurs de la recolecció
     
     private float amountBuilt = 0.0f;                       // Porcentatge de construcció feta
 	//public int mask = 1024;									// 10000001 checks default and obstacles
@@ -36,7 +39,10 @@ public class CivilUnit : Unit
         base.Start();
         objectName = "Civil Unit";
 		actions = new string[] { "Town Center", "Army Building", "Wall Tower", "Wall Entrance", "Wall", "Civil House" };                 // Accions que pot fer la unitat civil
-		building=false;
+		building = false;
+        capacity = 50;
+        aux = findTownCenter();
+        resourceStore = aux.gameObject.GetComponent<Yamato_TownCenterBuilding>();
     }
 
     protected override void Update()
@@ -45,9 +51,24 @@ public class CivilUnit : Unit
         if (!moving)
         {
 
-            if (harvesting || emptying)
+            if (harvesting)
             {
                 // tot el que implica la recoleccio de recursos
+                if(state == 0){ //No hacer nada
+                    //Idle();
+                }
+                if(state == 1){ //Vaciar en el almacen
+                    Vaciar();
+                }
+                if(state == 2){ //Recolectar el recurso
+                    Recolectar();
+                }
+                if(state == 3){ //Ir hacia el almacen
+                    IrVaciar();
+                }
+                if(state == 4){ //Ir hacia el recurso
+                    IrRecolectar();
+                } 
             }
             else if (building && currentProject.UnderConstruction())
             {
@@ -70,7 +91,7 @@ public class CivilUnit : Unit
     public ResourceType? GetHarvestType()
 	{
 		// TODO: Implement this method properly
-		return ResourceType.Wood;
+		return harvestType;
 	}
 	
 	/// <summary>
@@ -80,7 +101,7 @@ public class CivilUnit : Unit
 	public float? GetHarvestAmount()
 	{
 		// TODO: Implement this method properly
-		return 999;
+		return collectionAmount;
 	}
 	
 	public override void PerformAction(string actionToPerform) {
@@ -123,23 +144,72 @@ public class CivilUnit : Unit
     /*** Metodes privats ***/
 
     // Metode que cridem per a començar a recolectar
-    private void StartHarvest(Resource resource, Building store)
+    public void StartHarvest(Resource resource)
     {
         resourceDeposit = resource;
-        resourceStore = store;
+        harvestType = resourceDeposit.GetResourceType();
         harvesting = true;
-        emptying = false;
+        state = 4;
     }
 
     // Metode de recolecció
-    private void Collect()
+    public void Collect(Resource resourceDeposit)
     {
-
+        //GetComponent<Animation>().Play (attack.name); 
+        resourceDeposit.Remove(5*Time.deltaTime);    //resta esto del arbol (ej)
+        collectionAmount += 5*Time.deltaTime; //se lo suma al recolector
     }
 
     // Metode per depositar els recursos al edifici resourceStore
-    private void Deposit()
+    public void Deposit(Resource resourceDeposit)
     {
-
+        //vaciarme
+        if(resourceDeposit.tag == "tree"){
+            resourceStore.wood += collectionAmount;
+        }
+        if(resourceDeposit.tag == "food"){
+            resourceStore.food += collectionAmount;
+        }
+        if(resourceDeposit.tag == "mine"){
+            resourceStore.gold += collectionAmount;
+        }
+        collectionAmount = 0;
     }
+
+    public void Vaciar(){
+        Deposit(resourceDeposit);
+        state = 4; //como ya he vaciado, vuelvo al recurso
+    }
+    public void IrVaciar(){
+        SetNewPath(resourceStore.transform.position);
+        state = 1;
+    }
+    public void Recolectar(){
+        Collect(resourceDeposit);
+        if(collectionAmount >= capacity){ //Ir a Vaciar deposito
+           state = 3;
+        } 
+    }
+    public void IrRecolectar(){
+        SetNewPath(resourceDeposit.transform.position); //mi objetivo ahora es target = recurso (RTSObject)
+        state = 2;
+    }
+
+    public GameObject findTownCenter(){
+        GameObject[] centers;
+        centers = GameObject.FindGameObjectsWithTag("townCenter");
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject go in centers){
+            Vector3 diff = go.transform.position - position;
+            float curDistance =  diff.sqrMagnitude;
+            if(curDistance < distance){
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        return closest;
+    }
+
 }
