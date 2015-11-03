@@ -20,6 +20,9 @@ public class Building : RTSObject {
 	private static int layermask2 = 1 << layer2;
 	private int mask = layermask1 | layermask2;
 
+	public float visi = 60f;
+	private TerrainFoW tf;
+
     /*** Metodes per defecte de Unity ***/
 
     protected override void Awake()
@@ -37,6 +40,7 @@ public class Building : RTSObject {
 
     protected override void Update()
     {
+		explore ();
         base.Update();
         ProcessBuildQueue();
     }
@@ -102,6 +106,15 @@ public class Building : RTSObject {
 			 		
 		}	
     }
+
+	private void explore(){
+		tf = GameObject.FindObjectOfType(typeof(TerrainFoW)) as TerrainFoW;
+		
+		Vector3 vec = transform.position;
+		//Debug.Log(vec);
+		tf.ExploreArea (vec, visi);
+	}
+
 
     // Metode per administrar el progres de construccio de la cua
     protected void ProcessBuildQueue()
