@@ -17,6 +17,7 @@ public class CitizenRDV : MonoBehaviour {
 	
 	}
 
+    /* CODI COMENTAT - NO COMPILA (MERGE 03/11/2015, COMENTAT PER JOAN BRUGUERA)
 	void OnTriggerEnter (Collider other){
 		this.otherRol = other.gameObject.tag;
 		this.citizenAI.resources[this.citizenAI.resources.GetLength()-1] (other.transform); // añadimos el recurso a la BBDD
@@ -33,6 +34,7 @@ public class CitizenRDV : MonoBehaviour {
 		}
 
 	}
+    */
 }
 
 /*

@@ -51,6 +51,19 @@ public class Building : RTSObject
             DrawBuildProgress();
     }
 
+    /*** Metodes publics ***/
+
+    // Metode que obte el porcentatge de construccio actual
+    public float getBuildPercentage()
+    {
+        return currentBuildProgress / maxBuildProgress;
+    }
+
+    // Metode que obte si esta en construccio
+    public bool UnderConstruction()
+    {
+        return needsBuilding;
+    }
 
     // Metode que va construint el edifici
     public void Construct(int amount)

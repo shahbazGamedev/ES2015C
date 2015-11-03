@@ -17,9 +17,9 @@ public class Sumerian_civil : CivilUnit
 		actions = new string[] { "Town Center" };
     }
 
-	/*** Metodes interns accessibles per les subclasses ***/
-	
-	protected override void CreateBuilding(string buildingName)
+    /*** Metodes interns accessibles per les subclasses ***/
+
+    public override void CreateBuilding(string buildingName)
 	{
 		switch (buildingName) {
 		case "Town Center":

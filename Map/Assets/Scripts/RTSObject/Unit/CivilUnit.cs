@@ -31,17 +31,19 @@ public class CivilUnit : Unit
 	private static int layermask1 = 1 << layer1;
 	private static int layermask2 = 1 << layer2;
 	private int finalmask = layermask1 | layermask2;
-
-    public GameObject o;
 	
 	public Transform townCenter;
 
     /*** Metodes per defecte de Unity ***/
 
+    /* CODI COMENTAT - NO FA RES I DONA PROBLEMES AL INICIALITZAR (MERGE 03/11/2015, COMENTAT PER JOAN BRUGUERA)
+
+    public GameObject o;
+
     public CivilUnit(string asset, Vector3 coords) {
        o = Instantiate(Resources.Load(asset), coords, Quaternion.identity) as GameObject;
-
     }
+    */
 
     protected override void Start()
     {
@@ -121,7 +123,7 @@ public class CivilUnit : Unit
     /*** Metodes interns accessibles per les subclasses ***/
 
     // Metode que crea el edifici
-    protected virtual void CreateBuilding(string buildingName)
+    public virtual void CreateBuilding(string buildingName)
     {
         if (creationBuilding != null)
         {

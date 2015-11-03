@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ADS : MilitaryUnit {
+public class ADS : Unit {
 
     public int Speed = 2;
     public Vector3 currentDestination = new Vector3(0,0,0);

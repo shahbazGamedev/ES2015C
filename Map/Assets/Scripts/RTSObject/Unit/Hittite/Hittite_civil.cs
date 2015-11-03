@@ -19,7 +19,7 @@ public class Hittite_civil : CivilUnit
 
 	/*** Metodes interns accessibles per les subclasses ***/
 	
-	protected override void CreateBuilding(string buildingName)
+	public override void CreateBuilding(string buildingName)
 	{
 		switch (buildingName) {
 		case "Town Center":
