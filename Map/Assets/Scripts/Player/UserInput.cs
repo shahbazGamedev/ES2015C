@@ -10,7 +10,7 @@ public class UserInput : MonoBehaviour
     // Inicialitzem
     void Start()
     {
-        player = transform.root.GetComponent<Player>();
+        player = GetComponentInParent<Player>();
     }
 
     // Actualitzem a cada frame
@@ -56,7 +56,7 @@ public class UserInput : MonoBehaviour
         }
         else // Click on non-UI element
         {
-            RTSObject objectRtsElement = null;
+            RTSObject targetRtsElement = null;
 
             // Cast a ray in the direction clicked by the user to detect the currently clicked element,
             // and if it is a RTS element, then save its reference
@@ -67,22 +67,66 @@ public class UserInput : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject objectHit = hit.collider.gameObject;
-                objectRtsElement = objectHit.GetComponent<RTSObject>();
+                targetRtsElement = objectHit.GetComponent<RTSObject>();
             }
 
             if (leftClick)
             {
+				object[] obj = GameObject.FindSceneObjectsOfType(typeof (RTSObject));
+				foreach (object o in obj)
+				{
+					RTSObject g = (RTSObject) o;
+					g.SetSelection(false);
+				}
                 // Call the class to change the currently selected RTS element.
                 // Note that this will be null if the user clicked on nothing or a non-RTS element object.
-                player.ChangeSelectedRtsObject(objectRtsElement);
+                player.ChangeSelectedRtsObject(targetRtsElement);
+				if(targetRtsElement){
+					targetRtsElement.SetSelection(true);
+				} else if (player.SelectedObject != null) {
+					player.SelectedObject.SetSelection(true);
+				}else {
+					GameObject selArea = GameObject.Find("SelectedArea");
+					if (selArea) selArea.GetComponent<MeshRenderer>().enabled = false;
+				}
             }
-            else if (rightClick)
+            else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
             {
-                // If a unit is currently selected, move it to the point clicked by the player
-                Unit selectedUnit = player.SelectedObject as Unit;
-                if (selectedUnit != null)
+				if (player.SelectedObject.CanBuild()) {
+					player.SelectedObject.GetComponent<CivilUnit>().building=false;
+				}
+				//Atacar
+                if (player.SelectedObject.CanAttack() &&
+                    targetRtsElement != null && targetRtsElement.owner != null &&
+                    targetRtsElement.CanBeAttacked() &&
+                    player.Team.IsEnemyOf(targetRtsElement.owner.Team))
                 {
-                    selectedUnit.setNewPath(hit.point);
+                    // If the player clicked over an unit or building and the selected unit
+                    // can attack, start the attacking sequence
+                    player.SelectedObject.AttackObject(targetRtsElement);
+                }
+				//Construir un edificio
+				else if (player.SelectedObject.CanBuild()&& targetRtsElement != null && targetRtsElement.owner==player && targetRtsElement.CanBeBuilt()) {
+					player.SelectedObject.MoveTo(hit.point);
+					player.SelectedObject.GetComponent<CivilUnit>().building=true;
+					player.SelectedObject.GetComponent<CivilUnit>().currentProject=targetRtsElement.GetComponent<Building>();
+					targetRtsElement.GetComponent<Building>().needsBuilding=true;
+				}
+                
+                //Recolecto
+                else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.tag == "tree"){
+                    //player.SelectedObject.MoveTo(hit.point);
+                    player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>());//, Building store)
+                    //player.SelectedObject.GetComponent<CivilUnit>().harvesting=true; //el civilunit es recolector
+                    //player.SelectedObject.GetComponent<CivilUnit>().resourceDeposit = targetRtsElement.GetComponent<Resource>(); //este es tu recurso
+                    //player.SelectedObject.GetComponent<CivilUnit>().harvestType = targetRtsElement.GetComponent<Resource>().GetResourceType();
+                    //player.SelectedObject.GetComponent<CivilUnit>().state = 2;
+                }
+				
+                else if (player.SelectedObject.CanMove())
+                {
+                    // Otherwise, if the unit can move, start the movement sequence
+                    player.SelectedObject.MoveTo(hit.point);
                 }
             }
         }

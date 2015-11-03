@@ -2,26 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Building : RTSObject {
+public class Building : RTSObject
+{
+	protected float maxBuildProgress = 10.0f;	// Maxim progres de construccio
+	protected GameObject creationUnit = null;	// Objecte que indica la unitat a crear actual
 
-    public float maxBuildProgress = 10.0f;      // Maxim progres de construccio
+	protected Vector3 spawnPoint;               // Punt de creacio de les unitats
+	protected Queue<string> buildQueue;         // Cua de construccio del edifici
 
-    protected Vector3 spawnPoint;               // Punt de creacio de les unitats
-    protected Queue<string> buildQueue;         // Cua de construccio del edifici
+	private BoxCollider boxCollider;			// Referencia al component BoxCollider.
+	  
+	public bool needsBuilding = false;         // Indica si necesita se construit
 
-    private float currentBuildProgress = 0.0f;  // Progres actual de la construccio
-    private bool needsBuilding = false;         // Indica si necesita se construit
-	
-	public Transform civil;
-	
-	private static int layer1 = 0;
+	private static int layer1 = 11; 
 	private static int layer2 = 10;
 	private static int layermask1 = 1 << layer1;
 	private static int layermask2 = 1 << layer2;
 	private int mask = layermask1 | layermask2;
 
-	public float visi = 60f;
-	private TerrainFoW tf;
+    public float visi = 60f;
+    private TerrainFoW tf;
 
     /*** Metodes per defecte de Unity ***/
 
@@ -31,16 +31,15 @@ public class Building : RTSObject {
         spawnPoint = new Vector3(transform.position.x + 10, 0.0f, transform.position.z + 10);
         buildQueue = new Queue<string>();
         gameObject.layer = 10;
-    }
-
-    protected override void Start()
-    {
-        base.Start();
+        // Calculem la dimensio del BoxCollider
+        FittedBoxCollider();
+        needsBuilding = true;
+        currentBuildProgress = 0.0f; // Progres actual de la construccio
     }
 
     protected override void Update()
     {
-		explore ();
+        explore();
         base.Update();
         ProcessBuildQueue();
     }
@@ -48,22 +47,10 @@ public class Building : RTSObject {
     protected override void OnGUI()
     {
         base.OnGUI();
-        if (needsBuilding) DrawBuildProgress();
+        if (needsBuilding)
+            DrawBuildProgress();
     }
 
-    /*** Metodes publics ***/
-
-    // Metode que obte el porcentatge de construccio actual
-    public float getBuildPercentage()
-    {
-        return currentBuildProgress / maxBuildProgress;
-    }
-
-    // Metode que obte si esta en construccio
-    public bool UnderConstruction()
-    {
-        return needsBuilding;
-    }
 
     // Metode que va construint el edifici
     public void Construct(int amount)
@@ -76,45 +63,47 @@ public class Building : RTSObject {
         }
     }
 
-    /*** Metodes interns accessibles per les subclasses ***/
-
-    // Metode per crear unitats
-    protected void CreateUnit(string unitName)
+    public override void PerformAction(string actionToPerform)
     {
-		bool spawned = false;
-		int maximumSpawn = 5; //no podemos instanciar más de 5 unidades a la vez. Para instanciar más hay que mover las otras
-		Vector3 point = spawnPoint; 
-		
-		if (unitName.Equals("CivilUnit")) {		
-			while (spawned == false && maximumSpawn>0) {
-				if (Physics.CheckSphere (point, 0.1f, mask)) {
-					point = new Vector3(point.x + 10, 0.0f, point.z + 10); //si ya hay algo provamos en otra posicion
-				} else {
-					spawned = true;
-					float food = owner.GetResourceAmount(RTSObject.ResourceType.Food);
-					if (food >= 20) {
-						Transform civilClone = (Transform) Instantiate(civil, point, Quaternion.identity);
-						civilClone.GetComponent<RTSObject>().owner=owner;
-						owner.resourceAmounts[RTSObject.ResourceType.Food]=food-20;
-					} else {
-						Debug.Log("Not enough food");
-					}
-					
-				}
-				maximumSpawn--;
-			}
-			 		
-		}	
+        base.PerformAction(actionToPerform);
+        CreateUnit(actionToPerform);
     }
 
-	private void explore(){
-		tf = GameObject.FindObjectOfType(typeof(TerrainFoW)) as TerrainFoW;
-		
-		Vector3 vec = transform.position;
-		//Debug.Log(vec);
-		tf.ExploreArea (vec, visi);
-	}
+    protected virtual void CreateUnit(string unitName)
+    {
+        if (creationUnit != null)
+        {
+            bool spawned = false;
+            int maximumSpawn = 5; //tenemos cinco intentos para instanciar una unidad. si no se instancian hay que mover las viejas 
+            Vector3 point = spawnPoint;
 
+            while (spawned == false && maximumSpawn > 0)
+            {
+                if (Physics.CheckSphere(point, 0.4f, mask))
+                {
+                    point = new Vector3(point.x - 5, 0.0f, point.z); //si ya hay algo provamos en otra posicion
+                    Debug.Log("Habia algo en la posicion" + point);
+                }
+                else
+                {
+                    spawned = true;
+                    float food = owner.GetResourceAmount(RTSObject.ResourceType.Food);
+                    if (food >= 20)
+                    {
+                        GameObject unitClone = (GameObject)Instantiate(creationUnit, point, Quaternion.identity);
+                        unitClone.GetComponent<RTSObject>().owner = owner;
+                        owner.resourceAmounts[RTSObject.ResourceType.Food] = food - 20;
+                    }
+                    else
+                    {
+                        Debug.Log("Not enough food");
+                    }
+                }
+                maximumSpawn--;
+            }
+            creationUnit = null;
+        }
+    }
 
     // Metode per administrar el progres de construccio de la cua
     protected void ProcessBuildQueue()
@@ -126,5 +115,39 @@ public class Building : RTSObject {
     // Dibuixa el progres de construccio
     private void DrawBuildProgress()
     {
+    }
+
+    // Calcula el boxCollider del edifici
+    private void FittedBoxCollider()
+    {
+        Transform transform = this.gameObject.transform;
+        Quaternion rotation = transform.rotation;
+        transform.rotation = Quaternion.identity;
+
+        boxCollider = transform.GetComponent<BoxCollider>();
+
+        if (boxCollider == null)
+        {
+            transform.gameObject.AddComponent<BoxCollider>();
+            boxCollider = transform.GetComponent<BoxCollider>();
+        }
+
+        Bounds bounds = new Bounds(transform.position, Vector3.zero);
+
+        ExtendBounds(transform, ref bounds);
+
+        boxCollider.center = bounds.center - transform.position;
+        boxCollider.size = new Vector3(bounds.size.x / transform.localScale.x, bounds.size.y / transform.localScale.y, bounds.size.z / transform.localScale.z);
+
+        transform.rotation = rotation;
+    }
+
+    private void explore()
+    {
+        tf = GameObject.FindObjectOfType(typeof(TerrainFoW)) as TerrainFoW;
+
+        Vector3 vec = transform.position;
+        //Debug.Log(vec);
+        tf.ExploreArea(vec, visi);
     }
 }

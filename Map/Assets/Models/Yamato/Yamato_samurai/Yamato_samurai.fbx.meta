@@ -130,6 +130,7 @@ ModelImporter:
     7400014: Armature|Walk
     7400016: Samurai|Untitled
     7400018: Samurai|Untitled.001
+    7400020: Armature|Walk0
     9500000: //RootNode
     13700000: Samurai
   materials:
@@ -145,7 +146,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -162,7 +163,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -1557,7 +1558,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: .150000006
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

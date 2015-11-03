@@ -1,4 +1,3 @@
-﻿//using Mono.Cecil;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +9,17 @@ public class Player : MonoBehaviour {
     public Color teamColor;
 
     private bool findingPlacement = false;
+
+    /// <summary>
+    /// Gets the team that this player belongs to.
+    /// </summary>
+    public Team Team
+    {
+        get
+        {
+            return GetComponentInParent<Team>();
+        }
+    }
 
     /// <summary>
     /// Which object does the player have selected for executing actions over it?

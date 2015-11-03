@@ -32,7 +32,7 @@ public class HUDAction : HUDElement
             return;
 
         if (DisplayObject != null &&
-            DisplayObject.IsOwnedBy(transform.root.GetComponent<Player>()) &&
+            DisplayObject.IsOwnedBy(Player) &&
             ActionIndex < DisplayObject.GetActions().Length)
         {
             textComponent.text = DisplayObject.GetActions()[ActionIndex];
@@ -49,7 +49,7 @@ public class HUDAction : HUDElement
     public override void HandleClick()
     {
         if (DisplayObject != null &&
-            DisplayObject.IsOwnedBy(transform.root.GetComponent<Player>()) &&
+            DisplayObject.IsOwnedBy(Player) &&
             ActionIndex < DisplayObject.GetActions().Length)
         {
             DisplayObject.PerformAction(DisplayObject.GetActions()[ActionIndex]);
