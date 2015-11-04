@@ -161,6 +161,6 @@ public class Building : RTSObject
 
         Vector3 vec = transform.position;
         //Debug.Log(vec);
-        tf.ExploreArea(vec, visi);
+        if (tf != null) tf.ExploreArea(vec, visi);
     }
 }

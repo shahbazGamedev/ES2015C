@@ -174,8 +174,8 @@ public class Unit : RTSObject
         tf = GameObject.FindObjectOfType(typeof(TerrainFoW)) as TerrainFoW;
         
         Vector3 vec = transform.position;
-        Debug.Log(vec);
-        tf.ExploreArea(vec, visibility);
+        //Debug.Log(vec);
+        if (tf != null) tf.ExploreArea(vec, visibility);
     }
 
 
