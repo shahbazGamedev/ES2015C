@@ -198,7 +198,7 @@ public class TerrainFoW : MonoBehaviour
 	public void ExploreArea (Vector3 position, float exploreSize)
 	{
 		Vector3 pos = ConvertPosition (position);		
-		WhitenTerrain (pos, ExplorationSize);		
+		WhitenTerrain (position, exploreSize);		
 		try {
 			List<GameObject> gos = new List<GameObject> ();
 			if (!string.IsNullOrEmpty (ExploreTag1))
@@ -212,7 +212,7 @@ public class TerrainFoW : MonoBehaviour
 		
 			foreach (GameObject item in gos) {
 				float aux = Vector3.Distance (item.transform.position, pos);						
-				if (aux < (ExplorationSize / 2)) {			
+				if (aux < (exploreSize / 2)) {			
 					item.GetComponent<Renderer>().enabled = true;
 				}
 			}
@@ -225,7 +225,7 @@ public class TerrainFoW : MonoBehaviour
 			TreeInstance currentTree = ti;
 			Vector3 currentTreeWorldPosition = Vector3.Scale (currentTree.position, Terrain.activeTerrain.terrainData.size) + Terrain.activeTerrain.transform.position;
 			float aux = Vector3.Distance (currentTreeWorldPosition, pos);						
-			if (aux < (ExplorationSize / 2)) {
+			if (aux < (exploreSize / 2)) {
 				TreeAux ta = treeAux.FirstOrDefault (n => n.Index == i);
 				if (ta != null) {
 					ti.prototypeIndex = ta.Prototype;

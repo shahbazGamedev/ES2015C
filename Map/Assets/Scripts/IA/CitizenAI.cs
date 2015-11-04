@@ -39,7 +39,9 @@ public class CitizenAI : RTSObject {
 		//this.rtsObject = this.gameObject.GetComponent (RTSObject);
 		                                             
 	}
-	
+
+    /* CODI COMENTAT - NO COMPILA, SINTAXI INCORRECTA (MERGE 03/11/2015, COMENTAT PER JOAN BRUGUERA)
+
 	// Update is called once per frame
 	void Update () {
 		//this.gameObject.transform.rotation.x = 0;
@@ -274,8 +276,9 @@ public class CitizenAI : RTSObject {
 				break;
 		}
 	}
-	
-	public void Idle(){
+    */
+
+    public void Idle(){
 		//transform.rotation.x = 0;
 		//transform.rotation.z = 0;
 		GetComponent<Animation>().Play(idle.name); 

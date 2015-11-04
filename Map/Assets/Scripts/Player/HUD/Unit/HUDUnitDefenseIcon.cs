@@ -22,6 +22,6 @@ public class HUDUnitDefenseIcon : HUDElement
     /// </summary>
 	void Update()
     {
-        imageComponent.enabled = (DisplayObject is Unit);
+        imageComponent.enabled = DisplayObject != null && DisplayObject.CanBeAttacked();
     }
 }

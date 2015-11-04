@@ -22,14 +22,13 @@ public class HUDUnitAttackRange : HUDElement
     /// </summary>
 	void Update()
     {
-        float? attackRange = null;
-        if (DisplayObject is Unit)
+        float attackRange = 0f;
+        if (DisplayObject != null && DisplayObject.CanAttack())
         {
-            Unit displayUnit = (Unit)DisplayObject;
-            attackRange = displayUnit.GetAttackRange();
+            attackRange = DisplayObject.GetAttackRange();
         }
 
-        if (attackRange.HasValue)
+        if (attackRange != 0)
         {
             textComponent.enabled = true;
             textComponent.text = attackRange.ToString();
