@@ -11,6 +11,7 @@ public class TownCenterBuilding : Building {
     {
         base.Start();
         objectName = "Town Center";
+		gameObject.tag = "townCenter";
 		cost = 800;
 		hitPoints = 0;
 		maxHitPoints = 5000;

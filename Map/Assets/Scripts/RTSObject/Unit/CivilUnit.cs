@@ -7,9 +7,8 @@ public class CivilUnit : Unit
     public float capacity, collectionAmount, depositAmount; // Dades sobre la recolecció
     public bool llegado = false;                            //he llegado a mi destino
     public int state;                                       //estado de recoleccion
-    public GameObject aux;
-    public TownCenterBuilding resourceStore;                          // Edifici on es deposita la recolecció
-    //public int baseBuildSpeed;                                  // Velocitat de construcció
+	public TownCenterBuilding resourceStore;				// Edifici on es deposita la recolecció
+    //public int baseBuildSpeed;                            // Velocitat de construcció
 
 	protected GameObject creationBuilding = null;			// Objecte que indica la unitat a crear actual
 
@@ -32,8 +31,6 @@ public class CivilUnit : Unit
 	private static int layermask2 = 1 << layer2;
 	private int finalmask = layermask1 | layermask2;
 	
-	public Transform townCenter;
-
     /*** Metodes per defecte de Unity ***/
 
     /* CODI COMENTAT - NO FA RES I DONA PROBLEMES AL INICIALITZAR (MERGE 03/11/2015, COMENTAT PER JOAN BRUGUERA)
@@ -49,18 +46,21 @@ public class CivilUnit : Unit
     {
         base.Start();
         objectName = "Civil Unit";
+		gameObject.tag = "civil";
 		building = false;
         capacity = 50;
-        aux = findTownCenter();
-        resourceStore = aux.gameObject.GetComponent<Yamato_TownCenterBuilding>();
     }
+
+
+
+
+
 
     protected override void Update()
     {
         base.Update();
         if (!moving)
         {
-
             if (harvesting)
             {
                 // tot el que implica la recoleccio de recursos
@@ -199,6 +199,9 @@ public class CivilUnit : Unit
         state = 4; //como ya he vaciado, vuelvo al recurso
     }
     public void IrVaciar(){
+		if (resourceStore == null){
+			resourceStore = findTownCenter();
+		}
         SetNewPath(resourceStore.transform.position);
         state = 1;
     }
@@ -213,9 +216,9 @@ public class CivilUnit : Unit
         state = 2;
     }
 
-    public GameObject findTownCenter(){
+	private TownCenterBuilding findTownCenter(){
         GameObject[] centers;
-        centers = GameObject.FindGameObjectsWithTag("townCenter");
+		centers = GameObject.FindGameObjectsWithTag("townCenter");
         GameObject closest = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
@@ -227,7 +230,7 @@ public class CivilUnit : Unit
                 distance = curDistance;
             }
         }
-        return closest;
+        return closest.GetComponent<TownCenterBuilding>();
     }
 
 }

@@ -17,7 +17,7 @@ public class MiniMapScript : MonoBehaviour {
     // Use this for initialization
     public void Start() {
         Vector3 coords = new Vector3(114f, 0f, 134f);
-        Transform civil = Instantiate(Resources.Load("yamato_civil"), coords, Quaternion.identity) as Transform;
+		Transform civil = Instantiate(Resources.Load("Prefabs/Yamato_civil"), coords, Quaternion.identity) as Transform;
         //redColor = new GameObject();
         createMiniMapRed((civil));
         //addAllyGameObject((GameObject)o);

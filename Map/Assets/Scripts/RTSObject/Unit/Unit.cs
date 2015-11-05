@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Unit : RTSObject
 {
-	public Avatar unitAvatar;				// Referencia al avatar del component Animator.
-
 	private CharacterController characterController;	// Referencia al component CharacterController.
 	private Seeker seeker;					// Referencia al component Seeker.
 	private Vector3 targetPosition;         // Indica el vector3 del objectiu
@@ -27,15 +25,12 @@ public class Unit : RTSObject
 	{
 		base.Awake ();
 		seeker = gameObject.AddComponent<Seeker> ();
-		anim = gameObject.AddComponent<Animator>();
+		anim = gameObject.GetComponent<Animator>();
 		rigbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 		// Calculem la dimensio del CharacterController
 		FittedCharacterCollider();
 		gameObject.layer = 11;
 		
-		// Asignem les propietats el avatar del Animator
-		anim.avatar = unitAvatar;
-
 		// Asignem els components extres per al funcionament de la IA per a unitats
 		//RDV = gameObject.AddComponent<SphereCollider> ();
 		//RDV.radius = characterController.radius * 10;

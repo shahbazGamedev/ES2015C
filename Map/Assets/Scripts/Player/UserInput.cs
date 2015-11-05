@@ -81,9 +81,9 @@ public class UserInput : MonoBehaviour
                 // Call the class to change the currently selected RTS element.
                 // Note that this will be null if the user clicked on nothing or a non-RTS element object.
                 player.ChangeSelectedRtsObject(targetRtsElement);
-				if(targetRtsElement){
+				if(targetRtsElement && targetRtsElement.IsOwnedBy(player)){
 					targetRtsElement.SetSelection(true);
-				} else if (player.SelectedObject != null) {
+				} else if (player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player)) {
 					player.SelectedObject.SetSelection(true);
 				}else {
 					GameObject selArea = GameObject.Find("SelectedArea");
@@ -114,7 +114,7 @@ public class UserInput : MonoBehaviour
 				}
                 
                 //Recolecto
-                else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.tag == "tree"){
+                else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.tag == "wood"){
                     //player.SelectedObject.MoveTo(hit.point);
                     player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>());//, Building store)
                     //player.SelectedObject.GetComponent<CivilUnit>().harvesting=true; //el civilunit es recolector

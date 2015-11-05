@@ -1,0 +1,209 @@
+fileFormatVersion: 2
+guid: 21e5800e4ebec614d9583bf9dac131c3
+timeCreated: 1446671441
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: abdomen
+    100002: antebrazo_L
+    100004: antebrazo_R
+    100006: Armature
+    100008: brazo_L
+    100010: brazo_R
+    100012: cabeza
+    100014: cabeza_end
+    100016: cuello
+    100018: dedos_mano2_L
+    100020: dedos_mano2_L_end
+    100022: dedos_mano2_R
+    100024: dedos_mano2_R_end
+    100026: dedos_mano_L
+    100028: dedos_mano_R
+    100030: dedos_pie_L
+    100032: dedos_pie_L_end
+    100034: dedos_pie_L_roll
+    100036: dedos_pie_L_roll_end
+    100038: dedos_pie_R
+    100040: dedos_pie_R_end
+    100042: dedos_pie_R_roll
+    100044: dedos_pie_R_roll_end
+    100046: femur_L
+    100048: femur_R
+    100050: Hacha
+    100052: Hacha.001
+    100054: Hacha.001_end
+    100056: mano_L
+    100058: mano_R
+    100060: Martillo
+    100062: Martillo.001
+    100064: Martillo.001_end
+    100066: pecho
+    100068: Persian
+    100070: //RootNode
+    100072: Pick
+    100074: Pick_end
+    100076: pie_L
+    100078: pie_L.001
+    100080: pie_L_control
+    100082: pie_L_IK
+    100084: pie_L_IK.002
+    100086: pie_L_IK.002_end
+    100088: pie_L_IK_end
+    100090: pie_R
+    100092: pie_R.001
+    100094: pie_R_control
+    100096: pierna_L_pole_target
+    100098: pierna_L_pole_target_end
+    100100: pierna_R_pole_target
+    100102: pierna_R_pole_target_end
+    100104: pulga2_L
+    100106: pulga2_L_end
+    100108: pulga2_R
+    100110: pulga2_R_end
+    100112: pulgar1_L
+    100114: pulgar1_R
+    100116: Rack
+    100118: Rack_end
+    100120: root
+    100122: tibia_L
+    100124: tibia_L_end
+    100126: tibia_R
+    100128: tibia_R_end
+    400000: abdomen
+    400002: antebrazo_L
+    400004: antebrazo_R
+    400006: Armature
+    400008: brazo_L
+    400010: brazo_R
+    400012: cabeza
+    400014: cabeza_end
+    400016: cuello
+    400018: dedos_mano2_L
+    400020: dedos_mano2_L_end
+    400022: dedos_mano2_R
+    400024: dedos_mano2_R_end
+    400026: dedos_mano_L
+    400028: dedos_mano_R
+    400030: dedos_pie_L
+    400032: dedos_pie_L_end
+    400034: dedos_pie_L_roll
+    400036: dedos_pie_L_roll_end
+    400038: dedos_pie_R
+    400040: dedos_pie_R_end
+    400042: dedos_pie_R_roll
+    400044: dedos_pie_R_roll_end
+    400046: femur_L
+    400048: femur_R
+    400050: Hacha
+    400052: Hacha.001
+    400054: Hacha.001_end
+    400056: mano_L
+    400058: mano_R
+    400060: Martillo
+    400062: Martillo.001
+    400064: Martillo.001_end
+    400066: pecho
+    400068: Persian
+    400070: //RootNode
+    400072: Pick
+    400074: Pick_end
+    400076: pie_L
+    400078: pie_L.001
+    400080: pie_L_control
+    400082: pie_L_IK
+    400084: pie_L_IK.002
+    400086: pie_L_IK.002_end
+    400088: pie_L_IK_end
+    400090: pie_R
+    400092: pie_R.001
+    400094: pie_R_control
+    400096: pierna_L_pole_target
+    400098: pierna_L_pole_target_end
+    400100: pierna_R_pole_target
+    400102: pierna_R_pole_target_end
+    400104: pulga2_L
+    400106: pulga2_L_end
+    400108: pulga2_R
+    400110: pulga2_R_end
+    400112: pulgar1_L
+    400114: pulgar1_R
+    400116: Rack
+    400118: Rack_end
+    400120: root
+    400122: tibia_L
+    400124: tibia_L_end
+    400126: tibia_R
+    400128: tibia_R_end
+    4300000: Persian
+    7400000: Armature|Persian_Warrior_Dead
+    7400002: Armature|Persian_Warrior_Fight
+    7400004: Armature|Persian_Warrior_Idle
+    7400006: Armature|Persian_Warrior_Run
+    7400008: Armature|Persian_Warrior_Walk
+    9500000: //RootNode
+    13700000: Persian
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
