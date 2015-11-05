@@ -2,9 +2,6 @@
 
 public class TownCenterBuilding : Building {
 
-    public float wood;
-    public float food;
-    public float gold;
     /*** Metodes per defecte de Unity ***/
 
     protected override void Start()
@@ -20,9 +17,6 @@ public class TownCenterBuilding : Building {
         baseAttackRange = 10;
         baseDefense = 10;
         actions = new string[] { "Civil Unit" };
-        wood = 0;
-        food = 0;
-        gold = 0;
     }
 
     protected override void Update()

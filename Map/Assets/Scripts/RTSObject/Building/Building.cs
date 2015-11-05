@@ -149,7 +149,7 @@ public class Building : RTSObject
 
         ExtendBounds(transform, ref bounds);
 
-        boxCollider.center = bounds.center - transform.position;
+		boxCollider.center = new Vector3((bounds.center.x - transform.position.x) / transform.localScale.x, (bounds.center.y - transform.position.y) / transform.localScale.y, (bounds.center.z - transform.position.z) / transform.localScale.z);
         boxCollider.size = new Vector3(bounds.size.x / transform.localScale.x, bounds.size.y / transform.localScale.y, bounds.size.z / transform.localScale.z);
 
         transform.rotation = rotation;

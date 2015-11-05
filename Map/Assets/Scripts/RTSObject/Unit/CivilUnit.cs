@@ -7,19 +7,19 @@ public class CivilUnit : Unit
     public float capacity, collectionAmount, depositAmount; // Dades sobre la recolecció
     public bool llegado = false;                            //he llegado a mi destino
     public int state;                                       //estado de recoleccion
-	public TownCenterBuilding resourceStore;				// Edifici on es deposita la recolecció
     //public int baseBuildSpeed;                            // Velocitat de construcció
 
 	protected GameObject creationBuilding = null;			// Objecte que indica la unitat a crear actual
 
     public bool harvesting = false;      // Indicadors d'estat de la unitat
-	public bool building;    
+	public bool building;
+
     //private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
-    public ResourceType harvestType;                       // Tipus de recolecció
-    public Resource resourceDeposit;                       // Recurs de la recolecció
-    
+    private ResourceType harvestType;                       // Tipus de recolecció
+    private Resource resourceDeposit;                       // Recurs de la recolecció
+	private TownCenterBuilding resourceStore;				// Edifici on es deposita la recolecció
     private float amountBuilt = 0.0f;                       // Porcentatge de construcció feta
-	//public int mask = 1024;									// 10000001 checks default and obstacles
+	//public int mask = 1024;								// 10000001 checks default and obstacles
 	private Vector3 constructionPoint;
 	
 	private GameObject buildingClone;
@@ -50,12 +50,7 @@ public class CivilUnit : Unit
 		building = false;
         capacity = 50;
     }
-
-
-
-
-
-
+	
     protected override void Update()
     {
         base.Update();
@@ -181,16 +176,8 @@ public class CivilUnit : Unit
     // Metode per depositar els recursos al edifici resourceStore
     public void Deposit(Resource resourceDeposit)
     {
-        //vaciarme
-        if(resourceDeposit.tag == "tree"){
-            resourceStore.wood += collectionAmount;
-        }
-        if(resourceDeposit.tag == "food"){
-            resourceStore.food += collectionAmount;
-        }
-        if(resourceDeposit.tag == "mine"){
-            resourceStore.gold += collectionAmount;
-        }
+		//vaciarme
+		owner.resourceAmounts[harvestType] += collectionAmount;
         collectionAmount = 0;
     }
 

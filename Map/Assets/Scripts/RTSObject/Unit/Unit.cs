@@ -220,7 +220,7 @@ public class Unit : RTSObject
 		
 		ExtendBounds (transform, ref bounds);
 		
-		characterController.center = new Vector3(bounds.center.x - transform.position.x, bounds.center.y - transform.position.y + 0.25f, bounds.center.z - transform.position.z);
+		characterController.center = new Vector3((bounds.center.x - transform.position.x) / transform.localScale.x, (bounds.center.y - transform.position.y + 0.1f) / transform.localScale.y, (bounds.center.z - transform.position.z) / transform.localScale.z);
 		characterController.radius = bounds.size.x / 2;
 		characterController.height = bounds.size.y / transform.localScale.y;
 		
