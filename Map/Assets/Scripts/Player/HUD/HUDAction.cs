@@ -52,7 +52,11 @@ public class HUDAction : HUDElement
             DisplayObject.IsOwnedBy(Player) &&
             ActionIndex < DisplayObject.GetActions().Length)
         {
-            DisplayObject.PerformAction(DisplayObject.GetActions()[ActionIndex]);
+			if (DisplayObject.tag == "civil" && DisplayObject.GetComponent<CivilUnit>() && DisplayObject.GetComponent<CivilUnit>().building == false)
+			{
+				DisplayObject.GetComponent<CivilUnit>().building = true;
+			}
+        	DisplayObject.PerformAction(DisplayObject.GetActions()[ActionIndex]);
         }
     }
 }

@@ -4,13 +4,12 @@ public class ArmyBuilding : Building {
 
     /*** Metodes per defecte de Unity ***/
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+		base.Awake();
         objectName = "Army Building";
 		cost = 500;
-		hitPoints = 0;
-		maxHitPoints = 3000;
+		hitPoints = maxHitPoints = 3000;
         baseDefense = 5;
     }
 
