@@ -8,12 +8,12 @@ public class AI : MonoBehaviour
 
     // Use this for initialization
 
-    Player artificialIntelligence;
-    List<GameObject> civils;
-    int townCenters;
-    List<CivilUnit> soldiers;
-    Vector3 position;
-    GameObject civil;
+    private Player artificialIntelligence;
+    private List<GameObject> civils;
+    public int townCenters;
+    private List<CivilUnit> soldiers;
+    private Vector3 position;
+    private GameObject civil;
 
     private bool building=false;
     private int i = 0;
@@ -24,24 +24,29 @@ public class AI : MonoBehaviour
        civils = new List<GameObject>();
        Vector3 coords = new Vector3(453.51f, 0f, 435.28f);
        CreateNewCivil(coords);
+       buildTownCenter(true);
+       
     }
 	
 	// Update is called once per frame
 	void Update () {
-        buildTownCenter();
+        buildTownCenter(false);
     }
 
 
-    private void buildTownCenter() {
+    private void buildTownCenter(Boolean resourceFree) {
         //Si no tinc cap centro urbano, tenir-ne una ha de ser la meva prioritat 
         foreach (GameObject civilian in civils)
         {
             if (building == false) // Loop with for.
             {
-                Vector3 point = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z + 10);
-                GameObject centerClone = (GameObject)Instantiate(Resources.Load("Prefabs/Hittite_TownCenter"), point, Quaternion.identity);
-                centerClone.GetComponent<RTSObject>().owner = artificialIntelligence;                      
-                artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] - 100; //resta fusta 
+                position = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z + 10);
+                GameObject centerClone = (GameObject)Instantiate(Resources.Load("Prefabs/Hittite_TownCenter"), position, Quaternion.identity);
+                centerClone.GetComponent<RTSObject>().owner = artificialIntelligence;
+                if (resourceFree == false)
+                {
+                    artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] - 100; //resta fusta 
+                }                
                 townCenters++;
                 building = true;
             }
@@ -64,6 +69,10 @@ public class AI : MonoBehaviour
         }*/
     }
 
+
+
+
+    /*Encara s'ha de comprovar*/
     private void Build(String building) {
 
         GameObject resourceGameObject;
@@ -115,8 +124,10 @@ public class AI : MonoBehaviour
 
                         if (totalDist < 50)
                         {
-                        civilian.GetComponent<CivilUnit>().CreateBuilding(building); //Encara no esta implementat aquest mètode
-                        }
+                        position = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z + 10);
+                        GameObject centerClone = (GameObject)Instantiate(Resources.Load(""), position, Quaternion.identity);
+                        centerClone.GetComponent<RTSObject>().owner = artificialIntelligence;
+                    }
 
                     }
                 
