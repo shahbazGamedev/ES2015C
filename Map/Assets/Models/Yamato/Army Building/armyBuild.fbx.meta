@@ -63,6 +63,8 @@ ModelImporter:
     100110: Plane.003_MeshPart4
     100112: Sphere
     100114: Sun
+    100116: Area
+    100118: Cube.002
     400000: //RootNode
     400002: Camera
     400004: Camera.001
@@ -121,6 +123,8 @@ ModelImporter:
     400110: Plane.003_MeshPart4
     400112: Sphere
     400114: Sun
+    400116: Area
+    400118: Cube.002
     2300000: Cone
     2300002: Cube
     2300004: Cube.001
@@ -171,6 +175,7 @@ ModelImporter:
     2300094: Plane.003_MeshPart3
     2300096: Plane.003_MeshPart4
     2300098: Sphere
+    2300100: Cube.002
     3300000: Cone
     3300002: Cube
     3300004: Cube.001
@@ -221,6 +226,7 @@ ModelImporter:
     3300094: Plane.003_MeshPart3
     3300096: Plane.003_MeshPart4
     3300098: Sphere
+    3300100: Cube.002
     4300000: Cylinder.010
     4300002: Cylinder.009
     4300004: Cylinder.008
@@ -251,6 +257,7 @@ ModelImporter:
     4300054: Cube.015
     4300056: Cube.014
     4300058: Plane
+    4300060: Cube.002
   materials:
     importMaterials: 1
     materialName: 0

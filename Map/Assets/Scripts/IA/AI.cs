@@ -100,7 +100,8 @@ public class AI : Player {
 
                         if (totalDist < 50)
                         {
-                        civilian.GetComponent<CivilUnit>().CreateBuilding(building); //Encara no esta implementat aquest mètode
+						civilian.GetComponent<CivilUnit>().PerformAction(building);
+                        civilian.GetComponent<CivilUnit>().CreateBuilding(); //Encara no esta implementat aquest mètode
                         }
 
                     }

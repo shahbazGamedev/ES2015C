@@ -33,7 +33,6 @@ public class Building : RTSObject
         gameObject.layer = 10;
         // Calculem la dimensio del BoxCollider
         FittedBoxCollider();
-        needsBuilding = true;
         currentBuildProgress = 0.0f; // Progres actual de la construccio
     }
 
@@ -68,7 +67,7 @@ public class Building : RTSObject
     // Metode que va construint el edifici
     public void Construct(int amount)
     {
-        hitPoints += amount;
+		hitPoints += amount;
         if (hitPoints >= maxHitPoints)
         {
             hitPoints = maxHitPoints;

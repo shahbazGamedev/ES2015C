@@ -91,10 +91,6 @@ public class RTSObject : MonoBehaviour
 	public virtual void SetSelection(bool selected)
 	{
 		currentlySelected = selected;
-		if (selected) {
-			GameObject selArea = GameObject.Find("SelectedArea");
-			if (selArea) selArea.GetComponent<MeshRenderer>().enabled = true;
-		}
 	}
 
     // Metode per obtenir les accions del objecte
