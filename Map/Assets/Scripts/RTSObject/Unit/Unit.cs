@@ -89,6 +89,15 @@ public class Unit : RTSObject
 		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
 	}
 
+    public void GoTo(Vector3 target)
+    {
+        // We're starting movement, so start the walking animation
+        moving = true;
+
+        targetPosition = target;
+        seeker.StartPath(transform.position, targetPosition, OnPathComplete);
+    }
+
     /// <summary>
     /// Tell the unit to cancel the movement path to the given position.
     /// </summary>

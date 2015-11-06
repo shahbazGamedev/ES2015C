@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public string username;
     public bool human;
-    public float initialFood, initialGold, initialWood;
+    private float initialFood, initialGold, initialWood;
     public Color teamColor;
 
     private bool findingPlacement = false;
@@ -33,9 +33,9 @@ public class Player : MonoBehaviour {
 
     void Start () {
         resourceAmounts = new Dictionary<RTSObject.ResourceType, float>();
-        resourceAmounts[RTSObject.ResourceType.Food] = initialFood;
-        resourceAmounts[RTSObject.ResourceType.Gold] = initialGold;
-        resourceAmounts[RTSObject.ResourceType.Wood] = initialWood;
+        resourceAmounts[RTSObject.ResourceType.Food] = 999;
+        resourceAmounts[RTSObject.ResourceType.Gold] = 999;
+        resourceAmounts[RTSObject.ResourceType.Wood] = 999;
     }
 	
 	void Update () {
