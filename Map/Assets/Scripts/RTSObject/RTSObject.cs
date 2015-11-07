@@ -57,8 +57,20 @@ public class RTSObject : MonoBehaviour
 	private int ObjectId { get; set; }               // Identificador unic del objecte
     private float currentWeaponChargeTime;
 
-    //sprite publica
+    //sprite publica image de objeto activo
     public Sprite objectIconSprite;
+
+    //sprite publica image de unidad de ataque
+    public Sprite objectIconAttack;
+
+    //sprite publica image de unidad de defensa
+    public Sprite objectIconDefense;
+
+    //sprite publica image de unidad de rango de ataque
+    public Sprite objectIconAttackRange;
+
+    //sprite publica image de unidad de resoruce
+    public Sprite objectIconResource;
 
 
     /*** Metodes per defecte de Unity ***/
