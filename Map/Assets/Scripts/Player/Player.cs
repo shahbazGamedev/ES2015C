@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
     public string username;
     public bool human;
     public float initialFood, initialGold, initialWood;
-    public Color teamColor;
+    public PlayerCivilization civilization;
 
     private bool findingPlacement = false;
 
@@ -31,11 +31,33 @@ public class Player : MonoBehaviour {
     /// </summary>
     public Dictionary<RTSObject.ResourceType, float> resourceAmounts;
 
-    void Start () {
+    void Start ()
+    {
+        // Set the initial resource amounts
         resourceAmounts = new Dictionary<RTSObject.ResourceType, float>();
         resourceAmounts[RTSObject.ResourceType.Food] = initialFood;
         resourceAmounts[RTSObject.ResourceType.Gold] = initialGold;
         resourceAmounts[RTSObject.ResourceType.Wood] = initialWood;
+
+        // Initial game setup
+        var menuGameParametersObject = GameObject.Find("MenuGameParameters");
+        var menuGameParameters = (menuGameParametersObject != null) ?
+            menuGameParametersObject.GetComponent<MenuGameParameters>() : null;
+
+        if (menuGameParameters != null)
+        {
+            civilization = human
+                ? menuGameParameters.SelectedHumanCivilization
+                : menuGameParameters.SelectedEnemyCivilization;
+
+            Debug.LogFormat("The user has choosen the {0} civilization in the menu for the {1} player.",
+                civilization, human ? "human" : "enemy");
+        }
+        else
+        {
+            Debug.Log("Can't find the menu game parameters object (either it's not correctly " +
+                "configured, or you launched the game directly from the campaign scene). Setting defaults.");
+        }
     }
 	
 	void Update () {
