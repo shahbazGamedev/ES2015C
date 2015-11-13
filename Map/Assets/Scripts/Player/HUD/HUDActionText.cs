@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Behaviour to control the actions that a player can do over a RTSObject.
+/// Behaviour to control the actions that a player can do over a RTSObject - text node.
 /// </summary>
-public class HUDAction : HUDElement
+public class HUDActionText : HUDElement
 {
     /// <summary>
     /// The index of the action in the object to display.
