@@ -71,7 +71,6 @@ public class RTSObject : MonoBehaviour
 
     //sprite publica image de unidad de resoruce
     public Sprite objectIconResource;
-    
 
 
     /*** Metodes per defecte de Unity ***/
