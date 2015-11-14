@@ -5,9 +5,9 @@ using System.Collections.Generic;
 [RequireComponent(typeof(CharacterController))]
 public class MovimientoAleatorioCivil : RTSObject
 {
-    public float speed = 30;
-    public float directionChangeInterval = 10;
-    public float maxHeadingChange = 30;
+    public float speed = 1;
+    public float directionChangeInterval = 6;
+    public float maxHeadingChange = 500;
 
     CharacterController controller;
     float heading;
