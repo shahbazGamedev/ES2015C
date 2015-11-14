@@ -15,9 +15,10 @@ public class PlaceResources : MonoBehaviour
     void Start()
     {
         //Crides a la funció
-        PlaceRandomResources(50, "arbolYamato",500,500);
+        PlaceRandomResources(70, "arbolYamato",500,500);
         PlaceGroup(10, 30, "arbolYamato",500,500);
         PlaceResourcesFromXToZ("arbolYamato",500,500,130,130,150,150);
+        PlaceResourcesFromXToZ("arbolYamato", 500, 500, 400, 420, 420, 430);
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class PlaceResources : MonoBehaviour
         {
             double randomDepth = Random.Range(0, depth);
             double randomWidth = Random.Range(0, width);
-            coords = new Vector3((float)randomWidth, -1.6f, (float)randomDepth);
+            coords = new Vector3((float)randomWidth, 0.0f, (float)randomDepth);
             if (!Physics.CheckSphere(coords, 1))     //Comprova si hi ha algun altre objecte a on es crea l'arbre
             {
 				tree = (GameObject)Instantiate(Resources.Load("Prefabs/" + asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
