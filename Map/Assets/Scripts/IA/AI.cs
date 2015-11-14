@@ -15,7 +15,7 @@ public class AI : MonoBehaviour
     private Vector3 position,closestDistance;
     private float totalDist;
     private GameObject civil, center;
-    private GameObject tree,tree2;
+    private GameObject tree;
     private float time;
     private bool building=false;
     private int i = 0;
@@ -27,11 +27,10 @@ public class AI : MonoBehaviour
         civils = new List<GameObject>();
         Vector3 coords = new Vector3(453.51f, 0f, 435.28f);
         CreateNewCivil(coords);
-        //BuildWareHouse();
         BuildTownCenter(true);
 
         foreach (GameObject civilian in civils)
-        {      
+        {         
             BuildWareHouse(civilian);
         }    
     }
@@ -44,11 +43,11 @@ public class AI : MonoBehaviour
 
     private void BuildWareHouse(GameObject civilian) {
 
-        tree2 = civilian.GetComponent<CivilUnit>().FindClosest("tree");
+        tree = civilian.GetComponent<CivilUnit>().FindClosest("tree");
         center = civilian.GetComponent<CivilUnit>().FindClosest("townCenter");
 
-        Vector3 positionTree = new Vector3(tree2.transform.position.x, 0.0f, tree2.transform.position.z);
-        closestDistance = new Vector3(civil.GetComponent<CivilUnit>().transform.position.x - tree2.transform.position.x, 0, civil.GetComponent<CivilUnit>().transform.position.z - tree2.transform.position.z);
+        Vector3 positionTree = new Vector3(tree.transform.position.x, 0.0f, tree.transform.position.z);
+        closestDistance = new Vector3(civil.GetComponent<CivilUnit>().transform.position.x - tree.transform.position.x, 0, civil.GetComponent<CivilUnit>().transform.position.z - tree.transform.position.z);
         totalDist = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);
 
         Vector3 positionCenter = new Vector3(center.transform.position.x, 0.0f, center.transform.position.z);
@@ -56,7 +55,7 @@ public class AI : MonoBehaviour
         float totalCenter = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);
 
         if (totalDist < 50f && totalCenter > 100f){  
-            position = new Vector3(civilian.transform.position.x+30, 0.0f, civilian.transform.position.z+30);
+            position = new Vector3(civilian.transform.position.x+10, 0.0f, civilian.transform.position.z+10);
             GameObject centerClone = (GameObject)Instantiate(Resources.Load("Prefabs/Hittite_CivilHouse"), position, Quaternion.identity);
             centerClone.GetComponent<RTSObject>().owner = artificialIntelligence;
         }
