@@ -72,6 +72,14 @@ public class RTSObject : MonoBehaviour
     //sprite publica image de unidad de resoruce
     public Sprite objectIconResource;
     
+    //ACTION OF YAMATO CIVIL
+    public Sprite imageTownCenter;
+    public Sprite imageArmyBuilding;
+    public Sprite imageWallTower;
+    public Sprite imageWallEntrance;
+    public Sprite imageWall;
+    public Sprite imageCivilHouse;
+    public Sprite imageAcademy;
 
 
     /*** Metodes per defecte de Unity ***/
