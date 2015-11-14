@@ -12,29 +12,58 @@ public class AI : MonoBehaviour
     private List<GameObject> civils;
     public int townCenters;
     private List<CivilUnit> soldiers;
-    private Vector3 position;
-    private GameObject civil;
-
+    private Vector3 position,closestDistance;
+    private float totalDist;
+    private GameObject civil, center;
+    private GameObject tree,tree2;
+    private float time;
     private bool building=false;
     private int i = 0;
 
-    void Start () {
-       artificialIntelligence = gameObject.AddComponent<Player>();
-       townCenters = 0;
-       civils = new List<GameObject>();
-       Vector3 coords = new Vector3(453.51f, 0f, 435.28f);
-       CreateNewCivil(coords);
-       buildTownCenter(true);
-       
+    void Start()
+    {
+        artificialIntelligence = gameObject.AddComponent<Player>();
+        townCenters = 0;
+        civils = new List<GameObject>();
+        Vector3 coords = new Vector3(453.51f, 0f, 435.28f);
+        CreateNewCivil(coords);
+        //BuildWareHouse();
+        BuildTownCenter(true);
+
+        foreach (GameObject civilian in civils)
+        {      
+            BuildWareHouse(civilian);
+        }    
     }
 	
 	// Update is called once per frame
 	void Update () {
-        buildTownCenter(false);
     }
 
 
-    private void buildTownCenter(Boolean resourceFree) {
+
+    private void BuildWareHouse(GameObject civilian) {
+
+        tree2 = civilian.GetComponent<CivilUnit>().FindClosest("tree");
+        center = civilian.GetComponent<CivilUnit>().FindClosest("townCenter");
+
+        Vector3 positionTree = new Vector3(tree2.transform.position.x, 0.0f, tree2.transform.position.z);
+        closestDistance = new Vector3(civil.GetComponent<CivilUnit>().transform.position.x - tree2.transform.position.x, 0, civil.GetComponent<CivilUnit>().transform.position.z - tree2.transform.position.z);
+        totalDist = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);
+
+        Vector3 positionCenter = new Vector3(center.transform.position.x, 0.0f, center.transform.position.z);
+        Vector3 closestCenter = new Vector3(civil.GetComponent<CivilUnit>().transform.position.x - center.transform.position.x, 0, civil.GetComponent<CivilUnit>().transform.position.z - center.transform.position.z);
+        float totalCenter = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);
+
+        if (totalDist < 50f && totalCenter > 100f){  
+            position = new Vector3(civilian.transform.position.x+30, 0.0f, civilian.transform.position.z+30);
+            GameObject centerClone = (GameObject)Instantiate(Resources.Load("Prefabs/Hittite_CivilHouse"), position, Quaternion.identity);
+            centerClone.GetComponent<RTSObject>().owner = artificialIntelligence;
+        }
+    }
+
+
+    private void BuildTownCenter(Boolean resourceFree) {
         //Si no tinc cap centro urbano, tenir-ne una ha de ser la meva prioritat 
         foreach (GameObject civilian in civils)
         {
@@ -46,7 +75,7 @@ public class AI : MonoBehaviour
                 if (resourceFree == false)
                 {
                     artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] - 100; //resta fusta 
-                }                
+                }   
                 townCenters++;
                 building = true;
             }
@@ -58,81 +87,7 @@ public class AI : MonoBehaviour
         civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
         civils.Add(civil);
         coords = new Vector3(455f, 0f, 436f);
-        /*Transform tree = Instantiate(Resources.Load("Prefabs/arbolYamato"), coords, Quaternion.identity) as Transform;
-        if (tree == null)
-        {
-            Debug.Log("No hi ha cap arbre proper");
-        }
-        else
-        {
-            civil.GetComponent<CivilUnit>().GoTo(tree.transform.position);
-        }*/
     }
 
 
-
-
-    /*Encara s'ha de comprovar*/
-    private void Build(String building) {
-
-        GameObject resourceGameObject;
-        GameObject buildingGameObject;
-        GameObject townCenter;
-        Vector3 buildingPosition;
-        Vector3 unitPosition;
-        Vector3 closestDistance;
-        String resource;
-        float totalDist;
-
-        switch (building) {
-            case "farm":
-                resource = "food";
-                break;
-            case "woodCutter":
-                resource = "wood";
-                break;
-            case "mine":
-                resource = "metal";
-                break;
-            default:
-                resource = null;
-                break;
-
-        }
-
-        foreach (GameObject civilian in civils)
-        {
-            unitPosition = civilian.transform.position; //Agafo la posicio del civil
-            townCenter = civilian.GetComponent<CivilUnit>().FindClosest("townCenter"); //Retorna el TownCenter més proper
-            buildingPosition = townCenter.transform.position;//Agafo la posicio
-            closestDistance = new Vector3(unitPosition.x - buildingPosition.x, 0, unitPosition.z - buildingPosition.z);
-            totalDist = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);//i calculo  la distancia euclidania
-   
-                if (totalDist > 50)
-                { //Si les distancia és més petita de 50 no val la pena anar a construir una farm, ja es pot anar al TownCenter
-                    buildingGameObject = civilian.GetComponent<CivilUnit>().FindClosest(building);
-                    buildingPosition = buildingGameObject.transform.position;
-                    closestDistance = new Vector3(unitPosition.x - buildingPosition.x, 0, unitPosition.z - buildingPosition.z);
-                    totalDist = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);//i calculo  la distancia euclidania
-
-                    if (totalDist > 50)
-                    {
-                        resourceGameObject = civilian.GetComponent<CivilUnit>().FindClosest(resource);
-                        buildingPosition = resourceGameObject.transform.position;
-                        closestDistance = new Vector3(unitPosition.x - buildingPosition.x, 0, unitPosition.z - buildingPosition.z);
-                        totalDist = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);//i calculo  la distancia euclidania
-
-                        if (totalDist < 50)
-                        {
-                        position = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z + 10);
-                        GameObject centerClone = (GameObject)Instantiate(Resources.Load(""), position, Quaternion.identity);
-                        centerClone.GetComponent<RTSObject>().owner = artificialIntelligence;
-                    }
-
-                    }
-                
-
-            }
-        }
-    }
 }
