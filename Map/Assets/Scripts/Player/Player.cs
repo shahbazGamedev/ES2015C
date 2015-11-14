@@ -38,7 +38,7 @@ public class Player : MonoBehaviour {
         resourceAmounts = new Dictionary<RTSObject.ResourceType, float>();
         resourceAmounts[RTSObject.ResourceType.Food] = initialFood;
         resourceAmounts[RTSObject.ResourceType.Gold] = initialGold;
-        resourceAmounts[RTSObject.ResourceType.Wood] = initialWood+99999;
+        resourceAmounts[RTSObject.ResourceType.Wood] = initialWood;
 
         // Load player civilization from menu parameters
         var menuGameParametersObject = GameObject.Find("MenuGameParameters");
