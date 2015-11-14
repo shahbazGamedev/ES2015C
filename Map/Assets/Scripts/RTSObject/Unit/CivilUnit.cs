@@ -11,6 +11,7 @@ public class CivilUnit : Unit
 	public Vector3 constructionPoint = Vector3.zero;		// Posicio on crear el edifici
 	public Building currentProject = null;  				// Building actual de construccio
 	protected GameObject creationBuilding = null;			// Objecte que anem a crear
+	protected GameObject creationBuildingConstruction=null; //Edifici que anem a crear, en construccio
 
     public bool harvesting = false;      					// Indicadors d'estat de la unitat
 	public bool building = false;
@@ -75,9 +76,17 @@ public class CivilUnit : Unit
             }
 			else if (building)
 			{
-				if (currentProject && currentProject.UnderConstruction())
+				if (currentProject && currentProject.UnderConstruction()) //Si tenemos un proyecto y lo estamos construyendo 
 				{
 					currentProject.Construct(baseBuildSpeed);
+				}
+				else if (currentProject && currentProject.UnderConstruction()==false) //Si tenemos un proyecto y se ha acabado de construir
+				{
+					Destroy(creationBuildingConstruction);
+					Debug.Log("Destruimos el edificio en construccion");
+					currentProject=null;
+					building=false;
+					CreateFinishedBuilding();
 				}
 				else if (creationBuilding != null)
 				{
@@ -130,12 +139,14 @@ public class CivilUnit : Unit
 		if (Physics.CheckSphere (constructionPoint, 0.8f, finalmask)) {
 			Debug.Log ("No podemos construir porque hay otros edificios cerca");
 		} else {
-			creationBuilding = (GameObject)Instantiate (creationBuilding, constructionPoint, Quaternion.identity);
-			creationBuilding.SetActive(false);
+			Debug.Log("Podemos crear el edificio");
+			creationBuildingConstruction = (GameObject) Instantiate (creationBuildingConstruction, constructionPoint, Quaternion.identity);
+			creationBuildingConstruction.SetActive(false);
 			float wood = owner.GetResourceAmount (RTSObject.ResourceType.Wood);
-			if (wood >= creationBuilding.GetComponent<Building>().cost) {
-				creationBuilding.SetActive(true);
-				currentProject = creationBuilding.GetComponent<Building> ();
+			if (wood >= creationBuildingConstruction.GetComponent<Building>().cost) {
+				Debug.Log("Tenemos suficiente madera");
+				creationBuildingConstruction.SetActive(true);
+				currentProject = creationBuildingConstruction.GetComponent<Building> ();
 				currentProject.hitPoints = 0;
 				currentProject.needsBuilding = true;
 				currentProject.owner = owner;
@@ -144,14 +155,29 @@ public class CivilUnit : Unit
 				AstarPath.active.UpdateGraphs (guo);
 				owner.resourceAmounts [RTSObject.ResourceType.Wood] -= currentProject.cost;
 				SetNewPath(constructionPoint);
+						
 			} else {
-				Destroy(creationBuilding);
+				Destroy(creationBuildingConstruction);
 				Debug.Log ("Not enough wood");
 			}
 		}
+		//constructionPoint = Vector3.zero;
+    }
+	
+	public void CreateFinishedBuilding()
+	{
+		creationBuilding = (GameObject)Instantiate (creationBuilding, constructionPoint, Quaternion.identity);
+		creationBuilding.SetActive(true);
+		currentProject = creationBuilding.GetComponent<Building> ();
+		currentProject.owner = owner;
+		var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
+		guo.updatePhysics = true;
+		AstarPath.active.UpdateGraphs (guo);
+		SetNewPath(constructionPoint);		
 		constructionPoint = Vector3.zero;
 		creationBuilding = null;
-    }
+		currentProject=null;
+	}
 
     /*** Metodes privats ***/
 
