@@ -36,7 +36,7 @@ public class AI : MonoBehaviour
         BuildTownCenter(true);
         StartRecollecting(civils[0],"tree");
         StartRecollecting(civils[1], "tree");
-        StartRecollecting(civils[0], "food");
+        StartRecollecting(civils[2], "food");
    
     }
 
