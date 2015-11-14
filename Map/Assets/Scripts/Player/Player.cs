@@ -60,41 +60,37 @@ public class Player : MonoBehaviour {
                 "configured, or you launched the game directly from the campaign scene). Setting defaults.");
         }
 
-        // Spawn the initial town center
+        // Spawn initial elements
+        SpawnInitialTownCenter();
+        SpawnInitialCivilUnit();
+        SpawnInitialMilitaryUnit();
+    }
+
+    /// <summary>
+    /// Spawn the initial player town center.
+    /// </summary>
+    private void SpawnInitialTownCenter()
+    {
         var townCenterSpawnPointTransform = transform.FindChild("TownCenterSpawnPoint");
-        if (townCenterSpawnPointTransform != null)
-        {
-            var townCenterSpawnPoint = townCenterSpawnPointTransform.position;
-
-            var townCenterTemplate = GetTownCenterTemplateForCivilization(civilization);
-            var townCenter = (GameObject)Instantiate(townCenterTemplate, townCenterSpawnPoint, Quaternion.identity);
-            townCenter.GetComponent<RTSObject>().owner = this;
-            townCenter.transform.parent = transform; // Should have no effect, but easier for debugging
-
-            var guo = new GraphUpdateObject(townCenter.GetComponent<BoxCollider>().bounds);
-            guo.updatePhysics = true;
-            AstarPath.active.UpdateGraphs(guo);
-        }
-        else
+        if (townCenterSpawnPointTransform == null)
         {
             Debug.LogFormat("Can't find the town center spawn point for {0}.", username);
+            return;
         }
 
-        // Spawn the initial civil unit
-        var civilUnitSpawnPointTransform = transform.FindChild("CivilUnitSpawnPoint");
-        if (civilUnitSpawnPointTransform != null)
-        {
-            var civilUnitSpawnPoint = civilUnitSpawnPointTransform.position;
+        var townCenterSpawnPoint = townCenterSpawnPointTransform.position;
 
-            var civilUnitTemplate = GetCivilUnitTemplateForCivilization(civilization);
-            var civilUnit = (GameObject)Instantiate(civilUnitTemplate, civilUnitSpawnPoint, Quaternion.identity);
-            civilUnit.GetComponent<RTSObject>().owner = this;
-            civilUnit.transform.parent = transform; // Should have no effect, but easier for debugging
-        }
-        else
-        {
-            Debug.LogFormat("Can't find the civil unit spawn point for {0}.", username);
-        }
+        var townCenterTemplate = GetTownCenterTemplateForCivilization(civilization);
+        if (townCenterTemplate == null)
+            return;
+
+        var townCenter = (GameObject)Instantiate(townCenterTemplate, townCenterSpawnPoint, Quaternion.identity);
+        townCenter.GetComponent<RTSObject>().owner = this;
+        townCenter.transform.parent = transform; // Should have no effect, but easier for debugging
+
+        var guo = new GraphUpdateObject(townCenter.GetComponent<BoxCollider>().bounds);
+        guo.updatePhysics = true;
+        AstarPath.active.UpdateGraphs(guo);
     }
 
     /// <summary>
@@ -119,6 +115,29 @@ public class Player : MonoBehaviour {
     }
 
     /// <summary>
+    /// Spawn the initial player civil unit.
+    /// </summary>
+    private void SpawnInitialCivilUnit()
+    {
+        var civilUnitSpawnPointTransform = transform.FindChild("CivilUnitSpawnPoint");
+        if (civilUnitSpawnPointTransform == null)
+        {
+            Debug.LogFormat("Can't find the civil unit spawn point for {0}.", username);
+            return;
+        }
+
+        var civilUnitSpawnPoint = civilUnitSpawnPointTransform.position;
+
+        var civilUnitTemplate = GetCivilUnitTemplateForCivilization(civilization);
+        if (civilUnitTemplate == null)
+            return;
+
+        var civilUnit = (GameObject)Instantiate(civilUnitTemplate, civilUnitSpawnPoint, Quaternion.identity);
+        civilUnit.GetComponent<RTSObject>().owner = this;
+        civilUnit.transform.parent = transform; // Should have no effect, but easier for debugging
+    }
+
+    /// <summary>
     /// Get the default civil unit prefab for the specified civilization.
     /// </summary>
     /// <param name="civilization">The civilization of the player.</param>
@@ -135,6 +154,50 @@ public class Player : MonoBehaviour {
                 return Resources.Load<GameObject>("Prefabs/Yamato_civil");
             default:
                 Debug.LogFormat("Can't find the civil unit template for civilization {0}.", civilization);
+                return null;
+        }
+    }
+
+    /// <summary>
+    /// Spawn the initial player military unit.
+    /// </summary>
+    private void SpawnInitialMilitaryUnit()
+    {
+        var militaryUnitSpawnPointTransform = transform.FindChild("MilitaryUnitSpawnPoint");
+        if (militaryUnitSpawnPointTransform == null)
+        {
+            Debug.LogFormat("Can't find the military unit spawn point for {0}.", username);
+            return;
+        }
+
+        var militaryUnitSpawnPoint = militaryUnitSpawnPointTransform.position;
+
+        var militaryUnitTemplate = GetMilitaryUnitTemplateForCivilization(civilization);
+        if (militaryUnitTemplate == null)
+            return;
+
+        var militaryUnit = (GameObject)Instantiate(militaryUnitTemplate, militaryUnitSpawnPoint, Quaternion.identity);
+        militaryUnit.GetComponent<RTSObject>().owner = this;
+        militaryUnit.transform.parent = transform; // Should have no effect, but easier for debugging
+    }
+
+    /// <summary>
+    /// Get the default military unit prefab for the specified civilization.
+    /// </summary>
+    /// <param name="civilization">The civilization of the player.</param>
+    /// <returns>A reference to the loaded military unit resource.</returns>
+    private static GameObject GetMilitaryUnitTemplateForCivilization(PlayerCivilization civilization)
+    {
+        switch (civilization)
+        {
+            case PlayerCivilization.Hittites:
+                return Resources.Load<GameObject>("Prefabs/Hittite_warrior");
+            case PlayerCivilization.Sumerians:
+                return Resources.Load<GameObject>("Prefabs/Sumerian_warrior");
+            case PlayerCivilization.Yamato:
+                return Resources.Load<GameObject>("Prefabs/Yamato_samurai");
+            default:
+                Debug.LogFormat("Can't find the military unit template for civilization {0}.", civilization);
                 return null;
         }
     }
