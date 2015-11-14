@@ -1,76 +1,78 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(CharacterController))]
 public class MovimientoAleatorioCivil : RTSObject
 {
-    public AnimationClip walk;
-    public float velocidadMax;
-    public float xMax;
-    public float zMax;
-    public float xMin;
-    public float zMin;
+    public float speed = 30;
+    public float directionChangeInterval = 10;
+    public float maxHeadingChange = 30;
 
-    private float x;
-    private float z;
-    private float tiempo;
-    private float angulo;
+    CharacterController controller;
+    float heading;
+    Vector3 targetRotation;
 
-    // Use this for initialization
-    void Start()
+    Vector3 forward
     {
-        x = Random.Range(-velocidadMax, velocidadMax);
-        z = Random.Range(-velocidadMax, velocidadMax);
-        angulo = Mathf.Atan2(x, z) * (180 / 3.141592f) + 90;
-        transform.localRotation = Quaternion.Euler(0, angulo, 0);
-        GetComponent<Animation>().Play(walk.name);
+        get { return transform.TransformDirection(Vector3.forward); }
     }
 
-    // Update is called once per frame
+    void Awake()
+    {
+        controller = GetComponent<CharacterController>();
+
+        // Set random initial rotation
+        heading = Random.Range(0, 360);
+        transform.eulerAngles = new Vector3(0, heading, 0);
+
+        StartCoroutine(NewHeadingRoutine());
+    }
+
     void Update()
     {
+        transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * directionChangeInterval);
+        controller.SimpleMove(forward * speed);
+    }
 
-        tiempo += Time.deltaTime;
-
-        if (transform.localPosition.x > xMax)
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.tag != "Boundary")
         {
-            x = Random.Range(-velocidadMax, 0.0f);
-            angulo = Mathf.Atan2(x, z) * (180 / 3.141592f) + 90;
-            transform.localRotation = Quaternion.Euler(0, angulo, 0);
-            tiempo = 0.0f;
-        }
-        if (transform.localPosition.x < xMin)
-        {
-            x = Random.Range(0.0f, velocidadMax);
-            angulo = Mathf.Atan2(x, z) * (180 / 3.141592f) + 90;
-            transform.localRotation = Quaternion.Euler(0, angulo, 0);
-            tiempo = 0.0f;
-        }
-        if (transform.localPosition.z > zMax)
-        {
-            z = Random.Range(-velocidadMax, 0.0f);
-            angulo = Mathf.Atan2(x, z) * (180 / 3.141592f) + 90;
-            transform.localRotation = Quaternion.Euler(0, angulo, 0);
-            tiempo = 0.0f;
-        }
-        if (transform.localPosition.z < zMin)
-        {
-            z = Random.Range(0.0f, velocidadMax);
-            angulo = Mathf.Atan2(x, z) * (180 / 3.141592f) + 90;
-            transform.localRotation = Quaternion.Euler(0, angulo, 0);
-            tiempo = 0.0f;
+            return;
         }
 
+        // Bounce off the wall using angle of reflection
+        var newDirection = Vector3.Reflect(forward, hit.normal);
+        transform.rotation = Quaternion.FromToRotation(Vector3.forward, newDirection);
+        heading = transform.eulerAngles.y;
+        NewHeading();
+    }
 
-        if (tiempo > 1.0f)
+    /// <summary>
+    /// Calculates a new direction to move towards.
+    /// </summary>
+    void NewHeading()
+    {
+        var floor = Mathf.Clamp(heading - maxHeadingChange, 0, 360);
+        var ceil = Mathf.Clamp(heading + maxHeadingChange, 0, 360);
+        heading = Random.Range(floor, ceil);
+        targetRotation = new Vector3(0, heading, 0);
+    }
+
+    /// <summary>
+    /// Repeatedly calculates a new direction to move towards.
+    /// Use this instead of MonoBehaviour.InvokeRepeating so that the interval can be changed at runtime.
+    /// </summary>
+    IEnumerator NewHeadingRoutine()
+    {
+        while (true)
         {
-            x = Random.Range(-velocidadMax, velocidadMax);
-            z = Random.Range(-velocidadMax, velocidadMax);
-            angulo = Mathf.Atan2(x, z) * (180 / 3.141592f) + 90;
-            transform.localRotation = Quaternion.Euler(0, angulo, 0);
-            tiempo = 0.0f;
+            NewHeading();
+            yield return new WaitForSeconds(directionChangeInterval);
         }
-
-        transform.localPosition = new Vector3(transform.localPosition.x + x, transform.localPosition.y, transform.localPosition.z + z);
-        GetComponent<Animation>().Play(walk.name);
     }
 }
+
+
+
