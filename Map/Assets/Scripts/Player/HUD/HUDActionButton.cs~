@@ -40,7 +40,6 @@ public class HUDActionButton : HUDElement
         {
             buttonComponent.enabled = true;
             imageComponent.enabled = true;
-            
         }
         else
         {
@@ -61,7 +60,6 @@ public class HUDActionButton : HUDElement
             if (DisplayObject.tag == "civil" && DisplayObject.GetComponent<CivilUnit>() && DisplayObject.GetComponent<CivilUnit>().building == false)
             {
                 DisplayObject.GetComponent<CivilUnit>().building = true;
-                
             }
             DisplayObject.PerformAction(DisplayObject.GetActions()[ActionIndex]);
         }
