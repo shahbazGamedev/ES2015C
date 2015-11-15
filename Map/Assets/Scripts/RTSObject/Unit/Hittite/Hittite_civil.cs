@@ -27,6 +27,7 @@ public class Hittite_civil : CivilUnit
 			break;
 		case "Army Building":
 			creationBuilding = Resources.Load ("Prefabs/Hittite_ArmyBuilding") as GameObject;
+			creationBuildingConstruction = Resources.Load ("Prefabs/Hittite_ArmyBuildingConstruction") as GameObject;
 			break;
 		case "Wall Tower":
 			creationBuilding = Resources.Load ("Prefabs/Hittite_WallTower") as GameObject;
