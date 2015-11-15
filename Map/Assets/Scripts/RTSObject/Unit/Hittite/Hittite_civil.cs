@@ -24,26 +24,32 @@ public class Hittite_civil : CivilUnit
 		switch (actionToPerform) {
 		case "Town Center":
 			creationBuilding = Resources.Load ("Prefabs/Hittite_TownCenter") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_TownCenter") as GameObject;
+            break;
 		case "Army Building":
 			creationBuilding = Resources.Load ("Prefabs/Hittite_ArmyBuilding") as GameObject;
 			creationBuildingConstruction = Resources.Load ("Prefabs/Hittite_ArmyBuildingConstruction") as GameObject;
 			break;
 		case "Wall Tower":
 			creationBuilding = Resources.Load ("Prefabs/Hittite_WallTower") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_WallTower") as GameObject;
+            break;
 		case "Wall Entrance":
 			creationBuilding = Resources.Load ("Prefabs/Hittite_WallEntrance") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_WallEntrance") as GameObject;
+            break;
 		case "Wall":
 			creationBuilding = Resources.Load ("Prefabs/Hittite_Wall") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_Wall") as GameObject;
+            break;
 		case "Civil House":
 			creationBuilding = Resources.Load ("Prefabs/Hittite_CivilHouse") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_CivilHouse") as GameObject;
+            break;
 		case "Academy":
 			creationBuilding = Resources.Load ("Prefabs/Hittite_Academy") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_Academy") as GameObject;
+            break;
 		}
 	}
 }
