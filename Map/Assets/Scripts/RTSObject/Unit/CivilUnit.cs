@@ -128,7 +128,7 @@ public class CivilUnit : Unit
     public void CreateBuilding()
     {
 		if (Physics.CheckSphere (constructionPoint, 0.8f, finalmask)) {
-			Debug.Log ("No podemos construir porque hay otros edificios cerca");
+			HUDInfo.message = "We can not build because there are other buildings nearby";
 		} else {
 			creationBuilding = (GameObject)Instantiate (creationBuilding, constructionPoint, Quaternion.identity);
 			creationBuilding.SetActive(false);
@@ -145,8 +145,8 @@ public class CivilUnit : Unit
 				owner.resourceAmounts [RTSObject.ResourceType.Wood] -= currentProject.cost;
 				SetNewPath(constructionPoint);
 			} else {
+				HUDInfo.message = "Not enough wood (" + creationBuilding.GetComponent<Building>().cost + ") to construct the " + creationBuilding.name;
 				Destroy(creationBuilding);
-				Debug.Log ("Not enough wood");
 			}
 		}
 		constructionPoint = Vector3.zero;
