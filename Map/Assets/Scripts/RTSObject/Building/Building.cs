@@ -33,6 +33,7 @@ public class Building : RTSObject
         gameObject.layer = 10;
         // Calculem la dimensio del BoxCollider
         FittedBoxCollider();
+        needsBuilding = true;
         currentBuildProgress = 0.0f; // Progres actual de la construccio
     }
 
@@ -67,7 +68,7 @@ public class Building : RTSObject
     // Metode que va construint el edifici
     public void Construct(int amount)
     {
-		hitPoints += amount;
+        hitPoints += amount;
         if (hitPoints >= maxHitPoints)
         {
             hitPoints = maxHitPoints;
@@ -148,7 +149,7 @@ public class Building : RTSObject
 
         ExtendBounds(transform, ref bounds);
 
-		boxCollider.center = new Vector3((bounds.center.x - transform.position.x) / transform.localScale.x, (bounds.center.y - transform.position.y) / transform.localScale.y, (bounds.center.z - transform.position.z) / transform.localScale.z);
+        boxCollider.center = bounds.center - transform.position;
         boxCollider.size = new Vector3(bounds.size.x / transform.localScale.x, bounds.size.y / transform.localScale.y, bounds.size.z / transform.localScale.z);
 
         transform.rotation = rotation;
