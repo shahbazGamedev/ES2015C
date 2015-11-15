@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Unit : RTSObject
 {
+	public Avatar unitAvatar;				// Referencia al avatar del component Animator.
+
 	private CharacterController characterController;	// Referencia al component CharacterController.
 	private Seeker seeker;					// Referencia al component Seeker.
 	private Vector3 targetPosition;         // Indica el vector3 del objectiu
@@ -25,17 +27,25 @@ public class Unit : RTSObject
 	{
 		base.Awake ();
 		seeker = gameObject.AddComponent<Seeker> ();
-		anim = gameObject.GetComponent<Animator>();
+		anim = gameObject.AddComponent<Animator>();
 		rigbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 		// Calculem la dimensio del CharacterController
 		FittedCharacterCollider();
 		gameObject.layer = 11;
 		
+		// Asignem les propietats el avatar del Animator
+		anim.avatar = unitAvatar;
+
 		// Asignem els components extres per al funcionament de la IA per a unitats
 		//RDV = gameObject.AddComponent<SphereCollider> ();
 		//RDV.radius = characterController.radius * 10;
 		//RDA = gameObject.AddComponent<BoxCollider> ();
-		baseMoveSpeed = 5;
+	}
+
+	protected override void Start ()
+	{
+		base.Start ();
+        baseMoveSpeed = 5;
 	}
 
 	protected override void Update ()
@@ -215,7 +225,7 @@ public class Unit : RTSObject
 		
 		ExtendBounds (transform, ref bounds);
 		
-		characterController.center = new Vector3((bounds.center.x - transform.position.x) / transform.localScale.x, (bounds.center.y - transform.position.y + 0.1f) / transform.localScale.y, (bounds.center.z - transform.position.z) / transform.localScale.z);
+		characterController.center = new Vector3(bounds.center.x - transform.position.x, bounds.center.y - transform.position.y + 0.25f, bounds.center.z - transform.position.z);
 		characterController.radius = bounds.size.x / 2;
 		characterController.height = bounds.size.y / transform.localScale.y;
 		

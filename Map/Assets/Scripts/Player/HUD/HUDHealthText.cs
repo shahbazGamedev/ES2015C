@@ -29,7 +29,7 @@ public class HUDHealthText : HUDElement
         }
         else
         {
-            textComponent.text = "";
+            textComponent.text = "-";
         }
     }
 }

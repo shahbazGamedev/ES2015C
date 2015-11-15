@@ -4,9 +4,9 @@ public class Sumerian_TownCenterBuilding : TownCenterBuilding {
 
     /*** Metodes per defecte de Unity ***/
 
-	protected override void Awake()
+    protected override void Start()
     {
-		base.Awake();
+        base.Start();
 		objectName = "Sumerian Town Center";
         baseDefense = 5;
 		actions = new string[] { "Civil Unit", "Civil Unit Axe"};

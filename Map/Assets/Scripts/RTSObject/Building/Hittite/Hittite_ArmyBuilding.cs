@@ -5,9 +5,9 @@ public class Hittite_ArmyBuilding : ArmyBuilding
 
 	/*** Metodes per defecte de Unity ***/
 
-	protected override void Awake ()
+	protected override void Start ()
 	{
-		base.Awake ();
+		base.Start ();
 		objectName = "Hittite Army Building";
 		actions = new string[] {"Warrior", "Warrior Advanced"};
         baseDefense = 5;

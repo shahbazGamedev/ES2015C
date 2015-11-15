@@ -4,12 +4,13 @@ public class Yamato_Academy : Building {
 
     /*** Metodes per defecte de Unity ***/
 
-	protected override void Awake()
+    protected override void Start()
     {
-		base.Awake();
+        base.Start();
 		objectName = "Yamato Academy";
 		cost = 400;
-		hitPoints = maxHitPoints = 800;
+		hitPoints = 0;
+		maxHitPoints = 800;
         baseDefense = 5;
     }
 }
