@@ -3,38 +3,37 @@ using System.Collections;
 
 public class CitizenRDV : MonoBehaviour {
 
-	CitizenAI citizenAI;
+	public CitizenAI citizenAI;
 	string otherRol;
 	bool assignedRol;
 
 	// Use this for initialization
 	void Start () {
-		this.citizenAI.target = null;
+		assignedRol = false;
+		//citizenAI = this.gameObject.GetComponent<CitizenAI>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
 	
 	}
 
-    /* CODI COMENTAT - NO COMPILA (MERGE 03/11/2015, COMENTAT PER JOAN BRUGUERA)
+    // CODI COMENTAT - NO COMPILA (MERGE 03/11/2015, COMENTAT PER JOAN BRUGUERA)
 	void OnTriggerEnter (Collider other){
-		this.otherRol = other.gameObject.tag;
-		this.citizenAI.resources[this.citizenAI.resources.GetLength()-1] (other.transform); // añadimos el recurso a la BBDD
-		citizenAI.target = other.transform;
-		switch (this.citizenAI.subState) {
-		
-		case 11:break;
-			if(otherRol == "arbol" && !assignedRol){
-				this.citizenAI.gameObject.tag="woodCutter";
-				assignedRol=true;
-			}
-		case 12:break;
-		case 13:break;
+		otherRol = other.tag;
+		citizenAI.setState(2);
+		//this.citizenAI.resources[this.citizenAI.resources.GetLength()-1] (other.transform); // añadimos el recurso a la BBDD
+		citizenAI.setTarget(other.gameObject.transform);
+		if (otherRol == "tree" && !this.assignedRol) {
+			citizenAI.tag="woodCutter";
+			//citizenAI.target = other.transform;
+			assignedRol = true;
+			citizenAI.setState(2);
 		}
 
 	}
-    */
+
 }
 
 /*

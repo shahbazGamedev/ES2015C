@@ -23,13 +23,13 @@ public class CitizenRDA : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		/*
 		if (this.citizenAI.wood < 50) {
 			this.attackState = 1;
 		} else {
 			this.attackState = 2;
 		}
-
+		*/
 		switch (attackState) {
 			case 1:Action();break;
 			case 2:GoHome();break;
@@ -38,26 +38,13 @@ public class CitizenRDA : MonoBehaviour {
 
     void OnTriggerEnter( Collider other){
 		//citizenAI.state = 0;
-		this.citizenAI.gameObject.GetComponent<Collider>().isTrigger=false; // desactivo el trigger para que no me pille otros Colliders
+		//this.citizenAI.gameObject.GetComponent<Collider>().isTrigger=false; // desactivo el trigger para que no me pille otros Colliders
 		if(other.gameObject.tag=="tree"){
-			//woodResource = other.gameObject.GetComponent(RTSObject).GetComponent(Resource).capacity;
-			while(this.citizenAI.wood<=this.citizenAI.MAX_RESOURCE && this.counter <=1000){
-				this.attackState = 1;
-				citizenAI.state = 3; // Pasamos a ataque, ejecutando la animacion oportuna
-				this.counter++;
-			}
+			Resource resource = other.GetComponent<Resource>();
+			GetComponent<CivilUnit>().StartHarvest(resource);
 
 		}
 
-		if(other.gameObject.tag=="citizencenter"){
-			//other.gameObject.GetComponent(Center).capacity +=this.citizenAI.capacity;
-
-		}
-
-		//if(other.gameObject.GetComponent(Resource).capacity<=0){
-			//Destroy(other.gameObject);
-			//other.gameObject.setState(4);
-		//}
 	}
 
 	void OnTriggerExit(Collider other){
@@ -71,8 +58,7 @@ public class CitizenRDA : MonoBehaviour {
 		//this.citizenAI.getWood()+=5*Time.deltaTime;
 	}
 	void GoHome(){
-		citizenAI.setState(0);
-		citizenAI.setState(2);
 		citizenAI.setTarget(citizenAI.citizenCenter);
+		citizenAI.setState(2);
 	}
 }
