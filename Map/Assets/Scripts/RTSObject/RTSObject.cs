@@ -106,6 +106,18 @@ public class RTSObject : MonoBehaviour
     {
     }
 
+	private void OnMouseEnter() {
+		if (owner && owner.human) {
+			Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_select") as Texture2D;
+			Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+		}
+	}
+	
+	private void OnMouseExit() {
+		Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
+		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+	}
+
     /*** Metodes publics ***/
 
 	// Metode per declarar la seleccio del objecte
