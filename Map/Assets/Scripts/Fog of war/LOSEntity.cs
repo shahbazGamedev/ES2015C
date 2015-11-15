@@ -59,7 +59,7 @@ public class LOSEntity : MonoBehaviour {
 					Debug.Log (team);
 					this.IsAlly = team.Equals ("Human Player");
 					this.IsRevealer = IsAlly;
-					this.IsUnit = gameObject.tag.Equals ("unit");
+					//this.IsUnit = gameObject.tag.Equals ("unit");
 				}
 			}
 		}
