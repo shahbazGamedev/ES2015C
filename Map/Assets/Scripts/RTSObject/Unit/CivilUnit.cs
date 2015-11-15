@@ -194,8 +194,10 @@ public class CivilUnit : Unit
     public void Collect(Resource resourceDeposit)
     {
         //GetComponent<Animation>().Play (attack.name); 
-        resourceDeposit.Remove(5*Time.deltaTime);    //resta esto del arbol (ej)
-        collectionAmount += 5*Time.deltaTime; //se lo suma al recolector
+        if(!resourceDeposit.isEmpty()){
+            resourceDeposit.Remove(Mathf.Round(5*Time.deltaTime));    //resta esto del arbol (ej)
+            collectionAmount += Mathf.Round(5*Time.deltaTime); //se lo suma al recolector
+        }
     }
 
     // Metode per depositar els recursos al edifici resourceStore
