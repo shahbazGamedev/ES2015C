@@ -40,6 +40,9 @@ public class Player : MonoBehaviour {
         resourceAmounts[RTSObject.ResourceType.Gold] = initialGold;
         resourceAmounts[RTSObject.ResourceType.Wood] = initialWood;
 
+		Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
+		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+
         // Load player civilization from menu parameters
         var menuGameParametersObject = GameObject.Find("MenuGameParameters");
         var menuGameParameters = (menuGameParametersObject != null) ?
