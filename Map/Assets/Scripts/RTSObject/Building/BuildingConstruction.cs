@@ -34,6 +34,8 @@ public class BuildingConstruction : Building
         // Calculem la dimensio del BoxCollider
         FittedBoxCollider();
         currentBuildProgress = 0.0f; // Progres actual de la construccio
+        hitPoints = 0;
+        maxHitPoints = 5000;
     }
 
     protected override void Update()

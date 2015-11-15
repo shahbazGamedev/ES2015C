@@ -11,7 +11,7 @@ public class CivilUnit : Unit
 	public Vector3 constructionPoint = Vector3.zero;		// Posicio on crear el edifici
 	public Building currentProject = null;  				// Building actual de construccio
 	protected GameObject creationBuilding = null;			// Objecte que anem a crear
-	protected GameObject creationBuildingConstruction=null; //Edifici que anem a crear, en construccio
+	protected GameObject creationBuildingConstruction= Resources.Load("Prefabs/constructionBuildingPrefab") as GameObject; //Edifici que anem a crear, en construccio
 
     public bool harvesting = false;      					// Indicadors d'estat de la unitat
 	public bool building = false;
