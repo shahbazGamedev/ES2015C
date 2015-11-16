@@ -116,13 +116,21 @@ public class LOSManager : MonoBehaviour {
 
     void Update() {
 		if (Input.GetKey (KeyCode.R)) {
-			if (Terrain.materialType != Terrain.MaterialType.BuiltInStandard){
-				Terrain.materialType = Terrain.MaterialType.BuiltInStandard;
+			if (this.Terrain.materialType != Terrain.MaterialType.BuiltInStandard){
+				this.Terrain.materialType = Terrain.MaterialType.BuiltInStandard;
+				foreach (var entity in Entities)
+					entity.IsRevealer = true;
 			}
 		}
 		if (Input.GetKey (KeyCode.U)) {
-			Terrain.materialTemplate = Resources.Load("Terrain", typeof(Material)) as Material;
-			Terrain.materialType = Terrain.MaterialType.Custom;
+			this.Terrain.materialTemplate = Resources.Load("Materials/Terrain", typeof(Material)) as Material;
+			this.Terrain.materialType = Terrain.MaterialType.Custom;
+			foreach (var entity in Entities){
+				if (entity.IsAlly != true){
+					entity.IsRevealer = false;
+				}
+			}
+
 		}
 
 #if UNITY_EDITOR
