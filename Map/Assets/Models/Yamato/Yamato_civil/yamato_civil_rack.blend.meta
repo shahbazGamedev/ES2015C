@@ -38,6 +38,10 @@ ModelImporter:
     100060: tibia_R
     100062: Yamato
     100064: //RootNode
+    100066: Hacha
+    100068: Martillo
+    100070: Pick
+    100072: Rack
     400000: abdomen
     400002: antebrazo_L
     400004: antebrazo_R
@@ -71,12 +75,22 @@ ModelImporter:
     400060: tibia_R
     400062: Yamato
     400064: //RootNode
+    400066: Hacha
+    400068: Martillo
+    400070: Pick
+    400072: Rack
     4300000: Yamato
     7400000: Default Take
     7400002: Dead_001
     7400004: Run_001
     7400006: Waiting_001
     7400008: Walk_001
+    7400010: Yamato_Civil_Rack_Dead
+    7400012: Yamato_Civil_Rack_Farming
+    7400014: Yamato_Civil_Rack_Fight
+    7400016: Yamato_Civil_Rack_Idle
+    7400018: Yamato_Civil_Rack_Run
+    7400020: Yamato_Civil_Rack_Walk
     9500000: //RootNode
     13700000: Yamato
   materials:

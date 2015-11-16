@@ -5,6 +5,89 @@ licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
+<<<<<<< HEAD
+    100000: abdomen
+    100002: antebrazo_L
+    100004: antebrazo_R
+    100006: Archer
+    100008: Armature
+    100010: brazo_L
+    100012: brazo_R
+    100014: cabeza
+    100016: cuello
+    100018: dedos_mano2_L
+    100020: dedos_mano2_R
+    100022: dedos_mano_L
+    100024: dedos_mano_R
+    100026: dedos_pie_L
+    100028: dedos_pie_R
+    100030: femur_L
+    100032: femur_R
+    100034: Hacha
+    100036: mano_L
+    100038: mano_R
+    100040: Martillo
+    100042: pecho
+    100044: Pick
+    100046: pie_L
+    100048: pie_L_control
+    100050: pie_R
+    100052: pie_R_control
+    100054: pulga2_L
+    100056: pulga2_R
+    100058: pulgar1_L
+    100060: pulgar1_R
+    100062: Rack
+    100064: root
+    100066: String
+    100068: tibia_L
+    100070: tibia_R
+    100072: //RootNode
+    100074: Arrow
+    400000: abdomen
+    400002: antebrazo_L
+    400004: antebrazo_R
+    400006: Archer
+    400008: Armature
+    400010: brazo_L
+    400012: brazo_R
+    400014: cabeza
+    400016: cuello
+    400018: dedos_mano2_L
+    400020: dedos_mano2_R
+    400022: dedos_mano_L
+    400024: dedos_mano_R
+    400026: dedos_pie_L
+    400028: dedos_pie_R
+    400030: femur_L
+    400032: femur_R
+    400034: Hacha
+    400036: mano_L
+    400038: mano_R
+    400040: Martillo
+    400042: pecho
+    400044: Pick
+    400046: pie_L
+    400048: pie_L_control
+    400050: pie_R
+    400052: pie_R_control
+    400054: pulga2_L
+    400056: pulga2_R
+    400058: pulgar1_L
+    400060: pulgar1_R
+    400062: Rack
+    400064: root
+    400066: String
+    400068: tibia_L
+    400070: tibia_R
+    400072: //RootNode
+    400074: Arrow
+    4300000: Archer
+    7400000: Default Take
+    7400002: Yamato_Archer_Dead
+    9500000: //RootNode
+    13700000: Archer
+=======
     100000: Archer
     100002: Archer_001
     100004: Archer_Armature
@@ -455,6 +538,7 @@ ModelImporter:
     9500000: //RootNode
     13700000: Archer_001
     13700002: Bow
+>>>>>>> origin/dev
   materials:
     importMaterials: 1
     materialName: 0

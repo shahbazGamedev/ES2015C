@@ -4,7 +4,87 @@ timeCreated: 1446671443
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: abdomen
+    100002: antebrazo_L
+    100004: antebrazo_R
+    100006: Armature
+    100008: brazo_L
+    100010: brazo_R
+    100012: cabeza
+    100014: cuello
+    100016: dedos_mano2_L
+    100018: dedos_mano2_R
+    100020: dedos_mano_L
+    100022: dedos_mano_R
+    100024: dedos_pie_L
+    100026: dedos_pie_R
+    100028: femur_L
+    100030: femur_R
+    100032: Hacha
+    100034: Hacha_001
+    100036: mano_L
+    100038: mano_R
+    100040: Martillo
+    100042: Martillo_001
+    100044: pecho
+    100046: Persian
+    100048: //RootNode
+    100050: Pick
+    100052: pie_L
+    100054: pie_L_control
+    100056: pie_R
+    100058: pie_R_control
+    100060: pulga2_L
+    100062: pulga2_R
+    100064: pulgar1_L
+    100066: pulgar1_R
+    100068: Rack
+    100070: root
+    100072: tibia_L
+    100074: tibia_R
+    400000: abdomen
+    400002: antebrazo_L
+    400004: antebrazo_R
+    400006: Armature
+    400008: brazo_L
+    400010: brazo_R
+    400012: cabeza
+    400014: cuello
+    400016: dedos_mano2_L
+    400018: dedos_mano2_R
+    400020: dedos_mano_L
+    400022: dedos_mano_R
+    400024: dedos_pie_L
+    400026: dedos_pie_R
+    400028: femur_L
+    400030: femur_R
+    400032: Hacha
+    400034: Hacha_001
+    400036: mano_L
+    400038: mano_R
+    400040: Martillo
+    400042: Martillo_001
+    400044: pecho
+    400046: Persian
+    400048: //RootNode
+    400050: Pick
+    400052: pie_L
+    400054: pie_L_control
+    400056: pie_R
+    400058: pie_R_control
+    400060: pulga2_L
+    400062: pulga2_R
+    400064: pulgar1_L
+    400066: pulgar1_R
+    400068: Rack
+    400070: root
+    400072: tibia_L
+    400074: tibia_R
+    4300000: Persian
+    7400000: Default Take
+    9500000: //RootNode
+    13700000: Persian
   materials:
     importMaterials: 1
     materialName: 0
