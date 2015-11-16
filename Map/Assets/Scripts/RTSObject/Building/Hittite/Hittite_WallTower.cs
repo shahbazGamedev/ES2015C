@@ -4,13 +4,12 @@ public class Hittite_WallTower : Building {
 
     /*** Metodes per defecte de Unity ***/
 
-    protected override void Start()
+	protected override void Awake()
     {
-        base.Start();
+		base.Awake();
 		objectName = "Hittite Wall Tower";
 		cost = 250;
-		hitPoints = 0;
-		maxHitPoints = 900;
+		hitPoints = maxHitPoints = 900;
         baseDefense = 5;
     }
 }

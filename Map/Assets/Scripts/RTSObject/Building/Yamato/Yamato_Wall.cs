@@ -4,13 +4,12 @@ public class Yamato_Wall : Building {
 
     /*** Metodes per defecte de Unity ***/
 
-    protected override void Start()
+	protected override void Awake()
     {
-        base.Start();
+		base.Awake();
 		objectName = "Yamato Wall";
 		cost = 50;
-		hitPoints = 0;
-		maxHitPoints = 500;
+		hitPoints = maxHitPoints = 500;
         baseDefense = 5;
     }
 }

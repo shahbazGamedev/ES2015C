@@ -35,12 +35,7 @@ public class Unit : RTSObject
 		//RDV = gameObject.AddComponent<SphereCollider> ();
 		//RDV.radius = characterController.radius * 10;
 		//RDA = gameObject.AddComponent<BoxCollider> ();
-	}
-
-	protected override void Start ()
-	{
-		base.Start ();
-        baseMoveSpeed = 5;
+		baseMoveSpeed = 5;
 	}
 
 	protected override void Update ()
@@ -114,7 +109,7 @@ public class Unit : RTSObject
 		float distance = Mathf.Infinity;
 		Vector3 position = transform.position;
 		
-		foreach (GameObject go in TaggedObjects) { //recorre la llista dels objectes i caculca quin es el més proper
+		foreach (GameObject go in TaggedObjects) { //recorre la llista dels objectes i calcula quin es el més proper
 			position = (go.transform.position - position);
 			var curDistance = position.sqrMagnitude;
 			if (curDistance < distance) {

@@ -18,30 +18,8 @@ public class Resource : RTSObject {
 		gameObject.layer = 10;
 		// Calculem la dimensio del BoxCollider
 		FittedBoxCollider ();
-
 		resourceType = ResourceType.Unknown;
-		amountLeft = capacity;
 	}
-
-    protected override void Start()
-    {
-        base.Start();
-        if(this.tag == "tree"){
-    		resourceType = ResourceType.Wood;
-    		capacity = 150;
-    		amountLeft = capacity;
-    	}
-    	else if(this.tag == "mine"){
-    		resourceType = ResourceType.Gold;
-    		capacity = 200;
-    		amountLeft = capacity;
-    	}
-    	else if(this.tag == "food"){
-    		resourceType = ResourceType.Food;
-    		capacity = 100;
-    		amountLeft = capacity;
-    	}
-    }
 
     
     protected void Update () {
