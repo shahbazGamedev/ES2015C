@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class AI : MonoBehaviour
+public class AI : RTSObject
 {
 
     // Use this for initialization
@@ -12,13 +12,14 @@ public class AI : MonoBehaviour
     private List<GameObject> civils;
     public List<GameObject> townCenters;
     private List<CivilUnit> soldiers;
-    private Vector3 position, closestDistance;
+    private Vector3 position, closestDistance,coords;
     private float totalDist;
     private GameObject civil, center;
     private GameObject tree;
     private bool building = false;
     private int i = 0;
- 
+    public AIResources resources;
+
 
 
 
@@ -37,7 +38,6 @@ public class AI : MonoBehaviour
         StartRecollecting(civils[0],"tree");
         StartRecollecting(civils[1], "tree");
         StartRecollecting(civils[2], "food");
-   
     }
 
     // Update is called once per frame
@@ -46,6 +46,12 @@ public class AI : MonoBehaviour
             BuildTownCenter(false);
         }
 
+        if (resources.wood > 0)
+        {
+            resources.wood -= 300;
+            coords = new Vector3(457f, 0f, 436f);
+            CreateNewCivil(coords);
+        }
     }
 
     
