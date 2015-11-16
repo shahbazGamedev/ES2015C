@@ -795,6 +795,8 @@ ModelImporter:
     101574: tibia_L_end
     101576: tibia_R
     101578: tibia_R_end
+    101580: Arrow
+    101582: Arrow_end
     400000: Archer
     400002: Archer Armature
     400004: Archer.001
@@ -1585,6 +1587,8 @@ ModelImporter:
     401574: tibia_L_end
     401576: tibia_R
     401578: tibia_R_end
+    401580: Arrow
+    401582: Arrow_end
     4300000: Bow
     4300002: Archer.001
     4300004: Archer
@@ -1596,6 +1600,7 @@ ModelImporter:
     7400010: Armature|Yamato_Archer_Idle
     7400012: Armature|Yamato_Archer_Run
     7400014: Armature|Yamato_Archer_Walk
+    7400016: Armature|Yamato_Archer_Fight
     9500000: //RootNode
     13700000: Archer.001
     13700002: Bow

@@ -38,6 +38,7 @@ ModelImporter:
     100060: Upper_Arm_R
     100062: Upper_Leg_L
     100064: Upper_Leg_R
+    100066: Arrow
     400000: Armature_001
     400002: Bow_central_piece
     400004: Bow_central_piece_001
@@ -71,6 +72,7 @@ ModelImporter:
     400060: Upper_Arm_R
     400062: Upper_Leg_L
     400064: Upper_Leg_R
+    400066: Arrow
     4300000: Cube
     7400000: Default Take
     7400002: Die

@@ -61,6 +61,8 @@ ModelImporter:
     100106: Upper Arm.R
     100108: Upper Leg.L
     100110: Upper Leg.R
+    100112: Arrow
+    100114: Arrow_end
     400000: Armature.001
     400002: Bow central piece
     400004: Bow central piece.001
@@ -117,6 +119,8 @@ ModelImporter:
     400106: Upper Arm.R
     400108: Upper Leg.L
     400110: Upper Leg.R
+    400112: Arrow
+    400114: Arrow_end
     4300000: Cube
     7400000: Armature.001|CubeAction
     7400002: Armature.001|Die
