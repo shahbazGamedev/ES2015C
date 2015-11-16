@@ -115,6 +115,16 @@ public class LOSManager : MonoBehaviour {
     }
 
     void Update() {
+		if (Input.GetKey (KeyCode.R)) {
+			if (Terrain.materialType != Terrain.MaterialType.BuiltInStandard){
+				Terrain.materialType = Terrain.MaterialType.BuiltInStandard;
+			}
+		}
+		if (Input.GetKey (KeyCode.U)) {
+			Terrain.materialTemplate = Resources.Load("Terrain", typeof(Material)) as Material;
+			Terrain.materialType = Terrain.MaterialType.Custom;
+		}
+
 #if UNITY_EDITOR
         if (!Application.isPlaying) {
             if (PreviewInEditor) {
