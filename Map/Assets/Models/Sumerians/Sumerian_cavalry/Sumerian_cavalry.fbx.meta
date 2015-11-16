@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: d904cc012e48d2341a869812c5d70e23
+timeCreated: 1447642146
+=======
 guid: 2702c67d20205aa4ba6d536dc0348b08
 timeCreated: 1447641296
+>>>>>>> dev_TeamA
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -90,7 +95,10 @@ ModelImporter:
     100164: TobilloTras.R
     100166: TobilloTras_Roll.L
     100168: TobilloTras_Roll.R
+<<<<<<< HEAD
+=======
     100170: Horse
+>>>>>>> dev_TeamA
     400000: Abdomen
     400002: Abdomen_Yamato
     400004: Antebrazo.L
@@ -176,17 +184,26 @@ ModelImporter:
     400164: TobilloTras.R
     400166: TobilloTras_Roll.L
     400168: TobilloTras_Roll.R
+<<<<<<< HEAD
+    4300000: Sumerian
+=======
     400170: Horse
     4300000: Sumerian
     4300002: Horse
+>>>>>>> dev_TeamA
     7400000: Armature|Sumerian_Cavalry_Attack
     7400002: Armature|Sumerian_Cavalry_Idle
     7400004: Armature|Sumerian_Cavalry_Run
     7400006: Armature|Sumerian_Cavalry_Walk
+<<<<<<< HEAD
+    9500000: //RootNode
+    13700000: Sumerian
+=======
     7400008: Armature|Sumerian_Cavalry_Dead
     9500000: //RootNode
     13700000: Sumerian
     13700002: Horse
+>>>>>>> dev_TeamA
   materials:
     importMaterials: 1
     materialName: 0
