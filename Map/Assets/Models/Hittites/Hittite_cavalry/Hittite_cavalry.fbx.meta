@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 27eec2fc30b4d42479e566e064f8ee31
 timeCreated: 1447641938
+=======
+guid: 79681179d899f184e902e8456a0044c5
+timeCreated: 1447641390
+>>>>>>> dev_TeamA
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -90,6 +95,10 @@ ModelImporter:
     100164: TobilloTras.R
     100166: TobilloTras_Roll.L
     100168: TobilloTras_Roll.R
+<<<<<<< HEAD
+=======
+    100170: Horse
+>>>>>>> dev_TeamA
     400000: Abdomen
     400002: Abdomen_Yamato
     400004: Antebrazo.L
@@ -175,7 +184,13 @@ ModelImporter:
     400164: TobilloTras.R
     400166: TobilloTras_Roll.L
     400168: TobilloTras_Roll.R
+<<<<<<< HEAD
     4300000: Hittite
+=======
+    400170: Horse
+    4300000: Hittite
+    4300002: Horse
+>>>>>>> dev_TeamA
     7400000: Armature|Hittite_Cavalry_Die
     7400002: Armature|Hittite_Cavalry_Fight
     7400004: Armature|Hittite_Cavalry_Idle
@@ -183,6 +198,10 @@ ModelImporter:
     7400008: Armature|Hittite_Cavalry_Walk
     9500000: //RootNode
     13700000: Hittite
+<<<<<<< HEAD
+=======
+    13700002: Horse
+>>>>>>> dev_TeamA
   materials:
     importMaterials: 1
     materialName: 0

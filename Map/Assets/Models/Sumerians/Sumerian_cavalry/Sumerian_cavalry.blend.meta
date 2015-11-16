@@ -107,8 +107,12 @@ ModelImporter:
     7400000: Default Take
     7400002: Sumerian_Cavalry_Attack
     7400004: Sumerian_Cavalry_Walk
+    7400006: Sumerian_Cavalry_Dead
+    7400008: Sumerian_Cavalry_Idle
+    7400010: Sumerian_Cavalry_Run
     9500000: //RootNode
     13700000: Sumerian
+    13700002: Horse
   materials:
     importMaterials: 1
     materialName: 0
