@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 27eec2fc30b4d42479e566e064f8ee31
-timeCreated: 1447641938
-=======
 guid: 79681179d899f184e902e8456a0044c5
-timeCreated: 1447641390
->>>>>>> dev_TeamA
-licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -31,74 +24,71 @@ ModelImporter:
     100036: Dedos_Mano02.L_end
     100038: Hittite
     100040: //RootNode
-    100042: Lance
-    100044: Lance_end
-    100046: Mano.L
-    100048: PataDel01.L
-    100050: PataDel01.R
-    100052: PataDel02.L
-    100054: PataDel02.L_end
-    100056: PataDel02.R
-    100058: PataDel02.R_end
-    100060: PataDel_Control.L
-    100062: PataDel_Control.R
-    100064: PataDel_ik.L
-    100066: PataDel_ik.L_end
-    100068: PataDel_ik.R
-    100070: PataDel_ik.R_end
-    100072: PataDel_pole_target.L
-    100074: PataDel_pole_target.L_end
-    100076: PataDel_pole_target.R
-    100078: PataDel_pole_target.R_end
-    100080: PataTras01.L
-    100082: PataTras01.R
-    100084: PataTras02.L
-    100086: PataTras02.L_end
-    100088: PataTras02.R
-    100090: PataTras02.R_end
-    100092: PataTras_Control.L
-    100094: PataTras_Control.R
-    100096: PataTras_ik.L
-    100098: PataTras_ik.L_end
-    100100: PataTras_ik.R
-    100102: PataTras_ik.R_end
-    100104: PataTras_pole_target.L
-    100106: PataTras_pole_target.L_end
-    100108: PataTras_pole_target.R
-    100110: PataTras_pole_target.R_end
-    100112: Pecho
-    100114: Pecho_Yamato
-    100116: PezuDel.L
-    100118: PezuDel.L_end
-    100120: PezuDel.R
-    100122: PezuDel.R_end
-    100124: PezuDel_Control.L
-    100126: PezuDel_Control.L_end
-    100128: PezuDel_Control.R
-    100130: PezuDel_Control.R_end
-    100132: PezuTras.L
-    100134: PezuTras.L_end
-    100136: PezuTras.R
-    100138: PezuTras.R_end
-    100140: PezuTras_Control.L
-    100142: PezuTras_Control.L_end
-    100144: PezuTras_Control.R
-    100146: PezuTras_Control.R_end
-    100148: Pulgar01.L
-    100150: Pulgar02.L
-    100152: Pulgar02.L_end
-    100154: TobilloDel.L
-    100156: TobilloDel.R
-    100158: TobilloDel_Roll.L
-    100160: TobilloDel_Roll.R
-    100162: TobilloTras.L
-    100164: TobilloTras.R
-    100166: TobilloTras_Roll.L
-    100168: TobilloTras_Roll.R
-<<<<<<< HEAD
-=======
-    100170: Horse
->>>>>>> dev_TeamA
+    100042: Horse
+    100044: Lance
+    100046: Lance_end
+    100048: Mano.L
+    100050: PataDel01.L
+    100052: PataDel01.R
+    100054: PataDel02.L
+    100056: PataDel02.L_end
+    100058: PataDel02.R
+    100060: PataDel02.R_end
+    100062: PataDel_Control.L
+    100064: PataDel_Control.R
+    100066: PataDel_ik.L
+    100068: PataDel_ik.L_end
+    100070: PataDel_ik.R
+    100072: PataDel_ik.R_end
+    100074: PataDel_pole_target.L
+    100076: PataDel_pole_target.L_end
+    100078: PataDel_pole_target.R
+    100080: PataDel_pole_target.R_end
+    100082: PataTras01.L
+    100084: PataTras01.R
+    100086: PataTras02.L
+    100088: PataTras02.L_end
+    100090: PataTras02.R
+    100092: PataTras02.R_end
+    100094: PataTras_Control.L
+    100096: PataTras_Control.R
+    100098: PataTras_ik.L
+    100100: PataTras_ik.L_end
+    100102: PataTras_ik.R
+    100104: PataTras_ik.R_end
+    100106: PataTras_pole_target.L
+    100108: PataTras_pole_target.L_end
+    100110: PataTras_pole_target.R
+    100112: PataTras_pole_target.R_end
+    100114: Pecho
+    100116: Pecho_Yamato
+    100118: PezuDel.L
+    100120: PezuDel.L_end
+    100122: PezuDel.R
+    100124: PezuDel.R_end
+    100126: PezuDel_Control.L
+    100128: PezuDel_Control.L_end
+    100130: PezuDel_Control.R
+    100132: PezuDel_Control.R_end
+    100134: PezuTras.L
+    100136: PezuTras.L_end
+    100138: PezuTras.R
+    100140: PezuTras.R_end
+    100142: PezuTras_Control.L
+    100144: PezuTras_Control.L_end
+    100146: PezuTras_Control.R
+    100148: PezuTras_Control.R_end
+    100150: Pulgar01.L
+    100152: Pulgar02.L
+    100154: Pulgar02.L_end
+    100156: TobilloDel.L
+    100158: TobilloDel.R
+    100160: TobilloDel_Roll.L
+    100162: TobilloDel_Roll.R
+    100164: TobilloTras.L
+    100166: TobilloTras.R
+    100168: TobilloTras_Roll.L
+    100170: TobilloTras_Roll.R
     400000: Abdomen
     400002: Abdomen_Yamato
     400004: Antebrazo.L
@@ -120,77 +110,73 @@ ModelImporter:
     400036: Dedos_Mano02.L_end
     400038: Hittite
     400040: //RootNode
-    400042: Lance
-    400044: Lance_end
-    400046: Mano.L
-    400048: PataDel01.L
-    400050: PataDel01.R
-    400052: PataDel02.L
-    400054: PataDel02.L_end
-    400056: PataDel02.R
-    400058: PataDel02.R_end
-    400060: PataDel_Control.L
-    400062: PataDel_Control.R
-    400064: PataDel_ik.L
-    400066: PataDel_ik.L_end
-    400068: PataDel_ik.R
-    400070: PataDel_ik.R_end
-    400072: PataDel_pole_target.L
-    400074: PataDel_pole_target.L_end
-    400076: PataDel_pole_target.R
-    400078: PataDel_pole_target.R_end
-    400080: PataTras01.L
-    400082: PataTras01.R
-    400084: PataTras02.L
-    400086: PataTras02.L_end
-    400088: PataTras02.R
-    400090: PataTras02.R_end
-    400092: PataTras_Control.L
-    400094: PataTras_Control.R
-    400096: PataTras_ik.L
-    400098: PataTras_ik.L_end
-    400100: PataTras_ik.R
-    400102: PataTras_ik.R_end
-    400104: PataTras_pole_target.L
-    400106: PataTras_pole_target.L_end
-    400108: PataTras_pole_target.R
-    400110: PataTras_pole_target.R_end
-    400112: Pecho
-    400114: Pecho_Yamato
-    400116: PezuDel.L
-    400118: PezuDel.L_end
-    400120: PezuDel.R
-    400122: PezuDel.R_end
-    400124: PezuDel_Control.L
-    400126: PezuDel_Control.L_end
-    400128: PezuDel_Control.R
-    400130: PezuDel_Control.R_end
-    400132: PezuTras.L
-    400134: PezuTras.L_end
-    400136: PezuTras.R
-    400138: PezuTras.R_end
-    400140: PezuTras_Control.L
-    400142: PezuTras_Control.L_end
-    400144: PezuTras_Control.R
-    400146: PezuTras_Control.R_end
-    400148: Pulgar01.L
-    400150: Pulgar02.L
-    400152: Pulgar02.L_end
-    400154: TobilloDel.L
-    400156: TobilloDel.R
-    400158: TobilloDel_Roll.L
-    400160: TobilloDel_Roll.R
-    400162: TobilloTras.L
-    400164: TobilloTras.R
-    400166: TobilloTras_Roll.L
-    400168: TobilloTras_Roll.R
-<<<<<<< HEAD
-    4300000: Hittite
-=======
-    400170: Horse
+    400042: Horse
+    400044: Lance
+    400046: Lance_end
+    400048: Mano.L
+    400050: PataDel01.L
+    400052: PataDel01.R
+    400054: PataDel02.L
+    400056: PataDel02.L_end
+    400058: PataDel02.R
+    400060: PataDel02.R_end
+    400062: PataDel_Control.L
+    400064: PataDel_Control.R
+    400066: PataDel_ik.L
+    400068: PataDel_ik.L_end
+    400070: PataDel_ik.R
+    400072: PataDel_ik.R_end
+    400074: PataDel_pole_target.L
+    400076: PataDel_pole_target.L_end
+    400078: PataDel_pole_target.R
+    400080: PataDel_pole_target.R_end
+    400082: PataTras01.L
+    400084: PataTras01.R
+    400086: PataTras02.L
+    400088: PataTras02.L_end
+    400090: PataTras02.R
+    400092: PataTras02.R_end
+    400094: PataTras_Control.L
+    400096: PataTras_Control.R
+    400098: PataTras_ik.L
+    400100: PataTras_ik.L_end
+    400102: PataTras_ik.R
+    400104: PataTras_ik.R_end
+    400106: PataTras_pole_target.L
+    400108: PataTras_pole_target.L_end
+    400110: PataTras_pole_target.R
+    400112: PataTras_pole_target.R_end
+    400114: Pecho
+    400116: Pecho_Yamato
+    400118: PezuDel.L
+    400120: PezuDel.L_end
+    400122: PezuDel.R
+    400124: PezuDel.R_end
+    400126: PezuDel_Control.L
+    400128: PezuDel_Control.L_end
+    400130: PezuDel_Control.R
+    400132: PezuDel_Control.R_end
+    400134: PezuTras.L
+    400136: PezuTras.L_end
+    400138: PezuTras.R
+    400140: PezuTras.R_end
+    400142: PezuTras_Control.L
+    400144: PezuTras_Control.L_end
+    400146: PezuTras_Control.R
+    400148: PezuTras_Control.R_end
+    400150: Pulgar01.L
+    400152: Pulgar02.L
+    400154: Pulgar02.L_end
+    400156: TobilloDel.L
+    400158: TobilloDel.R
+    400160: TobilloDel_Roll.L
+    400162: TobilloDel_Roll.R
+    400164: TobilloTras.L
+    400166: TobilloTras.R
+    400168: TobilloTras_Roll.L
+    400170: TobilloTras_Roll.R
     4300000: Hittite
     4300002: Horse
->>>>>>> dev_TeamA
     7400000: Armature|Hittite_Cavalry_Die
     7400002: Armature|Hittite_Cavalry_Fight
     7400004: Armature|Hittite_Cavalry_Idle
@@ -198,10 +184,7 @@ ModelImporter:
     7400008: Armature|Hittite_Cavalry_Walk
     9500000: //RootNode
     13700000: Hittite
-<<<<<<< HEAD
-=======
     13700002: Horse
->>>>>>> dev_TeamA
   materials:
     importMaterials: 1
     materialName: 0
@@ -225,7 +208,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
