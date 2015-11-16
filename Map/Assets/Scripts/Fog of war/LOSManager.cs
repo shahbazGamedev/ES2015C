@@ -115,6 +115,24 @@ public class LOSManager : MonoBehaviour {
     }
 
     void Update() {
+		if (Input.GetKey (KeyCode.R)) {
+			if (this.Terrain.materialType != Terrain.MaterialType.BuiltInStandard){
+				this.Terrain.materialType = Terrain.MaterialType.BuiltInStandard;
+				foreach (var entity in Entities)
+					entity.IsRevealer = true;
+			}
+		}
+		if (Input.GetKey (KeyCode.U)) {
+			this.Terrain.materialTemplate = Resources.Load("Materials/Terrain", typeof(Material)) as Material;
+			this.Terrain.materialType = Terrain.MaterialType.Custom;
+			foreach (var entity in Entities){
+				if (entity.IsAlly != true){
+					entity.IsRevealer = false;
+				}
+			}
+
+		}
+
 #if UNITY_EDITOR
         if (!Application.isPlaying) {
             if (PreviewInEditor) {
