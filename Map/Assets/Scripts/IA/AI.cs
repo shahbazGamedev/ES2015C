@@ -31,21 +31,15 @@ public class AI : RTSObject
         civils = new List<GameObject>();
         Vector3 coords = new Vector3(453.51f, 0f, 435.28f);
         CreateNewCivil(coords);
-       coords = new Vector3(450f, 0f, 434f);
+        coords = new Vector3(450f, 0f, 434f);
         CreateNewCivil(coords);
        // coords = new Vector3(448f, 0f, 432f);
        // CreateNewCivil(coords);
         BuildTownCenter(true);
         StartRecollecting(civils[0],"tree");
-<<<<<<< HEAD
+
         StartRecollecting(civils[1], "food");
         //StartRecollecting(civils[2], "food");
-
-=======
-        StartRecollecting(civils[1], "tree");
-        StartRecollecting(civils[2], "food");
-   
->>>>>>> refs/remotes/origin/dev_TeamD
     }
 
     // Update is called once per frame
