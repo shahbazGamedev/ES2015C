@@ -21,7 +21,6 @@ public class Building : RTSObject
 	private int mask = layermask1 | layermask2;
 
     public float visi = 60f;
-    private TerrainFoW tf;
 
     /*** Metodes per defecte de Unity ***/
 
@@ -38,7 +37,6 @@ public class Building : RTSObject
 
     protected override void Update()
     {
-        explore();
         base.Update();
         ProcessBuildQueue();
     }
@@ -156,12 +154,4 @@ public class Building : RTSObject
         transform.rotation = rotation;
     }
 
-    private void explore()
-    {
-        tf = GameObject.FindObjectOfType(typeof(TerrainFoW)) as TerrainFoW;
-
-        Vector3 vec = transform.position;
-        //Debug.Log(vec);
-        if (tf != null) tf.ExploreArea(vec, visi);
-    }
 }
