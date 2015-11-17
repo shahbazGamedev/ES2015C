@@ -163,14 +163,10 @@ public class LOSManager : MonoBehaviour {
                 }
                 // Add LOS and AO for all entities
                 foreach (var entity in Entities) {
-                    if (entity != null)
-                    {
-                        RevealLOS(entity, entity.IsRevealer ? 255 : 0, 255, 255);
-                        if (entity.EnableAO && (AOIntensity > 0 || EnableHeightBlockers))
-                        {
-                            var bounds = entity.Bounds;
-                            AddAO(bounds, entity.Height);
-                        }
+                    RevealLOS(entity, entity.IsRevealer ? 255 : 0, 255, 255);
+                    if (entity.EnableAO && (AOIntensity > 0 || EnableHeightBlockers)) {
+                        var bounds = entity.Bounds;
+                        AddAO(bounds, entity.Height);
                     }
                 }
             } else {
@@ -179,11 +175,8 @@ public class LOSManager : MonoBehaviour {
                 if (forceFullUpdate) {
                     int revealerCount = 0;
                     foreach (var entity in Entities) {
-                        if (entity != null)
-                        {
-                            entity.RevealState = LOSEntity.RevealStates.Hidden;
-                            if (entity.IsRevealer) revealerCount++;
-                        }
+                        entity.RevealState = LOSEntity.RevealStates.Hidden;
+                        if (entity.IsRevealer) revealerCount++;
                     }
                     if (revealerCount == 0) {
                         Debug.LogError("No LOSEntity items were marked as revealers! Tick the 'Is Revealed' checkbox for at least 1 item.");
@@ -236,49 +229,40 @@ public class LOSManager : MonoBehaviour {
                             }
                         }
                         foreach (var entity in Entities) {
-                            if (entity != null)
-                            {
-                                var bounds = entity.Bounds;
-                                if (entity.EnableAO && AOIntensity > 0) AddAO(bounds, entity.Height);
-                                if (EnableHeightBlockers && (AllowOwnTeamHeightBlockers || !entity.IsRevealer))
-                                    AddHeightBlocker(bounds, entity.transform.position.y + entity.Height);
-                            }
+                            var bounds = entity.Bounds;
+                            if (entity.EnableAO && AOIntensity > 0) AddAO(bounds, entity.Height);
+                            if (EnableHeightBlockers && (AllowOwnTeamHeightBlockers || !entity.IsRevealer))
+                                AddHeightBlocker(bounds, entity.transform.position.y + entity.Height);
                         }
                     }
                 }
                 // Reveal LOS from all entities
                 foreach (var entity in Entities) {
-                    if (entity != null && entity.IsRevealer) RevealLOS(entity, 255, 255, 330);
+                    if (entity.IsRevealer) RevealLOS(entity, 255, 255, 330);
                 }
                 int count = 0;
                 foreach (var entity in Entities) {
-                    if (entity != null)
-                    {
-                        ++count;
-                        var rect = entity.Bounds;
-                        var fowColor = GetFOWColor(rect);
-                        var visible = GetRevealFromFOW(fowColor);
-                        if (entity.RevealState != visible && !(entity.RevealState == LOSEntity.RevealStates.Hidden && visible == LOSEntity.RevealStates.Fogged))
-                        {
-                            entity.RevealState = visible;
-                            if (visible == LOSEntity.RevealStates.Unfogged && RevealOnEntityDiscover)
-                            {
-                                RevealLOS(rect, 0, entity.Height + entity.transform.position.y, 0, 255, 255);
-                            }
+                    ++count;
+                    var rect = entity.Bounds;
+                    var fowColor = GetFOWColor(rect);
+                    var visible = GetRevealFromFOW(fowColor);
+                    if (entity.RevealState != visible && !(entity.RevealState == LOSEntity.RevealStates.Hidden && visible == LOSEntity.RevealStates.Fogged)) {
+                        entity.RevealState = visible;
+                        if (visible == LOSEntity.RevealStates.Unfogged && RevealOnEntityDiscover) {
+                            RevealLOS(rect, 0, entity.Height + entity.transform.position.y, 0, 255, 255);
                         }
-                        if (visible != LOSEntity.RevealStates.Hidden || forceFullUpdate)
-                        {
-                            entity.SetFOWColor(GetQuantizedFOW(fowColor), !forceFullUpdate);
-                            // Queue the item for FOW animation
-                            if (entity.RequiresFOWUpdate && !AnimatingEntities.Contains(entity))
-                                AnimatingEntities.Add(entity);
-                        }
+                    }
+                    if (visible != LOSEntity.RevealStates.Hidden || forceFullUpdate) {
+                        entity.SetFOWColor(GetQuantizedFOW(fowColor), !forceFullUpdate);
+                        // Queue the item for FOW animation
+                        if (entity.RequiresFOWUpdate && !AnimatingEntities.Contains(entity))
+                            AnimatingEntities.Add(entity);
                     }
                 }
                 //Manage the fact that resources and enemies behave in a different way.
                 foreach (var entity in Entities)
                 {
-                    if (entity != null && !entity.IsRevealer && entity.RevealState == LOSEntity.RevealStates.Fogged)
+                    if (!entity.IsRevealer && entity.RevealState == LOSEntity.RevealStates.Fogged)
                     {
                         entity.setActive(false);
                     }

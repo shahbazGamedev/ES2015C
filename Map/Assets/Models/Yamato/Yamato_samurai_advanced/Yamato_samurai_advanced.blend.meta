@@ -37,42 +37,6 @@ ModelImporter:
     100058: Tibia_L
     100060: Tibia_R
     100062: //RootNode
-    100064: abdomen
-    100066: antebrazo_L
-    100068: antebrazo_R
-    100070: brazo_L
-    100072: brazo_R
-    100074: cabeza
-    100076: cabeza_001
-    100078: cuello
-    100080: dedos_mano2_L
-    100082: dedos_mano2_R
-    100084: dedos_mano_L
-    100086: dedos_mano_R
-    100088: dedos_pie_L
-    100090: dedos_pie_R
-    100092: femur_L
-    100094: femur_R
-    100096: Hacha
-    100098: Hacha_001
-    100100: mano_L
-    100102: mano_R
-    100104: Martillo
-    100106: Martillo_001
-    100108: pecho
-    100110: Pick
-    100112: pie_L
-    100114: pie_L_control
-    100116: pie_R
-    100118: pie_R_control
-    100120: pulga2_L
-    100122: pulga2_R
-    100124: pulgar1_L
-    100126: pulgar1_R
-    100128: Rack
-    100130: root
-    100132: tibia_L
-    100134: tibia_R
     400000: Abdomen
     400002: Antebrazo_L
     400004: Antebrazo_R
@@ -105,42 +69,6 @@ ModelImporter:
     400058: Tibia_L
     400060: Tibia_R
     400062: //RootNode
-    400064: abdomen
-    400066: antebrazo_L
-    400068: antebrazo_R
-    400070: brazo_L
-    400072: brazo_R
-    400074: cabeza
-    400076: cabeza_001
-    400078: cuello
-    400080: dedos_mano2_L
-    400082: dedos_mano2_R
-    400084: dedos_mano_L
-    400086: dedos_mano_R
-    400088: dedos_pie_L
-    400090: dedos_pie_R
-    400092: femur_L
-    400094: femur_R
-    400096: Hacha
-    400098: Hacha_001
-    400100: mano_L
-    400102: mano_R
-    400104: Martillo
-    400106: Martillo_001
-    400108: pecho
-    400110: Pick
-    400112: pie_L
-    400114: pie_L_control
-    400116: pie_R
-    400118: pie_R_control
-    400120: pulga2_L
-    400122: pulga2_R
-    400124: pulgar1_L
-    400126: pulgar1_R
-    400128: Rack
-    400130: root
-    400132: tibia_L
-    400134: tibia_R
     4300000: Samurai_Advanced
     7400000: Default Take
     7400002: Dead

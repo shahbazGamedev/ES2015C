@@ -4,12 +4,13 @@ public class Gold : Resource {
 
     /*** Metodes per defecte de Unity ***/
 
-	protected override void Awake()
+    protected override void Start()
     {
-		base.Awake();
+        base.Start();
 		resourceType = ResourceType.Gold;
 		objectName = "Gold Resource";
 		gameObject.tag = "gold";
-		amountLeft = capacity = hitPoints = maxHitPoints = 800;
+		hitPoints = 800;
+		maxHitPoints = 800;
     }
 }

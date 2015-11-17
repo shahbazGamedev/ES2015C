@@ -6,88 +6,13 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: abdomen
-    100004: antebrazo_L
-    100006: antebrazo_R
-    100008: Armature_001
-    100010: brazo_L
-    100012: brazo_R
-    100014: cabeza
-    100016: cuello
-    100018: dedos_mano2_L
-    100020: dedos_mano2_R
-    100022: dedos_mano_L
-    100024: dedos_mano_R
-    100026: dedos_pie_L
-    100028: dedos_pie_R
-    100030: femur_L
-    100032: femur_R
-    100034: Hacha
-    100036: mano_L
-    100038: mano_R
-    100040: Martillo
-    100042: pecho
-    100044: Pick
-    100046: pie_L
-    100048: pie_L_control
-    100050: pie_R
-    100052: pie_R_control
-    100054: pulga2_L
-    100056: pulga2_R
-    100058: pulgar1_L
-    100060: pulgar1_R
-    100062: Rack
-    100064: Rack_001
-    100066: Rack_002
-    100068: root
-    100070: Summerian_Civil
-    100072: tibia_L
-    100074: tibia_R
     400000: //RootNode
-    400002: abdomen
-    400004: antebrazo_L
-    400006: antebrazo_R
-    400008: Armature_001
-    400010: brazo_L
-    400012: brazo_R
-    400014: cabeza
-    400016: cuello
-    400018: dedos_mano2_L
-    400020: dedos_mano2_R
-    400022: dedos_mano_L
-    400024: dedos_mano_R
-    400026: dedos_pie_L
-    400028: dedos_pie_R
-    400030: femur_L
-    400032: femur_R
-    400034: Hacha
-    400036: mano_L
-    400038: mano_R
-    400040: Martillo
-    400042: pecho
-    400044: Pick
-    400046: pie_L
-    400048: pie_L_control
-    400050: pie_R
-    400052: pie_R_control
-    400054: pulga2_L
-    400056: pulga2_R
-    400058: pulgar1_L
-    400060: pulgar1_R
-    400062: Rack
-    400064: Rack_001
-    400066: Rack_002
-    400068: root
-    400070: Summerian_Civil
-    400072: tibia_L
-    400074: tibia_R
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cube_003
     4300002: Summerian_Civil
     7400000: Default Take
     9500000: //RootNode
-    13700000: Summerian_Civil
   materials:
     importMaterials: 1
     materialName: 0

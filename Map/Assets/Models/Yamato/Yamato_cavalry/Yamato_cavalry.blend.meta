@@ -10,93 +10,11 @@ ModelImporter:
     100004: Spear
     100006: Yamato
     100008: //RootNode
-    100010: Abdomen
-    100012: Abdomen_Yamato
-    100014: Antebrazo_L
-    100016: Armature
-    100018: Bone
-    100020: Brazo_L
-    100022: Cabeza
-    100024: Cabeza_Yamato
-    100026: Cola01
-    100028: Cola02
-    100030: Coxis
-    100032: Cuello
-    100034: Cuello_Yamato
-    100036: Dedos_Mano01_L
-    100038: Dedos_Mano02_L
-    100040: Lance
-    100042: Mano_L
-    100044: PataDel01_L
-    100046: PataDel01_R
-    100048: PataDel02_L
-    100050: PataDel02_R
-    100052: PataDel_Control_L
-    100054: PataDel_Control_R
-    100056: PataTras01_L
-    100058: PataTras01_R
-    100060: PataTras02_L
-    100062: PataTras02_R
-    100064: PataTras_Control_L
-    100066: PataTras_Control_R
-    100068: Pecho
-    100070: Pecho_Yamato
-    100072: PezuDel_L
-    100074: PezuDel_R
-    100076: PezuTras_L
-    100078: PezuTras_R
-    100080: Pulgar01_L
-    100082: Pulgar02_L
-    100084: TobilloDel_L
-    100086: TobilloDel_R
-    100088: TobilloTras_L
-    100090: TobilloTras_R
     400000: Harness
     400002: Horse
     400004: Spear
     400006: Yamato
     400008: //RootNode
-    400010: Abdomen
-    400012: Abdomen_Yamato
-    400014: Antebrazo_L
-    400016: Armature
-    400018: Bone
-    400020: Brazo_L
-    400022: Cabeza
-    400024: Cabeza_Yamato
-    400026: Cola01
-    400028: Cola02
-    400030: Coxis
-    400032: Cuello
-    400034: Cuello_Yamato
-    400036: Dedos_Mano01_L
-    400038: Dedos_Mano02_L
-    400040: Lance
-    400042: Mano_L
-    400044: PataDel01_L
-    400046: PataDel01_R
-    400048: PataDel02_L
-    400050: PataDel02_R
-    400052: PataDel_Control_L
-    400054: PataDel_Control_R
-    400056: PataTras01_L
-    400058: PataTras01_R
-    400060: PataTras02_L
-    400062: PataTras02_R
-    400064: PataTras_Control_L
-    400066: PataTras_Control_R
-    400068: Pecho
-    400070: Pecho_Yamato
-    400072: PezuDel_L
-    400074: PezuDel_R
-    400076: PezuTras_L
-    400078: PezuTras_R
-    400080: Pulgar01_L
-    400082: Pulgar02_L
-    400084: TobilloDel_L
-    400086: TobilloDel_R
-    400088: TobilloTras_L
-    400090: TobilloTras_R
     2300000: Harness
     2300002: Horse
     2300004: Spear
@@ -110,16 +28,7 @@ ModelImporter:
     4300004: Horse
     4300006: Yamato
     7400000: Default Take
-    7400002: Yamato_Cavalry_Die
-    7400004: Yamato_Cavalry_Fight
-    7400006: Yamato_Cavalry_Idle
-    7400008: Yamato_Cavalry_Run
-    7400010: Yamato_Cavalry_Walk
     9500000: //RootNode
-    13700000: Harness
-    13700002: Horse
-    13700004: Spear
-    13700006: Yamato
   materials:
     importMaterials: 1
     materialName: 0

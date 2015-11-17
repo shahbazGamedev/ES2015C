@@ -4,12 +4,13 @@ public class Yamato_WallEntrance : Building {
 
     /*** Metodes per defecte de Unity ***/
 
-	protected override void Awake()
+    protected override void Start()
     {
-		base.Awake();
+        base.Start();
 		objectName = "Yamato Wall Entrance";
 		cost = 100;
-		hitPoints = maxHitPoints = 700;
+		hitPoints = 0;
+		maxHitPoints = 700;
         baseDefense = 5;
     }
 }
