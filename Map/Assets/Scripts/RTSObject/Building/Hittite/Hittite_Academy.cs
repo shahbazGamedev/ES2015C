@@ -4,13 +4,12 @@ public class Hittite_Academy : Building {
 
     /*** Metodes per defecte de Unity ***/
 
-    protected override void Start()
+	protected override void Awake()
     {
-        base.Start();
+		base.Awake();
 		objectName = "Hittite Academy";
 		cost = 400;
-		hitPoints = 0;
-		maxHitPoints = 800;
+		hitPoints = maxHitPoints = 800;
         baseDefense = 5;
     }
 }

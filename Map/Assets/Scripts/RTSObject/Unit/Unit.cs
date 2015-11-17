@@ -34,12 +34,7 @@ public class Unit : RTSObject
 		//RDV = gameObject.AddComponent<SphereCollider> ();
 		//RDV.radius = characterController.radius * 10;
 		//RDA = gameObject.AddComponent<BoxCollider> ();
-	}
-
-	protected override void Start ()
-	{
-		base.Start ();
-        baseMoveSpeed = 5;
+		baseMoveSpeed = 5;
 	}
 
 	protected override void Update ()
@@ -109,6 +104,7 @@ public class Unit : RTSObject
     public GameObject FindClosest (string tag)
 	{
 
+
         var nearestDistanceSqr = Mathf.Infinity;
         var taggedGameObjects = GameObject.FindGameObjectsWithTag(tag);
         GameObject nearestObj = null;
@@ -125,7 +121,6 @@ public class Unit : RTSObject
         return nearestObj;
     }
 
-	
 
 	/*** Metodes interns accessibles per les subclasses ***/
 
