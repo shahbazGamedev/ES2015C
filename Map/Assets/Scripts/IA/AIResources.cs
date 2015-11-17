@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AIResources : MonoBehaviour{
+public class AIResources : AI{
 	public float wood;
 	public float food;
 	public float gold;
 	
 	public AIResources (){
 		
-		this.wood = 1000;
+		this.wood = 200;
 		this.food = 1000;
 		this.gold = 1000;
 	}
