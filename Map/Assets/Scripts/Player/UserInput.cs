@@ -114,7 +114,7 @@ public class UserInput : MonoBehaviour
 				}
                 
                 //Recolecto
-                else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.tag == "wood"){
+				else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.GetComponent<Resource>()){ //tag == "wood"
                     //player.SelectedObject.MoveTo(hit.point);
                     player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>());//, Building store)
                     //player.SelectedObject.GetComponent<CivilUnit>().harvesting=true; //el civilunit es recolector

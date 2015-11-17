@@ -8,7 +8,7 @@ public class AIResources : MonoBehaviour{
 	
 	public AIResources (){
 		
-		this.wood = 1000;
+		this.wood = 200;
 		this.food = 1000;
 		this.gold = 1000;
 	}
