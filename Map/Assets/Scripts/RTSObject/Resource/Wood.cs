@@ -4,13 +4,18 @@ public class Wood : Resource {
 
     /*** Metodes per defecte de Unity ***/
 
-    protected override void Start()
+	protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 		resourceType = ResourceType.Wood;
 		objectName = "Wood Resource";
+<<<<<<< HEAD
 		gameObject.tag = "tree";
 		hitPoints = 100;
 		maxHitPoints = 100;
+=======
+		gameObject.tag = "wood";
+		amountLeft = capacity = hitPoints = maxHitPoints = 100;
+>>>>>>> origin/dev
     }
 }

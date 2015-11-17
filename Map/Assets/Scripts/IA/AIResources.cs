@@ -13,7 +13,14 @@ public class AIResources : MonoBehaviour{
 		this.gold = 1000;
 	}
 
-	void Start(){}
+	void Start(){
+
+        this.wood = 1000;
+        this.food = 1000;
+        this.gold = 1000;
+
+    }
+
 	void Update(){}
 }
 

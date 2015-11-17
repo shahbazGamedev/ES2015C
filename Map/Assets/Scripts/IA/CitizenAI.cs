@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using UnityEngine;
 using System.Collections;
 
@@ -164,3 +165,6 @@ public class CitizenAI : AI {
 
 
 
+=======
+﻿
+>>>>>>> origin/dev
