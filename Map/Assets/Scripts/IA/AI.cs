@@ -37,9 +37,15 @@ public class AI : RTSObject
        // CreateNewCivil(coords);
         BuildTownCenter(true);
         StartRecollecting(civils[0],"tree");
+<<<<<<< HEAD
         StartRecollecting(civils[1], "food");
         //StartRecollecting(civils[2], "food");
 
+=======
+        StartRecollecting(civils[1], "tree");
+        StartRecollecting(civils[2], "food");
+   
+>>>>>>> refs/remotes/origin/dev_TeamD
     }
 
     // Update is called once per frame

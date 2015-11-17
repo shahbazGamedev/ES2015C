@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+<<<<<<< HEAD
 public class CitizenAI : AI {
+=======
+public class CitizenAI : RTSObject {
+>>>>>>> refs/remotes/origin/dev_TeamD
 	
 	RTSObject rtsObject;
 	/*public AnimationClip idle;
@@ -10,6 +14,10 @@ public class CitizenAI : AI {
 	public AnimationClip attack;
 	public AnimationClip die;
 	*/
+<<<<<<< HEAD
+=======
+	public AIResources resources;
+>>>>>>> refs/remotes/origin/dev_TeamD
 	public int AIState; 		 
 	public float MAX_RESOURCE = 50f;
 	public float patrolTime = 0f; //contador de patrol/idle
