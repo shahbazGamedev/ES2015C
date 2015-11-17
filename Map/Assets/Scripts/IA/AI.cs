@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class AI : MonoBehaviour
+public class AI : RTSObject
 {
 
     // Use this for initialization
@@ -12,32 +12,40 @@ public class AI : MonoBehaviour
     private List<GameObject> civils;
     public List<GameObject> townCenters;
     private List<CivilUnit> soldiers;
-    private Vector3 position, closestDistance;
+    private Vector3 position, closestDistance,coords;
     private float totalDist;
     private GameObject civil, center;
     private GameObject tree;
     private bool building = false;
     private int i = 0;
- 
+    public AIResources resources;
+
 
 
 
     void Start()
     {
+        resources = new AIResources();
         artificialIntelligence = gameObject.AddComponent<Player>();
         townCenters = new List <GameObject>();
         civils = new List<GameObject>();
         Vector3 coords = new Vector3(453.51f, 0f, 435.28f);
         CreateNewCivil(coords);
-        coords = new Vector3(450f, 0f, 434f);
+       coords = new Vector3(450f, 0f, 434f);
         CreateNewCivil(coords);
-        coords = new Vector3(448f, 0f, 432f);
-        CreateNewCivil(coords);
+       // coords = new Vector3(448f, 0f, 432f);
+       // CreateNewCivil(coords);
         BuildTownCenter(true);
         StartRecollecting(civils[0],"tree");
+<<<<<<< HEAD
+        StartRecollecting(civils[1], "food");
+        //StartRecollecting(civils[2], "food");
+
+=======
         StartRecollecting(civils[1], "tree");
         StartRecollecting(civils[2], "food");
    
+>>>>>>> refs/remotes/origin/dev_TeamD
     }
 
     // Update is called once per frame
@@ -46,6 +54,18 @@ public class AI : MonoBehaviour
             BuildTownCenter(false);
         }
 
+        if (resources.wood >= 150)
+        {
+            resources.wood -= 150;
+            BuildWareHouse(civils[0]);
+        }
+
+            if (resources.wood >= 50)
+        {
+            resources.wood -= 50;
+            coords = new Vector3(457f, 0f, 436f);
+            CreateNewCivil(coords);
+        }
     }
 
     
@@ -57,20 +77,20 @@ public class AI : MonoBehaviour
             tree = civilian.GetComponent<CivilUnit>().FindClosest("tree");
             center = civilian.GetComponent<CivilUnit>().FindClosest("townCenter");
 
-            // Vector3 positionTree = new Vector3(tree.transform.position.x, 0.0f, tree.transform.position.z);
-            closestDistance = new Vector3(civil.GetComponent<CivilUnit>().transform.position.x - tree.transform.position.x, 0, civil.GetComponent<CivilUnit>().transform.position.z - tree.transform.position.z);
+
+           /* closestDistance = new Vector3(civil.GetComponent<CivilUnit>().transform.position.x - tree.transform.position.x, 0, civil.GetComponent<CivilUnit>().transform.position.z - tree.transform.position.z);
             totalDist = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);
 
             Vector3 positionCenter = new Vector3(center.transform.position.x, 0.0f, center.transform.position.z);
             Vector3 closestCenter = new Vector3(civil.GetComponent<CivilUnit>().transform.position.x - center.transform.position.x, 0, civil.GetComponent<CivilUnit>().transform.position.z - center.transform.position.z);
-            float totalCenter = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);
-
-            if (totalDist < 50f && totalCenter > 100f) {
-                position = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z + 10);
+            float totalCenter = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);*/
+            
+            //if (totalDist < 50f && totalCenter > 100f) {
+                position = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z -20);
                 GameObject centerClone = (GameObject)Instantiate(Resources.Load("Prefabs/Hittite_CivilHouse"), position, Quaternion.identity);
                 centerClone.GetComponent<RTSObject>().owner = artificialIntelligence;
                // artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] - 50;
-            }
+            //}
        //}
     }
 
@@ -83,7 +103,7 @@ public class AI : MonoBehaviour
             if (building == false) // Loop with for.
             {
                 position = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z + 10);
-                GameObject centerClone = (GameObject)Instantiate(Resources.Load("Prefabs/Hittite_TownCenter"), position, Quaternion.identity);
+                GameObject centerClone = (GameObject)Instantiate(Resources.Load("Prefabs/Sumerian_TownCenter"), position, Quaternion.identity);
                 centerClone.GetComponent<RTSObject>().owner = artificialIntelligence;
                 if (resourceFree == false)
                 {
@@ -96,7 +116,7 @@ public class AI : MonoBehaviour
     }
 
     private void CreateNewCivil(Vector3 coords) {
-        civil = Instantiate(Resources.Load("Prefabs/Hittite_civil"), coords, Quaternion.identity) as GameObject;
+        civil = Instantiate(Resources.Load("Prefabs/Sumerian_civil"), coords, Quaternion.identity) as GameObject;
         civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
         civils.Add(civil);
     }
