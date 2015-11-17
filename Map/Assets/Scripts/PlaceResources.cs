@@ -18,15 +18,15 @@ public class PlaceResources : MonoBehaviour
         //Crides a la funció
         //tree
         //PlaceRandomResources(30, "arbolYamato",500,500);
-        PlaceGroup(10, 30, "arbolYamato",500,500);
-        PlaceResourcesFromXToZ("arbolYamato",500,500,130,130,150,150);
+        PlaceGroup(10, 30, "arbolYamato", 500, 500);
+        PlaceResourcesFromXToZ("arbolYamato", 500, 500, 130, 130, 150, 150);
         PlaceResourcesFromXToZ("arbolYamato", 500, 500, 400, 420, 420, 430);
 
-        PlaceRandomResources(30, "Bush", 500,500);
+        PlaceRandomResources(30, "Bush", 500, 500);
         //PlaceGroup(10, 30, "Bush",500,500);
-        PlaceResourcesFromXToZ("Bush", 500,500,130,100,150,120);
+        PlaceResourcesFromXToZ("Bush", 500, 500, 130, 100, 150, 120);
         PlaceResourcesFromXToZ("Bush", 500, 500, 400, 470, 420, 480);
-        
+
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class PlaceResources : MonoBehaviour
     {
     }
 
-    void PlaceRandomResources(int numberOfResources, string asset,float width, float depth)//numero de recursos,prefab del recurs, amplada del mapa, profunditat del mapa
+    void PlaceRandomResources(int numberOfResources, string asset, float width, float depth)//numero de recursos,prefab del recurs, amplada del mapa, profunditat del mapa
     {
         if (asset == "arbolYamato")
         {
@@ -52,7 +52,7 @@ public class PlaceResources : MonoBehaviour
             coords = new Vector3((float)randomWidth, y, (float)randomDepth);
             if (!Physics.CheckSphere(coords, 1))     //Comprova si hi ha algun altre objecte a on es crea l'arbre
             {
-				tree = (GameObject)Instantiate(Resources.Load("Prefabs/" + asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
+                tree = (GameObject)Instantiate(Resources.Load("Prefabs/" + asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
                 var guo = new GraphUpdateObject(tree.GetComponent<Collider>().bounds);
                 guo.updatePhysics = true;
                 AstarPath.active.UpdateGraphs(guo);
@@ -63,10 +63,12 @@ public class PlaceResources : MonoBehaviour
 
     void PlaceGroup(int numGroups, int maxElementsInGroup, string asset, float width, float depth)
     {
-        if(asset == "arbolYamato") {
+        if (asset == "arbolYamato")
+        {
             y = -1.6f;
         }
-        else if(asset == "Bush") {
+        else if (asset == "Bush")
+        {
             y = 1.77f;
         }
         for (i = 0; i < numGroups; i++) //Numero de boscos que tindra el mapa
@@ -93,7 +95,7 @@ public class PlaceResources : MonoBehaviour
                             int placeTree = Random.Range(0, 2);  //Només posa un arbre si no surt el 0, es per que els boscos quedin més realistes
                             if (placeTree != 0)
                             {
-								tree=(GameObject)Instantiate(Resources.Load("Prefabs/" + asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
+                                tree = (GameObject)Instantiate(Resources.Load("Prefabs/" + asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
                                 var guo = new GraphUpdateObject(tree.GetComponent<Collider>().bounds);
                                 guo.updatePhysics = true;
                                 AstarPath.active.UpdateGraphs(guo);
@@ -108,7 +110,7 @@ public class PlaceResources : MonoBehaviour
 
     }
 
-    void PlaceResourcesFromXToZ( string asset, float width, float depth,float coordXStart, float coordZStart, float coordXEnd, float coordZEnd)//prefab del recurs, amplada del mapa, profunditat del mapa, i coordeandes d'inici i fi 
+    void PlaceResourcesFromXToZ(string asset, float width, float depth, float coordXStart, float coordZStart, float coordXEnd, float coordZEnd)//prefab del recurs, amplada del mapa, profunditat del mapa, i coordeandes d'inici i fi 
     {
         if (asset == "arbolYamato")
         {
@@ -118,24 +120,26 @@ public class PlaceResources : MonoBehaviour
         {
             y = 1.77f;
         }
-        float coordX,coordZ;
-        for (coordX = coordXStart; coordX < coordXEnd; coordX++) {
-            for (coordZ=coordZStart; coordZ < coordZEnd; coordZ++) {
+        float coordX, coordZ;
+        for (coordX = coordXStart; coordX < coordXEnd; coordX++)
+        {
+            for (coordZ = coordZStart; coordZ < coordZEnd; coordZ++)
+            {
                 int placeTree = Random.Range(0, 2);  //Només posa un arbre si no surt el 0, es per que els boscos quedin més realistes
                 if (placeTree == 0)
                 {
                     coords = new Vector3((float)coordX, y, (float)coordZ);
                     if (!Physics.CheckSphere(coords, 1))     //Comprova si hi ha algun altre objecte a on es crea l'arbre
                     {
-						tree = (GameObject)Instantiate(Resources.Load("Prefabs/" + asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
+                        tree = (GameObject)Instantiate(Resources.Load("Prefabs/" + asset, typeof(GameObject)), coords, Quaternion.identity); //Crear l'arbre
                         var guo = new GraphUpdateObject(tree.GetComponent<Collider>().bounds);
                         guo.updatePhysics = true;
                         AstarPath.active.UpdateGraphs(guo);
                     }
                 }
-                coordZ=coordZ+2;
+                coordZ = coordZ + 2;
             }
-            coordX=coordX + 2; 
+            coordX = coordX + 2;
         }
     }
 

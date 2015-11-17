@@ -1,0 +1,174 @@
+fileFormatVersion: 2
+guid: ceba2549110a7414b8f222be258fce33
+timeCreated: 1447612246
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Hittite
+    100002: //RootNode
+    100004: Horse
+    100006: Abdomen
+    100008: Abdomen_Yamato
+    100010: Antebrazo_L
+    100012: Armature
+    100014: Bone
+    100016: Brazo_L
+    100018: Cabeza
+    100020: Cabeza_Yamato
+    100022: Cola01
+    100024: Cola02
+    100026: Coxis
+    100028: Cuello
+    100030: Cuello_Yamato
+    100032: Dedos_Mano01_L
+    100034: Dedos_Mano02_L
+    100036: Lance
+    100038: Mano_L
+    100040: PataDel01_L
+    100042: PataDel01_R
+    100044: PataDel02_L
+    100046: PataDel02_R
+    100048: PataDel_Control_L
+    100050: PataDel_Control_R
+    100052: PataTras01_L
+    100054: PataTras01_R
+    100056: PataTras02_L
+    100058: PataTras02_R
+    100060: PataTras_Control_L
+    100062: PataTras_Control_R
+    100064: Pecho
+    100066: Pecho_Yamato
+    100068: PezuDel_L
+    100070: PezuDel_R
+    100072: PezuTras_L
+    100074: PezuTras_R
+    100076: Pulgar01_L
+    100078: Pulgar02_L
+    100080: TobilloDel_L
+    100082: TobilloDel_R
+    100084: TobilloTras_L
+    100086: TobilloTras_R
+    400000: Hittite
+    400002: //RootNode
+    400004: Horse
+    400006: Abdomen
+    400008: Abdomen_Yamato
+    400010: Antebrazo_L
+    400012: Armature
+    400014: Bone
+    400016: Brazo_L
+    400018: Cabeza
+    400020: Cabeza_Yamato
+    400022: Cola01
+    400024: Cola02
+    400026: Coxis
+    400028: Cuello
+    400030: Cuello_Yamato
+    400032: Dedos_Mano01_L
+    400034: Dedos_Mano02_L
+    400036: Lance
+    400038: Mano_L
+    400040: PataDel01_L
+    400042: PataDel01_R
+    400044: PataDel02_L
+    400046: PataDel02_R
+    400048: PataDel_Control_L
+    400050: PataDel_Control_R
+    400052: PataTras01_L
+    400054: PataTras01_R
+    400056: PataTras02_L
+    400058: PataTras02_R
+    400060: PataTras_Control_L
+    400062: PataTras_Control_R
+    400064: Pecho
+    400066: Pecho_Yamato
+    400068: PezuDel_L
+    400070: PezuDel_R
+    400072: PezuTras_L
+    400074: PezuTras_R
+    400076: Pulgar01_L
+    400078: Pulgar02_L
+    400080: TobilloDel_L
+    400082: TobilloDel_R
+    400084: TobilloTras_L
+    400086: TobilloTras_R
+    2300000: Hittite
+    2300002: Horse
+    3300000: Hittite
+    3300002: Horse
+    4300000: Horse
+    4300002: Hittite
+    7400000: Default Take
+    7400002: Hittite_Cavalry_Die
+    7400004: Hittite_Cavalry_Fight
+    7400006: Hittite_Cavalry_Idle
+    7400008: Hittite_Cavalry_Run
+    7400010: Hittite_Cavalry_Walk
+    9500000: //RootNode
+    13700000: Hittite
+    13700002: Horse
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -7,12 +7,14 @@ public class CivilUnit : Unit
     public float capacity, collectionAmount, depositAmount; // Dades sobre la recolecció
     public bool llegado = false;                            //he llegado a mi destino
     public int state;                                       //estado de recoleccion
-    //public int baseBuildSpeed;                            // Velocitat de construcció
 
-	protected GameObject creationBuilding = null;			// Objecte que indica la unitat a crear actual
+	public Vector3 constructionPoint = Vector3.zero;		// Posicio on crear el edifici
+	public Building currentProject = null;  				// Building actual de construccio
+	protected GameObject creationBuilding = null;			// Objecte que anem a crear
+	protected GameObject creationBuildingConstruction = null; //Edifici que anem a crear, en construccio
 
-    public bool harvesting = false;      // Indicadors d'estat de la unitat
-	public bool building;
+    public bool harvesting = false;      					// Indicadors d'estat de la unitat
+	public bool building = false;
 
     //private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
     private ResourceType harvestType;                       // Tipus de recolecció
@@ -20,10 +22,8 @@ public class CivilUnit : Unit
 	private TownCenterBuilding resourceStore;				// Edifici on es deposita la recolecció
     private float amountBuilt = 0.0f;                       // Porcentatge de construcció feta
 	//public int mask = 1024;								// 10000001 checks default and obstacles
-	private Vector3 constructionPoint;
-	
-	private GameObject buildingClone;
-	public Building currentProject;                        
+
+	                      
 	
 	private static int layer1 = 0;
 	private static int layer2 = 10;
@@ -42,12 +42,11 @@ public class CivilUnit : Unit
     }
     */
 
-    protected override void Start()
+	protected override void Awake()
     {
-        base.Start();
+		base.Awake();
         objectName = "Civil Unit";
 		gameObject.tag = "civil";
-		building = false;
         capacity = 50;
     }
 	
@@ -75,10 +74,33 @@ public class CivilUnit : Unit
                     IrRecolectar();
                 } 
             }
-            else if (building && currentProject.UnderConstruction())
-            {
-				currentProject.Construct(baseBuildSpeed);
-            }
+			else if (building)
+			{
+				if (currentProject && currentProject.UnderConstruction()) //Si tenemos un proyecto y lo estamos construyendo 
+				{
+					currentProject.Construct(baseBuildSpeed);
+				}
+				else if (currentProject && currentProject.UnderConstruction() == false) //Si tenemos un proyecto y se ha acabado de construir
+				{
+					Destroy(creationBuildingConstruction);
+					Debug.Log("Destruimos el edificio en construccion");
+					currentProject=null;
+					building=false;
+					CreateFinishedBuilding();
+				}
+				else if (creationBuildingConstruction != null)
+				{
+					if (constructionPoint != Vector3.zero)
+					{
+						CreateBuilding ();
+					}
+				}
+				else
+				{
+					currentProject = null;
+					building = false;
+				}
+			}
         }
     }
 
@@ -109,50 +131,56 @@ public class CivilUnit : Unit
         return collectionAmount;
     }
 
-    public override void PerformAction(string actionToPerform)
-    {
-        base.PerformAction(actionToPerform);
-        CreateBuilding(actionToPerform);
-    }
-
     /*** Metodes interns accessibles per les subclasses ***/
 
     // Metode que crea el edifici
-    public virtual void CreateBuilding(string buildingName)
+    public void CreateBuilding()
     {
-        if (creationBuilding != null)
-        {
-            //building = true;
-            constructionPoint = new Vector3(transform.position.x + 10, 0.0f, transform.position.z + 10);
-
-            if (Physics.CheckSphere(constructionPoint, 0.8f, finalmask))
-            {
-                Debug.Log("No podemos construir porque hay otros edificios cerca");
-            }
-            else
-            {
-                float wood = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
-                if (wood >= 100)
-                {
-                    buildingClone = (GameObject)Instantiate(creationBuilding, constructionPoint, Quaternion.identity);
-                    currentProject = buildingClone.GetComponent<Building>();
-                    building = true;
-
-                    buildingClone.GetComponent<RTSObject>().owner = owner;
-                    var guo = new GraphUpdateObject(buildingClone.GetComponent<BoxCollider>().bounds);
-                    guo.updatePhysics = true;
-                    AstarPath.active.UpdateGraphs(guo);
-                    owner.resourceAmounts[RTSObject.ResourceType.Wood] = wood - 100;
-                }
-                else
-                {
-                    Debug.Log("Not enough wood");
-                }
-            }
-
-            creationBuilding = null;
-        }
+		if (Physics.CheckSphere (constructionPoint, 0.8f, finalmask)) {
+			HUDInfo.message = "We can not build because there are other buildings nearby";
+			constructionPoint = Vector3.zero;
+		} else {
+			Debug.Log("Podemos crear el edificio");
+			creationBuildingConstruction = (GameObject) Instantiate (creationBuildingConstruction, constructionPoint, Quaternion.identity);
+			creationBuildingConstruction.SetActive(false);
+			float wood = owner.GetResourceAmount (RTSObject.ResourceType.Wood);
+			if (wood >= creationBuildingConstruction.GetComponent<Building>().cost) {
+				Debug.Log("Tenemos suficiente madera");
+				creationBuildingConstruction.SetActive(true);
+				currentProject = creationBuildingConstruction.GetComponent<Building> ();
+				currentProject.hitPoints = 0;
+				currentProject.needsBuilding = true;
+				currentProject.owner = owner;
+				var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
+				guo.updatePhysics = true;
+				AstarPath.active.UpdateGraphs (guo);
+				owner.resourceAmounts [RTSObject.ResourceType.Wood] -= currentProject.cost;
+				SetNewPath(constructionPoint);
+						
+			} else {
+				HUDInfo.message = "Not enough wood (" + creationBuilding.GetComponent<Building>().cost + ") to construct the " + creationBuilding.name;
+				Destroy(creationBuildingConstruction);
+				constructionPoint = Vector3.zero;
+				creationBuildingConstruction = null;
+			}
+		}
     }
+	
+	public void CreateFinishedBuilding()
+	{
+		creationBuilding = (GameObject)Instantiate (creationBuilding, constructionPoint, Quaternion.identity);
+		currentProject = creationBuilding.GetComponent<Building> ();
+		currentProject.owner = owner;
+		var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
+		guo.updatePhysics = true;
+		AstarPath.active.UpdateGraphs (guo);
+		SetNewPath(constructionPoint);		
+		constructionPoint = Vector3.zero;
+		creationBuilding = null;
+		currentProject=null;
+		creationBuildingConstruction = null;
+		constructionPoint = Vector3.zero;
+	}
 
     /*** Metodes privats ***/
 
@@ -169,8 +197,10 @@ public class CivilUnit : Unit
     public void Collect(Resource resourceDeposit)
     {
         //GetComponent<Animation>().Play (attack.name); 
-        resourceDeposit.Remove(5*Time.deltaTime);    //resta esto del arbol (ej)
-        collectionAmount += 5*Time.deltaTime; //se lo suma al recolector
+        if(!resourceDeposit.isEmpty()){
+            resourceDeposit.Remove(Mathf.Round(5*Time.deltaTime));    //resta esto del arbol (ej)
+            collectionAmount += Mathf.Round(5*Time.deltaTime); //se lo suma al recolector
+        }
     }
 
     // Metode per depositar els recursos al edifici resourceStore

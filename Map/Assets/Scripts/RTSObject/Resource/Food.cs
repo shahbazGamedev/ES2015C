@@ -4,13 +4,12 @@ public class Food : Resource {
 
     /*** Metodes per defecte de Unity ***/
 
-    protected override void Start()
+	protected override void Awake()
     {
-        base.Start();
+		base.Awake();
 		resourceType = ResourceType.Food;
 		objectName = "Food Resource";
 		gameObject.tag = "food";
-		hitPoints = 200;
-		maxHitPoints = 200;
+		amountLeft = capacity = hitPoints = maxHitPoints = 200;
     }
 }

@@ -26,19 +26,17 @@ public class HUDHealthSlider : HUDElement
         if (sliderComponent == null)
             return;
 
+        // Show/hide the slider (to do it, hide the images that make up the components)
+        // Making the current gameobject inactive also works, but then this script won't execute again, oops.
+        foreach (var img in GetComponentsInChildren<Image>())
+            img.enabled = (DisplayObject != null);
+
+        // Set the slider to the object's current HP
         if (DisplayObject != null)
         {
-            sliderComponent.enabled = true;
             sliderComponent.minValue = 0;
             sliderComponent.maxValue = DisplayObject.maxHitPoints;
             sliderComponent.value = DisplayObject.hitPoints;
-        }
-        else
-        {
-            sliderComponent.enabled = false;
-            sliderComponent.minValue = 0;
-            sliderComponent.maxValue = 0;
-            sliderComponent.value = 0;
         }
     }
 }

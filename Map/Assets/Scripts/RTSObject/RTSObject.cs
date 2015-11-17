@@ -57,8 +57,29 @@ public class RTSObject : MonoBehaviour
 	private int ObjectId { get; set; }               // Identificador unic del objecte
     private float currentWeaponChargeTime;
 
-    //sprite publica
+    //sprite publica image de objeto activo
     public Sprite objectIconSprite;
+
+    //sprite publica image de unidad de ataque
+    public Sprite objectIconAttack;
+
+    //sprite publica image de unidad de defensa
+    public Sprite objectIconDefense;
+
+    //sprite publica image de unidad de rango de ataque
+    public Sprite objectIconAttackRange;
+
+    //sprite publica image de unidad de resoruce
+    public Sprite objectIconResource;
+    
+    //ACTION OF YAMATO CIVIL
+    public Sprite imageTownCenter;
+    public Sprite imageArmyBuilding;
+    public Sprite imageWallTower;
+    public Sprite imageWallEntrance;
+    public Sprite imageWall;
+    public Sprite imageCivilHouse;
+    public Sprite imageAcademy;
 
 
     /*** Metodes per defecte de Unity ***/
@@ -85,16 +106,24 @@ public class RTSObject : MonoBehaviour
     {
     }
 
+	private void OnMouseEnter() {
+		if (owner && owner.human) {
+			Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_select") as Texture2D;
+			Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+		}
+	}
+	
+	private void OnMouseExit() {
+		Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
+		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+	}
+
     /*** Metodes publics ***/
 
 	// Metode per declarar la seleccio del objecte
 	public virtual void SetSelection(bool selected)
 	{
 		currentlySelected = selected;
-		if (selected) {
-			GameObject selArea = GameObject.Find("SelectedArea");
-			if (selArea) selArea.GetComponent<MeshRenderer>().enabled = true;
-		}
 	}
 
     // Metode per obtenir les accions del objecte
