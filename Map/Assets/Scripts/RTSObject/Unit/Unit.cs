@@ -103,25 +103,7 @@ public class Unit : RTSObject
 
     public GameObject FindClosest (string tag)
 	{
-<<<<<<< HEAD
-		
-		GameObject[] TaggedObjects = GameObject.FindGameObjectsWithTag (tag); //Retorna una llista amb els objectes que tenen el tag tag
-		GameObject closest = null;
-		float distance = Mathf.Infinity;
-		Vector3 position = transform.position;
-		
-		foreach (GameObject go in TaggedObjects) { //recorre la llista dels objectes i calcula quin es el més proper
-			position = (go.transform.position - position);
-			var curDistance = position.sqrMagnitude;
-			if (curDistance < distance) {
-				closest = go;
-				distance = curDistance;
-			}
-		}
-		
-		return closest;    //retorna l'objecte més proper
-	}
-=======
+
 
         var nearestDistanceSqr = Mathf.Infinity;
         var taggedGameObjects = GameObject.FindGameObjectsWithTag(tag);
@@ -139,8 +121,6 @@ public class Unit : RTSObject
         return nearestObj;
     }
 
-	
->>>>>>> dev_TeamD
 
 	/*** Metodes interns accessibles per les subclasses ***/
 
