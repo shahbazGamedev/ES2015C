@@ -33,6 +33,8 @@ public class Building : RTSObject
         // Calculem la dimensio del BoxCollider
         FittedBoxCollider();
         currentBuildProgress = 0.0f; // Progres actual de la construccio
+		ent.Range = visi;
+
     }
 
     protected override void Update()

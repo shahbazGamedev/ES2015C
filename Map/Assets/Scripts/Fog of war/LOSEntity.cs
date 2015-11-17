@@ -16,7 +16,7 @@ public class LOSEntity : MonoBehaviour {
     //
     public bool IsAlly = false;
 
-	public bool IsUnit = true;
+	public bool IsUnit = false;
 
     public float Range = 10;
     // Height is used for AO and peering over walls
