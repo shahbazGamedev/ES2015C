@@ -114,6 +114,7 @@ public class UserInput : MonoBehaviour
             }
             else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
             {
+
 				if (player.SelectedObject.tag == "civil")
 				{
 					player.SelectedObject.GetComponent<CivilUnit>().harvesting=false;

@@ -26,6 +26,9 @@ public class Unit : RTSObject
 		seeker = gameObject.AddComponent<Seeker> ();
 		anim = gameObject.GetComponent<Animator>();
 		rigbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+		ent.IsUnit = true;
+		ent.Range = visibility;
+
 		// Calculem la dimensio del CharacterController
 		FittedCharacterCollider();
 		gameObject.layer = 11;

@@ -21,16 +21,19 @@ public class Mini : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)){ // if left button pressed...
             RaycastHit hit;
-            Debug.Log("Step1");
+            //Debug.Log("Step1");
             Ray ray = itsMinimapCamera.ScreenPointToRay(Input.mousePosition);
-            Debug.Log("Step2");
+            //Debug.Log("Step2");
             if (Physics.Raycast(ray, out hit)){
 
                 float yPoint = itsMainCamera.transform.position.y;
                 Vector3 auxiliar = hit.point;
                 auxiliar.y = yPoint;
                 itsMainCamera.transform.position = auxiliar;
-                Debug.Log("Step3");
+				auxiliar = itsMainCamera.transform.position;
+				auxiliar.z = auxiliar.z - 100f;
+				itsMainCamera.transform.position = auxiliar;
+                //Debug.Log("Step3");
                 Debug.Log(hit.point);
             }  
        }

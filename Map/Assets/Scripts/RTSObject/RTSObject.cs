@@ -54,6 +54,7 @@ public class RTSObject : MonoBehaviour
 
     protected Animator anim;                        // Referencia al component Animator.
 	protected Rigidbody rigbody;					// Referenica al component Rigidbody
+	protected LOSEntity ent;
 
 	private int ObjectId { get; set; }               // Identificador unic del objecte
     private float currentWeaponChargeTime;
@@ -89,6 +90,7 @@ public class RTSObject : MonoBehaviour
     {
 		rigbody = gameObject.AddComponent<Rigidbody> ();
 		rigbody.constraints = RigidbodyConstraints.FreezeAll;
+		ent = gameObject.AddComponent<LOSEntity> ();
     }
 
     protected virtual void Start()
