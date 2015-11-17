@@ -155,6 +155,8 @@ public class Player : MonoBehaviour {
                 return Resources.Load<GameObject>("Prefabs/Sumerian_civil");
             case PlayerCivilization.Yamato:
                 return Resources.Load<GameObject>("Prefabs/Yamato_civil");
+            case PlayerCivilization.Persians:
+                return Resources.Load<GameObject>("Prefabs/Persian_civil");
             default:
                 Debug.LogFormat("Can't find the civil unit template for civilization {0}.", civilization);
                 return null;
@@ -199,6 +201,8 @@ public class Player : MonoBehaviour {
                 return Resources.Load<GameObject>("Prefabs/Sumerian_warrior");
             case PlayerCivilization.Yamato:
                 return Resources.Load<GameObject>("Prefabs/Yamato_samurai");
+            case PlayerCivilization.Persians:
+                return Resources.Load<GameObject>("Prefabs/Persian_warrior");
             default:
                 Debug.LogFormat("Can't find the military unit template for civilization {0}.", civilization);
                 return null;
