@@ -24,7 +24,8 @@ public class Sumerian_civil : CivilUnit
 		switch (buildingName) {
 		case "Town Center":
 			creationBuilding = Resources.Load ("Prefabs/Sumerian_TownCenter") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Sumerian_TownCenter_onConstruction") as GameObject;
+            break;
 		}
 		base.CreateBuilding (buildingName);
 	}

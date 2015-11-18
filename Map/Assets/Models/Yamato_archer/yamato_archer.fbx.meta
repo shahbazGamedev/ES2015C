@@ -734,6 +734,69 @@ ModelImporter:
     101452: VIS-upper_arm_pole.ik.R
     101454: VIS-upper_arm_pole.ik.R_end
     101456: //RootNode
+    101458: abdomen
+    101460: antebrazo_L
+    101462: antebrazo_R
+    101464: Armature
+    101466: brazo_L
+    101468: brazo_R
+    101470: cabeza
+    101472: cabeza_end
+    101474: cuello
+    101476: dedos_mano2_L
+    101478: dedos_mano2_L_end
+    101480: dedos_mano2_R
+    101482: dedos_mano2_R_end
+    101484: dedos_mano_L
+    101486: dedos_mano_R
+    101488: dedos_pie_L
+    101490: dedos_pie_L_end
+    101492: dedos_pie_L_roll
+    101494: dedos_pie_L_roll_end
+    101496: dedos_pie_R
+    101498: dedos_pie_R_end
+    101500: dedos_pie_R_roll
+    101502: dedos_pie_R_roll_end
+    101504: femur_L
+    101506: femur_R
+    101508: Hacha
+    101510: mano_L
+    101512: mano_R
+    101514: Martillo
+    101516: Martillo_end
+    101518: pecho
+    101520: Pick
+    101522: Pick_end
+    101524: pie_L
+    101526: pie_L.001
+    101528: pie_L_control
+    101530: pie_L_IK
+    101532: pie_L_IK.002
+    101534: pie_L_IK.002_end
+    101536: pie_L_IK_end
+    101538: pie_R
+    101540: pie_R.001
+    101542: pie_R_control
+    101544: pierna_L_pole_target
+    101546: pierna_L_pole_target_end
+    101548: pierna_R_pole_target
+    101550: pierna_R_pole_target_end
+    101552: pulga2_L
+    101554: pulga2_L_end
+    101556: pulga2_R
+    101558: pulga2_R_end
+    101560: pulgar1_L
+    101562: pulgar1_R
+    101564: Rack
+    101566: Rack_end
+    101568: String
+    101570: String_end
+    101572: tibia_L
+    101574: tibia_L_end
+    101576: tibia_R
+    101578: tibia_R_end
+    101580: Arrow
+    101582: Arrow_end
     400000: Archer
     400002: Archer Armature
     400004: Archer.001
@@ -1463,14 +1526,85 @@ ModelImporter:
     401452: VIS-upper_arm_pole.ik.R
     401454: VIS-upper_arm_pole.ik.R_end
     401456: //RootNode
+    401458: abdomen
+    401460: antebrazo_L
+    401462: antebrazo_R
+    401464: Armature
+    401466: brazo_L
+    401468: brazo_R
+    401470: cabeza
+    401472: cabeza_end
+    401474: cuello
+    401476: dedos_mano2_L
+    401478: dedos_mano2_L_end
+    401480: dedos_mano2_R
+    401482: dedos_mano2_R_end
+    401484: dedos_mano_L
+    401486: dedos_mano_R
+    401488: dedos_pie_L
+    401490: dedos_pie_L_end
+    401492: dedos_pie_L_roll
+    401494: dedos_pie_L_roll_end
+    401496: dedos_pie_R
+    401498: dedos_pie_R_end
+    401500: dedos_pie_R_roll
+    401502: dedos_pie_R_roll_end
+    401504: femur_L
+    401506: femur_R
+    401508: Hacha
+    401510: mano_L
+    401512: mano_R
+    401514: Martillo
+    401516: Martillo_end
+    401518: pecho
+    401520: Pick
+    401522: Pick_end
+    401524: pie_L
+    401526: pie_L.001
+    401528: pie_L_control
+    401530: pie_L_IK
+    401532: pie_L_IK.002
+    401534: pie_L_IK.002_end
+    401536: pie_L_IK_end
+    401538: pie_R
+    401540: pie_R.001
+    401542: pie_R_control
+    401544: pierna_L_pole_target
+    401546: pierna_L_pole_target_end
+    401548: pierna_R_pole_target
+    401550: pierna_R_pole_target_end
+    401552: pulga2_L
+    401554: pulga2_L_end
+    401556: pulga2_R
+    401558: pulga2_R_end
+    401560: pulgar1_L
+    401562: pulgar1_R
+    401564: Rack
+    401566: Rack_end
+    401568: String
+    401570: String_end
+    401572: tibia_L
+    401574: tibia_L_end
+    401576: tibia_R
+    401578: tibia_R_end
+    401580: Arrow
+    401582: Arrow_end
     4300000: Bow
     4300002: Archer.001
+    4300004: Archer
     7400000: Bow Armature|Shoot
     7400002: Bow|Walk
     7400004: Archer|Shoot
+    7400006: Armature|Yamato_Archer_Dead
+    7400008: Armature|Yamato_Archer_FIght
+    7400010: Armature|Yamato_Archer_Idle
+    7400012: Armature|Yamato_Archer_Run
+    7400014: Armature|Yamato_Archer_Walk
+    7400016: Armature|Yamato_Archer_Fight
     9500000: //RootNode
     13700000: Archer.001
     13700002: Bow
+    13700004: Archer
   materials:
     importMaterials: 1
     materialName: 0

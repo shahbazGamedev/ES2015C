@@ -21,7 +21,6 @@ public class Building : RTSObject
 	private int mask = layermask1 | layermask2;
 
     public float visi = 60f;
-    private TerrainFoW tf;
 
     /*** Metodes per defecte de Unity ***/
 
@@ -35,11 +34,12 @@ public class Building : RTSObject
         FittedBoxCollider();
         needsBuilding = true;
         currentBuildProgress = 0.0f; // Progres actual de la construccio
+		ent.Range = visi;
+
     }
 
     protected override void Update()
     {
-        explore();
         base.Update();
         ProcessBuildQueue();
     }
@@ -99,18 +99,20 @@ public class Building : RTSObject
                 }
                 else
                 {
-                    spawned = true;
-                    float food = owner.GetResourceAmount(RTSObject.ResourceType.Food);
-                    if (food >= 20)
-                    {
-                        GameObject unitClone = (GameObject)Instantiate(creationUnit, point, Quaternion.identity);
-                        unitClone.GetComponent<RTSObject>().owner = owner;
-                        owner.resourceAmounts[RTSObject.ResourceType.Food] = food - 20;
-                    }
-                    else
-                    {
-                        Debug.Log("Not enough food");
-                    }
+					spawned = true;
+					GameObject unitClone = (GameObject)Instantiate(creationUnit, point, Quaternion.identity);
+					unitClone.SetActive(false);
+					float food = owner.GetResourceAmount (RTSObject.ResourceType.Food);
+					if (food >= unitClone.GetComponent<Unit>().cost) {
+						unitClone.SetActive(true);
+						unitClone.GetComponent<RTSObject>().owner = owner;
+						owner.resourceAmounts [RTSObject.ResourceType.Food] -= unitClone.GetComponent<Unit>().cost;
+					}
+					else
+					{
+						HUDInfo.message = "Not enough food (" + unitClone.GetComponent<Unit>().cost + ") to create a new " + unitClone.GetComponent<Unit>().name;
+						Destroy(unitClone);
+					}
                 }
                 maximumSpawn--;
             }
@@ -155,12 +157,4 @@ public class Building : RTSObject
         transform.rotation = rotation;
     }
 
-    private void explore()
-    {
-        tf = GameObject.FindObjectOfType(typeof(TerrainFoW)) as TerrainFoW;
-
-        Vector3 vec = transform.position;
-        //Debug.Log(vec);
-        if (tf != null) tf.ExploreArea(vec, visi);
-    }
 }

@@ -24,25 +24,32 @@ public class Yamato_civil : CivilUnit
 		switch (buildingName) {
 		case "Town Center":
 			creationBuilding = Resources.Load ("Prefabs/Yamato_TownCenter") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_TownCenter_onConstruction") as GameObject;
+            break;
 		case "Army Building":
 			creationBuilding = Resources.Load ("Prefabs/Yamato_ArmyBuilding") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_ArmyBuilding") as GameObject;
+            break;
 		case "Wall Tower":
 			creationBuilding = Resources.Load ("Prefabs/Yamato_WallTower") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_WallTower") as GameObject;
+            break;
 		case "Wall Entrance":
 			creationBuilding = Resources.Load ("Prefabs/Yamato_WallEntrance") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_WallEntrance") as GameObject;
+            break;
 		case "Wall":
 			creationBuilding = Resources.Load ("Prefabs/Yamato_Wall") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_Wall") as GameObject;
+            break;
 		case "Civil House":
 			creationBuilding = Resources.Load ("Prefabs/Yamato_CivilHouse") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_CivilHouse") as GameObject;
+            break;
 		case "Academy":
 			creationBuilding = Resources.Load ("Prefabs/Yamato_Academy") as GameObject;
-			break;
+            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_Academy") as GameObject;
+            break;
 		}
 		base.CreateBuilding (buildingName);
 	}

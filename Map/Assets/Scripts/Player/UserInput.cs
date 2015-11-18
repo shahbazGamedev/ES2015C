@@ -92,6 +92,7 @@ public class UserInput : MonoBehaviour
             }
             else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
             {
+                player.SelectedObject.GetComponent<CivilUnit>().harvesting=false;
 				if (player.SelectedObject.CanBuild()) {
 					player.SelectedObject.GetComponent<CivilUnit>().building=false;
 				}
@@ -114,7 +115,12 @@ public class UserInput : MonoBehaviour
 				}
                 
                 //Recolecto
+<<<<<<< HEAD
+				else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.GetComponent<Resource>()) //tag == "wood"
+				{
+=======
                 else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.tag == "tree"){
+>>>>>>> master
                     //player.SelectedObject.MoveTo(hit.point);
                     player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>());//, Building store)
                     //player.SelectedObject.GetComponent<CivilUnit>().harvesting=true; //el civilunit es recolector
