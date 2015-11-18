@@ -5,9 +5,9 @@ public class Yamato_ArmyBuilding : ArmyBuilding
 
 	/*** Metodes per defecte de Unity ***/
 
-	protected override void Start ()
+	protected override void Awake ()
 	{
-		base.Start ();
+		base.Awake ();
 		objectName = "Yamato Army Building";
 		actions = new string[] {"Archer", "Cavalry", "Samurai", "Samurai Advanced"};
         baseDefense = 5;

@@ -6,11 +6,13 @@ public class UserInput : MonoBehaviour
 {
 
     private Player player;
+	public GameObject SelectedArea;
 
     // Inicialitzem
     void Start()
     {
         player = GetComponentInParent<Player>();
+		createSelectedArea ();
     }
 
     // Actualitzem a cada frame
@@ -34,6 +36,15 @@ public class UserInput : MonoBehaviour
     private void OpenPauseMenu()
     {
     }
+
+	private void createSelectedArea()
+	{
+		SelectedArea = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+		SelectedArea.transform.position = new Vector3(0, 0, 0);
+		SelectedArea.transform.localScale = new Vector3(0, 0, 0);
+		SelectedArea.name = "SelectedArea";
+		Destroy (SelectedArea.GetComponent<Collider> ());
+	}
 
     private void HandleMouseClick(bool leftClick, bool rightClick)
     {
@@ -70,7 +81,12 @@ public class UserInput : MonoBehaviour
                 targetRtsElement = objectHit.GetComponent<RTSObject>();
             }
 
-            if (leftClick)
+			if (player.SelectedObject && player.SelectedObject.tag == "civil" && player.SelectedObject.GetComponent<CivilUnit>()
+			    && player.SelectedObject.GetComponent<CivilUnit>().building == true && player.SelectedObject.GetComponent<CivilUnit>().constructionPoint == Vector3.zero)
+			{
+				player.SelectedObject.GetComponent<CivilUnit>().constructionPoint = hit.point;
+			}
+			else if (leftClick)
             {
 				object[] obj = GameObject.FindSceneObjectsOfType(typeof (RTSObject));
 				foreach (object o in obj)
@@ -81,13 +97,19 @@ public class UserInput : MonoBehaviour
                 // Call the class to change the currently selected RTS element.
                 // Note that this will be null if the user clicked on nothing or a non-RTS element object.
                 player.ChangeSelectedRtsObject(targetRtsElement);
-				if(targetRtsElement){
+				if(targetRtsElement && targetRtsElement.IsOwnedBy(player))
+				{
 					targetRtsElement.SetSelection(true);
-				} else if (player.SelectedObject != null) {
+					SelectedArea.GetComponent<MeshRenderer>().enabled = true;
+				}
+				else if (player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
+				{
 					player.SelectedObject.SetSelection(true);
-				}else {
-					GameObject selArea = GameObject.Find("SelectedArea");
-					if (selArea) selArea.GetComponent<MeshRenderer>().enabled = false;
+					SelectedArea.GetComponent<MeshRenderer>().enabled = true;
+				}
+				else if (SelectedArea)
+				{
+					SelectedArea.GetComponent<MeshRenderer>().enabled = false;
 				}
             }
             else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
@@ -107,7 +129,8 @@ public class UserInput : MonoBehaviour
                     player.SelectedObject.AttackObject(targetRtsElement);
                 }
 				//Construir un edificio
-				else if (player.SelectedObject.CanBuild()&& targetRtsElement != null && targetRtsElement.owner==player && targetRtsElement.CanBeBuilt()) {
+				else if (player.SelectedObject.CanBuild()&& targetRtsElement != null && targetRtsElement.owner==player && targetRtsElement.CanBeBuilt())
+				{
 					player.SelectedObject.MoveTo(hit.point);
 					player.SelectedObject.GetComponent<CivilUnit>().building=true;
 					player.SelectedObject.GetComponent<CivilUnit>().currentProject=targetRtsElement.GetComponent<Building>();
@@ -115,12 +138,8 @@ public class UserInput : MonoBehaviour
 				}
                 
                 //Recolecto
-<<<<<<< HEAD
 				else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.GetComponent<Resource>()) //tag == "wood"
 				{
-=======
-                else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.tag == "tree"){
->>>>>>> master
                     //player.SelectedObject.MoveTo(hit.point);
                     player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>());//, Building store)
                     //player.SelectedObject.GetComponent<CivilUnit>().harvesting=true; //el civilunit es recolector

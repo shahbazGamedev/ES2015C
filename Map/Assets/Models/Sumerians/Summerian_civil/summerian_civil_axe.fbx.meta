@@ -1,0 +1,1175 @@
+fileFormatVersion: 2
+guid: e9c464253cf8ecc43a47714433de0a9a
+timeCreated: 1446671531
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: abdomen
+    100002: antebrazo_L
+    100004: antebrazo_R
+    100006: Armature
+    100008: brazo_L
+    100010: brazo_R
+    100012: cabeza
+    100014: cabeza_end
+    100016: cuello
+    100018: dedos_mano2_L
+    100020: dedos_mano2_L_end
+    100022: dedos_mano2_R
+    100024: dedos_mano2_R_end
+    100026: dedos_mano_L
+    100028: dedos_mano_R
+    100030: dedos_pie_L
+    100032: dedos_pie_L_end
+    100034: dedos_pie_L_roll
+    100036: dedos_pie_L_roll_end
+    100038: dedos_pie_R
+    100040: dedos_pie_R_end
+    100042: dedos_pie_R_roll
+    100044: dedos_pie_R_roll_end
+    100046: femur_L
+    100048: femur_R
+    100050: Hacha
+    100052: Hacha_end
+    100054: mano_L
+    100056: mano_R
+    100058: pecho
+    100060: pie_L
+    100062: pie_L.001
+    100064: pie_L_control
+    100066: pie_L_IK
+    100068: pie_L_IK.002
+    100070: pie_L_IK.002_end
+    100072: pie_L_IK_end
+    100074: pie_R
+    100076: pie_R.001
+    100078: pie_R_control
+    100080: pierna_L_pole_target
+    100082: pierna_L_pole_target_end
+    100084: pierna_R_pole_target
+    100086: pierna_R_pole_target_end
+    100088: pulga2_L
+    100090: pulga2_L_end
+    100092: pulga2_R
+    100094: pulga2_R_end
+    100096: pulgar1_L
+    100098: pulgar1_R
+    100100: root
+    100102: Summerian Civil
+    100104: //RootNode
+    100106: tibia_L
+    100108: tibia_L_end
+    100110: tibia_R
+    100112: tibia_R_end
+    400000: abdomen
+    400002: antebrazo_L
+    400004: antebrazo_R
+    400006: Armature
+    400008: brazo_L
+    400010: brazo_R
+    400012: cabeza
+    400014: cabeza_end
+    400016: cuello
+    400018: dedos_mano2_L
+    400020: dedos_mano2_L_end
+    400022: dedos_mano2_R
+    400024: dedos_mano2_R_end
+    400026: dedos_mano_L
+    400028: dedos_mano_R
+    400030: dedos_pie_L
+    400032: dedos_pie_L_end
+    400034: dedos_pie_L_roll
+    400036: dedos_pie_L_roll_end
+    400038: dedos_pie_R
+    400040: dedos_pie_R_end
+    400042: dedos_pie_R_roll
+    400044: dedos_pie_R_roll_end
+    400046: femur_L
+    400048: femur_R
+    400050: Hacha
+    400052: Hacha_end
+    400054: mano_L
+    400056: mano_R
+    400058: pecho
+    400060: pie_L
+    400062: pie_L.001
+    400064: pie_L_control
+    400066: pie_L_IK
+    400068: pie_L_IK.002
+    400070: pie_L_IK.002_end
+    400072: pie_L_IK_end
+    400074: pie_R
+    400076: pie_R.001
+    400078: pie_R_control
+    400080: pierna_L_pole_target
+    400082: pierna_L_pole_target_end
+    400084: pierna_R_pole_target
+    400086: pierna_R_pole_target_end
+    400088: pulga2_L
+    400090: pulga2_L_end
+    400092: pulga2_R
+    400094: pulga2_R_end
+    400096: pulgar1_L
+    400098: pulgar1_R
+    400100: root
+    400102: Summerian Civil
+    400104: //RootNode
+    400106: tibia_L
+    400108: tibia_L_end
+    400110: tibia_R
+    400112: tibia_R_end
+    4300000: Summerian Civil
+    7400000: Armature|Sumerian_Civil_Axe_Dead
+    7400002: Armature|Sumerian_Civil_Axe_Fight
+    7400004: Armature|Sumerian_Civil_Axe_Idle
+    7400006: Armature|Sumerian_Civil_Axe_Run
+    7400008: Armature|Sumerian_Civil_Axe_Walk
+    7400010: Armature|Sumerian_Civil_Axe_WoodCutting
+    7400012: Summerian Civil|Sumerian_Civil_Axe_Run
+    9500000: //RootNode
+    13700000: Summerian Civil
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|Sumerian_Civil_Axe_Dead
+      takeName: Armature|Sumerian_Civil_Axe_Dead
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/abdomen
+        weight: 1
+      - path: Armature/root/abdomen/femur_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L/tibia_L_end
+        weight: 1
+      - path: Armature/root/abdomen/femur_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R/tibia_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L/dedos_mano2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha/Hacha_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L/pulga2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R/dedos_mano2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R/pulga2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza/cabeza_end
+        weight: 1
+      - path: Armature/root/pie_L_control
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll/dedos_pie_L_roll_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L/dedos_pie_L_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK/pie_L_IK_end
+        weight: 1
+      - path: Armature/root/pie_R_control
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll/dedos_pie_R_roll_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R/dedos_pie_R_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002/pie_L_IK.002_end
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target/pierna_L_pole_target_end
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target/pierna_R_pole_target_end
+        weight: 1
+      - path: Summerian Civil
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Sumerian_Civil_Axe_Fight
+      takeName: Armature|Sumerian_Civil_Axe_Fight
+      firstFrame: 0
+      lastFrame: 16
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/abdomen
+        weight: 1
+      - path: Armature/root/abdomen/femur_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L/tibia_L_end
+        weight: 1
+      - path: Armature/root/abdomen/femur_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R/tibia_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L/dedos_mano2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha/Hacha_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L/pulga2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R/dedos_mano2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R/pulga2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza/cabeza_end
+        weight: 1
+      - path: Armature/root/pie_L_control
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll/dedos_pie_L_roll_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L/dedos_pie_L_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK/pie_L_IK_end
+        weight: 1
+      - path: Armature/root/pie_R_control
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll/dedos_pie_R_roll_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R/dedos_pie_R_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002/pie_L_IK.002_end
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target/pierna_L_pole_target_end
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target/pierna_R_pole_target_end
+        weight: 1
+      - path: Summerian Civil
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Sumerian_Civil_Axe_Idle
+      takeName: Armature|Sumerian_Civil_Axe_Idle
+      firstFrame: 0
+      lastFrame: 7
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/abdomen
+        weight: 1
+      - path: Armature/root/abdomen/femur_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L/tibia_L_end
+        weight: 1
+      - path: Armature/root/abdomen/femur_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R/tibia_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L/dedos_mano2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha/Hacha_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L/pulga2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R/dedos_mano2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R/pulga2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza/cabeza_end
+        weight: 1
+      - path: Armature/root/pie_L_control
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll/dedos_pie_L_roll_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L/dedos_pie_L_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK/pie_L_IK_end
+        weight: 1
+      - path: Armature/root/pie_R_control
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll/dedos_pie_R_roll_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R/dedos_pie_R_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002/pie_L_IK.002_end
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target/pierna_L_pole_target_end
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target/pierna_R_pole_target_end
+        weight: 1
+      - path: Summerian Civil
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Sumerian_Civil_Axe_Run
+      takeName: Armature|Sumerian_Civil_Axe_Run
+      firstFrame: 0
+      lastFrame: 17
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/abdomen
+        weight: 1
+      - path: Armature/root/abdomen/femur_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L/tibia_L_end
+        weight: 1
+      - path: Armature/root/abdomen/femur_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R/tibia_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L/dedos_mano2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha/Hacha_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L/pulga2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R/dedos_mano2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R/pulga2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza/cabeza_end
+        weight: 1
+      - path: Armature/root/pie_L_control
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll/dedos_pie_L_roll_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L/dedos_pie_L_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK/pie_L_IK_end
+        weight: 1
+      - path: Armature/root/pie_R_control
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll/dedos_pie_R_roll_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R/dedos_pie_R_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002/pie_L_IK.002_end
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target/pierna_L_pole_target_end
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target/pierna_R_pole_target_end
+        weight: 1
+      - path: Summerian Civil
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Sumerian_Civil_Axe_Walk
+      takeName: Armature|Sumerian_Civil_Axe_Walk
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/abdomen
+        weight: 1
+      - path: Armature/root/abdomen/femur_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L/tibia_L_end
+        weight: 1
+      - path: Armature/root/abdomen/femur_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R/tibia_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L/dedos_mano2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha/Hacha_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L/pulga2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R/dedos_mano2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R/pulga2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza/cabeza_end
+        weight: 1
+      - path: Armature/root/pie_L_control
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll/dedos_pie_L_roll_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L/dedos_pie_L_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK/pie_L_IK_end
+        weight: 1
+      - path: Armature/root/pie_R_control
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll/dedos_pie_R_roll_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R/dedos_pie_R_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002/pie_L_IK.002_end
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target/pierna_L_pole_target_end
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target/pierna_R_pole_target_end
+        weight: 1
+      - path: Summerian Civil
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Sumerian_Civil_Axe_WoodCutting
+      takeName: Armature|Sumerian_Civil_Axe_WoodCutting
+      firstFrame: 0
+      lastFrame: 47
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/abdomen
+        weight: 1
+      - path: Armature/root/abdomen/femur_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L/tibia_L_end
+        weight: 1
+      - path: Armature/root/abdomen/femur_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R/tibia_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L/dedos_mano2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha/Hacha_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L/pulga2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R/dedos_mano2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R/pulga2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza/cabeza_end
+        weight: 1
+      - path: Armature/root/pie_L_control
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll/dedos_pie_L_roll_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L/dedos_pie_L_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK/pie_L_IK_end
+        weight: 1
+      - path: Armature/root/pie_R_control
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll/dedos_pie_R_roll_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R/dedos_pie_R_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002/pie_L_IK.002_end
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target/pierna_L_pole_target_end
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target/pierna_R_pole_target_end
+        weight: 1
+      - path: Summerian Civil
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Summerian Civil|Sumerian_Civil_Axe_Run
+      takeName: Summerian Civil|Sumerian_Civil_Axe_Run
+      firstFrame: 0
+      lastFrame: 17
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/abdomen
+        weight: 1
+      - path: Armature/root/abdomen/femur_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L
+        weight: 1
+      - path: Armature/root/abdomen/femur_L/tibia_L/tibia_L_end
+        weight: 1
+      - path: Armature/root/abdomen/femur_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R
+        weight: 1
+      - path: Armature/root/abdomen/femur_R/tibia_R/tibia_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/dedos_mano_L/dedos_mano2_L/dedos_mano2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/Hacha/Hacha_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_L/antebrazo_L/mano_L/pulgar1_L/pulga2_L/pulga2_L_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/dedos_mano_R/dedos_mano2_R/dedos_mano2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R
+        weight: 1
+      - path: Armature/root/abdomen/pecho/brazo_R/antebrazo_R/mano_R/pulgar1_R/pulga2_R/pulga2_R_end
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza
+        weight: 1
+      - path: Armature/root/abdomen/pecho/cuello/cabeza/cabeza_end
+        weight: 1
+      - path: Armature/root/pie_L_control
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll
+        weight: 1
+      - path: Armature/root/pie_L_control/dedos_pie_L_roll/dedos_pie_L_roll_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L/dedos_pie_L/dedos_pie_L_end
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK
+        weight: 1
+      - path: Armature/root/pie_L_control/pie_L.001/pie_L_IK/pie_L_IK_end
+        weight: 1
+      - path: Armature/root/pie_R_control
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll
+        weight: 1
+      - path: Armature/root/pie_R_control/dedos_pie_R_roll/dedos_pie_R_roll_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R/dedos_pie_R/dedos_pie_R_end
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002
+        weight: 1
+      - path: Armature/root/pie_R_control/pie_R.001/pie_L_IK.002/pie_L_IK.002_end
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target
+        weight: 1
+      - path: Armature/root/pierna_L_pole_target/pierna_L_pole_target_end
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target
+        weight: 1
+      - path: Armature/root/pierna_R_pole_target/pierna_R_pole_target_end
+        weight: 1
+      - path: Summerian Civil
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

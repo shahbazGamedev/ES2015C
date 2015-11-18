@@ -1,3 +1,4 @@
+using Pathfinding;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class Player : MonoBehaviour {
     public string username;
     public bool human;
     public float initialFood, initialGold, initialWood;
-    public Color teamColor;
+    public PlayerCivilization civilization;
 
     private bool findingPlacement = false;
 
@@ -31,12 +32,13 @@ public class Player : MonoBehaviour {
     /// </summary>
     public Dictionary<RTSObject.ResourceType, float> resourceAmounts;
 
-    void Start () {
+    void Start ()
+    {
+        // Set the initial resource amounts
         resourceAmounts = new Dictionary<RTSObject.ResourceType, float>();
         resourceAmounts[RTSObject.ResourceType.Food] = initialFood;
         resourceAmounts[RTSObject.ResourceType.Gold] = initialGold;
         resourceAmounts[RTSObject.ResourceType.Wood] = initialWood;
-<<<<<<< HEAD
 
 		Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
 		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
@@ -208,11 +210,6 @@ public class Player : MonoBehaviour {
     }
 
     void Update () {
-=======
-    }
-	
-	void Update () {
->>>>>>> master
 	
 	}
 
