@@ -4,12 +4,13 @@ public class Hittite_CivilHouse : Building {
 
     /*** Metodes per defecte de Unity ***/
 
-	protected override void Awake()
+    protected override void Start()
     {
-		base.Awake();
+        base.Start();
 		objectName = "Hittite Civil House";
 		cost = 50;
-		hitPoints = maxHitPoints = 200;
+		hitPoints = 0;
+		maxHitPoints = 200;
         baseDefense = 5;
     }
 }

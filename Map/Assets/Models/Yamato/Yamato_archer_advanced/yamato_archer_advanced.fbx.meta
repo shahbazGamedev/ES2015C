@@ -1,0 +1,1909 @@
+fileFormatVersion: 2
+guid: 7dc06e888f081ff40b59e465da88b0d6
+timeCreated: 1445371422
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Body
+    100004: Bone
+    100006: Bone.001
+    100008: Bone.001_end
+    100010: Bone.002
+    100012: Bone.002_end
+    100014: Bone.017
+    100016: Bone.018
+    100018: Bone.018_end
+    100020: Bow
+    100022: Bow.001
+    100024: Chest
+    100026: Fingers01.L
+    100028: Fingers01.R
+    100030: Fingers02.L
+    100032: Fingers02.L_end
+    100034: Fingers02.R
+    100036: Fingers02.R_end
+    100038: Foot Roll.L
+    100040: Foot Roll.R
+    100042: Foot.L
+    100044: Foot.R
+    100046: Hand.L
+    100048: Hand.R
+    100050: Head
+    100052: Head_end
+    100054: Leg Control.L
+    100056: Leg Control.R
+    100058: Leg ik.L
+    100060: Leg ik.L_end
+    100062: Leg ik.R
+    100064: Leg ik.R_end
+    100066: Leg pole target.L
+    100068: Leg pole target.L_end
+    100070: Leg pole target.R
+    100072: Leg pole target.R_end
+    100074: Lower Arm.L
+    100076: Lower Arm.R
+    100078: Lower Leg.L
+    100080: Lower Leg.L_end
+    100082: Lower Leg.R
+    100084: Lower Leg.R_end
+    100086: Neck
+    100088: Thumb01.L
+    100090: Thumb01.R
+    100092: Thumb02.L
+    100094: Thumb02.L_end
+    100096: Thumb02.R
+    100098: Thumb02.R_end
+    100100: Toes Control.L
+    100102: Toes Control.L_end
+    100104: Toes Control.R
+    100106: Toes Control.R_end
+    100108: Toes.L
+    100110: Toes.L_end
+    100112: Toes.R
+    100114: Toes.R_end
+    100116: Torso
+    100118: Upper Arm.L
+    100120: Upper Arm.R
+    100122: Upper Leg.L
+    100124: Upper Leg.R
+    100126: //RootNode
+    400000: Armature
+    400002: Body
+    400004: Bone
+    400006: Bone.001
+    400008: Bone.001_end
+    400010: Bone.002
+    400012: Bone.002_end
+    400014: Bone.017
+    400016: Bone.018
+    400018: Bone.018_end
+    400020: Bow
+    400022: Bow.001
+    400024: Chest
+    400026: Fingers01.L
+    400028: Fingers01.R
+    400030: Fingers02.L
+    400032: Fingers02.L_end
+    400034: Fingers02.R
+    400036: Fingers02.R_end
+    400038: Foot Roll.L
+    400040: Foot Roll.R
+    400042: Foot.L
+    400044: Foot.R
+    400046: Hand.L
+    400048: Hand.R
+    400050: Head
+    400052: Head_end
+    400054: Leg Control.L
+    400056: Leg Control.R
+    400058: Leg ik.L
+    400060: Leg ik.L_end
+    400062: Leg ik.R
+    400064: Leg ik.R_end
+    400066: Leg pole target.L
+    400068: Leg pole target.L_end
+    400070: Leg pole target.R
+    400072: Leg pole target.R_end
+    400074: Lower Arm.L
+    400076: Lower Arm.R
+    400078: Lower Leg.L
+    400080: Lower Leg.L_end
+    400082: Lower Leg.R
+    400084: Lower Leg.R_end
+    400086: Neck
+    400088: Thumb01.L
+    400090: Thumb01.R
+    400092: Thumb02.L
+    400094: Thumb02.L_end
+    400096: Thumb02.R
+    400098: Thumb02.R_end
+    400100: Toes Control.L
+    400102: Toes Control.L_end
+    400104: Toes Control.R
+    400106: Toes Control.R_end
+    400108: Toes.L
+    400110: Toes.L_end
+    400112: Toes.R
+    400114: Toes.R_end
+    400116: Torso
+    400118: Upper Arm.L
+    400120: Upper Arm.R
+    400122: Upper Leg.L
+    400124: Upper Leg.R
+    400126: //RootNode
+    4300000: Bow
+    4300002: Body
+    7400000: Bow.001|ArmsAction
+    7400002: Bow.001|BowAction
+    7400004: Bow.001|Shoot
+    7400006: Bow|ArmsAction
+    7400008: Bow|BowAction
+    7400010: Armature|ArmsAction
+    7400012: Armature|BowAction
+    7400014: Armature|Shoot
+    7400016: Armature|Walk_blocking
+    7400018: Body|ArmsAction
+    7400020: Body|BowAction
+    9500000: //RootNode
+    13700000: Body
+    13700002: Bow
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Bow.001|ArmsAction
+      takeName: Bow.001|ArmsAction
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L/Leg ik.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L/Toes Control.L_end
+        weight: 1
+      - path: Armature/Leg Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R/Leg ik.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R/Toes.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R/Toes Control.R_end
+        weight: 1
+      - path: Armature/Leg pole target.L
+        weight: 1
+      - path: Armature/Leg pole target.L/Leg pole target.L_end
+        weight: 1
+      - path: Armature/Leg pole target.R
+        weight: 1
+      - path: Armature/Leg pole target.R/Leg pole target.R_end
+        weight: 1
+      - path: Armature/Torso
+        weight: 1
+      - path: Armature/Torso/Chest
+        weight: 1
+      - path: Armature/Torso/Chest/Neck
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L/Fingers02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L/Thumb02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R/Fingers02.R_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R/Thumb02.R_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L/Lower Leg.L_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R/Lower Leg.R_end
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Bow
+        weight: 1
+      - path: Bow.001
+        weight: 1
+      - path: Bow.001/Bone
+        weight: 1
+      - path: Bow.001/Bone/Bone.001
+        weight: 1
+      - path: Bow.001/Bone/Bone.001/Bone.001_end
+        weight: 1
+      - path: Bow.001/Bone.002
+        weight: 1
+      - path: Bow.001/Bone.002/Bone.002_end
+        weight: 1
+      - path: Bow.001/Bone.017
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018/Bone.018_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bow.001|BowAction
+      takeName: Bow.001|BowAction
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L/Leg ik.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L/Toes Control.L_end
+        weight: 1
+      - path: Armature/Leg Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R/Leg ik.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R/Toes.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R/Toes Control.R_end
+        weight: 1
+      - path: Armature/Leg pole target.L
+        weight: 1
+      - path: Armature/Leg pole target.L/Leg pole target.L_end
+        weight: 1
+      - path: Armature/Leg pole target.R
+        weight: 1
+      - path: Armature/Leg pole target.R/Leg pole target.R_end
+        weight: 1
+      - path: Armature/Torso
+        weight: 1
+      - path: Armature/Torso/Chest
+        weight: 1
+      - path: Armature/Torso/Chest/Neck
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L/Fingers02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L/Thumb02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R/Fingers02.R_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R/Thumb02.R_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L/Lower Leg.L_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R/Lower Leg.R_end
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Bow
+        weight: 1
+      - path: Bow.001
+        weight: 1
+      - path: Bow.001/Bone
+        weight: 1
+      - path: Bow.001/Bone/Bone.001
+        weight: 1
+      - path: Bow.001/Bone/Bone.001/Bone.001_end
+        weight: 1
+      - path: Bow.001/Bone.002
+        weight: 1
+      - path: Bow.001/Bone.002/Bone.002_end
+        weight: 1
+      - path: Bow.001/Bone.017
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018/Bone.018_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bow.001|Shoot
+      takeName: Bow.001|Shoot
+      firstFrame: 0
+      lastFrame: 99
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L/Leg ik.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L/Toes Control.L_end
+        weight: 1
+      - path: Armature/Leg Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R/Leg ik.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R/Toes.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R/Toes Control.R_end
+        weight: 1
+      - path: Armature/Leg pole target.L
+        weight: 1
+      - path: Armature/Leg pole target.L/Leg pole target.L_end
+        weight: 1
+      - path: Armature/Leg pole target.R
+        weight: 1
+      - path: Armature/Leg pole target.R/Leg pole target.R_end
+        weight: 1
+      - path: Armature/Torso
+        weight: 1
+      - path: Armature/Torso/Chest
+        weight: 1
+      - path: Armature/Torso/Chest/Neck
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L/Fingers02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L/Thumb02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R/Fingers02.R_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R/Thumb02.R_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L/Lower Leg.L_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R/Lower Leg.R_end
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Bow
+        weight: 1
+      - path: Bow.001
+        weight: 1
+      - path: Bow.001/Bone
+        weight: 1
+      - path: Bow.001/Bone/Bone.001
+        weight: 1
+      - path: Bow.001/Bone/Bone.001/Bone.001_end
+        weight: 1
+      - path: Bow.001/Bone.002
+        weight: 1
+      - path: Bow.001/Bone.002/Bone.002_end
+        weight: 1
+      - path: Bow.001/Bone.017
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018/Bone.018_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bow|ArmsAction
+      takeName: Bow|ArmsAction
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L/Leg ik.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L/Toes Control.L_end
+        weight: 1
+      - path: Armature/Leg Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R/Leg ik.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R/Toes.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R/Toes Control.R_end
+        weight: 1
+      - path: Armature/Leg pole target.L
+        weight: 1
+      - path: Armature/Leg pole target.L/Leg pole target.L_end
+        weight: 1
+      - path: Armature/Leg pole target.R
+        weight: 1
+      - path: Armature/Leg pole target.R/Leg pole target.R_end
+        weight: 1
+      - path: Armature/Torso
+        weight: 1
+      - path: Armature/Torso/Chest
+        weight: 1
+      - path: Armature/Torso/Chest/Neck
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L/Fingers02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L/Thumb02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R/Fingers02.R_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R/Thumb02.R_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L/Lower Leg.L_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R/Lower Leg.R_end
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Bow
+        weight: 1
+      - path: Bow.001
+        weight: 1
+      - path: Bow.001/Bone
+        weight: 1
+      - path: Bow.001/Bone/Bone.001
+        weight: 1
+      - path: Bow.001/Bone/Bone.001/Bone.001_end
+        weight: 1
+      - path: Bow.001/Bone.002
+        weight: 1
+      - path: Bow.001/Bone.002/Bone.002_end
+        weight: 1
+      - path: Bow.001/Bone.017
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018/Bone.018_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bow|BowAction
+      takeName: Bow|BowAction
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L/Leg ik.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L/Toes Control.L_end
+        weight: 1
+      - path: Armature/Leg Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R/Leg ik.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R/Toes.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R/Toes Control.R_end
+        weight: 1
+      - path: Armature/Leg pole target.L
+        weight: 1
+      - path: Armature/Leg pole target.L/Leg pole target.L_end
+        weight: 1
+      - path: Armature/Leg pole target.R
+        weight: 1
+      - path: Armature/Leg pole target.R/Leg pole target.R_end
+        weight: 1
+      - path: Armature/Torso
+        weight: 1
+      - path: Armature/Torso/Chest
+        weight: 1
+      - path: Armature/Torso/Chest/Neck
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L/Fingers02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L/Thumb02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R/Fingers02.R_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R/Thumb02.R_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L/Lower Leg.L_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R/Lower Leg.R_end
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Bow
+        weight: 1
+      - path: Bow.001
+        weight: 1
+      - path: Bow.001/Bone
+        weight: 1
+      - path: Bow.001/Bone/Bone.001
+        weight: 1
+      - path: Bow.001/Bone/Bone.001/Bone.001_end
+        weight: 1
+      - path: Bow.001/Bone.002
+        weight: 1
+      - path: Bow.001/Bone.002/Bone.002_end
+        weight: 1
+      - path: Bow.001/Bone.017
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018/Bone.018_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|ArmsAction
+      takeName: Armature|ArmsAction
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L/Leg ik.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L/Toes Control.L_end
+        weight: 1
+      - path: Armature/Leg Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R/Leg ik.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R/Toes.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R/Toes Control.R_end
+        weight: 1
+      - path: Armature/Leg pole target.L
+        weight: 1
+      - path: Armature/Leg pole target.L/Leg pole target.L_end
+        weight: 1
+      - path: Armature/Leg pole target.R
+        weight: 1
+      - path: Armature/Leg pole target.R/Leg pole target.R_end
+        weight: 1
+      - path: Armature/Torso
+        weight: 1
+      - path: Armature/Torso/Chest
+        weight: 1
+      - path: Armature/Torso/Chest/Neck
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L/Fingers02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L/Thumb02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R/Fingers02.R_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R/Thumb02.R_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L/Lower Leg.L_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R/Lower Leg.R_end
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Bow
+        weight: 1
+      - path: Bow.001
+        weight: 1
+      - path: Bow.001/Bone
+        weight: 1
+      - path: Bow.001/Bone/Bone.001
+        weight: 1
+      - path: Bow.001/Bone/Bone.001/Bone.001_end
+        weight: 1
+      - path: Bow.001/Bone.002
+        weight: 1
+      - path: Bow.001/Bone.002/Bone.002_end
+        weight: 1
+      - path: Bow.001/Bone.017
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018/Bone.018_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|BowAction
+      takeName: Armature|BowAction
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L/Leg ik.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L/Toes Control.L_end
+        weight: 1
+      - path: Armature/Leg Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R/Leg ik.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R/Toes.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R/Toes Control.R_end
+        weight: 1
+      - path: Armature/Leg pole target.L
+        weight: 1
+      - path: Armature/Leg pole target.L/Leg pole target.L_end
+        weight: 1
+      - path: Armature/Leg pole target.R
+        weight: 1
+      - path: Armature/Leg pole target.R/Leg pole target.R_end
+        weight: 1
+      - path: Armature/Torso
+        weight: 1
+      - path: Armature/Torso/Chest
+        weight: 1
+      - path: Armature/Torso/Chest/Neck
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L/Fingers02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L/Thumb02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R/Fingers02.R_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R/Thumb02.R_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L/Lower Leg.L_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R/Lower Leg.R_end
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Bow
+        weight: 1
+      - path: Bow.001
+        weight: 1
+      - path: Bow.001/Bone
+        weight: 1
+      - path: Bow.001/Bone/Bone.001
+        weight: 1
+      - path: Bow.001/Bone/Bone.001/Bone.001_end
+        weight: 1
+      - path: Bow.001/Bone.002
+        weight: 1
+      - path: Bow.001/Bone.002/Bone.002_end
+        weight: 1
+      - path: Bow.001/Bone.017
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018/Bone.018_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Shoot
+      takeName: Armature|Shoot
+      firstFrame: 0
+      lastFrame: 99
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L/Leg ik.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L/Toes Control.L_end
+        weight: 1
+      - path: Armature/Leg Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R/Leg ik.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R/Toes.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R/Toes Control.R_end
+        weight: 1
+      - path: Armature/Leg pole target.L
+        weight: 1
+      - path: Armature/Leg pole target.L/Leg pole target.L_end
+        weight: 1
+      - path: Armature/Leg pole target.R
+        weight: 1
+      - path: Armature/Leg pole target.R/Leg pole target.R_end
+        weight: 1
+      - path: Armature/Torso
+        weight: 1
+      - path: Armature/Torso/Chest
+        weight: 1
+      - path: Armature/Torso/Chest/Neck
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L/Fingers02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L/Thumb02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R/Fingers02.R_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R/Thumb02.R_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L/Lower Leg.L_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R/Lower Leg.R_end
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Bow
+        weight: 1
+      - path: Bow.001
+        weight: 1
+      - path: Bow.001/Bone
+        weight: 1
+      - path: Bow.001/Bone/Bone.001
+        weight: 1
+      - path: Bow.001/Bone/Bone.001/Bone.001_end
+        weight: 1
+      - path: Bow.001/Bone.002
+        weight: 1
+      - path: Bow.001/Bone.002/Bone.002_end
+        weight: 1
+      - path: Bow.001/Bone.017
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018/Bone.018_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Walk_blocking
+      takeName: Armature|Walk_blocking
+      firstFrame: 0
+      lastFrame: 248
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L/Leg ik.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L/Toes Control.L_end
+        weight: 1
+      - path: Armature/Leg Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R/Leg ik.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R/Toes.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R/Toes Control.R_end
+        weight: 1
+      - path: Armature/Leg pole target.L
+        weight: 1
+      - path: Armature/Leg pole target.L/Leg pole target.L_end
+        weight: 1
+      - path: Armature/Leg pole target.R
+        weight: 1
+      - path: Armature/Leg pole target.R/Leg pole target.R_end
+        weight: 1
+      - path: Armature/Torso
+        weight: 1
+      - path: Armature/Torso/Chest
+        weight: 1
+      - path: Armature/Torso/Chest/Neck
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L/Fingers02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L/Thumb02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R/Fingers02.R_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R/Thumb02.R_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L/Lower Leg.L_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R/Lower Leg.R_end
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Bow
+        weight: 1
+      - path: Bow.001
+        weight: 1
+      - path: Bow.001/Bone
+        weight: 1
+      - path: Bow.001/Bone/Bone.001
+        weight: 1
+      - path: Bow.001/Bone/Bone.001/Bone.001_end
+        weight: 1
+      - path: Bow.001/Bone.002
+        weight: 1
+      - path: Bow.001/Bone.002/Bone.002_end
+        weight: 1
+      - path: Bow.001/Bone.017
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018/Bone.018_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Body|ArmsAction
+      takeName: Body|ArmsAction
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L/Leg ik.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L/Toes Control.L_end
+        weight: 1
+      - path: Armature/Leg Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R/Leg ik.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R/Toes.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R/Toes Control.R_end
+        weight: 1
+      - path: Armature/Leg pole target.L
+        weight: 1
+      - path: Armature/Leg pole target.L/Leg pole target.L_end
+        weight: 1
+      - path: Armature/Leg pole target.R
+        weight: 1
+      - path: Armature/Leg pole target.R/Leg pole target.R_end
+        weight: 1
+      - path: Armature/Torso
+        weight: 1
+      - path: Armature/Torso/Chest
+        weight: 1
+      - path: Armature/Torso/Chest/Neck
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L/Fingers02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L/Thumb02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R/Fingers02.R_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R/Thumb02.R_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L/Lower Leg.L_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R/Lower Leg.R_end
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Bow
+        weight: 1
+      - path: Bow.001
+        weight: 1
+      - path: Bow.001/Bone
+        weight: 1
+      - path: Bow.001/Bone/Bone.001
+        weight: 1
+      - path: Bow.001/Bone/Bone.001/Bone.001_end
+        weight: 1
+      - path: Bow.001/Bone.002
+        weight: 1
+      - path: Bow.001/Bone.002/Bone.002_end
+        weight: 1
+      - path: Bow.001/Bone.017
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018/Bone.018_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Body|BowAction
+      takeName: Body|BowAction
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot Roll.L/Leg ik.L/Leg ik.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L
+        weight: 1
+      - path: Armature/Leg Control.L/Foot.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L
+        weight: 1
+      - path: Armature/Leg Control.L/Toes Control.L/Toes Control.L_end
+        weight: 1
+      - path: Armature/Leg Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot Roll.R/Leg ik.R/Leg ik.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R
+        weight: 1
+      - path: Armature/Leg Control.R/Foot.R/Toes.R/Toes.R_end
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R
+        weight: 1
+      - path: Armature/Leg Control.R/Toes Control.R/Toes Control.R_end
+        weight: 1
+      - path: Armature/Leg pole target.L
+        weight: 1
+      - path: Armature/Leg pole target.L/Leg pole target.L_end
+        weight: 1
+      - path: Armature/Leg pole target.R
+        weight: 1
+      - path: Armature/Leg pole target.R/Leg pole target.R_end
+        weight: 1
+      - path: Armature/Torso
+        weight: 1
+      - path: Armature/Torso/Chest
+        weight: 1
+      - path: Armature/Torso/Chest/Neck
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Torso/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Fingers01.L/Fingers02.L/Fingers02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.L/Lower Arm.L/Hand.L/Thumb01.L/Thumb02.L/Thumb02.L_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Fingers01.R/Fingers02.R/Fingers02.R_end
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R
+        weight: 1
+      - path: Armature/Torso/Chest/Upper Arm.R/Lower Arm.R/Hand.R/Thumb01.R/Thumb02.R/Thumb02.R_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L
+        weight: 1
+      - path: Armature/Torso/Upper Leg.L/Lower Leg.L/Lower Leg.L_end
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R
+        weight: 1
+      - path: Armature/Torso/Upper Leg.R/Lower Leg.R/Lower Leg.R_end
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Bow
+        weight: 1
+      - path: Bow.001
+        weight: 1
+      - path: Bow.001/Bone
+        weight: 1
+      - path: Bow.001/Bone/Bone.001
+        weight: 1
+      - path: Bow.001/Bone/Bone.001/Bone.001_end
+        weight: 1
+      - path: Bow.001/Bone.002
+        weight: 1
+      - path: Bow.001/Bone.002/Bone.002_end
+        weight: 1
+      - path: Bow.001/Bone.017
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018
+        weight: 1
+      - path: Bow.001/Bone.017/Bone.018/Bone.018_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .150000006
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

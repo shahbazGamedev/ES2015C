@@ -7,7 +7,11 @@ public class CivilUnit : Unit
     public float capacity, collectionAmount, depositAmount; // Dades sobre la recolecció
     public bool llegado = false;                            //he llegado a mi destino
     public int state;                                       //estado de recoleccion
+    public GameObject aux;
+    public TownCenterBuilding resourceStore;                          // Edifici on es deposita la recolecció
+    //public int baseBuildSpeed;                                  // Velocitat de construcció
 
+<<<<<<< HEAD
 	public Vector3 constructionPoint = Vector3.zero;		// Posicio on crear el edifici
 	public Building currentProject = null;  				// Building actual de construccio
 	protected GameObject creationBuilding = null;			// Objecte que anem a crear
@@ -15,15 +19,22 @@ public class CivilUnit : Unit
 
     public bool harvesting = false;      					// Indicadors d'estat de la unitat
 	public bool building = false;
+=======
+	protected GameObject creationBuilding = null;			// Objecte que indica la unitat a crear actual
+>>>>>>> master
 
+    public bool harvesting = false;      // Indicadors d'estat de la unitat
+	public bool building;    
     //private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
-    private ResourceType harvestType;                       // Tipus de recolecció
-    private Resource resourceDeposit;                       // Recurs de la recolecció
-	private TownCenterBuilding resourceStore;				// Edifici on es deposita la recolecció
+    public ResourceType harvestType;                       // Tipus de recolecció
+    public Resource resourceDeposit;                       // Recurs de la recolecció
+    
     private float amountBuilt = 0.0f;                       // Porcentatge de construcció feta
-	//public int mask = 1024;								// 10000001 checks default and obstacles
-
-	                      
+	//public int mask = 1024;									// 10000001 checks default and obstacles
+	private Vector3 constructionPoint;
+	
+	private GameObject buildingClone;
+	public Building currentProject;                        
 	
 	private static int layer1 = 0;
 	private static int layer2 = 10;
@@ -31,6 +42,8 @@ public class CivilUnit : Unit
 	private static int layermask2 = 1 << layer2;
 	private int finalmask = layermask1 | layermask2;
 	
+	public Transform townCenter;
+
     /*** Metodes per defecte de Unity ***/
 
     /* CODI COMENTAT - NO FA RES I DONA PROBLEMES AL INICIALITZAR (MERGE 03/11/2015, COMENTAT PER JOAN BRUGUERA)
@@ -42,19 +55,22 @@ public class CivilUnit : Unit
     }
     */
 
-	protected override void Awake()
+    protected override void Start()
     {
-		base.Awake();
+        base.Start();
         objectName = "Civil Unit";
-		gameObject.tag = "civil";
+		building = false;
         capacity = 50;
+        aux = findTownCenter();
+        resourceStore = aux.gameObject.GetComponent<Yamato_TownCenterBuilding>();
     }
-	
+
     protected override void Update()
     {
         base.Update();
         if (!moving)
         {
+
             if (harvesting)
             {
                 // tot el que implica la recoleccio de recursos
@@ -74,6 +90,7 @@ public class CivilUnit : Unit
                     IrRecolectar();
                 } 
             }
+<<<<<<< HEAD
 			else if (building)
 			{
 				if (currentProject && currentProject.UnderConstruction()) //Si tenemos un proyecto y lo estamos construyendo 
@@ -101,6 +118,12 @@ public class CivilUnit : Unit
 					building = false;
 				}
 			}
+=======
+            else if (building && currentProject.UnderConstruction())
+            {
+				currentProject.Construct(baseBuildSpeed);
+            }
+>>>>>>> master
         }
     }
 
@@ -131,11 +154,18 @@ public class CivilUnit : Unit
         return collectionAmount;
     }
 
+    public override void PerformAction(string actionToPerform)
+    {
+        base.PerformAction(actionToPerform);
+        CreateBuilding(actionToPerform);
+    }
+
     /*** Metodes interns accessibles per les subclasses ***/
 
     // Metode que crea el edifici
-    public void CreateBuilding()
+    public virtual void CreateBuilding(string buildingName)
     {
+<<<<<<< HEAD
 		if (Physics.CheckSphere (constructionPoint, 0.8f, finalmask)) {
 			HUDInfo.message = "We can not build because there are other buildings nearby";
 			constructionPoint = Vector3.zero;
@@ -181,6 +211,41 @@ public class CivilUnit : Unit
 		creationBuildingConstruction = null;
 		constructionPoint = Vector3.zero;
 	}
+=======
+        if (creationBuilding != null)
+        {
+            //building = true;
+            constructionPoint = new Vector3(transform.position.x + 10, 0.0f, transform.position.z + 10);
+
+            if (Physics.CheckSphere(constructionPoint, 0.8f, finalmask))
+            {
+                Debug.Log("No podemos construir porque hay otros edificios cerca");
+            }
+            else
+            {
+                float wood = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
+                if (wood >= 100)
+                {
+                    buildingClone = (GameObject)Instantiate(creationBuilding, constructionPoint, Quaternion.identity);
+                    currentProject = buildingClone.GetComponent<Building>();
+                    building = true;
+
+                    buildingClone.GetComponent<RTSObject>().owner = owner;
+                    var guo = new GraphUpdateObject(buildingClone.GetComponent<BoxCollider>().bounds);
+                    guo.updatePhysics = true;
+                    AstarPath.active.UpdateGraphs(guo);
+                    owner.resourceAmounts[RTSObject.ResourceType.Wood] = wood - 100;
+                }
+                else
+                {
+                    Debug.Log("Not enough wood");
+                }
+            }
+
+            creationBuilding = null;
+        }
+    }
+>>>>>>> master
 
     /*** Metodes privats ***/
 
@@ -206,8 +271,16 @@ public class CivilUnit : Unit
     // Metode per depositar els recursos al edifici resourceStore
     public void Deposit(Resource resourceDeposit)
     {
-		//vaciarme
-		owner.resourceAmounts[harvestType] += collectionAmount;
+        //vaciarme
+        if(resourceDeposit.tag == "tree"){
+            resourceStore.wood += collectionAmount;
+        }
+        if(resourceDeposit.tag == "food"){
+            resourceStore.food += collectionAmount;
+        }
+        if(resourceDeposit.tag == "mine"){
+            resourceStore.gold += collectionAmount;
+        }
         collectionAmount = 0;
     }
 
@@ -216,9 +289,6 @@ public class CivilUnit : Unit
         state = 4; //como ya he vaciado, vuelvo al recurso
     }
     public void IrVaciar(){
-		if (resourceStore == null){
-			resourceStore = findTownCenter();
-		}
         SetNewPath(resourceStore.transform.position);
         state = 1;
     }
@@ -233,9 +303,9 @@ public class CivilUnit : Unit
         state = 2;
     }
 
-	private TownCenterBuilding findTownCenter(){
+    public GameObject findTownCenter(){
         GameObject[] centers;
-		centers = GameObject.FindGameObjectsWithTag("townCenter");
+        centers = GameObject.FindGameObjectsWithTag("townCenter");
         GameObject closest = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
@@ -247,7 +317,7 @@ public class CivilUnit : Unit
                 distance = curDistance;
             }
         }
-        return closest.GetComponent<TownCenterBuilding>();
+        return closest;
     }
 
 }
