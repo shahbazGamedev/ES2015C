@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class RTSObject : MonoBehaviour
 {
@@ -53,12 +54,34 @@ public class RTSObject : MonoBehaviour
 
     protected Animator anim;                        // Referencia al component Animator.
 	protected Rigidbody rigbody;					// Referenica al component Rigidbody
+	protected LOSEntity ent;
 
 	private int ObjectId { get; set; }               // Identificador unic del objecte
     private float currentWeaponChargeTime;
 
-    //sprite publica
+    //sprite publica image de objeto activo
     public Sprite objectIconSprite;
+
+    //sprite publica image de unidad de ataque
+    public Sprite objectIconAttack;
+
+    //sprite publica image de unidad de defensa
+    public Sprite objectIconDefense;
+
+    //sprite publica image de unidad de rango de ataque
+    public Sprite objectIconAttackRange;
+
+    //sprite publica image de unidad de resoruce
+    public Sprite objectIconResource;
+    
+    //ACTION OF YAMATO CIVIL
+    public Sprite imageTownCenter;
+    public Sprite imageArmyBuilding;
+    public Sprite imageWallTower;
+    public Sprite imageWallEntrance;
+    public Sprite imageWall;
+    public Sprite imageCivilHouse;
+    public Sprite imageAcademy;
 
 
     /*** Metodes per defecte de Unity ***/
@@ -67,6 +90,7 @@ public class RTSObject : MonoBehaviour
     {
 		rigbody = gameObject.AddComponent<Rigidbody> ();
 		rigbody.constraints = RigidbodyConstraints.FreezeAll;
+		ent = gameObject.AddComponent<LOSEntity> ();
     }
 
     protected virtual void Start()
@@ -85,16 +109,24 @@ public class RTSObject : MonoBehaviour
     {
     }
 
+	private void OnMouseEnter() {
+		if (owner && owner.human) {
+			Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_select") as Texture2D;
+			Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+		}
+	}
+	
+	private void OnMouseExit() {
+		Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
+		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+	}
+
     /*** Metodes publics ***/
 
 	// Metode per declarar la seleccio del objecte
 	public virtual void SetSelection(bool selected)
 	{
 		currentlySelected = selected;
-		if (selected) {
-			GameObject selArea = GameObject.Find("SelectedArea");
-			if (selArea) selArea.GetComponent<MeshRenderer>().enabled = true;
-		}
 	}
 
     // Metode per obtenir les accions del objecte
@@ -305,10 +337,10 @@ public class RTSObject : MonoBehaviour
 	// Funcio auxiliar per al calcul del BoxCollider i el CharacterController
 	protected void ExtendBounds (Transform t, ref Bounds b)
 	{
-		Renderer rend = t.GetComponent<Renderer> ();
-		if (rend != null) {
-			b.Encapsulate (rend.bounds.min);
-			b.Encapsulate (rend.bounds.max);
+        foreach (var rend in t.GetComponentsInChildren<Renderer>().Where(r => r != null && !r.name.StartsWith("Minimap")))
+        {
+            b.Encapsulate(rend.bounds.min);
+            b.Encapsulate(rend.bounds.max);
 		}
 		
 		foreach (Transform t2 in t) {
