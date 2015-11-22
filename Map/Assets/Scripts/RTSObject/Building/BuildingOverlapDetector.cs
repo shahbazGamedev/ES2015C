@@ -3,10 +3,15 @@ using System.Collections;
 using System;
 
 /// <summary>
-/// Placeholder class that is used to detect collisions when placing a building.
+/// Placeholder class that is used to display the building preview and detect collisions when placing a building.
 /// </summary>
 public class BuildingOverlapDetector : MonoBehaviour
 {
+    private readonly Color buildableColor = new Color(0.0f, 1.0f, 0.0f, 0.8f);
+    private readonly Color nonBuildableColor = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+
+    private const bool drawBoundingBox = false;
+
     /// <summary>
     /// Number of OnCollisionEnter calls minus number of OnCollisionExit calls.
     /// </summary>
@@ -37,6 +42,19 @@ public class BuildingOverlapDetector : MonoBehaviour
     {
         // Set our layer to IgnoreRaycast, so we don't detect collisions with ourselves...
         gameObject.layer = 2;
+
+        // Enable alpha mode (transparency) for each material, for the partially visible effect
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            foreach (Material m in r.materials)
+            {
+                // http://sassybot.com/blog/swapping-rendering-mode-in-unity-5-0/
+                m.SetFloat("_Mode", 2);
+                m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                m.EnableKeyword("_ALPHABLEND_ON");
+            }
+        }
     }
 
     void Update()
@@ -48,19 +66,32 @@ public class BuildingOverlapDetector : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, (1 << 9))) // Raycast against ground (terrain) only
         {
-            var hitPointOnFloor = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-            transform.position = hitPointOnFloor;
+            // Add a few units of extra height because otherwise, if the unit is exactly
+            // on the floor, the rigidbody will detect a collision with the floor always
+            var hitPoint = new Vector3(hit.point.x, hit.point.y+0.2f, hit.point.z);
+            transform.position = hitPoint;
         }
 
-        // Draw a box that displays if the object can be drawn and its position
-        foreach (Transform child in transform)
-            Destroy(child.gameObject);
+        // If the option is enabled, show the bounding box of the object instead
+        if (drawBoundingBox)
+        {
+            foreach (Transform child in transform)
+                Destroy(child.gameObject);
 
-        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        Destroy(go.GetComponent<BoxCollider>());
-        go.transform.parent = transform;
-        go.transform.localPosition = GetComponent<BoxCollider>().center;
-        go.transform.localScale = GetComponent<BoxCollider>().size;
-        go.GetComponent<Renderer>().material.color = (IsBuildable) ? Color.green : Color.red;
+            GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            Destroy(go.GetComponent<BoxCollider>());
+            go.transform.parent = transform;
+            go.transform.localPosition = GetComponent<BoxCollider>().center;
+            go.transform.localScale = GetComponent<BoxCollider>().size;
+        }
+
+        // Paint the object with a color according to if it's buildable or not
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            foreach (Material m in r.materials)
+            {
+                m.color = IsBuildable ? buildableColor : nonBuildableColor;
+            }
+        }
     }
 }

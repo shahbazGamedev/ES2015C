@@ -519,7 +519,7 @@ public class RTSObject : MonoBehaviour
             dying = true;
             remainingTimeToDead = DefaultDeadTime;
 
-            // Enable fade mode for each material, for the fade-out animation
+            // Enable alpha mode (transparency) for each material, for the fade-out animation
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
             {
                 foreach (Material m in r.materials)

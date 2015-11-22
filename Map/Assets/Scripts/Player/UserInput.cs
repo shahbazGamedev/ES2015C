@@ -51,7 +51,8 @@ public class UserInput : MonoBehaviour
         if (!EventSystem.current.IsPointerOverGameObject()) // Click on non-UI element
         {
             RaycastHit hit = FindMouseTargetHit();
-            RTSObject targetRtsElement = hit.collider.gameObject.GetComponent<RTSObject>();
+            RTSObject targetRtsElement = (hit.collider != null)
+                ? hit.collider.gameObject.GetComponent<RTSObject>() : null;
 
             if (player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>()
 			    && player.SelectedObject.GetComponent<CivilUnit>().waitingForBuildingLocationSelection)
