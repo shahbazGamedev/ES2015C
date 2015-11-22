@@ -142,6 +142,15 @@ public class CivilUnit : Unit
     /// <param name="creationBuildingConstructionResource">Name of the resource for the in-progress building</param>
     protected void StartBuildingLocationSelection(string creationBuildingResource, string creationBuildingConstructionResource)
     {
+        // If the unit is already working on another building, don't start, because that
+        // would corrupt our internal state (creationBuilding, etc.)
+        if (building)
+        {
+            HUDInfo.message = "This unit is already working on another building.";
+            return;
+        }
+
+        // Load the complete building resource
         var creationBuildingTmp = Resources.Load<GameObject>(creationBuildingResource) as GameObject;
         if (creationBuildingTmp == null || creationBuildingTmp.GetComponent<Building>() == null)
         {
@@ -149,6 +158,7 @@ public class CivilUnit : Unit
             return;
         }
 
+        // Load the in-construction building resource
         var creationBuildingConstructionTmp = Resources.Load<GameObject>(creationBuildingConstructionResource);
         if (creationBuildingConstructionTmp == null || creationBuildingConstructionTmp.GetComponent<Building>() == null)
         {
@@ -156,8 +166,9 @@ public class CivilUnit : Unit
             return;
         }
 
-        building = true;
+        // Set up the unit state to work on a building
         HUDInfo.message = "Select the site where you want to build the building";
+        building = true;
         creationBuilding = creationBuildingTmp;
         creationBuildingConstruction = creationBuildingConstructionTmp;
     }
