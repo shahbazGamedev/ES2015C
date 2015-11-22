@@ -56,8 +56,9 @@ public class UserInput : MonoBehaviour
             if (player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>()
 			    && player.SelectedObject.GetComponent<CivilUnit>().waitingForBuildingLocationSelection)
 			{
-				player.SelectedObject.GetComponent<CivilUnit>().constructionPoint = hit.point;
+                player.SelectedObject.GetComponent<CivilUnit>().SetBuildingLocation();
 			}
+
 			else if (leftClick)
             {
 				object[] obj = GameObject.FindSceneObjectsOfType(typeof (RTSObject));

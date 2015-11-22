@@ -14,9 +14,10 @@ public class CivilUnit : Unit
     public bool harvesting = false;                         // Indicadors d'estat de la unitat
 
     public bool waitingForBuildingLocationSelection = false; // If we are in building selection location mode
-    public Vector3 constructionPoint = Vector3.zero;        // Posicio on crear el edifici
+    protected Vector3 constructionPoint = Vector3.zero;        // Posicio on crear el edifici
     protected GameObject creationBuilding = null;           // Objecte que anem a crear
     protected GameObject creationBuildingConstruction = null; //Edifici que anem a crear, en construccio
+    protected GameObject creationCollisionDetectorObject; // Object to be used to detect if the place of a building is already taken
 
     protected bool building = false;                        // true if the unit has a building project assigned
     protected Building currentProject = null;  				// Building actual de construccio
@@ -59,11 +60,6 @@ public class CivilUnit : Unit
     {
         base.Update();
 
-        if (waitingForBuildingLocationSelection && constructionPoint != Vector3.zero)
-        {
-            CreateOnConstructionBuilding();
-        }
-
         if (!moving)
         {
             if (harvesting)
@@ -87,7 +83,11 @@ public class CivilUnit : Unit
             }
 			else if (building)
 			{
-				if (currentProject.CanBeBuilt()) //Si tenemos un proyecto y lo estamos construyendo 
+                if (currentProject == null)
+                {
+                    AssignBuildingProject(null);
+                }
+				else if (currentProject.CanBeBuilt()) //Si tenemos un proyecto y lo estamos construyendo 
 				{
                     // Check that the building is close enough to the unit to build it
                     var closestPointInBuilding = currentProject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
@@ -188,6 +188,48 @@ public class CivilUnit : Unit
         constructionPoint = Vector3.zero;
         creationBuilding = creationBuildingTmp;
         creationBuildingConstruction = creationBuildingConstructionTmp;
+
+        // Create the building overlap detector object
+        var creationBuildingInitTmp =
+            (GameObject)Instantiate(creationBuilding, Vector3.zero, Quaternion.identity);
+        var creationBuildingInitTmpCollider = creationBuildingInitTmp.GetComponent<BoxCollider>();
+
+        creationCollisionDetectorObject = new GameObject();
+        creationCollisionDetectorObject.name = "Collision Detector for " + creationBuildingInitTmp.name;
+        creationCollisionDetectorObject.transform.rotation = creationBuildingInitTmp.transform.rotation;
+        creationCollisionDetectorObject.transform.localScale = creationBuildingInitTmp.transform.localScale;
+        var collisionDetectorCollider = creationCollisionDetectorObject.AddComponent<BoxCollider>();
+        collisionDetectorCollider.center = creationBuildingInitTmpCollider.center;
+        collisionDetectorCollider.size = creationBuildingInitTmpCollider.size;
+        creationCollisionDetectorObject.AddComponent<BuildingOverlapDetector>();
+
+        Destroy(creationBuildingInitTmp);
+    }
+
+    /// <summary>
+    /// Sets the location of the building on the building location selector to the current position.
+    /// </summary>
+    public void SetBuildingLocation()
+    {
+        if (creationCollisionDetectorObject.GetComponent<BuildingOverlapDetector>().IsBuildable)
+        {
+            constructionPoint = creationCollisionDetectorObject.transform.position;
+            Destroy(creationCollisionDetectorObject); // To avoid collisions with the new object
+
+            // Create the "on construction" building
+            CreateOnConstructionBuilding();
+
+            // Exit location selection mode
+            waitingForBuildingLocationSelection = false;
+            constructionPoint = Vector3.zero;
+            creationBuilding = null;
+            creationBuildingConstruction = null;
+            creationCollisionDetectorObject = null;
+        }
+        else
+        {
+            HUDInfo.message = "The building cannot be placed in the selected location.";
+        }
     }
 
     public void CreateOnConstructionBuilding()
@@ -207,41 +249,11 @@ public class CivilUnit : Unit
                 creationBuildingConstructionProject.GetComponent<Building>().cost,
                 creationBuildingConstructionProject.GetComponent<Building>().objectName);
 
-            building = false;
-            constructionPoint = Vector3.zero;
-            currentProject = null;
-            creationBuilding = null;
-            creationBuildingConstruction = null;
             return;
         }
         Debug.Log("Tenemos suficiente madera");
 
-        // Verify that the building is not overlapping another building
-        // To do this, since Unity doesn't offer us much help, we do the following:
-        // We calculate a bounding sphere of the building and find nearby colliders.
-        // For those which correspond to buildings (which will be BoxColliders), we
-        // check for collissions one by one to check if there is any overlap
-        var buildingBoxCollider = creationBuildingConstructionProject.GetComponent<BoxCollider>();
-        var tentativeSphereCenter = buildingBoxCollider.bounds.center;
-        var tentativeSphereRadius = Math.Max(buildingBoxCollider.bounds.extents.x,
-            Math.Max(buildingBoxCollider.bounds.extents.y, buildingBoxCollider.bounds.extents.z));
-        var potentialColliders = Physics.OverlapSphere(tentativeSphereCenter, tentativeSphereRadius);
-        foreach (BoxCollider otherCollider in potentialColliders.Where(
-            c => c != buildingBoxCollider && c.gameObject.GetComponent<Building>() != null).Cast<BoxCollider>())
-        {
-            if (buildingBoxCollider.bounds.Intersects(otherCollider.bounds))
-            {
-                Destroy(creationBuildingConstructionProject);
-                HUDInfo.message = "We can not build because there are other buildings nearby";
-
-                constructionPoint = Vector3.zero;
-                return;
-            }
-        }
-
         // Start the building project
-        waitingForBuildingLocationSelection = false;
-
         var newProject = creationBuildingConstructionProject.GetComponent<Building> ();
         newProject.hitPoints = 0;
         newProject.needsBuilding = true;
@@ -259,11 +271,6 @@ public class CivilUnit : Unit
 		owner.resourceAmounts [RTSObject.ResourceType.Wood] -= newProject.cost;
         // Assign the building project to this unit
         AssignBuildingProject(newProject);
-
-        // Clean up variables that we don't need anymore
-        constructionPoint = Vector3.zero;
-        creationBuilding = null;
-        creationBuildingConstruction = null;
     }
 	
 	public void CreateFinishedBuilding()
