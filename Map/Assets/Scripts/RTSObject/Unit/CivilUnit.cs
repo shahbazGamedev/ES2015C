@@ -17,7 +17,8 @@ public class CivilUnit : Unit
 	protected GameObject creationBuildingConstruction = null; //Edifici que anem a crear, en construccio
 
     public bool harvesting = false;      					// Indicadors d'estat de la unitat
-	public bool building = false;
+    public bool waitingForBuildingLocationSelection = false;
+    public bool building = false;
 
     //private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
     private ResourceType harvestType;                       // Tipus de recolecció
@@ -56,6 +57,12 @@ public class CivilUnit : Unit
     protected override void Update()
     {
         base.Update();
+
+        if (waitingForBuildingLocationSelection && constructionPoint != Vector3.zero)
+        {
+            CreateOnConstructionBuilding();
+        }
+
         if (!moving)
         {
             if (harvesting)
@@ -79,24 +86,13 @@ public class CivilUnit : Unit
             }
 			else if (building)
 			{
-				if (currentProject && currentProject.UnderConstruction()) //Si tenemos un proyecto y lo estamos construyendo 
+				if (currentProject && currentProject.CanBeBuilt()) //Si tenemos un proyecto y lo estamos construyendo 
 				{
 					currentProject.Construct(baseBuildSpeed);
 				}
-				else if (currentProject && currentProject.UnderConstruction() == false) //Si tenemos un proyecto y se ha acabado de construir
+				else if (currentProject && currentProject.CanBeBuilt() == false) //Si tenemos un proyecto y se ha acabado de construir
 				{
-					Destroy(currentProject.gameObject);
-					Debug.Log("Destruimos el edificio en construccion");
-					currentProject=null;
-					building=false;
 					CreateFinishedBuilding();
-				}
-				else if (creationBuildingConstruction != null)
-				{
-					if (constructionPoint != Vector3.zero)
-					{
-						CreateBuilding ();
-					}
 				}
 				else
 				{
@@ -141,48 +137,39 @@ public class CivilUnit : Unit
     /// Starts the building location selection sequence, where the user has to click
     /// on the map in order to select the place where the building should be built.
     /// </summary>
-    /// <param name="creationBuildingResource">Name of the resource for the finished building.</param>
-    /// <param name="creationBuildingConstructionResource">Name of the resource for the in-progress building</param>
-    protected void StartBuildingLocationSelection(string creationBuildingResource, string creationBuildingConstructionResource)
+    /// <param name="creationBuildingPath">Name of the resource for the finished building.</param>
+    /// <param name="creationBuildingConstructionPath">Name of the resource for the in-progress building</param>
+    protected void StartBuildingLocationSelection(string creationBuildingPath, string creationBuildingConstructionPath)
     {
-        // If the unit is already working on another building, don't start, because that
-        // would corrupt our internal state (creationBuilding, etc.)
-        if (building)
-        {
-            HUDInfo.message = "This unit is already working on another building.";
-            return;
-        }
-
         // Load the complete building resource
-        var creationBuildingTmp = Resources.Load<GameObject>(creationBuildingResource) as GameObject;
+        var creationBuildingTmp = Resources.Load<GameObject>(creationBuildingPath) as GameObject;
         if (creationBuildingTmp == null || creationBuildingTmp.GetComponent<Building>() == null)
         {
-            Debug.LogError("Could not load resource '" + creationBuildingResource + "' to start building location selection.");
+            Debug.LogError("Could not load resource '" + creationBuildingPath + "' to start building location selection.");
             return;
         }
 
         // Load the in-construction building resource
-        var creationBuildingConstructionTmp = Resources.Load<GameObject>(creationBuildingConstructionResource);
-        if (creationBuildingConstructionTmp == null || creationBuildingConstructionTmp.GetComponent<Building>() == null)
+        var creationBuildingConstructionTmp = Resources.Load<GameObject>(creationBuildingConstructionPath);
+        if (creationBuildingConstructionTmp == null)
         {
-            Debug.LogError("Could not load resource '" + creationBuildingResource + "' to start building location selection.");
+            Debug.LogError("Could not load resource '" + creationBuildingConstructionPath + "' to start building location selection.");
             return;
         }
 
         // Set up the unit state to work on a building
         HUDInfo.message = "Select the site where you want to build the building";
-        building = true;
+        waitingForBuildingLocationSelection = true;
         constructionPoint = Vector3.zero;
-        currentProject = null;
         creationBuilding = creationBuildingTmp;
         creationBuildingConstruction = creationBuildingConstructionTmp;
     }
 
-    public void CreateBuilding()
+    public void CreateOnConstructionBuilding()
     {
         // Initialize the object to build, so we can access its cost and colliders
         var creationBuildingConstructionProject =
-            (GameObject)Instantiate(creationBuildingConstruction, constructionPoint, Quaternion.identity);
+            (GameObject)Instantiate(creationBuilding, constructionPoint, Quaternion.identity);
 
         // Check if there are enough resources available
         float woodAvailable = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
@@ -228,33 +215,43 @@ public class CivilUnit : Unit
         }
 
         // Start the building project
+        waitingForBuildingLocationSelection = false;
+        building = true;
+
         currentProject = creationBuildingConstructionProject.GetComponent<Building> ();
 		currentProject.hitPoints = 0;
 		currentProject.needsBuilding = true;
 		currentProject.owner = owner;
+        currentProject.finishedModel = creationBuilding;
 
+        currentProject.ReplaceChildWithChildFromGameObjectTemplate(creationBuildingConstruction);
+
+        // Update physics
 		var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
 		guo.updatePhysics = true;
 		AstarPath.active.UpdateGraphs (guo);
 
+        // Substract resources needed for the building
 		owner.resourceAmounts [RTSObject.ResourceType.Wood] -= currentProject.cost;
-		SetNewPath(constructionPoint);
+        // Make the unit move to the construction point
+		SetNewPath(currentProject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
+
+        // Clean up variables that we don't need anymore
+        constructionPoint = Vector3.zero;
+        creationBuilding = null;
+        creationBuildingConstruction = null;
     }
 	
 	public void CreateFinishedBuilding()
 	{
-		creationBuilding = (GameObject)Instantiate (creationBuilding, constructionPoint, Quaternion.identity);
-		currentProject = creationBuilding.GetComponent<Building> ();
-		currentProject.owner = owner;
-		var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
+        currentProject.ReplaceChildWithChildFromGameObjectTemplate(currentProject.finishedModel);
+
+        var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
 		guo.updatePhysics = true;
 		AstarPath.active.UpdateGraphs (guo);
-		SetNewPath(constructionPoint);		
-		constructionPoint = Vector3.zero;
-		creationBuilding = null;
+
+        building = false;
 		currentProject=null;
-		creationBuildingConstruction = null;
-		constructionPoint = Vector3.zero;
 	}
 
     /*** Metodes privats ***/

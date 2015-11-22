@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class Building : RTSObject
 {
-	protected float maxBuildProgress = 10.0f;	// Maxim progres de construccio
 	protected GameObject creationUnit = null;	// Objecte que indica la unitat a crear actual
 
 	protected Vector3 spawnPoint;               // Punt de creacio de les unitats
@@ -22,6 +21,8 @@ public class Building : RTSObject
 
     public float visi = 60f;
 
+    public GameObject finishedModel; // TODOXXX
+
     /*** Metodes per defecte de Unity ***/
 
     protected override void Awake()
@@ -32,7 +33,6 @@ public class Building : RTSObject
         gameObject.layer = 10;
         // Calculem la dimensio del BoxCollider
         FittedBoxCollider();
-        currentBuildProgress = 0.0f; // Progres actual de la construccio
 		ent.Range = visi;
 
     }
@@ -55,11 +55,11 @@ public class Building : RTSObject
     // Metode que obte el porcentatge de construccio actual
     public float getBuildPercentage()
     {
-        return currentBuildProgress / maxBuildProgress;
+        return hitPoints / maxHitPoints;
     }
 
     // Metode que obte si esta en construccio
-    public bool UnderConstruction()
+    public override bool CanBeBuilt()
     {
         return needsBuilding;
     }

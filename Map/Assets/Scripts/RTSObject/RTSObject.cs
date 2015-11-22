@@ -13,7 +13,6 @@ public class RTSObject : MonoBehaviour
     /// <summary>Default movement speed. Leave at zero if the object can't move.</summary>
     protected float baseMoveSpeed = 0;
 	
-	protected float currentBuildProgress = 10.0f;
 	protected int baseBuildSpeed=0;
     /// <summary>Default attack strength. Leave at zero if the object can't attack.</summary>
     protected int baseAttackStrength = 0;
@@ -226,7 +225,7 @@ public class RTSObject : MonoBehaviour
 	
 	public virtual bool CanBeBuilt()
 	{
-		return (currentBuildProgress<10.0f);
+        return false;
 	}
 
     /// <summary>
@@ -557,5 +556,36 @@ public class RTSObject : MonoBehaviour
         {
             AstarPath.active.UpdateGraphs(bounds);
         }
+    }
+
+    /// <summary>
+    /// Replaces all the child nodes of the GameObject associated with this object,
+    /// with the child nodes of the given GameObject template.
+    /// 
+    /// This can be used, for instance, to exchange the model that is used to
+    /// display the different versions (on construction, semidemolished, complete, ...) of a building.
+    /// </summary>
+    /// <param name="newGameObjectTemplate">The object to use as a template for the new child nodes.</param>
+    public void ReplaceChildWithChildFromGameObjectTemplate(GameObject newGameObjectTemplate)
+    {
+        // Remove all child nodes of the associated GameObject
+        // We use ToList() since we are changing the same structure we are enumerating
+        foreach (Transform child in transform.OfType<Transform>().ToList())
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        // Instantiate the object at the same position as our object temporarily
+        var finishedBuilding = (GameObject)Instantiate(newGameObjectTemplate, transform.position, Quaternion.identity);
+
+        // Reassociate all child nodes of the GameObject to our object
+        // We use ToList() since we are changing the same structure we are enumerating
+        foreach (Transform child in finishedBuilding.transform.OfType<Transform>().ToList())
+        {
+            child.parent = transform;
+        }
+
+        // Destroy the gameobject we've used to import its child
+        Destroy(finishedBuilding);
     }
 }
