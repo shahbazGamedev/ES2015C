@@ -29,7 +29,7 @@ public class BuildingOverlapDetector : MonoBehaviour
     {
         get
         {
-            return collisionCount == 0 && currentTerrainHeight < 2.0f;
+            return collisionCount == 0 && Math.Abs(currentTerrainHeight) < 2.0f;
         }
     }
 
