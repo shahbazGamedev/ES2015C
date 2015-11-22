@@ -75,6 +75,14 @@ public class Building : RTSObject
         }
     }
 
+    public override string[] GetActions()
+    {
+        if (CanBeBuilt())
+            return new string[0];
+
+        return base.GetActions();
+    }
+
     public override void PerformAction(string actionToPerform)
     {
         base.PerformAction(actionToPerform);

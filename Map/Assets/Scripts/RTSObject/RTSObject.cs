@@ -129,7 +129,7 @@ public class RTSObject : MonoBehaviour
 	}
 
     // Metode per obtenir les accions del objecte
-    public string[] GetActions()
+    public virtual string[] GetActions()
     {
         return actions;
     }
