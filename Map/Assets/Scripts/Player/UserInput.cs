@@ -50,21 +50,10 @@ public class UserInput : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject()) // Click on non-UI element
         {
-            RTSObject targetRtsElement = null;
+            RaycastHit hit = FindMouseTargetHit();
+            RTSObject targetRtsElement = hit.collider.gameObject.GetComponent<RTSObject>();
 
-            // Cast a ray in the direction clicked by the user to detect the currently clicked element,
-            // and if it is a RTS element, then save its reference
-            GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-            Ray ray = camera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                GameObject objectHit = hit.collider.gameObject;
-                targetRtsElement = objectHit.GetComponent<RTSObject>();
-            }
-
-			if (player.SelectedObject && player.SelectedObject.tag == "civil" && player.SelectedObject.GetComponent<CivilUnit>()
+            if (player.SelectedObject && player.SelectedObject.tag == "civil" && player.SelectedObject.GetComponent<CivilUnit>()
 			    && player.SelectedObject.GetComponent<CivilUnit>().building == true && player.SelectedObject.GetComponent<CivilUnit>().constructionPoint == Vector3.zero)
 			{
 				player.SelectedObject.GetComponent<CivilUnit>().constructionPoint = hit.point;
@@ -142,6 +131,48 @@ public class UserInput : MonoBehaviour
                 }
             }
         }
+    }
+
+    private RaycastHit FindMouseTargetHit()
+    {
+        RTSObject targetRtsElement = null;
+
+        // Cast a ray in the direction clicked by the user to detect the currently clicked element,
+        // and if it is a RTS element, then save its reference
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        Ray ray = camera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+
+        // First, cast a ray without considering the currently selected element
+        // (add it temporally to the "ignore raycast" layer), so if the user clicked
+        // on a unit that is occluded by the current element, it will be selected instead
+        int origSelectedObjectLayer = 0;
+        if (player.SelectedObject != null)
+        {
+            origSelectedObjectLayer = player.SelectedObject.gameObject.layer;
+            player.SelectedObject.gameObject.layer = 2; // IgnoreRaycast layer
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject objectHit = hit.collider.gameObject;
+            targetRtsElement = objectHit.GetComponent<RTSObject>();
+        }
+
+        if (player.SelectedObject != null)
+        {
+            player.SelectedObject.gameObject.layer = origSelectedObjectLayer; // Restore original layer
+        }
+
+        // If we didn't find a collision, repeat the raycast in order to test if the user
+        // clicked again on the unit he had already selected
+        if (targetRtsElement == null && Physics.Raycast(ray, out hit))
+        {
+            GameObject objectHit = hit.collider.gameObject;
+            targetRtsElement = objectHit.GetComponent<RTSObject>();
+        }
+
+        return hit;
     }
 
     private void MoveCamera()
