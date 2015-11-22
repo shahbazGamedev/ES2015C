@@ -134,6 +134,34 @@ public class CivilUnit : Unit
     /*** Metodes interns accessibles per les subclasses ***/
 
     // Metode que crea el edifici
+    /// <summary>
+    /// Starts the building location selection sequence, where the user has to click
+    /// on the map in order to select the place where the building should be built.
+    /// </summary>
+    /// <param name="creationBuildingResource">Name of the resource for the finished building.</param>
+    /// <param name="creationBuildingConstructionResource">Name of the resource for the in-progress building</param>
+    protected void StartBuildingLocationSelection(string creationBuildingResource, string creationBuildingConstructionResource)
+    {
+        var creationBuildingTmp = Resources.Load<GameObject>(creationBuildingResource) as GameObject;
+        if (creationBuildingTmp == null || creationBuildingTmp.GetComponent<Building>() == null)
+        {
+            Debug.LogError("Could not load resource '" + creationBuildingResource + "' to start building location selection.");
+            return;
+        }
+
+        var creationBuildingConstructionTmp = Resources.Load<GameObject>(creationBuildingConstructionResource);
+        if (creationBuildingConstructionTmp == null || creationBuildingConstructionTmp.GetComponent<Building>() == null)
+        {
+            Debug.LogError("Could not load resource '" + creationBuildingResource + "' to start building location selection.");
+            return;
+        }
+
+        building = true;
+        HUDInfo.message = "Select the site where you want to build the building";
+        creationBuilding = creationBuildingTmp;
+        creationBuildingConstruction = creationBuildingConstructionTmp;
+    }
+
     public void CreateBuilding()
     {
 		if (Physics.CheckSphere (constructionPoint, 0.8f, finalmask)) {

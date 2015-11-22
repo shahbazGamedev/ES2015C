@@ -22,34 +22,27 @@ public class Yamato_civil : CivilUnit
 	public override void PerformAction(string actionToPerform)
 	{
 		switch (actionToPerform) {
-		case "Town Center":
-			creationBuilding = Resources.Load ("Prefabs/Yamato_TownCenter") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_TownCenter_onConstruction") as GameObject;
-            break;
-		case "Army Building":
-			creationBuilding = Resources.Load ("Prefabs/Yamato_ArmyBuilding") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_ArmyBuilding") as GameObject;
-            break;
-		case "Wall Tower":
-			creationBuilding = Resources.Load ("Prefabs/Yamato_WallTower") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_WallTower") as GameObject;
-            break;
-		case "Wall Entrance":
-			creationBuilding = Resources.Load ("Prefabs/Yamato_WallEntrance") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_WallEntrance") as GameObject;
-            break;
-		case "Wall":
-			creationBuilding = Resources.Load ("Prefabs/Yamato_Wall") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_Wall") as GameObject;
-            break;
-		case "Civil House":
-			creationBuilding = Resources.Load ("Prefabs/Yamato_CivilHouse") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_CivilHouse") as GameObject;
-            break;
-		case "Academy":
-			creationBuilding = Resources.Load ("Prefabs/Yamato_Academy") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Yamato_Academy") as GameObject;
-            break;
+		    case "Town Center":
+                StartBuildingLocationSelection("Prefabs/Yamato_TownCenter", "Prefabs/Yamato_TownCenter_onConstruction");
+                break;
+		    case "Army Building":
+                StartBuildingLocationSelection("Prefabs/Yamato_ArmyBuilding", "Prefabs/Yamato_ArmyBuilding");
+                break;
+		    case "Wall Tower":
+                StartBuildingLocationSelection("Prefabs/Yamato_WallTower", "Prefabs/Yamato_WallTower");
+                break;
+		    case "Wall Entrance":
+                StartBuildingLocationSelection("Prefabs/Yamato_WallEntrance", "Prefabs/Yamato_WallEntrance");
+                break;
+		    case "Wall":
+                StartBuildingLocationSelection("Prefabs/Yamato_Wall", "Prefabs/Yamato_Wall");
+                break;
+		    case "Civil House":
+                StartBuildingLocationSelection("Prefabs/Yamato_CivilHouse", "Prefabs/Yamato_CivilHouse");
+                break;
+		    case "Academy":
+                StartBuildingLocationSelection("Prefabs/Yamato_Academy", "Prefabs/Yamato_Academy");
+                break;
 		}
 	}
 }

@@ -22,10 +22,9 @@ public class Sumerian_civil : CivilUnit
 	public override void PerformAction(string actionToPerform)
 	{
 		switch (actionToPerform) {
-		case "Town Center":
-			creationBuilding = Resources.Load ("Prefabs/Sumerian_TownCenter") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Sumerian_TownCenter_onConstruction") as GameObject;
-            break;
+		    case "Town Center":
+                StartBuildingLocationSelection("Prefabs/Sumerian_TownCenter", "Prefabs/Sumerian_TownCenter_onConstruction");
+                break;
 		}
 	}
 }
