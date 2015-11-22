@@ -63,11 +63,6 @@ public class HUDAction : HUDElement
             DisplayObject.IsOwnedBy(Player) &&
             ActionIndex < DisplayObject.GetActions().Length)
         {
-            if (DisplayObject.tag == "civil" && DisplayObject.GetComponent<CivilUnit>() && DisplayObject.GetComponent<CivilUnit>().building == false)
-            {
-                DisplayObject.GetComponent<CivilUnit>().building = true;
-				HUDInfo.message = "Select the site where you want to build the building";
-            }
             DisplayObject.PerformAction(DisplayObject.GetActions()[ActionIndex]);
         }
     }

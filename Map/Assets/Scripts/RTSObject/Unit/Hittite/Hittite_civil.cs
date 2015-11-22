@@ -22,34 +22,27 @@ public class Hittite_civil : CivilUnit
 	public override void PerformAction(string actionToPerform)
 	{
 		switch (actionToPerform) {
-		case "Town Center":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_TownCenter") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_TownCenter") as GameObject;
-            break;
-		case "Army Building":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_ArmyBuilding") as GameObject;
-			creationBuildingConstruction = Resources.Load ("Prefabs/Hittite_ArmyBuildingConstruction") as GameObject;
-			break;
-		case "Wall Tower":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_WallTower") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_WallTower") as GameObject;
-            break;
-		case "Wall Entrance":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_WallEntrance") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_WallEntrance") as GameObject;
-            break;
-		case "Wall":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_Wall") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_Wall") as GameObject;
-            break;
-		case "Civil House":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_CivilHouse") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_CivilHouse") as GameObject;
-            break;
-		case "Academy":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_Academy") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_Academy") as GameObject;
-            break;
+            case "Town Center":
+                StartBuildingLocationSelection("Prefabs/Hittite_TownCenter", "Prefabs/Hittite_TownCenter");
+                break;
+            case "Army Building":
+                StartBuildingLocationSelection("Prefabs/Hittite_ArmyBuilding", "Prefabs/Hittite_ArmyBuildingConstruction");
+			    break;
+		    case "Wall Tower":
+                StartBuildingLocationSelection("Prefabs/Hittite_WallTower", "Prefabs/Hittite_WallTower");
+                break;
+		    case "Wall Entrance":
+                StartBuildingLocationSelection("Prefabs/Hittite_WallEntrance", "Prefabs/Hittite_WallEntrance");
+                break;
+		    case "Wall":
+                StartBuildingLocationSelection("Prefabs/Hittite_Wall", "Prefabs/Hittite_Wall");
+                break;
+		    case "Civil House":
+                StartBuildingLocationSelection("Prefabs/Hittite_CivilHouse", "Prefabs/Hittite_CivilHouse");
+                break;
+		    case "Academy":
+                StartBuildingLocationSelection("Prefabs/Hittite_Academy", "Prefabs/Hittite_Academy");
+                break;
 		}
 	}
 }
