@@ -167,30 +167,30 @@ public class CivilUnit : Unit
 		if (Physics.CheckSphere (constructionPoint, 0.8f, finalmask)) {
 			HUDInfo.message = "We can not build because there are other buildings nearby";
 			constructionPoint = Vector3.zero;
-		} else {
-			Debug.Log("Podemos crear el edificio");
-			creationBuildingConstruction = (GameObject) Instantiate (creationBuildingConstruction, constructionPoint, Quaternion.identity);
-			creationBuildingConstruction.SetActive(false);
-			float wood = owner.GetResourceAmount (RTSObject.ResourceType.Wood);
-			if (wood >= creationBuildingConstruction.GetComponent<Building>().cost) {
-				Debug.Log("Tenemos suficiente madera");
-				creationBuildingConstruction.SetActive(true);
-				currentProject = creationBuildingConstruction.GetComponent<Building> ();
-				currentProject.hitPoints = 0;
-				currentProject.needsBuilding = true;
-				currentProject.owner = owner;
-				var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
-				guo.updatePhysics = true;
-				AstarPath.active.UpdateGraphs (guo);
-				owner.resourceAmounts [RTSObject.ResourceType.Wood] -= currentProject.cost;
-				SetNewPath(constructionPoint);
+            return;
+		}
+        Debug.Log("Podemos crear el edificio");
+
+        float woodAvailable = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
+        float woodCost = creationBuildingConstruction.GetComponent<Building>().cost;
+
+		if (woodAvailable >= woodCost) {
+            Debug.Log("Tenemos suficiente madera");
+            creationBuildingConstruction = (GameObject)Instantiate(creationBuildingConstruction, constructionPoint, Quaternion.identity);
+            currentProject = creationBuildingConstruction.GetComponent<Building> ();
+			currentProject.hitPoints = 0;
+			currentProject.needsBuilding = true;
+			currentProject.owner = owner;
+			var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
+			guo.updatePhysics = true;
+			AstarPath.active.UpdateGraphs (guo);
+			owner.resourceAmounts [RTSObject.ResourceType.Wood] -= currentProject.cost;
+			SetNewPath(constructionPoint);
 						
-			} else {
-				HUDInfo.message = "Not enough wood (" + creationBuilding.GetComponent<Building>().cost + ") to construct the " + creationBuilding.name;
-				Destroy(creationBuildingConstruction);
-				constructionPoint = Vector3.zero;
-				creationBuildingConstruction = null;
-			}
+		} else {
+            HUDInfo.message = "Not enough wood (" + creationBuilding.GetComponent<Building>().cost + ") to construct the " + creationBuilding.name;
+			constructionPoint = Vector3.zero;
+			creationBuildingConstruction = null;
 		}
     }
 	
