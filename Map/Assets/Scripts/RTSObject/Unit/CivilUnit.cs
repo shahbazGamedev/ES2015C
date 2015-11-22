@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using Pathfinding;
+using System;
+using System.Linq;
+
 
 public class CivilUnit : Unit
 {
@@ -82,7 +85,7 @@ public class CivilUnit : Unit
 				}
 				else if (currentProject && currentProject.UnderConstruction() == false) //Si tenemos un proyecto y se ha acabado de construir
 				{
-					Destroy(creationBuildingConstruction);
+					Destroy(currentProject.gameObject);
 					Debug.Log("Destruimos el edificio en construccion");
 					currentProject=null;
 					building=false;
@@ -142,6 +145,15 @@ public class CivilUnit : Unit
     /// <param name="creationBuildingConstructionResource">Name of the resource for the in-progress building</param>
     protected void StartBuildingLocationSelection(string creationBuildingResource, string creationBuildingConstructionResource)
     {
+        // If the unit is already working on another building, don't start, because that
+        // would corrupt our internal state (creationBuilding, etc.)
+        if (building)
+        {
+            HUDInfo.message = "This unit is already working on another building.";
+            return;
+        }
+
+        // Load the complete building resource
         var creationBuildingTmp = Resources.Load<GameObject>(creationBuildingResource) as GameObject;
         if (creationBuildingTmp == null || creationBuildingTmp.GetComponent<Building>() == null)
         {
@@ -149,6 +161,7 @@ public class CivilUnit : Unit
             return;
         }
 
+        // Load the in-construction building resource
         var creationBuildingConstructionTmp = Resources.Load<GameObject>(creationBuildingConstructionResource);
         if (creationBuildingConstructionTmp == null || creationBuildingConstructionTmp.GetComponent<Building>() == null)
         {
@@ -156,42 +169,76 @@ public class CivilUnit : Unit
             return;
         }
 
-        building = true;
+        // Set up the unit state to work on a building
         HUDInfo.message = "Select the site where you want to build the building";
+        building = true;
+        constructionPoint = Vector3.zero;
+        currentProject = null;
         creationBuilding = creationBuildingTmp;
         creationBuildingConstruction = creationBuildingConstructionTmp;
     }
 
     public void CreateBuilding()
     {
-		if (Physics.CheckSphere (constructionPoint, 0.8f, finalmask)) {
-			HUDInfo.message = "We can not build because there are other buildings nearby";
-			constructionPoint = Vector3.zero;
-		} else {
-			Debug.Log("Podemos crear el edificio");
-			creationBuildingConstruction = (GameObject) Instantiate (creationBuildingConstruction, constructionPoint, Quaternion.identity);
-			creationBuildingConstruction.SetActive(false);
-			float wood = owner.GetResourceAmount (RTSObject.ResourceType.Wood);
-			if (wood >= creationBuildingConstruction.GetComponent<Building>().cost) {
-				Debug.Log("Tenemos suficiente madera");
-				creationBuildingConstruction.SetActive(true);
-				currentProject = creationBuildingConstruction.GetComponent<Building> ();
-				currentProject.hitPoints = 0;
-				currentProject.needsBuilding = true;
-				currentProject.owner = owner;
-				var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
-				guo.updatePhysics = true;
-				AstarPath.active.UpdateGraphs (guo);
-				owner.resourceAmounts [RTSObject.ResourceType.Wood] -= currentProject.cost;
-				SetNewPath(constructionPoint);
-						
-			} else {
-				HUDInfo.message = "Not enough wood (" + creationBuilding.GetComponent<Building>().cost + ") to construct the " + creationBuilding.name;
-				Destroy(creationBuildingConstruction);
-				constructionPoint = Vector3.zero;
-				creationBuildingConstruction = null;
-			}
-		}
+        // Initialize the object to build, so we can access its cost and colliders
+        var creationBuildingConstructionProject =
+            (GameObject)Instantiate(creationBuildingConstruction, constructionPoint, Quaternion.identity);
+
+        // Check if there are enough resources available
+        float woodAvailable = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
+        float woodCost = creationBuildingConstructionProject.GetComponent<Building>().cost;
+
+        if (woodAvailable < woodCost)
+        {
+            Destroy(creationBuildingConstructionProject);
+            HUDInfo.message = string.Format("Not enough wood ({0}) to construct the {1}",
+                creationBuildingConstructionProject.GetComponent<Building>().cost,
+                creationBuildingConstructionProject.GetComponent<Building>().objectName);
+
+            building = false;
+            constructionPoint = Vector3.zero;
+            currentProject = null;
+            creationBuilding = null;
+            creationBuildingConstruction = null;
+            return;
+        }
+        Debug.Log("Tenemos suficiente madera");
+
+        // Verify that the building is not overlapping another building
+        // To do this, since Unity doesn't offer us much help, we do the following:
+        // We calculate a bounding sphere of the building and find nearby colliders.
+        // For those which correspond to buildings (which will be BoxColliders), we
+        // check for collissions one by one to check if there is any overlap
+        var buildingBoxCollider = creationBuildingConstructionProject.GetComponent<BoxCollider>();
+        var tentativeSphereCenter = buildingBoxCollider.bounds.center;
+        var tentativeSphereRadius = Math.Max(buildingBoxCollider.bounds.extents.x,
+            Math.Max(buildingBoxCollider.bounds.extents.y, buildingBoxCollider.bounds.extents.z));
+        var potentialColliders = Physics.OverlapSphere(tentativeSphereCenter, tentativeSphereRadius);
+        foreach (BoxCollider otherCollider in potentialColliders.Where(
+            c => c != buildingBoxCollider && c.gameObject.GetComponent<Building>() != null).Cast<BoxCollider>())
+        {
+            if (buildingBoxCollider.bounds.Intersects(otherCollider.bounds))
+            {
+                Destroy(creationBuildingConstructionProject);
+                HUDInfo.message = "We can not build because there are other buildings nearby";
+
+                constructionPoint = Vector3.zero;
+                return;
+            }
+        }
+
+        // Start the building project
+        currentProject = creationBuildingConstructionProject.GetComponent<Building> ();
+		currentProject.hitPoints = 0;
+		currentProject.needsBuilding = true;
+		currentProject.owner = owner;
+
+		var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
+		guo.updatePhysics = true;
+		AstarPath.active.UpdateGraphs (guo);
+
+		owner.resourceAmounts [RTSObject.ResourceType.Wood] -= currentProject.cost;
+		SetNewPath(constructionPoint);
     }
 	
 	public void CreateFinishedBuilding()
