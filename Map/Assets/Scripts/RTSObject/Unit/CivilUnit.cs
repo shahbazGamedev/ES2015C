@@ -11,14 +11,15 @@ public class CivilUnit : Unit
     public bool llegado = false;                            //he llegado a mi destino
     public int state;                                       //estado de recoleccion
 
-	public Vector3 constructionPoint = Vector3.zero;		// Posicio on crear el edifici
-	public Building currentProject = null;  				// Building actual de construccio
-	protected GameObject creationBuilding = null;			// Objecte que anem a crear
-	protected GameObject creationBuildingConstruction = null; //Edifici que anem a crear, en construccio
+    public bool harvesting = false;                         // Indicadors d'estat de la unitat
 
-    public bool harvesting = false;      					// Indicadors d'estat de la unitat
-    public bool waitingForBuildingLocationSelection = false;
-    public bool building = false;
+    public bool waitingForBuildingLocationSelection = false; // If we are in building selection location mode
+    public Vector3 constructionPoint = Vector3.zero;        // Posicio on crear el edifici
+    protected GameObject creationBuilding = null;           // Objecte que anem a crear
+    protected GameObject creationBuildingConstruction = null; //Edifici que anem a crear, en construccio
+
+    protected bool building = false;                        // true if the unit has a building project assigned
+    protected Building currentProject = null;  				// Building actual de construccio
 
     //private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
     private ResourceType harvestType;                       // Tipus de recolecció
@@ -86,18 +87,25 @@ public class CivilUnit : Unit
             }
 			else if (building)
 			{
-				if (currentProject && currentProject.CanBeBuilt()) //Si tenemos un proyecto y lo estamos construyendo 
+				if (currentProject.CanBeBuilt()) //Si tenemos un proyecto y lo estamos construyendo 
 				{
-					currentProject.Construct(baseBuildSpeed);
+                    // Check that the building is close enough to the unit to build it
+                    var closestPointInBuilding = currentProject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                    var distanceToBuilding = (closestPointInBuilding - transform.position).magnitude;
+
+                    if (distanceToBuilding <= 5)
+                    {
+                        currentProject.Construct(baseBuildSpeed);
+                    }
+                    else
+                    {
+                        HUDInfo.message = "Civil unit can't reach the target location, deassigning building project.";
+                        AssignBuildingProject(null);
+                    }
 				}
-				else if (currentProject && currentProject.CanBeBuilt() == false) //Si tenemos un proyecto y se ha acabado de construir
+				else  // Si tenemos un proyecto y se ha acabado de construir
 				{
 					CreateFinishedBuilding();
-				}
-				else
-				{
-					currentProject = null;
-					building = false;
 				}
 			}
         }
@@ -128,6 +136,23 @@ public class CivilUnit : Unit
     {
         // TODO: Implement this method properly
         return collectionAmount;
+    }
+
+    public override bool IsBuilding()
+    {
+        return building;
+    }
+
+    public override void AssignBuildingProject(Building newProject)
+    {
+        building = (newProject != null);
+        currentProject = newProject;
+
+        // Move to unit to the object to build
+        if (newProject != null)
+        {
+            SetNewPath(newProject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
+        }
     }
 
     /*** Metodes interns accessibles per les subclasses ***/
@@ -216,25 +241,24 @@ public class CivilUnit : Unit
 
         // Start the building project
         waitingForBuildingLocationSelection = false;
-        building = true;
 
-        currentProject = creationBuildingConstructionProject.GetComponent<Building> ();
-		currentProject.hitPoints = 0;
-		currentProject.needsBuilding = true;
-		currentProject.owner = owner;
-        currentProject.finishedModel = creationBuilding;
+        var newProject = creationBuildingConstructionProject.GetComponent<Building> ();
+        newProject.hitPoints = 0;
+        newProject.needsBuilding = true;
+        newProject.owner = owner;
+        newProject.finishedModel = creationBuilding;
 
-        currentProject.ReplaceChildWithChildFromGameObjectTemplate(creationBuildingConstruction);
+        newProject.ReplaceChildWithChildFromGameObjectTemplate(creationBuildingConstruction);
 
         // Update physics
-		var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
+		var guo = new GraphUpdateObject (newProject.GetComponent<BoxCollider> ().bounds);
 		guo.updatePhysics = true;
 		AstarPath.active.UpdateGraphs (guo);
 
         // Substract resources needed for the building
-		owner.resourceAmounts [RTSObject.ResourceType.Wood] -= currentProject.cost;
-        // Make the unit move to the construction point
-		SetNewPath(currentProject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
+		owner.resourceAmounts [RTSObject.ResourceType.Wood] -= newProject.cost;
+        // Assign the building project to this unit
+        AssignBuildingProject(newProject);
 
         // Clean up variables that we don't need anymore
         constructionPoint = Vector3.zero;
@@ -250,8 +274,7 @@ public class CivilUnit : Unit
 		guo.updatePhysics = true;
 		AstarPath.active.UpdateGraphs (guo);
 
-        building = false;
-		currentProject=null;
+        AssignBuildingProject(null);
 	}
 
     /*** Metodes privats ***/

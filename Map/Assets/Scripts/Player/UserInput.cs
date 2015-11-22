@@ -91,11 +91,10 @@ public class UserInput : MonoBehaviour
                     player.SelectedObject.GetComponent<CivilUnit>().harvesting = false;
                 }
 
-                if (player.SelectedObject.GetComponent<CivilUnit>() &&
-                    player.SelectedObject.GetComponent<CivilUnit>().building == true)
+                // If there is any building project for this object, deassign it before assigning other actions
+                if (player.SelectedObject.IsBuilding())
                 {
-                    player.SelectedObject.GetComponent<CivilUnit>().building = false;
-                    player.SelectedObject.GetComponent<CivilUnit>().currentProject = null;
+                    player.SelectedObject.AssignBuildingProject(null);
                 }
 
 				//Atacar
@@ -111,9 +110,7 @@ public class UserInput : MonoBehaviour
 				//Construir un edificio
 				else if (player.SelectedObject.CanBuild()&& targetRtsElement != null && targetRtsElement.owner==player && targetRtsElement.CanBeBuilt())
 				{
-					player.SelectedObject.MoveTo(hit.point);
-					player.SelectedObject.GetComponent<CivilUnit>().building=true;
-					player.SelectedObject.GetComponent<CivilUnit>().currentProject=targetRtsElement.GetComponent<Building>();
+                    player.SelectedObject.AssignBuildingProject(targetRtsElement.GetComponent<Building>());
 				}
                 
                 //Recolecto

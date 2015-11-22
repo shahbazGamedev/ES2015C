@@ -222,6 +222,25 @@ public class RTSObject : MonoBehaviour
 	{
 		return (baseBuildSpeed !=0);
 	}
+
+    /// <summary>
+    /// Checks if the object is currently building another object.
+    /// </summary>
+    /// <returns>true if this object is building, false otherwise.</returns>
+    public virtual bool IsBuilding()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Assigns a new building project to this object.
+    /// </summary>
+    /// <param name="newProject">The new project to assign, or null to deassign the current project.</param>
+    /// <returns></returns>
+    public virtual void AssignBuildingProject(Building newProject)
+    {
+        throw new NotImplementedException();
+    }
 	
 	public virtual bool CanBeBuilt()
 	{
