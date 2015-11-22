@@ -13,11 +13,17 @@ public class CivilUnit : Unit
 
     public bool harvesting = false;                         // Indicadors d'estat de la unitat
 
-    public bool waitingForBuildingLocationSelection = false; // If we are in building selection location mode
-    protected Vector3 constructionPoint = Vector3.zero;        // Posicio on crear el edifici
+    /// <summary>
+    /// true if we are in building location selection mode.
+    /// </summary>
+    public bool waitingForBuildingLocationSelection = false;
+    protected Vector3 constructionPoint = Vector3.zero;
     protected GameObject creationBuilding = null;           // Objecte que anem a crear
     protected GameObject creationBuildingConstruction = null; //Edifici que anem a crear, en construccio
-    protected GameObject creationCollisionDetectorObject; // Object to be used to detect if the place of a building is already taken
+    /// <summary>
+    /// Object used to show the preview to the user and detect overlaps and unbuildable places.
+    /// </summary>
+    protected GameObject creationCollisionDetectorObject;
 
     protected bool building = false;                        // true if the unit has a building project assigned
     protected Building currentProject = null;  				// Building actual de construccio
@@ -166,6 +172,12 @@ public class CivilUnit : Unit
     /// <param name="creationBuildingConstructionPath">Name of the resource for the in-progress building</param>
     protected void StartBuildingLocationSelection(string creationBuildingPath, string creationBuildingConstructionPath)
     {
+        // Destroy old collision detector object if any
+        if (creationCollisionDetectorObject != null)
+        {
+            Destroy(creationCollisionDetectorObject);
+        }
+
         // Load the complete building resource
         var creationBuildingTmp = Resources.Load<GameObject>(creationBuildingPath) as GameObject;
         if (creationBuildingTmp == null || creationBuildingTmp.GetComponent<Building>() == null)
@@ -189,21 +201,22 @@ public class CivilUnit : Unit
         creationBuilding = creationBuildingTmp;
         creationBuildingConstruction = creationBuildingConstructionTmp;
 
-        // Create the building overlap detector object
-        var creationBuildingInitTmp =
-            (GameObject)Instantiate(creationBuilding, Vector3.zero, Quaternion.identity);
-        var creationBuildingInitTmpCollider = creationBuildingInitTmp.GetComponent<BoxCollider>();
-
-        creationCollisionDetectorObject = new GameObject();
-        creationCollisionDetectorObject.name = "Collision Detector for " + creationBuildingInitTmp.name;
-        creationCollisionDetectorObject.transform.rotation = creationBuildingInitTmp.transform.rotation;
-        creationCollisionDetectorObject.transform.localScale = creationBuildingInitTmp.transform.localScale;
-        var collisionDetectorCollider = creationCollisionDetectorObject.AddComponent<BoxCollider>();
-        collisionDetectorCollider.center = creationBuildingInitTmpCollider.center;
-        collisionDetectorCollider.size = creationBuildingInitTmpCollider.size;
+        // Create the building preview and overlap detector object
+        creationCollisionDetectorObject = (GameObject)Instantiate(creationBuilding, Vector3.zero, Quaternion.identity);
+        creationCollisionDetectorObject.name = creationCollisionDetectorObject.name + "_CollisionDetector";
         creationCollisionDetectorObject.AddComponent<BuildingOverlapDetector>();
 
-        Destroy(creationBuildingInitTmp);
+        // Remove all components of the preview object except the colliders
+        foreach (Component component in creationCollisionDetectorObject.GetComponents<Component>())
+        {
+            if (!(component is Transform) && !(component is Collider))
+            {
+                Destroy(component);
+            }
+        }
+
+        // Add our script to manage the preview object
+        creationCollisionDetectorObject.AddComponent<BuildingOverlapDetector>();
     }
 
     /// <summary>
@@ -286,7 +299,7 @@ public class CivilUnit : Unit
 
     /*** Metodes privats ***/
 
-    // Metode que cridem per a començar a recolectar
+        // Metode que cridem per a començar a recolectar
     public void StartHarvest(Resource resource)
     {
         resourceDeposit = resource;

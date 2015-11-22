@@ -21,7 +21,7 @@ public class Building : RTSObject
 
     public float visi = 60f;
 
-    public GameObject finishedModel; // TODOXXX
+    public GameObject finishedModel;
 
     /*** Metodes per defecte de Unity ***/
 
