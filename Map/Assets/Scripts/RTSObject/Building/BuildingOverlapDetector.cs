@@ -18,13 +18,18 @@ public class BuildingOverlapDetector : MonoBehaviour
     private int collisionCount = 0;
 
     /// <summary>
+    /// Height of the currently mouse-overed terrain.
+    /// </summary>
+    private float currentTerrainHeight = 0.0f;
+
+    /// <summary>
     /// Checks if the overlap detector is currently colliding.
     /// </summary>
     public bool IsBuildable
     {
         get
         {
-            return collisionCount == 0 && Math.Abs(transform.position.y) <= 2;
+            return collisionCount == 0 && currentTerrainHeight < 2.0f;
         }
     }
 
@@ -66,10 +71,18 @@ public class BuildingOverlapDetector : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, (1 << 9))) // Raycast against ground (terrain) only
         {
+            currentTerrainHeight = hit.point.y;
+
+            // Adjust the weight so the bottom of the collider touching the ground, to avoid collisions with it
             // Add a few units of extra height because otherwise, if the unit is exactly
             // on the floor, the rigidbody will detect a collision with the floor always
-            var hitPoint = new Vector3(hit.point.x, hit.point.y+0.2f, hit.point.z);
+            var hitPoint = new Vector3(hit.point.x, hit.point.y - 
+                (2*GetComponent<BoxCollider>().center.y - GetComponent<BoxCollider>().size.y) + 0.35f, hit.point.z);
             transform.position = hitPoint;
+        }
+        else
+        {
+            currentTerrainHeight = Mathf.NegativeInfinity;
         }
 
         // If the option is enabled, show the bounding box of the object instead
