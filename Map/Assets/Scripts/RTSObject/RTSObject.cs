@@ -180,7 +180,7 @@ public class RTSObject : MonoBehaviour
     /// <param name="target">The position we want the object to move to.</param>
     public void MoveTo(Vector3 target)
     {
-        if (!CanAttack())
+        if (!CanMove())
             throw new InvalidOperationException("Called MoveTo over an object that can't move.");
 
         if (attacking)
