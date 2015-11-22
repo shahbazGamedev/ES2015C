@@ -5,12 +5,14 @@ using UnityEngine.UI;
 /// <summary>
 /// Behaviour to control the actions that a player can do over a RTSObject - button node.
 /// </summary>
-public class HUDActionButton : HUDElement
+public class HUDAction : HUDElement
 {
     /// <summary>
     /// The index of the action in the object to display.
     /// </summary>
     public int ActionIndex;
+
+    private Text textComponent;
 
     private Button buttonComponent;
 
@@ -18,9 +20,10 @@ public class HUDActionButton : HUDElement
 
     void Start()
     {
-        buttonComponent = GetComponent<Button>();
-        imageComponent = GetComponent<Image>();
-        if (buttonComponent == null || imageComponent == null)
+        textComponent = GetComponentInChildren<Text>();
+        buttonComponent = GetComponentInChildren<Button>();
+        imageComponent = GetComponentInChildren<Image>();
+        if (textComponent == null || buttonComponent == null || imageComponent == null)
         {
             Debug.Log("Script of type " + GetType().Name + " without a Button and Image component won't work.");
         }
@@ -31,19 +34,21 @@ public class HUDActionButton : HUDElement
     /// </summary>
     void Update()
     {
-        if (buttonComponent == null || imageComponent == null)
+        if (textComponent == null || buttonComponent == null || imageComponent == null)
             return;
 
         if (DisplayObject != null &&
             DisplayObject.IsOwnedBy(Player) &&
             ActionIndex < DisplayObject.GetActions().Length)
         {
+            textComponent.text = DisplayObject.GetActions()[ActionIndex];
             buttonComponent.enabled = true;
             imageComponent.enabled = true;
             
         }
         else
         {
+            textComponent.text = "";
             buttonComponent.enabled = false;
             imageComponent.enabled = false;
         }
@@ -52,7 +57,7 @@ public class HUDActionButton : HUDElement
     /// <summary>
     /// Calls the action handler in the RTSObject when the user clicks the action.
     /// </summary>
-    public override void HandleClick()
+    public void ExecuteAction()
     {
         if (DisplayObject != null &&
             DisplayObject.IsOwnedBy(Player) &&

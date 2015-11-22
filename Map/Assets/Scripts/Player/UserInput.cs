@@ -48,24 +48,7 @@ public class UserInput : MonoBehaviour
 
     private void HandleMouseClick(bool leftClick, bool rightClick)
     {
-        EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-        if (eventSystem.IsPointerOverGameObject()) // Click on UI element
-        {
-            HUDElement element = null;
-
-            // Check if the currently selected element is an element from the HUD
-            if (eventSystem.currentSelectedGameObject != null)
-            {
-                element = eventSystem.currentSelectedGameObject.GetComponent<HUDElement>();
-            }
-
-            if (element != null && leftClick)
-            {
-                // Notify the element about the click event
-                element.HandleClick();
-            }
-        }
-        else // Click on non-UI element
+        if (!EventSystem.current.IsPointerOverGameObject()) // Click on non-UI element
         {
             RTSObject targetRtsElement = null;
 
