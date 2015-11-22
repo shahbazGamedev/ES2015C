@@ -180,25 +180,29 @@ public class CivilUnit : Unit
 
     public void CreateBuilding()
     {
+        // Initialize the object to build, so we can access its cost and colliders
+        var creationBuildingConstructionProject =
+            (GameObject)Instantiate(creationBuildingConstruction, constructionPoint, Quaternion.identity);
+
         // Check if there are enough resources available
         float woodAvailable = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
-        float woodCost = creationBuildingConstruction.GetComponent<Building>().cost;
+        float woodCost = creationBuildingConstructionProject.GetComponent<Building>().cost;
 
         if (woodAvailable < woodCost)
         {
-            HUDInfo.message = "Not enough wood (" + creationBuilding.GetComponent<Building>().cost + ") to construct the " + creationBuilding.name;
+            Destroy(creationBuildingConstructionProject);
+            HUDInfo.message = string.Format("Not enough wood ({0}) to construct the {1}",
+                creationBuildingConstructionProject.GetComponent<Building>().cost,
+                creationBuildingConstructionProject.GetComponent<Building>().objectName);
 
             building = false;
             constructionPoint = Vector3.zero;
             currentProject = null;
             creationBuilding = null;
             creationBuildingConstruction = null;
+            return;
         }
         Debug.Log("Tenemos suficiente madera");
-
-        // Initialize the object to build, so we can access its colliders
-        var creationBuildingConstructionProject =
-            (GameObject)Instantiate(creationBuildingConstruction, constructionPoint, Quaternion.identity);
 
         // Verify that the building is not overlapping another building
         // To do this, since Unity doesn't offer us much help, we do the following:
