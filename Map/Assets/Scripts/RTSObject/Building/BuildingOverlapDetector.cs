@@ -66,8 +66,10 @@ public class BuildingOverlapDetector : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, (1 << 9))) // Raycast against ground (terrain) only
         {
-            var hitPointOnFloor = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-            transform.position = hitPointOnFloor;
+            // Add a few units of extra height because otherwise, if the unit is exactly
+            // on the floor, the rigidbody will detect a collision with the floor always
+            var hitPoint = new Vector3(hit.point.x, hit.point.y+0.2f, hit.point.z);
+            transform.position = hitPoint;
         }
 
         // If the option is enabled, show the bounding box of the object instead

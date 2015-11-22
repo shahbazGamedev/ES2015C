@@ -206,10 +206,15 @@ public class CivilUnit : Unit
         creationCollisionDetectorObject.name = creationCollisionDetectorObject.name + "_CollisionDetector";
         creationCollisionDetectorObject.AddComponent<BuildingOverlapDetector>();
 
-        // Remove all components of the preview object except the colliders
+        // Remove all components of the preview / overlap detector object except
+        // - The transform, since this is basic and can't be removed
+        // - The collider, because we need it to detect the overlaps with other objects
+        // - The rigidbody, because otherwise, the object will be considered to have a 
+        //   "static collider" and the physics engine will not compute calculation correctly
+        //   after the object has moved
         foreach (Component component in creationCollisionDetectorObject.GetComponents<Component>())
         {
-            if (!(component is Transform) && !(component is Collider))
+            if (!(component is Transform) && !(component is Collider) && !(component is Rigidbody))
             {
                 Destroy(component);
             }
