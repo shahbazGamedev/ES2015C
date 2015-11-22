@@ -53,8 +53,8 @@ public class UserInput : MonoBehaviour
             RaycastHit hit = FindMouseTargetHit();
             RTSObject targetRtsElement = hit.collider.gameObject.GetComponent<RTSObject>();
 
-            if (player.SelectedObject && player.SelectedObject.tag == "civil" && player.SelectedObject.GetComponent<CivilUnit>()
-			    && player.SelectedObject.GetComponent<CivilUnit>().building == true && player.SelectedObject.GetComponent<CivilUnit>().constructionPoint == Vector3.zero)
+            if (player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>()
+			    && player.SelectedObject.GetComponent<CivilUnit>().waitingForBuildingLocationSelection)
 			{
 				player.SelectedObject.GetComponent<CivilUnit>().constructionPoint = hit.point;
 			}
@@ -89,11 +89,15 @@ public class UserInput : MonoBehaviour
                 if (player.SelectedObject.GetType().Equals("CivilUnit"))
                 {
                     player.SelectedObject.GetComponent<CivilUnit>().harvesting = false;
-                    if (player.SelectedObject.CanBuild())
-                    {
-                        player.SelectedObject.GetComponent<CivilUnit>().building = false;
-                    }
                 }
+
+                if (player.SelectedObject.GetComponent<CivilUnit>() &&
+                    player.SelectedObject.GetComponent<CivilUnit>().building == true)
+                {
+                    player.SelectedObject.GetComponent<CivilUnit>().building = false;
+                    player.SelectedObject.GetComponent<CivilUnit>().currentProject = null;
+                }
+
 				//Atacar
                 if (player.SelectedObject.CanAttack() &&
                     targetRtsElement != null && targetRtsElement.owner != null &&
@@ -110,7 +114,6 @@ public class UserInput : MonoBehaviour
 					player.SelectedObject.MoveTo(hit.point);
 					player.SelectedObject.GetComponent<CivilUnit>().building=true;
 					player.SelectedObject.GetComponent<CivilUnit>().currentProject=targetRtsElement.GetComponent<Building>();
-					targetRtsElement.GetComponent<Building>().needsBuilding=true;
 				}
                 
                 //Recolecto
