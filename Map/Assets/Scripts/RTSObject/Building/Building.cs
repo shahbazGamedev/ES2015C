@@ -72,14 +72,19 @@ public class Building : RTSObject
     // Metode que va construint el edifici
     public void Construct(float timeFactor)
     {
+        // Increment the number of hit point, taking into account the fractional hit points
         float newHitPoints = hitPoints + fractionalHitPoints + (maxHitPoints/ buildingTime) * timeFactor;
+        // Split again into whole and fractional hit points
         hitPoints = (int)newHitPoints;
         fractionalHitPoints = newHitPoints - (int)newHitPoints;
 
-        if (hitPoints >= maxHitPoints)
+        if (hitPoints >= maxHitPoints) // Building is completed?
         {
+            // Clamp hit points at maximum
             hitPoints = maxHitPoints;
             fractionalHitPoints = 0;
+
+            // Mark as completed
             needsBuilding = false;
         }
     }
