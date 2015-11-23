@@ -21,7 +21,12 @@ public class Building : RTSObject
 
     public float visi = 60f;
 
+    /// <summary>For in-construction buildings, reference to the finished building model.</summary>
     public GameObject finishedModel;
+    /// <summary>Number of seconds that this building will take to be built at the default building factor.</summary>
+    public float buildingTime = 5.0f;
+    /// <summary>While building, number of "partial" hit points, to build at a consistent rate.</summary>
+    private float fractionalHitPoints = 0.0f;
 
     /*** Metodes per defecte de Unity ***/
 
@@ -65,12 +70,21 @@ public class Building : RTSObject
     }
 
     // Metode que va construint el edifici
-    public void Construct(int amount)
+    public void Construct(float timeFactor)
     {
-		hitPoints += amount;
-        if (hitPoints >= maxHitPoints)
+        // Increment the number of hit point, taking into account the fractional hit points
+        float newHitPoints = hitPoints + fractionalHitPoints + (maxHitPoints/ buildingTime) * timeFactor;
+        // Split again into whole and fractional hit points
+        hitPoints = (int)newHitPoints;
+        fractionalHitPoints = newHitPoints - (int)newHitPoints;
+
+        if (hitPoints >= maxHitPoints) // Building is completed?
         {
+            // Clamp hit points at maximum
             hitPoints = maxHitPoints;
+            fractionalHitPoints = 0;
+
+            // Mark as completed
             needsBuilding = false;
         }
     }

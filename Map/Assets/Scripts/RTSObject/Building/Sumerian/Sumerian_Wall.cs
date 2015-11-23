@@ -11,5 +11,6 @@ public class Sumerian_Wall : Building {
 		cost = 50;
 		hitPoints = maxHitPoints = 500;
         baseDefense = 5;
+        buildingTime = 1.0f;
     }
 }
