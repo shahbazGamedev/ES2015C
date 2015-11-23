@@ -13,7 +13,8 @@ public class RTSObject : MonoBehaviour
     /// <summary>Default movement speed. Leave at zero if the object can't move.</summary>
     protected float baseMoveSpeed = 0;
 	
-	protected int baseBuildSpeed=0;
+    /// <summary>Default speed factor of building (x1 = default building time, x2 = half building time, etc). Leave at zero if the unit can't build.</summary>
+	protected float baseBuildFactor=0;
     /// <summary>Default attack strength. Leave at zero if the object can't attack.</summary>
     protected int baseAttackStrength = 0;
     /// <summary>Default number of hits per second of the object. Leave at zero if the object can't attack.</summary>
@@ -220,7 +221,7 @@ public class RTSObject : MonoBehaviour
 	
 	public virtual bool CanBuild()
 	{
-		return (baseBuildSpeed !=0);
+		return (baseBuildFactor !=0);
 	}
 
     /// <summary>

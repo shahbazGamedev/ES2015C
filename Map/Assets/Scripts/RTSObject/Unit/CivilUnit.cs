@@ -41,8 +41,8 @@ public class CivilUnit : Unit
 	private static int layer2 = 10;
 	private static int layermask1 = 1 << layer1;
 	private static int layermask2 = 1 << layer2;
-	private int finalmask = layermask1 | layermask2;
-	
+    private int finalmask = layermask1 | layermask2;
+
     /*** Metodes per defecte de Unity ***/
 
     /* CODI COMENTAT - NO FA RES I DONA PROBLEMES AL INICIALITZAR (MERGE 03/11/2015, COMENTAT PER JOAN BRUGUERA)
@@ -54,12 +54,13 @@ public class CivilUnit : Unit
     }
     */
 
-	protected override void Awake()
+    protected override void Awake()
     {
 		base.Awake();
         objectName = "Civil Unit";
 		gameObject.tag = "civil";
         capacity = 50;
+        baseBuildFactor = 1.0f;
     }
 	
     protected override void Update()
@@ -101,7 +102,7 @@ public class CivilUnit : Unit
 
                     if (distanceToBuilding <= 5)
                     {
-                        currentProject.Construct(baseBuildSpeed);
+                        currentProject.Construct(Time.deltaTime * baseBuildFactor);
                     }
                     else
                     {
