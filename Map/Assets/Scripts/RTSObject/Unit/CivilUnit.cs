@@ -340,8 +340,11 @@ public class CivilUnit : Unit
 		if (resourceStore == null){
 			resourceStore = findTownCenter();
 		}
-        SetNewPath(resourceStore.transform.position);
+        //ClosestPointOnBounds retorna el punto mas cercano del collider del objeto respecto al transform que le pasas
+        var closestPointResourceStore = resourceStore.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+        SetNewPath(closestPointResourceStore);
         state = 1;
+        
     }
     public void Recolectar(){
         Collect(resourceDeposit);
@@ -350,7 +353,9 @@ public class CivilUnit : Unit
         } 
     }
     public void IrRecolectar(){
-        SetNewPath(resourceDeposit.transform.position); //mi objetivo ahora es target = recurso (RTSObject)
+        //ClosestPointOnBounds retorna el punto mas cercano del collider del objeto respecto al transform que le pasas
+        var closestPointResource = resourceDeposit.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+        SetNewPath(closestPointResource); //mi objetivo ahora es target = recurso (RTSObject)
         state = 2;
     }
 

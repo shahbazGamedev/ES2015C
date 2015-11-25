@@ -111,6 +111,8 @@ public class Player : MonoBehaviour {
                 return Resources.Load<GameObject>("Prefabs/Sumerian_TownCenter");
             case PlayerCivilization.Yamato:
                 return Resources.Load<GameObject>("Prefabs/Yamato_TownCenter");
+            //case PlayerCivilization.Yamato:
+                //return Resources.Load<GameObject>("Prefabs/Persian_TownCenter");
             default:
                 Debug.LogFormat("Can't find the town center template for civilization {0}.", civilization);
                 return null;
