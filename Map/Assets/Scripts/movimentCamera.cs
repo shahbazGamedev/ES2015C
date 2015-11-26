@@ -8,8 +8,8 @@ public class movimentCamera : MonoBehaviour {
 		terrainWidth = Terrain.activeTerrain.terrainData.heightmapWidth;
 		wMargin = Screen.width * marginPercent;
 		hMargin = Screen.height * marginPercent;
-		Debug.Log(Screen.width.ToString("F2"));
-		Debug.Log (wMargin.ToString("F2"));
+		//Debug.Log(Screen.width.ToString("F2"));
+		//Debug.Log (wMargin.ToString("F2"));
 		recup = new Rect (0, 0, Screen.width, hMargin);
 		recdown = new Rect (0, Screen.height-hMargin, Screen.width, hMargin);
 		recleft = new Rect (0, 0, wMargin, Screen.height);
@@ -85,7 +85,7 @@ public class movimentCamera : MonoBehaviour {
 				marginVisibleDown = false;
 
 		
-			if (recdown.Contains (Input.mousePosition) && transform.position.z < terrainHeight * 0.7) {
+			if (recdown.Contains (Input.mousePosition) && transform.position.z < terrainHeight * 0.8) {
 				percent = 1 - (Screen.height - Input.mousePosition.y) / hMargin;
 				transform.Translate (0, 0, percent * cspeed, Space.World);
 				marginVisibleUp = true;
@@ -99,7 +99,7 @@ public class movimentCamera : MonoBehaviour {
 			} else
 				marginVisibleLeft = false;
 		
-			if (recright.Contains (Input.mousePosition) && transform.position.x < terrainWidth * 0.85) {
+			if (recright.Contains (Input.mousePosition) && transform.position.x < terrainWidth * 0.95) {
 				percent = 1 - (Screen.width - Input.mousePosition.x) / wMargin;
 				transform.Translate (percent * cspeed, 0, 0, Space.World);
 				marginVisibleRight = true;
@@ -112,7 +112,7 @@ public class movimentCamera : MonoBehaviour {
 			}
 			
 			
-			if (recdown.Contains (Input.mousePosition) && transform.position.z < terrainHeight * 0.7) {
+			if (recdown.Contains (Input.mousePosition) && transform.position.z < terrainHeight* 0.8) {
 				transform.Translate (0, 0, 1 * cspeed, Space.World);
 			}
 			
@@ -120,7 +120,7 @@ public class movimentCamera : MonoBehaviour {
 				transform.Translate (-1 * cspeed, 0, 0, Space.World);
 			}
 			
-			if (recright.Contains (Input.mousePosition) && transform.position.x < terrainWidth * 0.85) {
+			if (recright.Contains (Input.mousePosition) && transform.position.x < terrainWidth * 0.95) {
 				transform.Translate (1 * cspeed, 0, 0, Space.World);
 			}
 		}
@@ -128,13 +128,13 @@ public class movimentCamera : MonoBehaviour {
 		if (Input.GetKey (KeyCode.DownArrow) && transform.position.z > -60) {
 			transform.Translate (0, 0, -CamSpeed*5 * Time.deltaTime, Space.World);
 		}
-		if (Input.GetKey (KeyCode.UpArrow) && transform.position.z < terrainHeight*0.70) {
+		if (Input.GetKey (KeyCode.UpArrow) && transform.position.z < terrainHeight*0.8) {
 			transform.Translate (0, 0, CamSpeed*5 * Time.deltaTime, Space.World);
 		}
 		if (Input.GetKey (KeyCode.LeftArrow) && transform.position.x > 0) {
 			transform.Translate (-CamSpeed*5 * Time.deltaTime, 0, 0, Space.World);
 		}
-		if (Input.GetKey (KeyCode.RightArrow) && transform.position.x < terrainWidth*0.85) {
+		if (Input.GetKey (KeyCode.RightArrow) && transform.position.x < terrainWidth*0.95) {
 			transform.Translate (CamSpeed*5 * Time.deltaTime, 0, 0, Space.World);
 		}
 	}
