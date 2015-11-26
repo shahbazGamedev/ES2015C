@@ -5,7 +5,7 @@ public class InfoEnemy : MonoBehaviour
 {
 
 	private GameObject menu;
-	private bool activated = true;
+	private bool activated = false;
 	// Use this for initialization
 	//GameObject prefab;
 	void Start () {
@@ -14,19 +14,22 @@ public class InfoEnemy : MonoBehaviour
 	
 	
 	private void CreateMenu() {
-        //menu = Instantiate(Resources.Load("HUDInfoEnemy")) as GameObject;     
+        menu = Instantiate(Resources.Load("HUDEnemy")) as GameObject;     
     }
 
 	void Update() {
 
-		if (activated) {
+		if (!activated) {
 			if (Input.GetKey (KeyCode.X)) {
+				activated=true;
 				CreateMenu();
+
 			}
 		}
 
 		else {
 			if (Input.GetKey (KeyCode.X)) {
+				activated=false;
 				menu.active = false;
 			}
 		}
