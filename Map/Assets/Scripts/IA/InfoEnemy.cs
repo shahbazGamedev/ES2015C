@@ -34,11 +34,5 @@ public class InfoEnemy : MonoBehaviour
 			}
 		}
 	}
-	/*
-	public void OnDisable ()
-	{
-		if (guiObj != null)
-			GameObject.DestroyImmediate (guiObj.gameObject);
-	}	
-*/
+	
 }
