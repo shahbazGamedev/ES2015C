@@ -35,7 +35,10 @@ public class CivilUnit : Unit
     private float amountBuilt = 0.0f;                       // Porcentatge de construcció feta
 	//public int mask = 1024;								// 10000001 checks default and obstacles
 
-	                      
+	public AudioClip farmingSound;
+	public AudioClip miningSound;
+	public AudioClip woodCuttingSound;
+	public AudioClip buildingSound;
 	
 	private static int layer1 = 0;
 	private static int layer2 = 10;
@@ -163,6 +166,31 @@ public class CivilUnit : Unit
     }
 
     /*** Metodes interns accessibles per les subclasses ***/
+
+	protected override void Animating ()
+	{
+		base.Animating ();
+		anim.SetBool ("IsFarming", harvesting && state == 2 && harvestType == ResourceType.Food);
+		if(currentlySelected && harvesting && state == 2 && harvestType == ResourceType.Food && farmingSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (farmingSound);
+		}
+		anim.SetBool ("IsMining", harvesting && state == 2 && harvestType == ResourceType.Gold);
+		if(currentlySelected && harvesting && state == 2 && harvestType == ResourceType.Gold && miningSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (miningSound);
+		}
+		anim.SetBool ("IsWoodCutting", harvesting && state == 2 && harvestType == ResourceType.Wood);
+		if(currentlySelected && harvesting && state == 2 && harvestType == ResourceType.Wood && woodCuttingSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (woodCuttingSound);
+		}
+		anim.SetBool ("IsBuilding", building && currentProject && currentProject.CanBeBuilt() && currentProject.inConstruction);
+		if(currentlySelected && building && currentProject && currentProject.CanBeBuilt() && currentProject.inConstruction && buildingSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (buildingSound);
+		}
+	}
 
     // Metode que crea el edifici
     /// <summary>
