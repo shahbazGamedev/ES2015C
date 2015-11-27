@@ -14,8 +14,11 @@ public class Unit : RTSObject
 	private int currentWaypoint = 0;
 	public float visibility = 20f;
 
-    protected bool moving;                  // Indica si esta movent-se 
-	protected bool running;					// Indica si esta corrent
+	protected AudioClip walkingSound;
+	protected AudioClip runningSound;
+
+    protected bool moving = false;			// Indica si esta movent-se 
+	protected bool running = false;			// Indica si esta corrent
 
 
 	/*** Metodes per defecte de Unity ***/
@@ -131,7 +134,15 @@ public class Unit : RTSObject
 	{
 		base.Animating ();
 		anim.SetBool ("IsWalking", moving);
+		if(currentlySelected && moving && walkingSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (walkingSound);
+		}
 		anim.SetBool ("IsRunning", running);
+		if(currentlySelected && running && runningSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (runningSound);
+		}
 	}
 	
 	// Metode per disparar

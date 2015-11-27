@@ -11,7 +11,8 @@ public class Building : RTSObject
 
 	private BoxCollider boxCollider;			// Referencia al component BoxCollider.
 	  
-	public bool needsBuilding = false;         // Indica si necesita se construit
+	public bool needsBuilding = false;         	// Indica si necesita se construit
+	public bool inConstruction = false;			// Indica si s'esta construint ara mateix
 
 	private static int layer1 = 11; 
 	private static int layer2 = 10;
@@ -72,6 +73,7 @@ public class Building : RTSObject
     // Metode que va construint el edifici
     public void Construct(float timeFactor)
     {
+		inConstruction = true;
         // Increment the number of hit point, taking into account the fractional hit points
         float newHitPoints = hitPoints + fractionalHitPoints + (maxHitPoints/ buildingTime) * timeFactor;
         // Split again into whole and fractional hit points
@@ -86,6 +88,7 @@ public class Building : RTSObject
 
             // Mark as completed
             needsBuilding = false;
+			inConstruction = false;
         }
     }
 
