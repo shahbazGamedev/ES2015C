@@ -27,10 +27,14 @@ public class UserInput : MonoBehaviour
             if (leftClick || rightClick)
                 HandleMouseClick(leftClick, rightClick);
 
+            if (Input.GetKey (KeyCode.M)) morirEnemigos(); 
+            if (Input.GetKey (KeyCode.P)) morirJugador();
+
             MoveCamera();
             RotateCamera();
             MouseActivity();
         }
+
     }
 
     private void OpenPauseMenu()
@@ -169,6 +173,27 @@ public class UserInput : MonoBehaviour
         }
 
         return hit;
+    }
+
+    //Funcion para que todos los objectos del jugador mueran
+    private void morirJugador(){
+        GameObject game = GameObject.FindGameObjectWithTag("civil");
+        Destroy(game, 4);
+        game = GameObject.FindGameObjectWithTag("townCenter");
+        Destroy(game, 4);
+
+    }
+
+    //Funcion para que todos los objectos del enemigo mueran
+    private void morirEnemigos(){
+        GameObject game = GameObject.FindGameObjectWithTag("civil");
+        if(player.Team.IsEnemyOf(game.GetComponent<CivilUnit>().owner.Team)){
+            Destroy(game, 4);
+        }
+        game = GameObject.FindGameObjectWithTag("townCenter");
+        if(player.Team.IsEnemyOf(game.GetComponent<TownCenterBuilding>().owner.Team)){
+            Destroy(game, 4);
+        }
     }
 
     private void MoveCamera()
