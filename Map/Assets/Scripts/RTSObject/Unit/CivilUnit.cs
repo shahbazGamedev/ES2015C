@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Pathfinding;
 using System;
 using System.Linq;
@@ -72,7 +72,7 @@ public class CivilUnit : Unit
             if (harvesting)
             {
                 // tot el que implica la recoleccio de recursos
-                if(state == 0){ //No hacer nada
+                if(state==0){ //No hacer nada
                     //Idle();
                 }
                 if(state == 1){ //Vaciar en el almacen
