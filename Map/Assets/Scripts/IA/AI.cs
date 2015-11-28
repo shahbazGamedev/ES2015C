@@ -5,6 +5,7 @@ using System;
 
 public class AI : MonoBehaviour
 {
+    public string username;
 
     // Use this for initialization
 
@@ -20,7 +21,15 @@ public class AI : MonoBehaviour
     private int i = 0;
     public AIResources resources;
 
-
+    /// <summary>
+     /// Which object does the player have selected for executing actions over it?
+     /// </summary>
+     public RTSObject SelectedObject { get; set; }
+ 
+     /// <summary>
+     /// Amount of each resource that can be collected by the player.
+     /// </summary>
+     public Dictionary<RTSObject.ResourceType, float> resourceAmounts;
 
 
     void Start()
@@ -40,7 +49,85 @@ public class AI : MonoBehaviour
 
         StartRecollecting(civils[1], "food");
         //StartRecollecting(civils[2], "food");
+
+        /*
+         SpawnInitialEnemyTownCenter();
+         SpawnInitialEnemyCivilUnit();
+         SpawnInitialEnemyMilitaryUnit();
+         */
     }
+    //Creación del TownCenter dependiendo de la civilización seleccionada //
+     private void SpawnInitialEnemyTownCenter()
+     {
+         var townCenterSpawnPointTransform = transform.FindChild("TownCenterSpawnPoint");
+         if (townCenterSpawnPointTransform == null)
+         {
+             Debug.LogFormat("Can't find the town center spawn point for {0}.", username);
+             return;
+         }
+ 
+         var townCenterSpawnPoint = townCenterSpawnPointTransform.position;
+ 
+         //var townCenterTemplate = GetTownCenterTemplateForCivilization(civilization);
+         var townCenterTemplate = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilization, true);
+         if (townCenterTemplate == null)
+             return;
+ 
+         var townCenter = (GameObject)Instantiate(townCenterTemplate, townCenterSpawnPoint, Quaternion.identity);
+         townCenter.GetComponent<RTSObject>().owner = this;
+         townCenter.transform.parent = transform; // Should have no effect, but easier for debugging
+ 
+         var guo = new GraphUpdateObject(townCenter.GetComponent<BoxCollider>().bounds);
+         guo.updatePhysics = true;
+         AstarPath.active.UpdateGraphs(guo);
+     }
+
+     //Creación de la Unidad Civil dependiendo de la civilización seleccionada //
+     private void SpawnInitialEnemyCivilUnit()
+     {
+         var civilUnitSpawnPointTransform = transform.FindChild("CivilUnitSpawnPoint");
+         if (civilUnitSpawnPointTransform == null)
+         {
+             Debug.LogFormat("Can't find the civil unit spawn point for {0}.", username);
+             return;
+         }
+ 
+         var civilUnitSpawnPoint = civilUnitSpawnPointTransform.position;
+ 
+         //var civilUnitTemplate = GetCivilUnitTemplateForCivilization(civilization);
+         var civilUnitTemplate = RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilization, true);
+         if (civilUnitTemplate == null)
+             return;
+ 
+         var civilUnit = (GameObject)Instantiate(civilUnitTemplate, civilUnitSpawnPoint, Quaternion.identity);
+         civilUnit.GetComponent<RTSObject>().owner = this;
+         civilUnit.transform.parent = transform; // Should have no effect, but easier for debugging
+     }
+
+     //Creación de la Unidad Militar dependiendo de la civilización seleccionada //
+     private void SpawnInitialEnemyMilitaryUnit()
+     {
+         var militaryUnitSpawnPointTransform = transform.FindChild("MilitaryUnitSpawnPoint");
+         if (militaryUnitSpawnPointTransform == null)
+         {
+             Debug.LogFormat("Can't find the military unit spawn point for {0}.", username);
+             return;
+         }
+ 
+         var militaryUnitSpawnPoint = militaryUnitSpawnPointTransform.position;
+ 
+         //var militaryUnitTemplate = GetMilitaryUnitTemplateForCivilization(civilization);
+         var militaryUnitTemplate = RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitWarrior, civilization, true);
+         if (militaryUnitTemplate == null)
+             return;
+ 
+         var militaryUnit = (GameObject)Instantiate(militaryUnitTemplate, militaryUnitSpawnPoint, Quaternion.identity);
+         militaryUnit.GetComponent<RTSObject>().owner = this;
+         militaryUnit.transform.parent = transform; // Should have no effect, but easier for debugging
+     }
+ 
+
+
 
     // Update is called once per frame
     void Update()
@@ -111,6 +198,7 @@ public class AI : MonoBehaviour
             }
         }
     }
+
 
     private void CreateNewCivil(Vector3 coords)
     {
