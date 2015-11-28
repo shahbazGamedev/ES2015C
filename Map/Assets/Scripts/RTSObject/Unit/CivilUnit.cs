@@ -277,4 +277,33 @@ public class CivilUnit : Unit
         return closest.GetComponent<Resource>();
     }
 
+
+
+    public void CreateBuildingIA(GameObject building, Vector3 coords)
+    {
+            creationBuilding = (GameObject)Instantiate(building, coords, Quaternion.identity);
+            creationBuildingConstruction = (GameObject)Instantiate(building, coords, Quaternion.identity);
+            creationBuildingConstruction.SetActive(false);
+            float wood = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
+            if (wood >= creationBuildingConstruction.GetComponent<Building>().cost)
+            {
+                Debug.Log("Tenemos suficiente madera");
+                creationBuildingConstruction.SetActive(true);
+                currentProject = creationBuildingConstruction.GetComponent<Building>();
+                currentProject.hitPoints = 0;
+                currentProject.needsBuilding = true;
+                currentProject.owner = owner;
+                var guo = new GraphUpdateObject(currentProject.GetComponent<BoxCollider>().bounds);
+                guo.updatePhysics = true;
+                AstarPath.active.UpdateGraphs(guo);
+                owner.resourceAmounts[RTSObject.ResourceType.Wood] -= currentProject.cost;
+                SetNewPath(coords);                    
+        }
+    }
+
+
+
+
+
+
 }
