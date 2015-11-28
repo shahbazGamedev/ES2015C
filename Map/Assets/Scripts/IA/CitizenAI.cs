@@ -11,11 +11,10 @@ public class CitizenAI : AI {
 	public Transform auxAITarget,aux;
 	RaycastHit hit;
 	Vector3 fwd;
-	float MAX_WOOD = 50f;
+	float MAX_COLLECT = 50f;
 	public bool estoyLleno;
 	public bool estoyOcupado;
 	float myWood = 0f;
-	GameObject[] gameObjects;
 	// Use this for initialization
 	void Start () {
 		this.tag = "Untagged";
@@ -24,7 +23,6 @@ public class CitizenAI : AI {
 		this.hit = new RaycastHit ();
 		this.aiResource = new Resource ();
 		resources = new AIResources ();
-		gameObjects = GameObject.FindGameObjectsWithTag("tree");
 		this.estoyOcupado = false;
 		this.estoyLleno = false;
 	}*/
@@ -48,17 +46,14 @@ public class CitizenAI : AI {
 			//Debug.Log ("HE DETECTADO EL OBJETO: " + hit.collider.name);
 
 			// Si topo contra una madera
-			if (hit.collider.tag.Equals ("wood")) {	
+			if (hit.collider.tag.Equals ("wood")||hit.collider.tag.Equals("food")||hit.collider.tag.Equals("gold")) {	
 				// Si no existe en la lista
 				if(!resources.resourcesArray.Contains(hit.collider.gameObject)){
 					resources.resourcesArray.Add(hit.collider.gameObject); // Añado el recurso al array
-					Debug.Log ("HE AÑADIDO EL OBJETO: " + hit.collider.name);
-					Debug.Log ("------------ DESPUES DE ADD EL ARRAY TIENE: "+resources.resourcesArray.Count);
 				}
 				// Obtener el objeto de tipo Resource para los metodos de Logica
 				//this.aiResource = hit.collider.gameObject.GetComponent<Resource> (); 
 				if(!estoyOcupado){
-					this.tag = "woodCutter"; 
 					this.AITarget = NextResource();
 					this.AIState = 2;
 					this.estoyOcupado = true;
@@ -69,7 +64,7 @@ public class CitizenAI : AI {
 		// --------------------------------- ESTOY JUNTO A ALGO ---------------------------------------
 		/*if (Physics.SphereCast (fwd, 0F, transform.forward, out hit, 1F)) {
 			//Debug.Log ("ESTOY JUNTO AL OBJETO: "+hit.collider.name);
-			if(hit.collider.tag.Equals ("wood") && !estoyLleno && estoyOcupado){
+			if((hit.collider.tag.Equals ("wood") || hit.collider.tag.Equals("food")||hit.collider.tag.Equals("gold")) && !estoyLleno && estoyOcupado){
 				this.auxAITarget = this.AITarget;
 				this.AIState = 3;
 			}
@@ -93,7 +88,6 @@ public class CitizenAI : AI {
 	
 	/*public void Walk() { // estado 1
 		//GetComponent<Animation>().Play(walk.name); 
-		Debug.Log ("Camino sin rumbo");
 		transform.LookAt(AITarget);
 		this.gameObject.transform.Rotate(0,(1*Random.Range(0,0)*this.direction)*Time.deltaTime,0);//(0, 25*this.direction, 0) * Time.deltaTime); //25*direction en el eje de las Y
 		this.gameObject.transform.Translate (0, 0, 1 * Time.deltaTime);
@@ -108,9 +102,7 @@ public class CitizenAI : AI {
 	
 	/*public void Collect(){ // estado 3              
 		if (this.AITarget.gameObject.GetComponent<Resource>().isEmpty()) {
-			Debug.Log ("----------------- RECURSO "+AITarget.gameObject.name+" VACIO ----------------- ");
 			resources.resourcesArray.Remove(AITarget.gameObject);
-			Debug.Log ("------------ DESPUES DE REMOVE EL ARRAY TIENE: "+resources.resourcesArray.Count);
 			this.auxAITarget = NextResource ();
 			this.AIState = 2;
 		} else {
@@ -118,8 +110,18 @@ public class CitizenAI : AI {
 			this.AIState = 2;
 		}
 
-		if (gameObject.GetComponent<Sumerian_civil>().collectionAmount <= MAX_WOOD) {
-			hit.collider.gameObject.GetComponent<Wood> ().amountLeft -= 11 * Time.deltaTime;
+		if (gameObject.GetComponent<Sumerian_civil>().collectionAmount <= MAX_COLLECT) {
+			switch(hit.collider.tag){
+			case "wood":
+				hit.collider.gameObject.GetComponent<Wood> ().amountLeft -= 11 * Time.deltaTime;
+				break;
+			case "food":
+				hit.collider.gameObject.GetComponent<Food> ().amountLeft -= 11 * Time.deltaTime;
+				break;
+			case "gold":
+				hit.collider.gameObject.GetComponent<Gold> ().amountLeft -= 11 * Time.deltaTime;
+				break;
+			}
 			gameObject.GetComponent<Sumerian_civil>().collectionAmount += 11 * Time.deltaTime;
 		} else {
 			this.estoyLleno = true;
