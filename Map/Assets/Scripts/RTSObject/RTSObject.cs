@@ -184,7 +184,7 @@ public class RTSObject : MonoBehaviour
     /// given position.
     /// </summary>
     /// <param name="target">The position we want the object to move to.</param>
-    public void MoveTo(Vector3 target)
+    public void MoveTo(Vector3 target, bool isRunning)
     {
         if (!CanMove())
             throw new InvalidOperationException("Called MoveTo over an object that can't move.");
@@ -194,7 +194,7 @@ public class RTSObject : MonoBehaviour
             EndAttack();
         }
 
-        SetNewPath(target);
+        SetNewPath(target, isRunning);
     }
 
     /// <summary>
@@ -202,7 +202,7 @@ public class RTSObject : MonoBehaviour
     /// following a route to the desired position.
     /// </summary>
     /// <param name="target">The position we want the object to move to.</param>
-    protected virtual void SetNewPath(Vector3 target)
+    protected virtual void SetNewPath(Vector3 target, bool isRunning)
     {
         throw new NotImplementedException();
     }
@@ -505,7 +505,7 @@ public class RTSObject : MonoBehaviour
                 // Move to a point near the target to attack
                 var attackPosition = targetAttackPosition - (targetAttackPosition -
                     transform.position).normalized * AttackRangeTolerance / 4;
-                SetNewPath(attackPosition);
+                SetNewPath(attackPosition, false);
                 
                 programmedAttackPosition = attackPosition;
             }

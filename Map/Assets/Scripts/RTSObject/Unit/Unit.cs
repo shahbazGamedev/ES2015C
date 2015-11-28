@@ -72,19 +72,27 @@ public class Unit : RTSObject
 	/// following a route to the desired position.
 	/// </summary>
 	/// <param name="target">The position we want the unit to move to.</param>
-	protected override void SetNewPath (Vector3 target)
+	protected override void SetNewPath (Vector3 target, bool isRunning)
 	{
 		// We're starting movement, so start the walking animation
-		moving = true;
+		if (isRunning){
+			running = true;
+		} else {
+			moving = true;
+		}
 
 		targetPosition = target;
 		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
 	}
 
-    public void GoTo(Vector3 target)
+    public void GoTo(Vector3 target, bool isRunning)
     {
         // We're starting movement, so start the walking animation
-        moving = true;
+		if (isRunning){
+			running = true;
+		} else {
+			moving = true;
+		}
 
         targetPosition = target;
         seeker.StartPath(transform.position, targetPosition, OnPathComplete);
@@ -96,6 +104,7 @@ public class Unit : RTSObject
     protected override void CancelPath()
     {
         moving = false;
+		running=false;
         path = null;
     }
 
@@ -104,7 +113,7 @@ public class Unit : RTSObject
     /// </summary>
     protected override bool HasPath()
     {
-        return moving;
+        return moving || running;
     }
 
     public GameObject FindClosest (string tag)
@@ -167,7 +176,7 @@ public class Unit : RTSObject
         // the OnPathComplete() event even tough the movement was cancelled.
         // Note that the case where we start a new path, cancel it, and start a new one
         // quickly works correctly, since in this case the Seeker will cancel the first path
-		if (moving && !newPath.error)
+		if ((moving || running) && !newPath.error)
         {
 			path = newPath;
 			currentWaypoint = 0;

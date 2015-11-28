@@ -161,7 +161,7 @@ public class CivilUnit : Unit
         // Move to unit to the object to build
         if (newProject != null)
         {
-            SetNewPath(newProject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
+            SetNewPath(newProject.GetComponent<Collider>().ClosestPointOnBounds(transform.position), false);
         }
     }
 
@@ -370,7 +370,7 @@ public class CivilUnit : Unit
 		}
         //ClosestPointOnBounds retorna el punto mas cercano del collider del objeto respecto al transform que le pasas
         var closestPointResourceStore = resourceStore.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-        SetNewPath(closestPointResourceStore);
+        SetNewPath(closestPointResourceStore, false);
         state = 1;
         
     }
@@ -383,7 +383,7 @@ public class CivilUnit : Unit
     public void IrRecolectar(){
         //ClosestPointOnBounds retorna el punto mas cercano del collider del objeto respecto al transform que le pasas
         var closestPointResource = resourceDeposit.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-        SetNewPath(closestPointResource); //mi objetivo ahora es target = recurso (RTSObject)
+        SetNewPath(closestPointResource, false); //mi objetivo ahora es target = recurso (RTSObject)
         state = 2;
     }
 

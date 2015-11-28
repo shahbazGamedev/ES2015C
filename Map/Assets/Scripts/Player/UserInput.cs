@@ -24,8 +24,9 @@ public class UserInput : MonoBehaviour
 
             bool leftClick = Input.GetMouseButtonDown(0);
             bool rightClick = Input.GetMouseButtonDown(1);
-            if (leftClick || rightClick)
-                HandleMouseClick(leftClick, rightClick);
+			bool middleClick = Input.GetMouseButtonDown(2);
+            if (leftClick || rightClick || middleClick)
+                HandleMouseClick(leftClick, rightClick, middleClick);
 
             MoveCamera();
             RotateCamera();
@@ -46,7 +47,7 @@ public class UserInput : MonoBehaviour
 		Destroy (SelectedArea.GetComponent<Collider> ());
 	}
 
-    private void HandleMouseClick(bool leftClick, bool rightClick)
+    private void HandleMouseClick(bool leftClick, bool rightClick, bool middleClick)
     {
         if (!EventSystem.current.IsPointerOverGameObject()) // Click on non-UI element
         {
@@ -123,9 +124,16 @@ public class UserInput : MonoBehaviour
                 else if (player.SelectedObject.CanMove())
                 {
                     // Otherwise, if the unit can move, start the movement sequence
-                    player.SelectedObject.MoveTo(hit.point);
+                    player.SelectedObject.MoveTo(hit.point, false);
                 }
             }
+			else if (middleClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
+			{
+				if (player.SelectedObject.CanMove())
+                {
+                    player.SelectedObject.MoveTo(hit.point, true);
+                }
+			}
         }
     }
 
