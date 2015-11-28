@@ -23,3 +23,15 @@ Map/Assets/Scripts/RTSObject/Resource/Tree1.meta
 Map/Assets/Scripts/RTSObject/Resource/Tree1/tree_afsTREE_xao_xlprl_LOD2.fbm.meta
 Map/Assets/Models/Summerian_civil/summerian_civil.blend1
 Map/Assets/Models/Yamato/Yamato_cavalry/Yamato_cavalry.blend1
+
+*.txt
+
+Map/ProjectSettings/ProjectSettings.asset
+
+Map/Assets/New Terrain.asset
+
+Map/Assets/map.unity
+
+Map/Assets/.DS_Store
+
+Map/Assets/.DS_Store
