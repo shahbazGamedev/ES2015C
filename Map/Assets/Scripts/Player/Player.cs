@@ -64,9 +64,12 @@ public class Player : MonoBehaviour {
         }
 
         // Spawn initial elements
-        SpawnInitialTownCenter();
-        SpawnInitialCivilUnit();
-        SpawnInitialMilitaryUnit();
+        if (human==true) {
+            SpawnInitialTownCenter();
+            SpawnInitialCivilUnit();
+            SpawnInitialMilitaryUnit();
+
+        }
     }
 
     /// <summary>
