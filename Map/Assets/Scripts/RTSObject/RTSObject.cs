@@ -235,6 +235,9 @@ public class RTSObject : MonoBehaviour
     /// <returns>true if this object is building, false otherwise.</returns>
     public virtual bool IsBuilding()
     {
+        if (!CanBuild())
+            return false;
+
         throw new NotImplementedException();
     }
 
