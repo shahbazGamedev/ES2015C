@@ -13,20 +13,12 @@ public class AI : MonoBehaviour
     private List<GameObject> townCenters;
     private List<GameObject> soldiers;
     private int civilhouse = 0;
-    private Vector3 position, closestDistance, coords;
-    Vector3 spawnPos;
-    private float totalDist;
-    private GameObject civil;
-    private GameObject tree;
-    private bool housesBuilt = false,armyBuilt=false, towerBuilt=false;
+    private Vector3 position, coords;
+    private Vector3 spawnPos;
+    private bool housesBuilt = false, armyBuilt=false, towerBuilt=false;
     private int i;
-    public AIResources resources;
     private PlayerCivilization civilitzation;
-    private static int layer1 = 11;
-    private static int layer2 = 10;
-    private static int layermask1 = 1 << layer1;
-    private static int layermask2 = 1 << layer2;
-    private int mask = layermask1 | layermask2;
+
 
     private int prova =1;
 
@@ -48,6 +40,13 @@ public class AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (townCenters.Count==0) {
+            civils[0].GetComponent<CivilUnit>().building = true;
+            civils[0].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilitzation), coords);
+            civils[0].GetComponent<CivilUnit>().building = false;
+            civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+        }
+
         if (artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] > 100 && civils.Count < 3) {
             CreateNewCivil(false); ;
             civils[i].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
@@ -76,14 +75,12 @@ public class AI : MonoBehaviour
              housesBuilt == false) {
 
             CreateNewCivil(false);
-            spawnPos = new Vector3(spawnPos.x, -2, spawnPos.z - 30);
+            spawnPos = new Vector3(spawnPos.x, 0, spawnPos.z - 30);
 
             civils[i].GetComponent<CivilUnit>().building = true;
             civils[i].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingCivilHouse, civilitzation), spawnPos);
-            civils[i].GetComponent<CivilUnit>().building = false;
-            spawnPos = new Vector3(spawnPos.x - 10, -2, spawnPos.z);
+            spawnPos = new Vector3(spawnPos.x - 10, 0, spawnPos.z);
 
-            civils[i].GetComponent<CivilUnit>().building = true;
             civils[i].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingCivilHouse, civilitzation), spawnPos);
             civils[i].GetComponent<CivilUnit>().building = false;
             civils[i].GetComponent<CivilUnit>().StartHarvest(null, true, "wood");
@@ -96,7 +93,7 @@ public class AI : MonoBehaviour
                armyBuilt == false) {
 
             CreateNewCivil(false);
-            spawnPos = new Vector3(townCenters[0].transform.position.x - 40, 0, townCenters[0].transform.position.z);
+            spawnPos = new Vector3(townCenters[0].transform.position.x - 35, 0, townCenters[0].transform.position.z+15);
 
             civils[i].GetComponent<CivilUnit>().building = true;
             civils[i].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingArmyBuilding, civilitzation), spawnPos);
@@ -111,13 +108,12 @@ public class AI : MonoBehaviour
             towerBuilt==false) {
       
             CreateNewCivil(false);
-            spawnPos = new Vector3(townCenters[0].transform.position.x + 15, 0, townCenters[0].transform.position.z);
+            spawnPos = new Vector3(townCenters[0].transform.position.x + 20, 0, townCenters[0].transform.position.z);
 
             civils[i].GetComponent<CivilUnit>().building = true;
             civils[i].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingWallTower, civilitzation), spawnPos);
-            //civils[i].GetComponent<CivilUnit>().building = false;
 
-            spawnPos = new Vector3(townCenters[0].transform.position.x, 0, townCenters[0].transform.position.z+15);
+            spawnPos = new Vector3(townCenters[0].transform.position.x, 0, townCenters[0].transform.position.z+20);
 
             civils[i].GetComponent<CivilUnit>().building = true;
             civils[i].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingWallTower, civilitzation), spawnPos);
@@ -140,7 +136,7 @@ public class AI : MonoBehaviour
 
 
 
-    private void BuildWareHouse(GameObject civilian)
+   /* private void BuildWareHouse(GameObject civilian)
     {
 
         //if (artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] > 50)
@@ -156,13 +152,13 @@ public class AI : MonoBehaviour
          float totalCenter = (float)Math.Sqrt(closestDistance.x * closestDistance.x + closestDistance.z * closestDistance.z);*/
 
         //if (totalDist < 50f && totalCenter > 100f) {
-        position = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z - 20);
-        GameObject centerClone = (GameObject)Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingCivilHouse,civilitzation), position, Quaternion.identity);
-        centerClone.GetComponent<RTSObject>().owner = artificialIntelligence;
+        //position = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z - 20);
+        //GameObject centerClone = (GameObject)Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingCivilHouse,civilitzation), position, Quaternion.identity);
+        //centerClone.GetComponent<RTSObject>().owner = artificialIntelligence;
         // artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] - 50;
         //}
         //}
-    }
+    //}
 
 
     private void BuildTownCenter(Boolean resourceFree)
@@ -185,7 +181,6 @@ public class AI : MonoBehaviour
 
     private void BuildTownCenter(Vector3 coords,Boolean resourceFree)
     {
-           // position = new Vector3(civilian.transform.position.x + 10, 0.0f, civilian.transform.position.z + 10);
             var townCenter = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilitzation), coords, Quaternion.identity) as GameObject;
             townCenter.GetComponent<RTSObject>().owner = artificialIntelligence;
             if (resourceFree == false)
@@ -215,7 +210,7 @@ public class AI : MonoBehaviour
                 if (resourceFree == false) {
                     artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] - 100;
                 }
-                civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation), coords, Quaternion.identity) as GameObject;
+                GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation), coords, Quaternion.identity) as GameObject;
                 civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
                 civils.Add(civil);
             
