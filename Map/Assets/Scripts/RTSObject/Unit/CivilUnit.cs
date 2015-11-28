@@ -185,9 +185,15 @@ public class CivilUnit : Unit
     /*** Metodes privats ***/
 
     // Metode que cridem per a començar a recolectar
-    public void StartHarvest(Resource resource)
+    public void StartHarvest(Resource resource, bool ia,string tag)
     {
-        resourceDeposit = resource;
+        if (ia == false)
+        {
+            resourceDeposit = resource;
+        }
+        else {
+            resourceDeposit = FindResource(tag);
+        }
         harvestType = resourceDeposit.GetResourceType();
         harvesting = true;
         state = 4;
@@ -248,6 +254,27 @@ public class CivilUnit : Unit
             }
         }
         return closest.GetComponent<TownCenterBuilding>();
+    }
+
+
+    private Resource FindResource(string tag)
+    {
+        GameObject[] centers;
+        centers = GameObject.FindGameObjectsWithTag(tag);
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject go in centers)
+        {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        return closest.GetComponent<Resource>();
     }
 
 }
