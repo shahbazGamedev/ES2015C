@@ -25,9 +25,9 @@ void Update(){
 }
 
 int quienQueda(){
-	int sumaE1, sumaE2, sumaH;
+	int sumaE1, sumaH;
+	sumaE1 = sumaH = 0;
 	GameObject[] games;
-	sumaE1 = sumaE2 = sumaH = 0;
 	games = GameObject.FindGameObjectsWithTag("civil");
 	foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
 		if(civil.GetComponent<CivilUnit>().owner.human){
