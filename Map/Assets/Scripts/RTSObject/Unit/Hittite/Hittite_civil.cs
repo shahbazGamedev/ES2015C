@@ -45,7 +45,7 @@ public class Hittite_civil : CivilUnit
                 StartBuildingLocationSelection("Prefabs/Hittite_Wall", "Prefabs/Hittite_Wall_onConstruction");
                 break;
 		    case "Civil House":
-                StartBuildingLocationSelection("Prefabs/Hittite_CivilHouse", "Prefabs/Hittite_CivilHouse");
+                StartBuildingLocationSelection("Prefabs/Hittite_CivilHouse", "Prefabs/Hittite_CivilHouse_onConstruction");
                 break;
 		    case "Academy":
                 StartBuildingLocationSelection("Prefabs/Hittite_Academy", "Prefabs/Hittite_Academy_onConstruction");

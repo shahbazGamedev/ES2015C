@@ -348,8 +348,8 @@ public class CivilUnit : Unit
     {
         //GetComponent<Animation>().Play (attack.name); 
         if(!resourceDeposit.isEmpty()){
-            resourceDeposit.Remove(Mathf.Round(5*Time.deltaTime));    //resta esto del arbol (ej)
-            collectionAmount += Mathf.Round(5*Time.deltaTime); //se lo suma al recolector
+            resourceDeposit.Remove(Mathf.Round(5));    //resta esto del arbol (ej) *Time.deltaTime
+            collectionAmount += Mathf.Round(5); //se lo suma al recolector *Time.deltaTime
         }
     }
 
