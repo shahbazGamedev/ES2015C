@@ -63,7 +63,7 @@ public class CitizenAI : AI {
 		if (Physics.SphereCast (fwd, 0F, transform.forward, out hit, 1F)) {
 			Debug.Log ("ESTOY JUNTO AL OBJETO DE CLASE: "+hit.collider.tag);
 			if (hit.collider.tag.Equals ("townCenter")) {
-				this.hit.collider.gameObject.GetComponent<AIResources>().wood += this.gameObject.GetComponent<CivilUnit> ().collectionAmount; // Sumo al total de resource
+				//this.hit.collider.gameObject.GetComponent<AIResources>().wood += this.gameObject.GetComponent<CivilUnit> ().collectionAmount; // Sumo al total de resource
 				this.gameObject.GetComponent<CivilUnit> ().collectionAmount = 0f; // elimino lo que llevo
 				this.estoyLleno = false;
 				this.AITarget=this.auxAITarget;
