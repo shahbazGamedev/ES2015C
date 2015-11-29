@@ -13,11 +13,14 @@ void Update(){
 		/*case 1: // Solo has eliminado a un enemigo
 			Debug.Log("Te queda un enemigo por eliminar");
 			break;*/
+
 		case 1: // Has ganado
 			Debug.Log("Victorious");
+			Application.LoadLevel("gameOverVictory");
 			break;
 		case 2: //Game over
 			Debug.Log("Game over");
+			Application.LoadLevel("gameOverDefeat");
 			break;
 		case 0:
 			break;
