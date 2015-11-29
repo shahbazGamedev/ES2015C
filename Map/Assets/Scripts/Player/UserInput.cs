@@ -30,6 +30,7 @@ public class UserInput : MonoBehaviour
 
             if (Input.GetKey (KeyCode.M)) morirEnemigos(); 
             if (Input.GetKey (KeyCode.P)) morirJugador();
+			if (Input.GetKeyUp("k")) demolishBuildings();
 
             MoveCamera();
             RotateCamera();
@@ -242,6 +243,18 @@ public class UserInput : MonoBehaviour
             }
         }
     }
+	
+	private void demolishBuildings() {
+		
+		Building[] buildings = FindObjectsOfType(typeof(Building)) as Building[];
+         
+        foreach(Building b in buildings)
+        {
+			if (b.demolishedModel!=null) {
+				b.changeModel("demolished");
+			}
+        }
+	}
 
     private void MoveCamera()
     {
