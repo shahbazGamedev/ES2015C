@@ -145,10 +145,6 @@ public class Player : MonoBehaviour {
         militaryUnit.transform.parent = transform; // Should have no effect, but easier for debugging
     }
 
-    void Update () {
-	   //Mirar tots els RTSObject
-	}
-
     /// <summary>
     /// Called when the RTS element selection begins.
     /// </summary>
