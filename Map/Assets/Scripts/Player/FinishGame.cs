@@ -25,22 +25,25 @@ void Update(){
 
 int quienQueda(){
 	int sumaE1, sumaE2, sumaH;
-	GameObject[] games;
+	//GameObject[] games;
 	sumaE1 = sumaE2 = sumaH = 0;
-	games = GameObject.FindGameObjectsWithTag("civil");
-	foreach(var cosa in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
-		if(cosa.GetComponent<CivilUnit>().owner.human){
+	/*games = GameObject.FindGameObjectsWithTag("civil");
+	foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+		if(civil.GetComponent<CivilUnit>().owner.human){
 			sumaH += 1;
 		}
 		else{
 			sumaE1 += 1;
 		}
-		/*else if (cosa.owner=="EnemyPlayer2"){
-			sumaE2 += 1;
-		}
-		else if(cosa.owner == "Player"){
+	}
+	games = GameObject.FindGameObjectsWithTag("mility");
+	foreach(var mility in games){ //Miro todos los TownCenterBuilding y si hay alguno de owner lo sumo
+		if(mility.GetComponent<Unit>().owner.human){
 			sumaH += 1;
-		}*/
+		}
+		else{
+			sumaE1 += 1;
+		}
 	}
 	games = GameObject.FindGameObjectsWithTag("townCenter");
 	foreach(var town in games){ //Miro todos los TownCenterBuilding y si hay alguno de owner lo sumo
@@ -50,25 +53,27 @@ int quienQueda(){
 		else{
 			sumaE1 += 1;
 		}
-		/*else if (town.owner=="EnemyPlayer2"){
-			sumaE2 += 1;
-		}
-		else if(town.owner == "Player"){
-			sumaH += 1;
-		}*/
 	}
-	/*games = GameObject.FindGameObjectsWithTag("civil");
-	/*foreach(var atac in games){ //Miro todos los ArmyBuilding y si hay alguno de owner lo sumo
-		if(atac.owner=="EnemyPlayer1"){
+	games = GameObject.FindGameObjectsWithTag("armyBuilding");
+
+	foreach(var army in games){ //Miro todos los TownCenterBuilding y si hay alguno de owner lo sumo
+		if(army.GetComponent<ArmyBuilding>().owner.human){
+			sumaH += 1;
+		}
+		else{
 			sumaE1 += 1;
 		}
-		else if (atac.owner=="EnemyPlayer2"){
-			sumaE2 += 1;
-		}
-		else if(atac.owner == "Player"){
-			sumaH += 1;
-		}
 	}*/
+	object[] obj = GameObject.FindSceneObjectsOfType(typeof (RTSObject));
+    foreach(object o in obj){
+        RTSObject g = (RTSObject)o;
+        if(g.owner==player){
+            sumaH += 1;
+        }
+        else if(g.owner!=player){
+        	sumaE1 +=1;
+        }
+    }
 
 	if(sumaE1 == 0){ //Si no e sumado ningun enemigo HE GANADO
 		return 1;

@@ -177,10 +177,21 @@ public class UserInput : MonoBehaviour
 
     //Funcion para que todos los objectos del jugador mueran
     private void morirJugador(){
-        GameObject game = GameObject.FindGameObjectWithTag("civil");
-        Destroy(game, 4);
+        /*GameObject game = GameObject.FindGameObjectWithTag("civil");
+        Destroy(game, 2);
         game = GameObject.FindGameObjectWithTag("townCenter");
-        Destroy(game, 4);
+        Destroy(game, 2);
+        game = GameObject.FindGameObjectWithTag("mility");
+        Destroy(game, 2);*/
+        Debug.Log("Matas a los tuyos");
+        object[] obj = GameObject.FindSceneObjectsOfType(typeof (RTSObject));
+        foreach(object o in obj){
+            RTSObject g = (RTSObject)o;
+            if(g.owner==player){
+                Debug.Log("Muere algo");
+                Destroy(g,2);
+            }
+        }
 
     }
 

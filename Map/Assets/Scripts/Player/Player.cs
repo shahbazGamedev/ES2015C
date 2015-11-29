@@ -66,7 +66,7 @@ public class Player : MonoBehaviour {
         // Spawn initial elements
         SpawnInitialTownCenter();
         SpawnInitialCivilUnit();
-        //SpawnInitialMilitaryUnit();
+        SpawnInitialMilitaryUnit();
     }
 
     /// <summary>
