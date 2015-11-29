@@ -119,7 +119,6 @@ public class Building : RTSObject
                 if (Physics.CheckSphere(point, 0.4f, mask))
                 {
                     point = new Vector3(point.x - 5, 0.0f, point.z); //si ya hay algo provamos en otra posicion
-                    Debug.Log("Habia algo en la posicion" + point);
                 }
                 else
                 {
@@ -134,7 +133,7 @@ public class Building : RTSObject
 					}
 					else
 					{
-						HUDInfo.message = "Not enough food (" + unitClone.GetComponent<Unit>().cost + ") to create a new " + unitClone.GetComponent<Unit>().name;
+						HUDInfo.insertMessage("Not enough food (" + unitClone.GetComponent<Unit>().cost + ") to create a new " + unitClone.GetComponent<Unit>().name);
 						Destroy(unitClone);
 					}
                 }

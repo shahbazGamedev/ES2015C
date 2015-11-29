@@ -496,7 +496,7 @@ public class RTSObject : MonoBehaviour
             // If we need to and the unit can't move, warn the user that the attack can't be done
             if (!CanMove())
             {
-                Debug.Log(string.Format("{0} can't attack {1}, because it is {2}m away",
+                HUDInfo.insertMessage(string.Format("{0} can't attack {1}, because it is {2}m away",
                     objectName, target.objectName, distanceToTarget));
                 EndAttack();
                 return;
