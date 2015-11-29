@@ -8,6 +8,7 @@ public class Hittite_cavalry : Unit
     {
 		base.Awake();
 		objectName = "Hittite Cavalry";
+		//gameObject.tag = "mility";
 		baseMoveSpeed = 10;
 		cost = 250;
 		hitPoints = maxHitPoints = 200;

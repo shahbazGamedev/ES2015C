@@ -146,7 +146,7 @@ public class Player : MonoBehaviour {
     }
 
     void Update () {
-	
+	   //Mirar tots els RTSObject
 	}
 
     /// <summary>

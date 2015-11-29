@@ -28,10 +28,14 @@ public class UserInput : MonoBehaviour
             if (leftClick || rightClick || middleClick)
                 HandleMouseClick(leftClick, rightClick, middleClick);
 
+            if (Input.GetKey (KeyCode.M)) morirEnemigos(); 
+            if (Input.GetKey (KeyCode.P)) morirJugador();
+
             MoveCamera();
             RotateCamera();
             MouseActivity();
         }
+
     }
 
     private void OpenPauseMenu()
@@ -43,6 +47,8 @@ public class UserInput : MonoBehaviour
 		SelectedArea = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
 		SelectedArea.transform.position = new Vector3(0, 0, 0);
 		SelectedArea.transform.localScale = new Vector3(0, 0, 0);
+		SelectedArea.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+		SelectedArea.GetComponent<MeshRenderer>().material = Resources.Load("Materials/selectedArea") as Material;
 		SelectedArea.name = "SelectedArea";
 		Destroy (SelectedArea.GetComponent<Collider> ());
 	}
@@ -177,6 +183,64 @@ public class UserInput : MonoBehaviour
         }
 
         return hit;
+    }
+
+    //Funcion para que todos los objectos del jugador mueran
+    private void morirJugador(){
+        GameObject[] games;
+        games = GameObject.FindGameObjectsWithTag("civil");
+        foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(civil.GetComponent<CivilUnit>().owner==player){
+                Destroy(civil, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("townCenter");
+        foreach(var town in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(town.GetComponent<TownCenterBuilding>().owner==player){
+                Destroy(town, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("mility");
+        foreach(var mili in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(mili.GetComponent<Unit>().owner==player){
+                Destroy(mili, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("armyBuilding");
+        foreach(var army in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(army.GetComponent<ArmyBuilding>().owner==player){
+                Destroy(army, 2);
+            }
+        }
+    }
+
+    //Funcion para que todos los objectos del enemigo mueran
+    private void morirEnemigos(){
+        GameObject[] games;
+        games = GameObject.FindGameObjectsWithTag("civil");
+        foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(civil.GetComponent<CivilUnit>().owner!=player){
+                Destroy(civil, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("townCenter");
+        foreach(var town in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(town.GetComponent<TownCenterBuilding>().owner!=player){
+                Destroy(town, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("mility");
+        foreach(var mili in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(mili.GetComponent<Unit>().owner!=player){
+                Destroy(mili, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("armyBuilding");
+        foreach(var army in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(army.GetComponent<ArmyBuilding>().owner!=player){
+                Destroy(army, 2);
+            }
+        }
     }
 
     private void MoveCamera()

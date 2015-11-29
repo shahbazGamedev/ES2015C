@@ -8,6 +8,7 @@ public class Hittite_warrior_advanced : Unit
     {
 		base.Awake();
 		objectName = "Hittite Warrior Advanced";
+		//gameObject.tag = "mility";
 		baseMoveSpeed = 3;
 		cost = 300;
 		hitPoints = maxHitPoints = 200;
