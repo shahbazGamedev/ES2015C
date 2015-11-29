@@ -347,7 +347,7 @@ public class RTSObject : MonoBehaviour
     /// Substract health points from this object.
     /// </summary>
     /// <param name="damage">The number of health points to substract to this object.</param>
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         hitPoints = Math.Max(hitPoints - damage, 0);
         if (hitPoints == 0)

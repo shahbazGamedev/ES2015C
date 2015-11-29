@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 
 public class Building : RTSObject
 {
@@ -11,8 +12,9 @@ public class Building : RTSObject
 
 	private BoxCollider boxCollider;			// Referencia al component BoxCollider.
 	  
-	public bool needsBuilding = false;         	// Indica si necesita se construit
+	public bool needsBuilding = false;         	// Indica si necesita ser construit
 	public bool inConstruction = false;			// Indica si s'esta construint ara mateix
+	private bool demolished = false;
 
 	private static int layer1 = 11; 
 	private static int layer2 = 10;
@@ -24,6 +26,8 @@ public class Building : RTSObject
 
     /// <summary>For in-construction buildings, reference to the finished building model.</summary>
     public GameObject finishedModel;
+	public GameObject constructionModel;
+	public GameObject demolishedModel;
     /// <summary>Number of seconds that this building will take to be built at the default building factor.</summary>
     public float buildingTime = 5.0f;
     /// <summary>While building, number of "partial" hit points, to build at a consistent rate.</summary>
@@ -47,6 +51,10 @@ public class Building : RTSObject
     {
         base.Update();
         ProcessBuildQueue();
+		
+		if (!inConstruction && hitPoints<maxHitPoints) {
+			
+		}
     }
 
     protected override void OnGUI()
@@ -89,6 +97,7 @@ public class Building : RTSObject
             // Mark as completed
             needsBuilding = false;
 			inConstruction = false;
+			demolished = false;
         }
     }
 
@@ -180,5 +189,33 @@ public class Building : RTSObject
 
         transform.rotation = rotation;
     }
+	
+	public void changeModel(string estat) {
+		if (estat=="finished") {
+			this.ReplaceChildWithChildFromGameObjectTemplate(finishedModel);
+		} else if (estat == "demolished") {
+			this.ReplaceChildWithChildFromGameObjectTemplate(demolishedModel);
+		} else if (estat == "construction") {
+			this.ReplaceChildWithChildFromGameObjectTemplate(constructionModel);
+		}
+
+        var guo = new GraphUpdateObject (this.GetComponent<BoxCollider> ().bounds);
+		guo.updatePhysics = true;
+		AstarPath.active.UpdateGraphs (guo);		
+	}
+	
+	public void getModels(string fModel, string cModel, string dModel) {
+		finishedModel = Resources.Load<GameObject>(fModel) as GameObject;
+		constructionModel = Resources.Load<GameObject>(cModel) as GameObject;
+		demolishedModel = Resources.Load<GameObject>(dModel) as GameObject;
+	}
+	
+	public override void TakeDamage(int damage){
+		base.TakeDamage(damage);
+		if(hitPoints>0 && hitPoints<maxHitPoints && !demolished) {
+			changeModel("demolished");
+			demolished=true;
+		}
+	}
 
 }

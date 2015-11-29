@@ -11,6 +11,7 @@ public class Sumerian_ArmyBuilding : ArmyBuilding
 		objectName = "Sumerian Army Building";
 		actions = new string[] {"Archer", "Cavalry", "Warrior", "Warrior Advanced"};
         baseDefense = 5;
+		getModels("Prefabs/Sumerian_ArmyBuilding", "Prefabs/Sumerian_ArmyBuilding", "Prefabs/Sumerian_army_building_semidemolished");
     }
 
 	/*** Metodes interns accessibles per les subclasses ***/

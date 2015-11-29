@@ -322,11 +322,13 @@ public class CivilUnit : Unit
 	
 	public void CreateFinishedBuilding()
 	{
+		/*
         currentProject.ReplaceChildWithChildFromGameObjectTemplate(currentProject.finishedModel);
 
         var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
 		guo.updatePhysics = true;
-		AstarPath.active.UpdateGraphs (guo);
+		AstarPath.active.UpdateGraphs (guo);*/
+		currentProject.GetComponent<Building>().changeModel("finished");
 
         AssignBuildingProject(null);
 	}
