@@ -1,0 +1,170 @@
+fileFormatVersion: 2
+guid: cee0626b8d85e994da44ddea870362f7
+timeCreated: 1448801485
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Abdomen
+    100002: Abdomen_Yamato
+    100004: Antebrazo_L
+    100006: Armature
+    100008: Bone
+    100010: Brazo_L
+    100012: Cabeza
+    100014: Cabeza_Yamato
+    100016: Cola01
+    100018: Cola02
+    100020: Coxis
+    100022: Cuello
+    100024: Cuello_Yamato
+    100026: Dedos_Mano01_L
+    100028: Dedos_Mano02_L
+    100030: Horse
+    100032: Mano_L
+    100034: PataDel01_L
+    100036: PataDel01_R
+    100038: PataDel02_L
+    100040: PataDel02_R
+    100042: PataDel_Control_L
+    100044: PataDel_Control_R
+    100046: PataTras01_L
+    100048: PataTras01_R
+    100050: PataTras02_L
+    100052: PataTras02_R
+    100054: PataTras_Control_L
+    100056: PataTras_Control_R
+    100058: Pecho
+    100060: Pecho_Yamato
+    100062: PezuDel_L
+    100064: PezuDel_R
+    100066: PezuTras_L
+    100068: PezuTras_R
+    100070: Pulgar01_L
+    100072: Pulgar02_L
+    100074: Sumerian
+    100076: //RootNode
+    100078: Sword
+    100080: TobilloDel_L
+    100082: TobilloDel_R
+    100084: TobilloTras_L
+    100086: TobilloTras_R
+    400000: Abdomen
+    400002: Abdomen_Yamato
+    400004: Antebrazo_L
+    400006: Armature
+    400008: Bone
+    400010: Brazo_L
+    400012: Cabeza
+    400014: Cabeza_Yamato
+    400016: Cola01
+    400018: Cola02
+    400020: Coxis
+    400022: Cuello
+    400024: Cuello_Yamato
+    400026: Dedos_Mano01_L
+    400028: Dedos_Mano02_L
+    400030: Horse
+    400032: Mano_L
+    400034: PataDel01_L
+    400036: PataDel01_R
+    400038: PataDel02_L
+    400040: PataDel02_R
+    400042: PataDel_Control_L
+    400044: PataDel_Control_R
+    400046: PataTras01_L
+    400048: PataTras01_R
+    400050: PataTras02_L
+    400052: PataTras02_R
+    400054: PataTras_Control_L
+    400056: PataTras_Control_R
+    400058: Pecho
+    400060: Pecho_Yamato
+    400062: PezuDel_L
+    400064: PezuDel_R
+    400066: PezuTras_L
+    400068: PezuTras_R
+    400070: Pulgar01_L
+    400072: Pulgar02_L
+    400074: Sumerian
+    400076: //RootNode
+    400078: Sword
+    400080: TobilloDel_L
+    400082: TobilloDel_R
+    400084: TobilloTras_L
+    400086: TobilloTras_R
+    4300000: Sumerian
+    4300002: Horse
+    7400000: Default Take
+    7400002: Sumerian_Cavalry_Attack
+    7400004: Sumerian_Cavalry_Dead
+    7400006: Sumerian_Cavalry_Idle
+    7400008: Sumerian_Cavalry_Run
+    7400010: Sumerian_Cavalry_Walk
+    9500000: //RootNode
+    13700000: Horse
+    13700002: Sumerian
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
