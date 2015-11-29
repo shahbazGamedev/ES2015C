@@ -3,17 +3,16 @@ using System.Collections;
 
 public class ADS : RTSObject {
 
-    public int Speed;
     RaycastHit hit;
     RTSObject targetlocal;
-    //state setup
-    public bool colision = false;
     enum aiState { wandering, chasing, attacking }
     aiState estado;
+    int speed;
+    float dist;
 
     // Use this for initialization
     void Start () {
-        Speed = 2;
+        speed = 2;
         hit = new RaycastHit();
         estado = aiState.wandering;
         this.owner = gameObject.GetComponent<RTSObject>().owner;
@@ -28,24 +27,34 @@ public class ADS : RTSObject {
     }
 
     public void Chase() {
-        //transform.LookAt(currentDestination);
         //transform.LookAt(target.transform);
         //transform.Translate(0, 0, 1 * Time.deltaTime * Speed);
     }
 
     public void Attack()
     {
-        GetComponent<MovimientoAleatorioCivil>().enabled = false;
-        //transform.Translate(0, 0, 0);
+
         if (targetlocal != null)
         {
-            AttackObject(targetlocal);
+            GetComponent<MovimientoAleatorioCivil>().enabled = false;
+            dist = Vector3.Distance(transform.position, targetlocal.transform.position);
+            transform.LookAt(targetlocal.transform);
+            if (dist > 2)
+            {
+                transform.Translate(0, 0, 1 * speed * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(0, 0, 0);
+                AttackObject(targetlocal);
+            }            
         }
-        targetlocal = null;
 
-        estado = aiState.wandering;
+        if (targetlocal == null)
+        {
+            estado = aiState.wandering;
+        }
 
-        //Pendiente de poner la logica de ataque.
     }
 
     public void Wander()
