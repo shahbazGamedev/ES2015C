@@ -1,16 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ADS : Unit {
+public class ADS : RTSObject {
 
     public int Speed;
-    public Vector3 currentDestination,a;
-    
-    Vector3 fwd;
     RaycastHit hit;
-    private Vector3 previousPosition;
-
-
+    RTSObject targetlocal;
     //state setup
     public bool colision = false;
     enum aiState { wandering, chasing, attacking }
@@ -19,10 +14,10 @@ public class ADS : Unit {
     // Use this for initialization
     void Start () {
         Speed = 2;
-        currentDestination = new Vector3(0, 0, 0);
         hit = new RaycastHit();
-        previousPosition = transform.position;
         estado = aiState.wandering;
+        this.owner = gameObject.GetComponent<RTSObject>().owner;
+        GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -41,7 +36,15 @@ public class ADS : Unit {
     public void Attack()
     {
         GetComponent<MovimientoAleatorioCivil>().enabled = false;
-        transform.Translate(0, 0, 0);
+        //transform.Translate(0, 0, 0);
+        if (targetlocal != null)
+        {
+            AttackObject(targetlocal);
+        }
+        targetlocal = null;
+
+        estado = aiState.wandering;
+
         //Pendiente de poner la logica de ataque.
     }
 
@@ -54,17 +57,18 @@ public class ADS : Unit {
     public void detection()
     {
         //Debug.Log("VOY MIRANDO");
-        if ((Physics.Raycast(transform.position, transform.position + new Vector3(0, 0, 15), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(0, 0, -15), out hit, 10))
-            || (Physics.Raycast(transform.position, transform.position + new Vector3(15, 0, 0), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(-15, 0, 0), out hit, 10))
-            || (Physics.Raycast(transform.position, transform.position + new Vector3(14, 0, 14), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(14, 0, -14), out hit, 10))
-            || (Physics.Raycast(transform.position, transform.position + new Vector3(-14, 0, 14), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(-14, 0, -14), out hit, 10)))
+        if ((Physics.Raycast(transform.position, transform.position + new Vector3(0, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(0, 0, -40), out hit, 10))
+            || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, 0), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, 0), out hit, 10))
+            || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, -40), out hit, 10))
+            || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, -40), out hit, 10)))
         {
-            //if(hit.collider.gameObject.GetComponent<RTSObject>().owner) { 
+            if(hit.collider.gameObject.GetComponent<RTSObject>().owner != this.owner) { 
+                targetlocal = hit.collider.gameObject.GetComponent<RTSObject>();
+                estado = aiState.attacking;
 
-        Debug.Log("HE DETECTADO UN OBJETO DE CLASE: " + hit.collider.tag);
-
-            //}
-            //estado = aiState.attacking;
+                Debug.Log("HE DETECTADO UN OBJETO DE CLASE: " + hit.collider.tag);
+                Debug.Log("TENGO EL TARGET Y VOY A ATACAR -->" + targetlocal + "i");
+            }
         }
     }
     
