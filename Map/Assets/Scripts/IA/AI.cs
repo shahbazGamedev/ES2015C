@@ -122,7 +122,7 @@ public class AI : MonoBehaviour
 
     private void recollect(GameObject civilian, Vector3 position)
     {
-        civilian.GetComponent<CivilUnit>().GoTo(position);
+        civilian.GetComponent<CivilUnit>().GoTo(position, false);
         civilian.GetComponent<CivilUnit>().StartHarvest(tree.GetComponent<Resource>());
 
     }

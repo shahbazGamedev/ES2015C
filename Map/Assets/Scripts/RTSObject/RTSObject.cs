@@ -52,9 +52,13 @@ public class RTSObject : MonoBehaviour
 
     protected List<RTSObject> nearbyObjects;        // Llista de objectes propers
 
-    protected Animator anim;                        // Referencia al component Animator.
+    protected Animator anim;                        // Referencia al component Animator
+	protected AudioSource audio;					// Referencia al component AudioSource
 	protected Rigidbody rigbody;					// Referenica al component Rigidbody
 	protected LOSEntity ent;
+
+	protected AudioClip fightSound;
+	protected AudioClip dieSound;
 
 	private int ObjectId { get; set; }               // Identificador unic del objecte
     private float currentWeaponChargeTime;
@@ -88,6 +92,7 @@ public class RTSObject : MonoBehaviour
 
     protected virtual void Awake()
     {
+		audio = gameObject.AddComponent<AudioSource> ();
 		rigbody = gameObject.AddComponent<Rigidbody> ();
 		rigbody.constraints = RigidbodyConstraints.FreezeAll;
 		ent = gameObject.AddComponent<LOSEntity> ();
@@ -101,8 +106,8 @@ public class RTSObject : MonoBehaviour
     {
 		if (currentlySelected) updateSelection ();
         if (attacking) PerformAttack();
-        if (dying && UpdateDeadObject()) return; ;
         if (this != null && anim && anim.runtimeAnimatorController) Animating();
+		if (dying && UpdateDeadObject()) return;
     }
 
     protected virtual void OnGUI()
@@ -179,7 +184,7 @@ public class RTSObject : MonoBehaviour
     /// given position.
     /// </summary>
     /// <param name="target">The position we want the object to move to.</param>
-    public void MoveTo(Vector3 target)
+    public void MoveTo(Vector3 target, bool isRunning)
     {
         if (!CanMove())
             throw new InvalidOperationException("Called MoveTo over an object that can't move.");
@@ -189,7 +194,7 @@ public class RTSObject : MonoBehaviour
             EndAttack();
         }
 
-        SetNewPath(target);
+        SetNewPath(target, isRunning);
     }
 
     /// <summary>
@@ -197,7 +202,7 @@ public class RTSObject : MonoBehaviour
     /// following a route to the desired position.
     /// </summary>
     /// <param name="target">The position we want the object to move to.</param>
-    protected virtual void SetNewPath(Vector3 target)
+    protected virtual void SetNewPath(Vector3 target, bool isRunning)
     {
         throw new NotImplementedException();
     }
@@ -230,6 +235,9 @@ public class RTSObject : MonoBehaviour
     /// <returns>true if this object is building, false otherwise.</returns>
     public virtual bool IsBuilding()
     {
+        if (!CanBuild())
+            return false;
+
         throw new NotImplementedException();
     }
 
@@ -376,7 +384,7 @@ public class RTSObject : MonoBehaviour
 	// Metode que usem per animar el objecte
 	protected virtual void Animating()
 	{
-		anim.SetBool("IsAttacking", attacking);
+		anim.SetBool("IsFighting", attacking);
 		anim.SetBool("IsDead", hitPoints <= 0);
 	}
 	
@@ -398,7 +406,8 @@ public class RTSObject : MonoBehaviour
 	private void updateSelection(){
 		GameObject selArea = GameObject.Find("SelectedArea");
 		if (selArea) {
-			selArea.transform.localPosition = new Vector3 (gameObject.GetComponent<Collider> ().bounds.center.x, gameObject.transform.localPosition.y, gameObject.GetComponent<Collider> ().bounds.center.z);
+			float terrainY = Terrain.activeTerrain.SampleHeight(gameObject.GetComponent<Collider> ().bounds.center);
+			selArea.transform.localPosition = new Vector3 (gameObject.GetComponent<Collider> ().bounds.center.x, terrainY + 0.01f, gameObject.GetComponent<Collider> ().bounds.center.z);
 			selArea.transform.localScale = new Vector3 (gameObject.GetComponent<Collider> ().bounds.size.x * 1.2f, 0.01f, gameObject.GetComponent<Collider> ().bounds.size.z * 1.2f);
 		}
 	}
@@ -461,6 +470,10 @@ public class RTSObject : MonoBehaviour
 
         if (targetInRange)
         {
+			if (currentlySelected && fightSound && !audio.isPlaying)
+			{
+				audio.PlayOneShot (fightSound);
+			}
             // Cancel movement if we've just reached the target
             if (CanMove() && HasPath())
             {
@@ -496,7 +509,7 @@ public class RTSObject : MonoBehaviour
                 // Move to a point near the target to attack
                 var attackPosition = targetAttackPosition - (targetAttackPosition -
                     transform.position).normalized * AttackRangeTolerance / 4;
-                SetNewPath(attackPosition);
+                SetNewPath(attackPosition, false);
                 
                 programmedAttackPosition = attackPosition;
             }
@@ -519,6 +532,10 @@ public class RTSObject : MonoBehaviour
             // Begin the "dying" state
             dying = true;
             remainingTimeToDead = DefaultDeadTime;
+			if (owner.human && dieSound)
+			{
+				audio.PlayOneShot (dieSound);
+			}
 
             // Enable alpha mode (transparency) for each material, for the fade-out animation
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
