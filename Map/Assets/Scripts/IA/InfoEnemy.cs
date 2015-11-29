@@ -6,10 +6,15 @@ public class InfoEnemy : MonoBehaviour
 
 	private GameObject menu;
 	private bool activated = false;
+	public Player artificialIntelligence;
+	public PlayerCivilization civilitzation;
+
 	// Use this for initialization
 	//GameObject prefab;
 	void Start () {
 		GameObject menu;
+		artificialIntelligence = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
+        civilitzation = GameObject.Find("EnemyPlayer1").GetComponent<Player>().civilization;
 	}
 	
 	
