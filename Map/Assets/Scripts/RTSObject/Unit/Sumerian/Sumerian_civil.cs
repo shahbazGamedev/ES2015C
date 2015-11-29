@@ -21,7 +21,7 @@ public class Sumerian_civil : CivilUnit
 		miningSound = Resources.Load ("Sounds/Sumerian_civil_Mining") as AudioClip;
 		woodCuttingSound = Resources.Load ("Sounds/Sumerian_civil_WoodCutting") as AudioClip;
 		buildingSound = Resources.Load ("Sounds/Sumerian_civil_Building") as AudioClip;
-		actions = new string[] { "Town Center" };
+		actions = new string[] { "Town Center", "Army Building", "Wall Tower", "Wall Entrance", "Wall", "Civil House", "Academy" };
     }
 
     /*** Metodes interns accessibles per les subclasses ***/
@@ -31,6 +31,24 @@ public class Sumerian_civil : CivilUnit
 		switch (actionToPerform) {
 		    case "Town Center":
                 StartBuildingLocationSelection("Prefabs/Sumerian_TownCenter", "Prefabs/Sumerian_TownCenter_onConstruction");
+                break;
+		    case "Army Building":
+                StartBuildingLocationSelection("Prefabs/Sumerian_ArmyBuilding", "Prefabs/Sumerian_ArmyBuilding");
+                break;
+		    case "Wall Tower":
+                StartBuildingLocationSelection("Prefabs/Sumerian_WallTower", "Prefabs/Sumerian_WallTower");
+                break;
+		    case "Wall Entrance":
+                StartBuildingLocationSelection("Prefabs/Sumerian_WallEntrance", "Prefabs/Sumerian_WallEntrance");
+                break;
+		    case "Wall":
+                StartBuildingLocationSelection("Prefabs/Sumerian_Wall", "Prefabs/Sumerian_Wall");
+                break;
+		    case "Civil House":
+                StartBuildingLocationSelection("Prefabs/Sumerian_CivilHouse", "Prefabs/Sumerian_CivilHouse");
+                break;
+		    case "Academy":
+                StartBuildingLocationSelection("Prefabs/Sumerian_Academy", "Prefabs/Sumerian_Academy");
                 break;
 		}
 	}
