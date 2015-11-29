@@ -406,7 +406,8 @@ public class RTSObject : MonoBehaviour
 	private void updateSelection(){
 		GameObject selArea = GameObject.Find("SelectedArea");
 		if (selArea) {
-			selArea.transform.localPosition = new Vector3 (gameObject.GetComponent<Collider> ().bounds.center.x, gameObject.transform.localPosition.y, gameObject.GetComponent<Collider> ().bounds.center.z);
+			float terrainY = Terrain.activeTerrain.SampleHeight(gameObject.GetComponent<Collider> ().bounds.center);
+			selArea.transform.localPosition = new Vector3 (gameObject.GetComponent<Collider> ().bounds.center.x, terrainY + 0.01f, gameObject.GetComponent<Collider> ().bounds.center.z);
 			selArea.transform.localScale = new Vector3 (gameObject.GetComponent<Collider> ().bounds.size.x * 1.2f, 0.01f, gameObject.GetComponent<Collider> ().bounds.size.z * 1.2f);
 		}
 	}
