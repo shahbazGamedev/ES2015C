@@ -44,7 +44,6 @@ public class Building : RTSObject
         // Calculem la dimensio del BoxCollider
         FittedBoxCollider();
 		ent.Range = visi;
-
     }
 
     protected override void Update()
@@ -128,7 +127,6 @@ public class Building : RTSObject
                 if (Physics.CheckSphere(point, 0.4f, mask))
                 {
                     point = new Vector3(point.x - 5, 0.0f, point.z); //si ya hay algo provamos en otra posicion
-                    Debug.Log("Habia algo en la posicion" + point);
                 }
                 else
                 {
@@ -143,7 +141,7 @@ public class Building : RTSObject
 					}
 					else
 					{
-						HUDInfo.message = "Not enough food (" + unitClone.GetComponent<Unit>().cost + ") to create a new " + unitClone.GetComponent<Unit>().name;
+						HUDInfo.insertMessage("Not enough food (" + unitClone.GetComponent<Unit>().cost + ") to create a new " + unitClone.GetComponent<Unit>().name);
 						Destroy(unitClone);
 					}
                 }
@@ -192,11 +190,11 @@ public class Building : RTSObject
 	
 	public void changeModel(string estat) {
 		if (estat=="finished") {
-			this.ReplaceChildWithChildFromGameObjectTemplate(finishedModel);
+			ReplaceChildWithChildFromGameObjectTemplate(finishedModel);
 		} else if (estat == "demolished") {
-			this.ReplaceChildWithChildFromGameObjectTemplate(demolishedModel);
+			ReplaceChildWithChildFromGameObjectTemplate(demolishedModel);
 		} else if (estat == "construction") {
-			this.ReplaceChildWithChildFromGameObjectTemplate(constructionModel);
+			ReplaceChildWithChildFromGameObjectTemplate(constructionModel);
 		}
 
         var guo = new GraphUpdateObject (this.GetComponent<BoxCollider> ().bounds);
@@ -205,9 +203,25 @@ public class Building : RTSObject
 	}
 	
 	public void getModels(string fModel, string cModel, string dModel) {
+		Debug.Log("get prefabs of Building");
 		finishedModel = Resources.Load<GameObject>(fModel) as GameObject;
 		constructionModel = Resources.Load<GameObject>(cModel) as GameObject;
 		demolishedModel = Resources.Load<GameObject>(dModel) as GameObject;
+		
+		if (finishedModel == null || finishedModel.GetComponent<Building>() == null)
+        {
+            Debug.Log("Could not load resource '" + fModel);
+        }
+		
+		if (constructionModel == null || constructionModel.GetComponent<Building>() == null)
+        {
+            Debug.Log("Could not load resource '" + cModel);
+        }
+		
+		if (demolishedModel == null || demolishedModel.GetComponent<Building>() == null)
+        {
+            Debug.Log("Could not load resource '" + dModel);
+        }
 	}
 	
 	public override void TakeDamage(int damage){

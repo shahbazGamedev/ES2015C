@@ -115,9 +115,40 @@ public class RTSObject : MonoBehaviour
     }
 
 	private void OnMouseEnter() {
-		if (owner && owner.human) {
-			Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_select") as Texture2D;
-			Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+		if (owner) {
+			if (owner.human == true) {
+				Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_select") as Texture2D;
+				if (owner.SelectedObject && owner.SelectedObject.CanBuild() && CanBeBuilt()){
+					cursorTexture = Resources.Load ("HUD/Cursors/cursor_construct") as Texture2D;
+					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+				}
+				Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+			} else {
+				Player humanPlayer = GameObject.Find("Player").GetComponent<Player>();
+				if (humanPlayer && humanPlayer.SelectedObject && humanPlayer.SelectedObject.CanAttack()){
+					if (CanBeAttacked ()){
+						Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_fight") as Texture2D;
+						Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+					} else {
+						Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_none") as Texture2D;
+						Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+					}
+				}
+			}
+		} else {
+			Player humanPlayer = GameObject.Find("Player").GetComponent<Player>();
+			if (humanPlayer && humanPlayer.SelectedObject && humanPlayer.SelectedObject.GetComponent<CivilUnit>()){
+				if (this.GetComponent<Food>()){
+					Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_farm") as Texture2D;
+					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+				} else if (this.GetComponent<Gold>()){
+					Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_mine") as Texture2D;
+					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+				} else if (this.GetComponent<Wood>()){
+					Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_cut") as Texture2D;
+					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+				}
+			}
 		}
 	}
 	
@@ -496,7 +527,7 @@ public class RTSObject : MonoBehaviour
             // If we need to and the unit can't move, warn the user that the attack can't be done
             if (!CanMove())
             {
-                Debug.Log(string.Format("{0} can't attack {1}, because it is {2}m away",
+                HUDInfo.insertMessage(string.Format("{0} can't attack {1}, because it is {2}m away",
                     objectName, target.objectName, distanceToTarget));
                 EndAttack();
                 return;

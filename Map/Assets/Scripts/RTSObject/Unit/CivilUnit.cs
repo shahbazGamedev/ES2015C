@@ -109,7 +109,7 @@ public class CivilUnit : Unit
                     }
                     else
                     {
-                        HUDInfo.message = "Civil unit can't reach the target location, deassigning building project.";
+						HUDInfo.insertMessage("Civil unit can't reach the target location, deassigning building project.");
                         AssignBuildingProject(null);
                     }
 				}
@@ -211,7 +211,7 @@ public class CivilUnit : Unit
         var creationBuildingTmp = Resources.Load<GameObject>(creationBuildingPath) as GameObject;
         if (creationBuildingTmp == null || creationBuildingTmp.GetComponent<Building>() == null)
         {
-            Debug.LogError("Could not load resource '" + creationBuildingPath + "' to start building location selection.");
+			HUDInfo.insertMessage("Could not load resource '" + creationBuildingPath + "' to start building location selection.");
             return;
         }
 
@@ -219,12 +219,12 @@ public class CivilUnit : Unit
         var creationBuildingConstructionTmp = Resources.Load<GameObject>(creationBuildingConstructionPath);
         if (creationBuildingConstructionTmp == null)
         {
-            Debug.LogError("Could not load resource '" + creationBuildingConstructionPath + "' to start building location selection.");
+			HUDInfo.insertMessage("Could not load resource '" + creationBuildingConstructionPath + "' to start building location selection.");
             return;
         }
 
         // Set up the unit state to work on a building
-        HUDInfo.message = "Select the site where you want to build the building";
+		HUDInfo.insertMessage("Select the site where you want to build the selected building " + creationBuildingTmp.name);
         waitingForBuildingLocationSelection = true;
         constructionPoint = Vector3.zero;
         creationBuilding = creationBuildingTmp;
@@ -275,7 +275,7 @@ public class CivilUnit : Unit
         }
         else
         {
-            HUDInfo.message = "The building cannot be placed in the selected location.";
+			HUDInfo.insertMessage("The building cannot be placed in the selected location.");
         }
     }
 
@@ -292,13 +292,12 @@ public class CivilUnit : Unit
         if (woodAvailable < woodCost)
         {
             Destroy(creationBuildingConstructionProject);
-            HUDInfo.message = string.Format("Not enough wood ({0}) to construct the {1}",
+			HUDInfo.insertMessage(string.Format("Not enough wood ({0}) to construct the {1}",
                 creationBuildingConstructionProject.GetComponent<Building>().cost,
-                creationBuildingConstructionProject.GetComponent<Building>().objectName);
+                creationBuildingConstructionProject.GetComponent<Building>().objectName));
 
             return;
         }
-        Debug.Log("Tenemos suficiente madera");
 
         // Start the building project
         var newProject = creationBuildingConstructionProject.GetComponent<Building> ();

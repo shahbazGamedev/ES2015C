@@ -173,7 +173,7 @@ public static class RTSObjectFactory
                 {
                     Debug.LogWarning("Using model for civilization " + fallbackCivilization + " for object of type " +
                         type + " because no model is available for civilization " + civilization + ".");
-                    HUDInfo.message = "Object " + type + " not available for civilization " + civilization + "; Using fallback.";
+					HUDInfo.insertMessage("Object " + type + " not available for civilization " + civilization + "; Using fallback.");
                     return loadedResource;
                 }
             }
