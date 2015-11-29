@@ -33,22 +33,22 @@ public class Yamato_civil : CivilUnit
                 StartBuildingLocationSelection("Prefabs/Yamato_TownCenter", "Prefabs/Yamato_TownCenter_onConstruction");
                 break;
 		    case "Army Building":
-                StartBuildingLocationSelection("Prefabs/Yamato_ArmyBuilding", "Prefabs/Yamato_ArmyBuilding");
+                StartBuildingLocationSelection("Prefabs/Yamato_ArmyBuilding", "Prefabs/Yamato_ArmyBuilding_onConstruction");
                 break;
 		    case "Wall Tower":
-                StartBuildingLocationSelection("Prefabs/Yamato_WallTower", "Prefabs/Yamato_WallTower");
+                StartBuildingLocationSelection("Prefabs/Yamato_WallTower", "Prefabs/Yamato_WallTower_onConstruction");
                 break;
 		    case "Wall Entrance":
-                StartBuildingLocationSelection("Prefabs/Yamato_WallEntrance", "Prefabs/Yamato_WallEntrance");
+                StartBuildingLocationSelection("Prefabs/Yamato_WallEntrance", "Prefabs/Yamato_WallEntrance_onConstruction");
                 break;
 		    case "Wall":
-                StartBuildingLocationSelection("Prefabs/Yamato_Wall", "Prefabs/Yamato_Wall");
+                StartBuildingLocationSelection("Prefabs/Yamato_Wall", "Prefabs/Yamato_Wall_onConstruction");
                 break;
 		    case "Civil House":
-                StartBuildingLocationSelection("Prefabs/Yamato_CivilHouse", "Prefabs/Yamato_CivilHouse");
+                StartBuildingLocationSelection("Prefabs/Yamato_CivilHouse", "Prefabs/Yamato_CivilHouse_onConstruction");
                 break;
 		    case "Academy":
-                StartBuildingLocationSelection("Prefabs/Yamato_Academy", "Prefabs/Yamato_Academy");
+                StartBuildingLocationSelection("Prefabs/Yamato_Academy", "Prefabs/Yamato_Academy_onConstruction");
                 break;
 		}
 	}

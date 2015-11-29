@@ -33,22 +33,22 @@ public class Persian_civil : CivilUnit
                 StartBuildingLocationSelection("Prefabs/Persian_TownCenter", "Prefabs/Persian_TownCenter_onConstruction");
                 break;
 		    case "Army Building":
-                StartBuildingLocationSelection("Prefabs/Persian_ArmyBuilding", "Prefabs/Persian_ArmyBuilding");
+                StartBuildingLocationSelection("Prefabs/Persian_ArmyBuilding", "Prefabs/Persian_ArmyBuilding_onConstruction");
                 break;
 		    case "Wall Tower":
-                StartBuildingLocationSelection("Prefabs/Persian_WallTower", "Prefabs/Persian_WallTower");
+                StartBuildingLocationSelection("Prefabs/Persian_WallTower", "Prefabs/Persian_WallTower_onConstruction");
                 break;
 		    case "Wall Entrance":
-                StartBuildingLocationSelection("Prefabs/Persian_WallEntrance", "Prefabs/Persian_WallEntrance");
+                StartBuildingLocationSelection("Prefabs/Persian_WallEntrance", "Prefabs/Persian_WallEntrance_onConstruction");
                 break;
 		    case "Wall":
-                StartBuildingLocationSelection("Prefabs/Persian_Wall", "Prefabs/Persian_Wall");
+                StartBuildingLocationSelection("Prefabs/Persian_Wall", "Prefabs/Persian_Wall_onConstruction");
                 break;
 		    case "Civil House":
-                StartBuildingLocationSelection("Prefabs/Persian_CivilHouse", "Prefabs/Persian_CivilHouse");
+                StartBuildingLocationSelection("Prefabs/Persian_CivilHouse", "Prefabs/Persian_CivilHouse_onConstruction");
                 break;
 		    case "Academy":
-                StartBuildingLocationSelection("Prefabs/Persian_Academy", "Prefabs/Persian_Academy");
+                StartBuildingLocationSelection("Prefabs/Persian_Academy", "Prefabs/Persian_Academy_onConstruction");
                 break;
 		}
 	}

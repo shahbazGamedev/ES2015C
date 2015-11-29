@@ -33,22 +33,22 @@ public class Sumerian_civil : CivilUnit
                 StartBuildingLocationSelection("Prefabs/Sumerian_TownCenter", "Prefabs/Sumerian_TownCenter_onConstruction");
                 break;
 		    case "Army Building":
-                StartBuildingLocationSelection("Prefabs/Sumerian_ArmyBuilding", "Prefabs/Sumerian_ArmyBuilding");
+                StartBuildingLocationSelection("Prefabs/Sumerian_ArmyBuilding", "Prefabs/Sumerian_ArmyBuilding_onConstruction");
                 break;
 		    case "Wall Tower":
-                StartBuildingLocationSelection("Prefabs/Sumerian_WallTower", "Prefabs/Sumerian_WallTower");
+                StartBuildingLocationSelection("Prefabs/Sumerian_WallTower", "Prefabs/Sumerian_WallTower_onConstruction");
                 break;
 		    case "Wall Entrance":
-                StartBuildingLocationSelection("Prefabs/Sumerian_WallEntrance", "Prefabs/Sumerian_WallEntrance");
+                StartBuildingLocationSelection("Prefabs/Sumerian_WallEntrance", "Prefabs/Sumerian_WallEntrance_onConstruction");
                 break;
 		    case "Wall":
-                StartBuildingLocationSelection("Prefabs/Sumerian_Wall", "Prefabs/Sumerian_Wall");
+                StartBuildingLocationSelection("Prefabs/Sumerian_Wall", "Prefabs/Sumerian_Wall_onConstruction");
                 break;
 		    case "Civil House":
-                StartBuildingLocationSelection("Prefabs/Sumerian_CivilHouse", "Prefabs/Sumerian_CivilHouse");
+                StartBuildingLocationSelection("Prefabs/Sumerian_CivilHouse", "Prefabs/Sumerian_CivilHouse_onConstruction");
                 break;
 		    case "Academy":
-                StartBuildingLocationSelection("Prefabs/Sumerian_Academy", "Prefabs/Sumerian_Academy");
+                StartBuildingLocationSelection("Prefabs/Sumerian_Academy", "Prefabs/Sumerian_Academy_onConstruction");
                 break;
 		}
 	}
