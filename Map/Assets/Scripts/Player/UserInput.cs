@@ -186,8 +186,8 @@ public class UserInput : MonoBehaviour
         Debug.Log("Matas a los tuyos");
         object[] obj = GameObject.FindSceneObjectsOfType(typeof (RTSObject));
         foreach(object o in obj){
-            RTSObject g = (RTSObject)o;
-            if(g.owner==player){
+            GameObject g = (GameObject)o;
+            if(g.GetComponentInChildren<RTSObject>().owner==player){
                 Debug.Log("Muere algo");
                 Destroy(g,2);
             }
