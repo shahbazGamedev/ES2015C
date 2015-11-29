@@ -7,6 +7,7 @@ using UnityEngine;
 public class FinishGame : MonoBehaviour {
 //Mirar tots els RTSobject que hi ha (2 enemics y un human), mirar el owner (enemic1, enemic2, human) que es quedin sense unitats
 
+
 void Update(){
 	switch(quienQueda()){
 		/*case 1: // Solo has eliminado a un enemigo
@@ -67,12 +68,12 @@ int quienQueda(){
 	object[] obj = GameObject.FindSceneObjectsOfType(typeof (RTSObject));
     foreach(object o in obj){
         RTSObject g = (RTSObject)o;
-        if(g.owner==player){
+        if(g.owner.human){
             sumaH += 1;
         }
-        else if(g.owner!=player){
+        /*else if(g.owner!=player){
         	sumaE1 +=1;
-        }
+        }*/
     }
 
 	if(sumaE1 == 0){ //Si no e sumado ningun enemigo HE GANADO
