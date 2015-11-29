@@ -42,6 +42,8 @@ public class UserInput : MonoBehaviour
 		SelectedArea = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
 		SelectedArea.transform.position = new Vector3(0, 0, 0);
 		SelectedArea.transform.localScale = new Vector3(0, 0, 0);
+		SelectedArea.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+		SelectedArea.GetComponent<MeshRenderer>().material = Resources.Load("Materials/selectedArea") as Material;
 		SelectedArea.name = "SelectedArea";
 		Destroy (SelectedArea.GetComponent<Collider> ());
 	}
