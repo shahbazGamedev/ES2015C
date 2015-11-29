@@ -187,11 +187,11 @@ public class UserInput : MonoBehaviour
     //Funcion para que todos los objectos del enemigo mueran
     private void morirEnemigos(){
         GameObject game = GameObject.FindGameObjectWithTag("civil");
-        if(player.Team.IsEnemyOf(game.GetComponent<CivilUnit>().owner.Team)){
+        if(game.GetComponent<CivilUnit>().owner!=player){
             Destroy(game, 4);
         }
         game = GameObject.FindGameObjectWithTag("townCenter");
-        if(player.Team.IsEnemyOf(game.GetComponent<TownCenterBuilding>().owner.Team)){
+        if(game.GetComponent<TownCenterBuilding>().owner!=player){
             Destroy(game, 4);
         }
     }

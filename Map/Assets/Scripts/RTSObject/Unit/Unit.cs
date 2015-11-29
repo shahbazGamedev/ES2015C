@@ -32,7 +32,7 @@ public class Unit : RTSObject
 		// Calculem la dimensio del CharacterController
 		FittedCharacterCollider();
 		gameObject.layer = 11;
-		
+		gameObject.tag = "mility";
 		// Asignem els components extres per al funcionament de la IA per a unitats
 		//RDV = gameObject.AddComponent<SphereCollider> ();
 		//RDV.radius = characterController.radius * 10;

@@ -42,7 +42,7 @@ int quienQueda(){
 			sumaH += 1;
 		}*/
 	}
-	games = GameObject.FindGameObjectsWithTag("towncenter");
+	games = GameObject.FindGameObjectsWithTag("townCenter");
 	foreach(var town in games){ //Miro todos los TownCenterBuilding y si hay alguno de owner lo sumo
 		if(town.GetComponent<TownCenterBuilding>().owner.human){
 			sumaH += 1;
@@ -57,7 +57,7 @@ int quienQueda(){
 			sumaH += 1;
 		}*/
 	}
-	games = GameObject.FindGameObjectsWithTag("civil");
+	/*games = GameObject.FindGameObjectsWithTag("civil");
 	/*foreach(var atac in games){ //Miro todos los ArmyBuilding y si hay alguno de owner lo sumo
 		if(atac.owner=="EnemyPlayer1"){
 			sumaE1 += 1;
