@@ -13,10 +13,11 @@ public class AI : MonoBehaviour
     private List<GameObject> townCenters;
     private List<GameObject> soldiers;
     private int civilhouse = 0;
-    private Vector3 position, coords;
+    private Vector3 position, coords, armyPos;
     private Vector3 spawnPos;
     private bool housesBuilt = false, armyBuilt=false, towerBuilt=false;
-    private int i;
+    private int i, z = 0;
+    private GameObject armyBuilding;
     private PlayerCivilization civilitzation;
 
 
@@ -93,19 +94,22 @@ public class AI : MonoBehaviour
                armyBuilt == false) {
 
             CreateNewCivil(false);
-            spawnPos = new Vector3(townCenters[0].transform.position.x - 35, 0, townCenters[0].transform.position.z+15);
+            armyPos = new Vector3(townCenters[0].transform.position.x - 35, 0, townCenters[0].transform.position.z+15);
 
             civils[i].GetComponent<CivilUnit>().building = true;
-            civils[i].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingArmyBuilding, civilitzation), spawnPos);
+            armyBuilding = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingArmyBuilding, civilitzation);
+            civils[i].GetComponent<CivilUnit>().CreateBuildingIA(armyBuilding, armyPos);
             civils[i].GetComponent<CivilUnit>().building = false;
 
             civils[i].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
             i++;
             armyBuilt = true;
         }
+
         else if (armyBuilt==true &&
-            artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] > 100&&
-            towerBuilt==false) {
+            artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] > 100 &&
+            towerBuilt==false &&
+            civils.Count == 7) {
       
             CreateNewCivil(false);
             spawnPos = new Vector3(townCenters[0].transform.position.x + 20, 0, townCenters[0].transform.position.z);
@@ -132,6 +136,38 @@ public class AI : MonoBehaviour
             civils[i].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
             i++;
         }
+
+        if (armyBuilt==true &&
+            artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] > 100 &&
+            soldiers.Count<10) {
+                CreateNewWarrior();
+         }
+
+        if (armyBuilt == true &&
+            artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] > 100 &&
+            soldiers.Count < 15 &&
+            soldiers.Count >=10)
+        {
+            CreateNewArcher();
+        }
+
+        if (armyBuilt == true &&
+           artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] > 100 &&
+           soldiers.Count < 20 && 
+           soldiers.Count>=15)
+        {
+            CreateNewCavalry();
+        }
+
+        if (armyBuilt == true &&
+          artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] > 525 &&
+          soldiers.Count >= 20)
+        {
+            CreateNewCavalry();
+            CreateNewArcher();
+            CreateNewWarrior();
+        }
+
     }
 
 
@@ -215,5 +251,66 @@ public class AI : MonoBehaviour
                 civils.Add(civil);
             
     }
+
+
+
+    private void CreateNewWarrior()
+    {
+
+        coords = new Vector3(armyPos.x - 10, 0.4f, armyPos.z - 10 + z * 2);
+        artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] - 100;
+
+        GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitWarrior, civilitzation), coords, Quaternion.identity) as GameObject;
+        civil.GetComponent<Unit>().owner = artificialIntelligence;
+        soldiers.Add(civil);
+        if (z >= 10)
+        {
+            z = 0;
+        }
+        else {
+            z++;
+        }
+    }
+
+
+
+    private void CreateNewArcher()
+    {
+
+        coords = new Vector3(armyPos.x - 15, 0.4f, armyPos.z - 10 + z * 2);
+        artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] - 170;
+
+        GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitArcher, civilitzation), coords, Quaternion.identity) as GameObject;
+        civil.GetComponent<Unit>().owner = artificialIntelligence;
+        soldiers.Add(civil);
+        if (z >= 8)
+        {
+            z = 0;
+        }
+        else
+        {
+            z++;
+        }
+    }
+
+    private void CreateNewCavalry()
+    {
+
+        coords = new Vector3(armyPos.x - 20, 0.4f, armyPos.z - 10 + z * 3);
+        artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] - 250;
+
+        GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCavalry, civilitzation), coords, Quaternion.identity) as GameObject;
+        civil.GetComponent<Unit>().owner = artificialIntelligence;
+        soldiers.Add(civil);
+        if (z >= 8)
+        {
+            z = 0;
+        }
+        else
+        {
+            z++;
+        }
+    }
+
 
 }
