@@ -178,46 +178,58 @@ public class UserInput : MonoBehaviour
     //Funcion para que todos los objectos del jugador mueran
     private void morirJugador(){
         GameObject[] games;
-        string[] etiquetas = {"civil", "townCenter", "mility", "armyBuilding"};
-        foreach(string eti in etiquetas){
-            /*games = GameObject.FindGameObjectsWithTag(eti);
-            foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+        games = GameObject.FindGameObjectsWithTag("civil");
+        foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(civil.GetComponent<CivilUnit>().owner==player){
                 Destroy(civil, 2);
-            }*/
-            GameObject game = GameObject.FindGameObjectWithTag(eti);
-            Destroy(game, 2);
-        }/*
+            }
+        }
         games = GameObject.FindGameObjectsWithTag("townCenter");
-        foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
-            Destroy(civil, 2);
+        foreach(var town in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(town.GetComponent<TownCenterBuilding>().owner==player){
+                Destroy(town, 2);
+            }
         }
-        games = GameObject.FindGameObjectsWithTag("civil");
-        foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
-            Destroy(civil, 2);
+        games = GameObject.FindGameObjectsWithTag("mility");
+        foreach(var mili in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(mili.GetComponent<Unit>().owner==player){
+                Destroy(mili, 2);
+            }
         }
-        games = GameObject.FindGameObjectsWithTag("civil");
-        foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
-            Destroy(civil, 2);
+        games = GameObject.FindGameObjectsWithTag("armyBuilding");
+        foreach(var army in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(army.GetComponent<ArmyBuilding>().owner==player){
+                Destroy(army, 2);
+            }
         }
-        GameObject game = GameObject.FindGameObjectWithTag("civil");
-        Destroy(game, 2);
-        game = GameObject.FindGameObjectWithTag("townCenter");
-        Destroy(game, 2);
-        game = GameObject.FindGameObjectWithTag("mility");
-        Destroy(game, 2);*/
-        Debug.Log("Matas a los tuyos");
-
     }
 
     //Funcion para que todos los objectos del enemigo mueran
     private void morirEnemigos(){
-        GameObject game = GameObject.FindGameObjectWithTag("civil");
-        if(game.GetComponent<CivilUnit>().owner!=player){
-            Destroy(game, 4);
+        GameObject[] games;
+        games = GameObject.FindGameObjectsWithTag("civil");
+        foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(civil.GetComponent<CivilUnit>().owner!=player){
+                Destroy(civil, 2);
+            }
         }
-        game = GameObject.FindGameObjectWithTag("townCenter");
-        if(game.GetComponent<TownCenterBuilding>().owner!=player){
-            Destroy(game, 4);
+        games = GameObject.FindGameObjectsWithTag("townCenter");
+        foreach(var town in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(town.GetComponent<TownCenterBuilding>().owner!=player){
+                Destroy(town, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("mility");
+        foreach(var mili in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(mili.GetComponent<Unit>().owner!=player){
+                Destroy(mili, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("armyBuilding");
+        foreach(var army in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(army.GetComponent<ArmyBuilding>().owner!=player){
+                Destroy(army, 2);
+            }
         }
     }
 
