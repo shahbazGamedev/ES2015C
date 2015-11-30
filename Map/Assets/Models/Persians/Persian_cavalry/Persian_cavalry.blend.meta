@@ -104,6 +104,11 @@ ModelImporter:
     7400006: Sumerian_Cavalry_Idle
     7400008: Sumerian_Cavalry_Run
     7400010: Sumerian_Cavalry_Walk
+    7400012: Persian_Cavalry_Die
+    7400014: Persian_Cavalry_Fight
+    7400016: Persian_Cavalry_Idle
+    7400018: Persian_Cavalry_Run
+    7400020: Persian_Cavalry_Walk
     9500000: //RootNode
     13700000: Harness
     13700002: Horse
@@ -127,7 +132,703 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Coxis
+        weight: 1
+      - path: Armature/Coxis/Abdomen
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L/Dedos_Mano02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Lance
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L/Pulgar02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L/PataDel02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R/PataDel02_R
+        weight: 1
+      - path: Armature/Coxis/Cola01
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L/PataTras02_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R/PataTras02_R
+        weight: 1
+      - path: Armature/PataDel_Control_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L/PezuDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R/PezuDel_R
+        weight: 1
+      - path: Armature/PataTras_Control_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L/PezuTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R/PezuTras_R
+        weight: 1
+      - path: Harness
+        weight: 1
+      - path: Horse
+        weight: 1
+      - path: Persian
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Persian_Cavalry_Die
+      takeName: Persian_Cavalry_Die
+      firstFrame: -1
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Coxis
+        weight: 1
+      - path: Armature/Coxis/Abdomen
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L/Dedos_Mano02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Lance
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L/Pulgar02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L/PataDel02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R/PataDel02_R
+        weight: 1
+      - path: Armature/Coxis/Cola01
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L/PataTras02_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R/PataTras02_R
+        weight: 1
+      - path: Armature/PataDel_Control_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L/PezuDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R/PezuDel_R
+        weight: 1
+      - path: Armature/PataTras_Control_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L/PezuTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R/PezuTras_R
+        weight: 1
+      - path: Harness
+        weight: 1
+      - path: Horse
+        weight: 1
+      - path: Persian
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Persian_Cavalry_Fight
+      takeName: Persian_Cavalry_Fight
+      firstFrame: -1
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Coxis
+        weight: 1
+      - path: Armature/Coxis/Abdomen
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L/Dedos_Mano02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Lance
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L/Pulgar02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L/PataDel02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R/PataDel02_R
+        weight: 1
+      - path: Armature/Coxis/Cola01
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L/PataTras02_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R/PataTras02_R
+        weight: 1
+      - path: Armature/PataDel_Control_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L/PezuDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R/PezuDel_R
+        weight: 1
+      - path: Armature/PataTras_Control_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L/PezuTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R/PezuTras_R
+        weight: 1
+      - path: Harness
+        weight: 1
+      - path: Horse
+        weight: 1
+      - path: Persian
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Persian_Cavalry_Idle
+      takeName: Persian_Cavalry_Idle
+      firstFrame: -1
+      lastFrame: 58
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Coxis
+        weight: 1
+      - path: Armature/Coxis/Abdomen
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L/Dedos_Mano02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Lance
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L/Pulgar02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L/PataDel02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R/PataDel02_R
+        weight: 1
+      - path: Armature/Coxis/Cola01
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L/PataTras02_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R/PataTras02_R
+        weight: 1
+      - path: Armature/PataDel_Control_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L/PezuDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R/PezuDel_R
+        weight: 1
+      - path: Armature/PataTras_Control_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L/PezuTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R/PezuTras_R
+        weight: 1
+      - path: Harness
+        weight: 1
+      - path: Horse
+        weight: 1
+      - path: Persian
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Persian_Cavalry_Run
+      takeName: Persian_Cavalry_Run
+      firstFrame: -1
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Coxis
+        weight: 1
+      - path: Armature/Coxis/Abdomen
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L/Dedos_Mano02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Lance
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L/Pulgar02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L/PataDel02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R/PataDel02_R
+        weight: 1
+      - path: Armature/Coxis/Cola01
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L/PataTras02_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R/PataTras02_R
+        weight: 1
+      - path: Armature/PataDel_Control_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L/PezuDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R/PezuDel_R
+        weight: 1
+      - path: Armature/PataTras_Control_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L/PezuTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R/PezuTras_R
+        weight: 1
+      - path: Harness
+        weight: 1
+      - path: Horse
+        weight: 1
+      - path: Persian
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Persian_Cavalry_Walk
+      takeName: Persian_Cavalry_Walk
+      firstFrame: -1
+      lastFrame: 31
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Coxis
+        weight: 1
+      - path: Armature/Coxis/Abdomen
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Dedos_Mano01_L/Dedos_Mano02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Lance
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo_L/Antebrazo_L/Mano_L/Pulgar01_L/Pulgar02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_L/PataDel02_L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01_R/PataDel02_R
+        weight: 1
+      - path: Armature/Coxis/Cola01
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_L/PataTras02_L
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R
+        weight: 1
+      - path: Armature/Coxis/PataTras01_R/PataTras02_R
+        weight: 1
+      - path: Armature/PataDel_Control_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_L/TobilloDel_L/PezuDel_L
+        weight: 1
+      - path: Armature/PataDel_Control_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R
+        weight: 1
+      - path: Armature/PataDel_Control_R/TobilloDel_R/PezuDel_R
+        weight: 1
+      - path: Armature/PataTras_Control_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_L/TobilloTras_L/PezuTras_L
+        weight: 1
+      - path: Armature/PataTras_Control_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R
+        weight: 1
+      - path: Armature/PataTras_Control_R/TobilloTras_R/PezuTras_R
+        weight: 1
+      - path: Harness
+        weight: 1
+      - path: Horse
+        weight: 1
+      - path: Persian
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
