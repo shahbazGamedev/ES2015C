@@ -10,7 +10,7 @@ public class Hittite_TownCenterBuilding : TownCenterBuilding {
 		objectName = "Hittite Town Center";
         baseDefense = 5;
 		actions = new string[] { "Civil Unit", "Civil Unit Axe"};
-		getModels("Prefabs/Hittite_TownCenter", "Prefabs/Hittite_TownCenter", "Prefabs/Hittites_TownCenter_Semidemolished");
+		getModels("Prefabs/Hittite_TownCenter", "Prefabs/Hittite_TownCenter_onConstruction", "Prefabs/Hittites_TownCenter_Semidemolished");
     }
 
 	/*** Metodes interns accessibles per les subclasses ***/

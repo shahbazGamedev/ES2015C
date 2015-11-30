@@ -12,6 +12,6 @@ public class Hittite_Wall : Building {
 		hitPoints = maxHitPoints = 500;
         baseDefense = 5;
         buildingTime = 1.0f;
-		getModels("Prefabs/Hittite_Wall", "Prefabs/Hittite_Wall", "Prefabs/Hittite_Wall");
+		getModels("Prefabs/Hittite_Wall", "Prefabs/Hittite_Wall_onConstruction", "Prefabs/Hittite_Wall");
     }
 }

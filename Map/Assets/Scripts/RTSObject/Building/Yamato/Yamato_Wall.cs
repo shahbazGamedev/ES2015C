@@ -12,6 +12,6 @@ public class Yamato_Wall : Building {
 		hitPoints = maxHitPoints = 500;
         baseDefense = 5;
         buildingTime = 1.0f;
-		getModels("Prefabs/Yamato_Wall", "Prefabs/Yamato_Wall", "Prefabs/Yamato_Wall");
+		getModels("Prefabs/Yamato_Wall", "Prefabs/Yamato_Wall_onConstruction", "Prefabs/Yamato_Wall");
     }
 }

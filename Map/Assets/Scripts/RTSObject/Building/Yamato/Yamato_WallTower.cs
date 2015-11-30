@@ -11,6 +11,6 @@ public class Yamato_WallTower : Building {
 		cost = 250;
 		hitPoints = maxHitPoints = 900;
         baseDefense = 5;
-		getModels("Prefabs/Yamato_WallTower", "Prefabs/Yamato_WallTower", "Prefabs/Yamato_WallTower");
+		getModels("Prefabs/Yamato_WallTower", "Prefabs/Yamato_WallTower_onConstruction", "Prefabs/Yamato_WallTower");
     }
 }
