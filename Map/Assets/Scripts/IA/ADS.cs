@@ -25,16 +25,16 @@ public class ADS : MonoBehaviour
     void Update()
     {
 
-        detection();
-        stateMachine();
+        detection(); //funcion de deteccion del entorno
+        stateMachine(); //funcion de maquina de estados
         
         if (enlace.GetComponent<Player>().objetivos.Count > 0) //se mira si hay objetivos o no
         {
-            estado = aiState.attacking;
+            estado = aiState.attacking; //estado de atacar
         }
         else
         {
-            estado = aiState.wandering;
+            estado = aiState.wandering; //estado de vagar por el mapa
         }
     }
 
@@ -49,7 +49,7 @@ public class ADS : MonoBehaviour
         if (enlace.GetComponent<Player>().objetivos.Count > 0) { 
             targetlocal = (RTSObject)enlace.GetComponent<Player>().objetivos[0];
             transform.LookAt(targetlocal.transform);
-            GetComponent<MovimientoAleatorioCivil>().enabled = false;
+            GetComponent<MovimientoAleatorioCivil>().enabled = false; // desactivo el movimiento aleatorio
             dist = Vector3.Distance(transform.position, targetlocal.transform.position);
             if (targetlocal.GetComponent<RTSObject>().hitPoints == 0)
             {
@@ -69,7 +69,7 @@ public class ADS : MonoBehaviour
 
     public void Wander()
     {
-        GetComponent<MovimientoAleatorioCivil>().enabled = true;
+        GetComponent<MovimientoAleatorioCivil>().enabled = true; // Activo el movimiento aleatorio
     }
 
     public void detection()
