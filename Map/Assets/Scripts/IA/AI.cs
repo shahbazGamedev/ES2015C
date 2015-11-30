@@ -19,11 +19,13 @@ public class AI : MonoBehaviour
     private bool building = false;
     private int i = 0;
     public AIResources resources;
-	
+
+
+
 
     void Start()
     {
-
+        resources = new AIResources();
         artificialIntelligence = gameObject.AddComponent<Player>();
         townCenters = new List<GameObject>();
         civils = new List<GameObject>();
@@ -35,7 +37,7 @@ public class AI : MonoBehaviour
         // CreateNewCivil(coords);
         BuildTownCenter(true);
         StartRecollecting(civils[0], "tree");
-		resources = GameObject.Find ("AIResources").GetComponent<AIResources> ();
+
         StartRecollecting(civils[1], "food");
         //StartRecollecting(civils[2], "food");
     }
@@ -62,13 +64,7 @@ public class AI : MonoBehaviour
         }
     }
 
-	public AIResources getResources(){
-		return this.resources;
-	}
 
-	public void setResources(AIResources resources){
-		this.resources = resources;
-	}
 
     private void BuildWareHouse(GameObject civilian)
     {
