@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ADS : RTSObject
+public class ADS : MonoBehaviour
 {
-    GameObject elnombrequequieras;
+    GameObject enlace;
     RaycastHit hit;
     RTSObject targetlocal;
     enum aiState { wandering, chasing, attacking }
     aiState estado;
     int speed;
     float dist;
-    ArrayList objetivosLocal;
 
     // Use this for initialization
     void Start()
@@ -18,10 +17,8 @@ public class ADS : RTSObject
         speed = 2;
         hit = new RaycastHit();
         estado = aiState.wandering;
-        this.owner = gameObject.GetComponent<RTSObject>().owner;
         GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
-        elnombrequequieras = GameObject.Find("EnemyPlayer1");
-        objetivosLocal = elnombrequequieras.GetComponent<Player>().objetivos;
+        enlace = GameObject.Find("EnemyPlayer1");
     }
 
     // Update is called once per frame
@@ -31,7 +28,7 @@ public class ADS : RTSObject
         detection();
         stateMachine();
         
-        if (objetivosLocal.Count > 0) //se mira si hay objetivos o no
+        if (enlace.GetComponent<Player>().objetivos.Count > 0) //se mira si hay objetivos o no
         {
             estado = aiState.attacking;
         }
@@ -49,14 +46,14 @@ public class ADS : RTSObject
 
     public void Attack()
     {
-        if (objetivosLocal.Count > 0) { 
-            targetlocal = (RTSObject)objetivosLocal[0];
+        if (enlace.GetComponent<Player>().objetivos.Count > 0) { 
+            targetlocal = (RTSObject)enlace.GetComponent<Player>().objetivos[0];
             transform.LookAt(targetlocal.transform);
             GetComponent<MovimientoAleatorioCivil>().enabled = false;
             dist = Vector3.Distance(transform.position, targetlocal.transform.position);
             if (targetlocal.GetComponent<RTSObject>().hitPoints == 0)
             {
-                objetivosLocal.Remove(targetlocal);
+                enlace.GetComponent<Player>().objetivos.Remove(targetlocal);
             }
             if (dist > 2)
             {
@@ -65,7 +62,7 @@ public class ADS : RTSObject
             else
             {
                 transform.Translate(0, 0, 0);
-                AttackObject(targetlocal);
+                GetComponent<RTSObject>().AttackObject(targetlocal);
             }
         }
     }
@@ -83,11 +80,11 @@ public class ADS : RTSObject
             || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, -40), out hit, 10))
             || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, -40), out hit, 10)))
         {
-            if (hit.collider.gameObject.GetComponent<RTSObject>().owner != this.owner)
+            if (hit.collider.gameObject.GetComponent<RTSObject>().owner != GetComponent<RTSObject>().owner)
             { // compruebo si el owner es de otro equipo
-                if (!objetivosLocal.Contains(hit.collider.gameObject.GetComponent<RTSObject>())) // compruebo si el objetivo ya esta en la lista 
+                if (!enlace.GetComponent<Player>().objetivos.Contains(hit.collider.gameObject.GetComponent<RTSObject>())) // compruebo si el objetivo ya esta en la lista 
                 {
-                    objetivosLocal.Add(hit.collider.gameObject.GetComponent<RTSObject>()); // añado el objetivo a la lista de objetivos
+                    enlace.GetComponent<Player>().objetivos.Add(hit.collider.gameObject.GetComponent<RTSObject>()); // añado el objetivo a la lista de objetivos
                     Debug.Log("HE DETECTADO UN OBJETO DE CLASE: " + hit.collider.tag);
                     Debug.Log("TENGO EL TARGET AÑADIDO-->" + targetlocal);
                 }
