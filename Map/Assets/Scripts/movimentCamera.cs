@@ -142,10 +142,10 @@ public class movimentCamera : MonoBehaviour {
 
 		}
 
-
+		Vector3 posi = CameraPoint.transform.position;
 		if (margin) {
 
-			if (recup.Contains (Input.mousePosition) && transform.position.z > -60) {
+			if (recup.Contains (Input.mousePosition)) {
 			
 				marginVisibleDown = true;
 				percent = (hMargin - Input.mousePosition.y) / hMargin;
@@ -154,21 +154,21 @@ public class movimentCamera : MonoBehaviour {
 				marginVisibleDown = false;
 
 		
-			if (recdown.Contains (Input.mousePosition) && transform.position.z < terrainHeight * 0.8) {
+			if (recdown.Contains (Input.mousePosition)) {
 				percent = 1 - (Screen.height - Input.mousePosition.y) / hMargin;
 				transform.Translate (0, 0, percent * cspeed, Space.World);
 				marginVisibleUp = true;
 			} else
 				marginVisibleUp = false;
 		
-			if (recleft.Contains (Input.mousePosition) && transform.position.x > 0) {
+			if (recleft.Contains (Input.mousePosition)) {
 				percent = (wMargin - Input.mousePosition.x) / wMargin;
 				transform.Translate (-percent * cspeed, 0, 0, Space.World);
 				marginVisibleLeft = true;
 			} else
 				marginVisibleLeft = false;
 		
-			if (recright.Contains (Input.mousePosition) && transform.position.x < terrainWidth * 0.95) {
+			if (recright.Contains (Input.mousePosition)) {
 				percent = 1 - (Screen.width - Input.mousePosition.x) / wMargin;
 				transform.Translate (percent * cspeed, 0, 0, Space.World);
 				marginVisibleRight = true;
@@ -176,60 +176,79 @@ public class movimentCamera : MonoBehaviour {
 				marginVisibleRight = false;
 		} else {
 
-			if (recup.Contains (Input.mousePosition) && transform.position.z > -60) {
+			if (recup.Contains (Input.mousePosition)) {
+
 				Vector3 trans = new Vector3(-1 * cspeed*direccioX, 0, -1 * cspeed*direccioZ);
-				transform.Translate (trans, Space.World);
-				CameraPoint.transform.Translate(trans, Space.World);
+				if (posi.x+trans.x > 0 && posi.x+trans.x < terrainWidth && posi.z+trans.z > 0 && posi.z+trans.z < terrainHeight){
+					transform.Translate (trans, Space.World);
+					CameraPoint.transform.Translate(trans, Space.World);
+				}
 				//cube.transform.position = CameraPoint.transform.position;
 			}
 			
 			
-			if (recdown.Contains (Input.mousePosition) && transform.position.z < terrainHeight* 0.8) {
+			if (recdown.Contains (Input.mousePosition)) {
 				Vector3 trans = new Vector3(1 * cspeed*direccioX, 0, 1 * cspeed*direccioZ);
+				if (posi.x+trans.x > 0 && posi.x+trans.x < terrainWidth && posi.z+trans.z > 0 && posi.z+trans.z < terrainHeight){
 				transform.Translate (trans, Space.World);
 				CameraPoint.transform.Translate(trans, Space.World);
+				}
 				//cube.transform.position = CameraPoint.transform.position;
 			}
 			
-			if (recleft.Contains (Input.mousePosition) && transform.position.x > 0) {
+			if (recleft.Contains (Input.mousePosition)) {
 				Vector3 trans = new Vector3(-1 * cspeed*direccioX2, 0, -1 * cspeed*direccioZ2);
+				if (posi.x+trans.x > 0 && posi.x+trans.x < terrainWidth && posi.z+trans.z > 0 && posi.z+trans.z < terrainHeight){
 				transform.Translate (trans, Space.World);
 				CameraPoint.transform.Translate(trans, Space.World);
+				}
 				//cube.transform.position = CameraPoint.transform.position;
 			}
 			
-			if (recright.Contains (Input.mousePosition) && transform.position.x < terrainWidth * 0.95) {
+			if (recright.Contains (Input.mousePosition)) {
 				Vector3 trans = new Vector3(1 * cspeed*direccioX2, 0, 1 * cspeed*direccioZ2);
+				if (posi.x+trans.x > 0 && posi.x+trans.x < terrainWidth && posi.z+trans.z > 0 && posi.z+trans.z < terrainHeight){
 				transform.Translate (trans, Space.World);
 				CameraPoint.transform.Translate(trans, Space.World);
+				}
 				//cube.transform.position = CameraPoint.transform.position;
 			}
 		}
 		// Arrows movement
-		if (Input.GetKey (KeyCode.DownArrow) && transform.position.z > -60) {
+		if (Input.GetKey (KeyCode.DownArrow)) {
 			Vector3 trans = new Vector3(-CamSpeed*5 * Time.deltaTime*direccioX, 0, -CamSpeed*5 * Time.deltaTime*direccioZ);
+			
+			if (posi.x+trans.x > 0 && posi.x+trans.x < terrainWidth && posi.z+trans.z > 0 && posi.z+trans.z < terrainHeight){
 			CameraPoint.transform.Translate(trans, Space.World);
 			//cube.transform.position = CameraPoint.transform.position;
 			transform.Translate (trans, Space.World);
+			}
 		}
-		if (Input.GetKey (KeyCode.UpArrow) && transform.position.z < terrainHeight*0.8) {
+		if (Input.GetKey (KeyCode.UpArrow)) {
 			Vector3 trans = new Vector3(CamSpeed*5 * Time.deltaTime*direccioX, 0, CamSpeed*5 * Time.deltaTime*direccioZ);
+			
+			if (posi.x+trans.x > 0 && posi.x+trans.x < terrainWidth && posi.z+trans.z > 0 && posi.z+trans.z < terrainHeight){
 			CameraPoint.transform.Translate(trans, Space.World);
 			//cube.transform.position = CameraPoint.transform.position;
 			transform.Translate (trans, Space.World);
+			}
 		}
-		if (Input.GetKey (KeyCode.LeftArrow) && transform.position.x > 0) {
+		if (Input.GetKey (KeyCode.LeftArrow)) {
 			Vector3 trans = new Vector3(-CamSpeed*5 * Time.deltaTime*direccioX2, 0, -CamSpeed*5 * Time.deltaTime*direccioZ2);
+			if (posi.x+trans.x > 0 && posi.x+trans.x < terrainWidth && posi.z+trans.z > 0 && posi.z+trans.z < terrainHeight){
 			CameraPoint.transform.Translate(trans, Space.World);
 			//cube.transform.position = CameraPoint.transform.position;
 			transform.Translate (trans, Space.World);
+			}
 		}
-		if (Input.GetKey (KeyCode.RightArrow) && transform.position.x < terrainWidth*0.95) {
-
+		if (Input.GetKey (KeyCode.RightArrow)) {
 			Vector3 trans = new Vector3(CamSpeed*5 * Time.deltaTime*direccioX2, 0, CamSpeed*5 * Time.deltaTime*direccioZ2);
+			
+			if (posi.x+trans.x > 0 && posi.x+trans.x < terrainWidth && posi.z+trans.z > 0 && posi.z+trans.z < terrainHeight){
 			CameraPoint.transform.Translate(trans, Space.World);
 			//cube.transform.position = CameraPoint.transform.position;
 			transform.Translate (trans, Space.World);
+			}
 		}
 	}
 }
