@@ -184,6 +184,11 @@ ModelImporter:
     4300004: Persian
     7400000: Armature|Sumerian_Cavalry_Attack
     7400002: Armature|Sumerian_Cavalry_Run
+    7400004: Armature|Persian_Cavalry_Run
+    7400006: Harness|Persian_Cavalry_Run
+    7400008: Armature|Persian_Cavalry_Fight
+    7400010: Armature|Persian_Cavalry_Walk
+    7400012: Armature|Persian_Cavalry_Die
     9500000: //RootNode
     13700000: Harness
     13700002: Horse

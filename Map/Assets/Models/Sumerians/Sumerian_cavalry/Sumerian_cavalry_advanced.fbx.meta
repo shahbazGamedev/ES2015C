@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 837824aa6b6ac42419faefb6ffb71edd
-timeCreated: 1448801116
+guid: a641d053ab7bd8d4e8fc051c116ddcf0
+timeCreated: 1448847163
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -24,75 +24,73 @@ ModelImporter:
     100032: Dedos_Mano01.L
     100034: Dedos_Mano02.L
     100036: Dedos_Mano02.L_end
-    100038: Harness
-    100040: Horse
-    100042: Lance
-    100044: Lance_end
-    100046: Mano.L
-    100048: PataDel01.L
-    100050: PataDel01.R
-    100052: PataDel02.L
-    100054: PataDel02.L_end
-    100056: PataDel02.R
-    100058: PataDel02.R_end
-    100060: PataDel_Control.L
-    100062: PataDel_Control.R
-    100064: PataDel_ik.L
-    100066: PataDel_ik.L_end
-    100068: PataDel_ik.R
-    100070: PataDel_ik.R_end
-    100072: PataDel_pole_target.L
-    100074: PataDel_pole_target.L_end
-    100076: PataDel_pole_target.R
-    100078: PataDel_pole_target.R_end
-    100080: PataTras01.L
-    100082: PataTras01.R
-    100084: PataTras02.L
-    100086: PataTras02.L_end
-    100088: PataTras02.R
-    100090: PataTras02.R_end
-    100092: PataTras_Control.L
-    100094: PataTras_Control.R
-    100096: PataTras_ik.L
-    100098: PataTras_ik.L_end
-    100100: PataTras_ik.R
-    100102: PataTras_ik.R_end
-    100104: PataTras_pole_target.L
-    100106: PataTras_pole_target.L_end
-    100108: PataTras_pole_target.R
-    100110: PataTras_pole_target.R_end
-    100112: Pecho
-    100114: Pecho_Yamato
-    100116: Persian
-    100118: //RootNode
-    100120: PezuDel.L
-    100122: PezuDel.L_end
-    100124: PezuDel.R
-    100126: PezuDel.R_end
-    100128: PezuDel_Control.L
-    100130: PezuDel_Control.L_end
-    100132: PezuDel_Control.R
-    100134: PezuDel_Control.R_end
-    100136: PezuTras.L
-    100138: PezuTras.L_end
-    100140: PezuTras.R
-    100142: PezuTras.R_end
-    100144: PezuTras_Control.L
-    100146: PezuTras_Control.L_end
-    100148: PezuTras_Control.R
-    100150: PezuTras_Control.R_end
-    100152: Pulgar01.L
-    100154: Pulgar02.L
-    100156: Pulgar02.L_end
-    100158: Spear
-    100160: TobilloDel.L
-    100162: TobilloDel.R
-    100164: TobilloDel_Roll.L
-    100166: TobilloDel_Roll.R
-    100168: TobilloTras.L
-    100170: TobilloTras.R
-    100172: TobilloTras_Roll.L
-    100174: TobilloTras_Roll.R
+    100038: Horse
+    100040: Mano.L
+    100042: PataDel01.L
+    100044: PataDel01.R
+    100046: PataDel02.L
+    100048: PataDel02.L_end
+    100050: PataDel02.R
+    100052: PataDel02.R_end
+    100054: PataDel_Control.L
+    100056: PataDel_Control.R
+    100058: PataDel_ik.L
+    100060: PataDel_ik.L_end
+    100062: PataDel_ik.R
+    100064: PataDel_ik.R_end
+    100066: PataDel_pole_target.L
+    100068: PataDel_pole_target.L_end
+    100070: PataDel_pole_target.R
+    100072: PataDel_pole_target.R_end
+    100074: PataTras01.L
+    100076: PataTras01.R
+    100078: PataTras02.L
+    100080: PataTras02.L_end
+    100082: PataTras02.R
+    100084: PataTras02.R_end
+    100086: PataTras_Control.L
+    100088: PataTras_Control.R
+    100090: PataTras_ik.L
+    100092: PataTras_ik.L_end
+    100094: PataTras_ik.R
+    100096: PataTras_ik.R_end
+    100098: PataTras_pole_target.L
+    100100: PataTras_pole_target.L_end
+    100102: PataTras_pole_target.R
+    100104: PataTras_pole_target.R_end
+    100106: Pecho
+    100108: Pecho_Yamato
+    100110: PezuDel.L
+    100112: PezuDel.L_end
+    100114: PezuDel.R
+    100116: PezuDel.R_end
+    100118: PezuDel_Control.L
+    100120: PezuDel_Control.L_end
+    100122: PezuDel_Control.R
+    100124: PezuDel_Control.R_end
+    100126: PezuTras.L
+    100128: PezuTras.L_end
+    100130: PezuTras.R
+    100132: PezuTras.R_end
+    100134: PezuTras_Control.L
+    100136: PezuTras_Control.L_end
+    100138: PezuTras_Control.R
+    100140: PezuTras_Control.R_end
+    100142: Pulgar01.L
+    100144: Pulgar02.L
+    100146: Pulgar02.L_end
+    100148: Sumerian
+    100150: //RootNode
+    100152: Sword
+    100154: Sword_end
+    100156: TobilloDel.L
+    100158: TobilloDel.R
+    100160: TobilloDel_Roll.L
+    100162: TobilloDel_Roll.R
+    100164: TobilloTras.L
+    100166: TobilloTras.R
+    100168: TobilloTras_Roll.L
+    100170: TobilloTras_Roll.R
     400000: Abdomen
     400002: Abdomen_Yamato
     400004: Antebrazo.L
@@ -112,89 +110,84 @@ ModelImporter:
     400032: Dedos_Mano01.L
     400034: Dedos_Mano02.L
     400036: Dedos_Mano02.L_end
-    400038: Harness
-    400040: Horse
-    400042: Lance
-    400044: Lance_end
-    400046: Mano.L
-    400048: PataDel01.L
-    400050: PataDel01.R
-    400052: PataDel02.L
-    400054: PataDel02.L_end
-    400056: PataDel02.R
-    400058: PataDel02.R_end
-    400060: PataDel_Control.L
-    400062: PataDel_Control.R
-    400064: PataDel_ik.L
-    400066: PataDel_ik.L_end
-    400068: PataDel_ik.R
-    400070: PataDel_ik.R_end
-    400072: PataDel_pole_target.L
-    400074: PataDel_pole_target.L_end
-    400076: PataDel_pole_target.R
-    400078: PataDel_pole_target.R_end
-    400080: PataTras01.L
-    400082: PataTras01.R
-    400084: PataTras02.L
-    400086: PataTras02.L_end
-    400088: PataTras02.R
-    400090: PataTras02.R_end
-    400092: PataTras_Control.L
-    400094: PataTras_Control.R
-    400096: PataTras_ik.L
-    400098: PataTras_ik.L_end
-    400100: PataTras_ik.R
-    400102: PataTras_ik.R_end
-    400104: PataTras_pole_target.L
-    400106: PataTras_pole_target.L_end
-    400108: PataTras_pole_target.R
-    400110: PataTras_pole_target.R_end
-    400112: Pecho
-    400114: Pecho_Yamato
-    400116: Persian
-    400118: //RootNode
-    400120: PezuDel.L
-    400122: PezuDel.L_end
-    400124: PezuDel.R
-    400126: PezuDel.R_end
-    400128: PezuDel_Control.L
-    400130: PezuDel_Control.L_end
-    400132: PezuDel_Control.R
-    400134: PezuDel_Control.R_end
-    400136: PezuTras.L
-    400138: PezuTras.L_end
-    400140: PezuTras.R
-    400142: PezuTras.R_end
-    400144: PezuTras_Control.L
-    400146: PezuTras_Control.L_end
-    400148: PezuTras_Control.R
-    400150: PezuTras_Control.R_end
-    400152: Pulgar01.L
-    400154: Pulgar02.L
-    400156: Pulgar02.L_end
-    400158: Spear
-    400160: TobilloDel.L
-    400162: TobilloDel.R
-    400164: TobilloDel_Roll.L
-    400166: TobilloDel_Roll.R
-    400168: TobilloTras.L
-    400170: TobilloTras.R
-    400172: TobilloTras_Roll.L
-    400174: TobilloTras_Roll.R
-    4300000: Horse
-    4300002: Harness
-    4300004: Spear
-    4300006: Persian
-    7400000: Armature|Sumerian_Cavalry_Idle
-    7400002: Armature|Sumerian_Cavalry_Run
-    7400004: Armature|Persian_Cavalry_Advanced_Run
-    7400006: Armature|Persian_Cavalry_Advanced_Walk
-    7400008: Armature|Untitled
+    400038: Horse
+    400040: Mano.L
+    400042: PataDel01.L
+    400044: PataDel01.R
+    400046: PataDel02.L
+    400048: PataDel02.L_end
+    400050: PataDel02.R
+    400052: PataDel02.R_end
+    400054: PataDel_Control.L
+    400056: PataDel_Control.R
+    400058: PataDel_ik.L
+    400060: PataDel_ik.L_end
+    400062: PataDel_ik.R
+    400064: PataDel_ik.R_end
+    400066: PataDel_pole_target.L
+    400068: PataDel_pole_target.L_end
+    400070: PataDel_pole_target.R
+    400072: PataDel_pole_target.R_end
+    400074: PataTras01.L
+    400076: PataTras01.R
+    400078: PataTras02.L
+    400080: PataTras02.L_end
+    400082: PataTras02.R
+    400084: PataTras02.R_end
+    400086: PataTras_Control.L
+    400088: PataTras_Control.R
+    400090: PataTras_ik.L
+    400092: PataTras_ik.L_end
+    400094: PataTras_ik.R
+    400096: PataTras_ik.R_end
+    400098: PataTras_pole_target.L
+    400100: PataTras_pole_target.L_end
+    400102: PataTras_pole_target.R
+    400104: PataTras_pole_target.R_end
+    400106: Pecho
+    400108: Pecho_Yamato
+    400110: PezuDel.L
+    400112: PezuDel.L_end
+    400114: PezuDel.R
+    400116: PezuDel.R_end
+    400118: PezuDel_Control.L
+    400120: PezuDel_Control.L_end
+    400122: PezuDel_Control.R
+    400124: PezuDel_Control.R_end
+    400126: PezuTras.L
+    400128: PezuTras.L_end
+    400130: PezuTras.R
+    400132: PezuTras.R_end
+    400134: PezuTras_Control.L
+    400136: PezuTras_Control.L_end
+    400138: PezuTras_Control.R
+    400140: PezuTras_Control.R_end
+    400142: Pulgar01.L
+    400144: Pulgar02.L
+    400146: Pulgar02.L_end
+    400148: Sumerian
+    400150: //RootNode
+    400152: Sword
+    400154: Sword_end
+    400156: TobilloDel.L
+    400158: TobilloDel.R
+    400160: TobilloDel_Roll.L
+    400162: TobilloDel_Roll.R
+    400164: TobilloTras.L
+    400166: TobilloTras.R
+    400168: TobilloTras_Roll.L
+    400170: TobilloTras_Roll.R
+    4300000: Sumerian
+    4300002: Horse
+    7400000: Armature|Sumerian_Cavalry_Advanced_Die
+    7400002: Armature|Sumerian_Cavalry_Advanced_Fight
+    7400004: Armature|Sumerian_Cavalry_Advanced_Idle
+    7400006: Armature|Sumerian_Cavalry_Advanced_Run
+    7400008: Armature|Sumerian_Cavalry_Advanced_Walk
+    7400010: Horse|Sumerian_Cavalry_Advanced_Walk
     9500000: //RootNode
-    13700000: Harness
-    13700002: Horse
-    13700004: Persian
-    13700006: Spear
+    13700000: Horse
+    13700002: Sumerian
   materials:
     importMaterials: 1
     materialName: 0
@@ -216,8 +209,602 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|Persian_Cavalry_Advanced_Run
-      takeName: Armature|Persian_Cavalry_Advanced_Run
+      name: Armature|Sumerian_Cavalry_Advanced_Die
+      takeName: Armature|Sumerian_Cavalry_Advanced_Die
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Coxis
+        weight: 1
+      - path: Armature/Coxis/Abdomen
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L/Dedos_Mano02.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L/Dedos_Mano02.L/Dedos_Mano02.L_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L/Pulgar02.L_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Sword
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Sword/Sword_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato/Cabeza_Yamato_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone/Bone_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L/PataDel02.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L/PataDel02.L/PataDel02.L_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R/PataDel02.R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R/PataDel02.R/PataDel02.R_end
+        weight: 1
+      - path: Armature/Coxis/Cola01
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02/Cola02_end
+        weight: 1
+      - path: Armature/Coxis/PataTras01.L
+        weight: 1
+      - path: Armature/Coxis/PataTras01.L/PataTras02.L
+        weight: 1
+      - path: Armature/Coxis/PataTras01.L/PataTras02.L/PataTras02.L_end
+        weight: 1
+      - path: Armature/Coxis/PataTras01.R
+        weight: 1
+      - path: Armature/Coxis/PataTras01.R/PataTras02.R
+        weight: 1
+      - path: Armature/Coxis/PataTras01.R/PataTras02.R/PataTras02.R_end
+        weight: 1
+      - path: Armature/PataDel_Control.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/PezuDel_Control.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/PezuDel_Control.L/PezuDel_Control.L_end
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel.L/PezuDel.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel.L/PezuDel.L/PezuDel.L_end
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L/PataDel_ik.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L/PataDel_ik.L/PataDel_ik.L_end
+        weight: 1
+      - path: Armature/PataDel_Control.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/PezuDel_Control.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/PezuDel_Control.R/PezuDel_Control.R_end
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel.R/PezuDel.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel.R/PezuDel.R/PezuDel.R_end
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R/PataDel_ik.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R/PataDel_ik.R/PataDel_ik.R_end
+        weight: 1
+      - path: Armature/PataDel_pole_target.L
+        weight: 1
+      - path: Armature/PataDel_pole_target.L/PataDel_pole_target.L_end
+        weight: 1
+      - path: Armature/PataDel_pole_target.R
+        weight: 1
+      - path: Armature/PataDel_pole_target.R/PataDel_pole_target.R_end
+        weight: 1
+      - path: Armature/PataTras_Control.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/PezuTras_Control.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/PezuTras_Control.L/PezuTras_Control.L_end
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras.L/PezuTras.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras.L/PezuTras.L/PezuTras.L_end
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L/PataTras_ik.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L/PataTras_ik.L/PataTras_ik.L_end
+        weight: 1
+      - path: Armature/PataTras_Control.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/PezuTras_Control.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/PezuTras_Control.R/PezuTras_Control.R_end
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras.R/PezuTras.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras.R/PezuTras.R/PezuTras.R_end
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R/PataTras_ik.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R/PataTras_ik.R/PataTras_ik.R_end
+        weight: 1
+      - path: Armature/PataTras_pole_target.L
+        weight: 1
+      - path: Armature/PataTras_pole_target.L/PataTras_pole_target.L_end
+        weight: 1
+      - path: Armature/PataTras_pole_target.R
+        weight: 1
+      - path: Armature/PataTras_pole_target.R/PataTras_pole_target.R_end
+        weight: 1
+      - path: Horse
+        weight: 1
+      - path: Sumerian
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Sumerian_Cavalry_Advanced_Fight
+      takeName: Armature|Sumerian_Cavalry_Advanced_Fight
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Coxis
+        weight: 1
+      - path: Armature/Coxis/Abdomen
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L/Dedos_Mano02.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L/Dedos_Mano02.L/Dedos_Mano02.L_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L/Pulgar02.L_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Sword
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Sword/Sword_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato/Cabeza_Yamato_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone/Bone_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L/PataDel02.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L/PataDel02.L/PataDel02.L_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R/PataDel02.R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R/PataDel02.R/PataDel02.R_end
+        weight: 1
+      - path: Armature/Coxis/Cola01
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02/Cola02_end
+        weight: 1
+      - path: Armature/Coxis/PataTras01.L
+        weight: 1
+      - path: Armature/Coxis/PataTras01.L/PataTras02.L
+        weight: 1
+      - path: Armature/Coxis/PataTras01.L/PataTras02.L/PataTras02.L_end
+        weight: 1
+      - path: Armature/Coxis/PataTras01.R
+        weight: 1
+      - path: Armature/Coxis/PataTras01.R/PataTras02.R
+        weight: 1
+      - path: Armature/Coxis/PataTras01.R/PataTras02.R/PataTras02.R_end
+        weight: 1
+      - path: Armature/PataDel_Control.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/PezuDel_Control.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/PezuDel_Control.L/PezuDel_Control.L_end
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel.L/PezuDel.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel.L/PezuDel.L/PezuDel.L_end
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L/PataDel_ik.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L/PataDel_ik.L/PataDel_ik.L_end
+        weight: 1
+      - path: Armature/PataDel_Control.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/PezuDel_Control.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/PezuDel_Control.R/PezuDel_Control.R_end
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel.R/PezuDel.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel.R/PezuDel.R/PezuDel.R_end
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R/PataDel_ik.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R/PataDel_ik.R/PataDel_ik.R_end
+        weight: 1
+      - path: Armature/PataDel_pole_target.L
+        weight: 1
+      - path: Armature/PataDel_pole_target.L/PataDel_pole_target.L_end
+        weight: 1
+      - path: Armature/PataDel_pole_target.R
+        weight: 1
+      - path: Armature/PataDel_pole_target.R/PataDel_pole_target.R_end
+        weight: 1
+      - path: Armature/PataTras_Control.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/PezuTras_Control.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/PezuTras_Control.L/PezuTras_Control.L_end
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras.L/PezuTras.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras.L/PezuTras.L/PezuTras.L_end
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L/PataTras_ik.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L/PataTras_ik.L/PataTras_ik.L_end
+        weight: 1
+      - path: Armature/PataTras_Control.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/PezuTras_Control.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/PezuTras_Control.R/PezuTras_Control.R_end
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras.R/PezuTras.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras.R/PezuTras.R/PezuTras.R_end
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R/PataTras_ik.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R/PataTras_ik.R/PataTras_ik.R_end
+        weight: 1
+      - path: Armature/PataTras_pole_target.L
+        weight: 1
+      - path: Armature/PataTras_pole_target.L/PataTras_pole_target.L_end
+        weight: 1
+      - path: Armature/PataTras_pole_target.R
+        weight: 1
+      - path: Armature/PataTras_pole_target.R/PataTras_pole_target.R_end
+        weight: 1
+      - path: Horse
+        weight: 1
+      - path: Sumerian
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Sumerian_Cavalry_Advanced_Idle
+      takeName: Armature|Sumerian_Cavalry_Advanced_Idle
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Coxis
+        weight: 1
+      - path: Armature/Coxis/Abdomen
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L/Dedos_Mano02.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L/Dedos_Mano02.L/Dedos_Mano02.L_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L/Pulgar02.L_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Sword
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Sword/Sword_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato/Cabeza_Yamato_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone/Bone_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L/PataDel02.L
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L/PataDel02.L/PataDel02.L_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R/PataDel02.R
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R/PataDel02.R/PataDel02.R_end
+        weight: 1
+      - path: Armature/Coxis/Cola01
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02
+        weight: 1
+      - path: Armature/Coxis/Cola01/Cola02/Cola02_end
+        weight: 1
+      - path: Armature/Coxis/PataTras01.L
+        weight: 1
+      - path: Armature/Coxis/PataTras01.L/PataTras02.L
+        weight: 1
+      - path: Armature/Coxis/PataTras01.L/PataTras02.L/PataTras02.L_end
+        weight: 1
+      - path: Armature/Coxis/PataTras01.R
+        weight: 1
+      - path: Armature/Coxis/PataTras01.R/PataTras02.R
+        weight: 1
+      - path: Armature/Coxis/PataTras01.R/PataTras02.R/PataTras02.R_end
+        weight: 1
+      - path: Armature/PataDel_Control.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/PezuDel_Control.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/PezuDel_Control.L/PezuDel_Control.L_end
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel.L/PezuDel.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel.L/PezuDel.L/PezuDel.L_end
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L/PataDel_ik.L
+        weight: 1
+      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L/PataDel_ik.L/PataDel_ik.L_end
+        weight: 1
+      - path: Armature/PataDel_Control.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/PezuDel_Control.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/PezuDel_Control.R/PezuDel_Control.R_end
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel.R/PezuDel.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel.R/PezuDel.R/PezuDel.R_end
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R/PataDel_ik.R
+        weight: 1
+      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R/PataDel_ik.R/PataDel_ik.R_end
+        weight: 1
+      - path: Armature/PataDel_pole_target.L
+        weight: 1
+      - path: Armature/PataDel_pole_target.L/PataDel_pole_target.L_end
+        weight: 1
+      - path: Armature/PataDel_pole_target.R
+        weight: 1
+      - path: Armature/PataDel_pole_target.R/PataDel_pole_target.R_end
+        weight: 1
+      - path: Armature/PataTras_Control.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/PezuTras_Control.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/PezuTras_Control.L/PezuTras_Control.L_end
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras.L/PezuTras.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras.L/PezuTras.L/PezuTras.L_end
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L/PataTras_ik.L
+        weight: 1
+      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L/PataTras_ik.L/PataTras_ik.L_end
+        weight: 1
+      - path: Armature/PataTras_Control.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/PezuTras_Control.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/PezuTras_Control.R/PezuTras_Control.R_end
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras.R/PezuTras.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras.R/PezuTras.R/PezuTras.R_end
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R/PataTras_ik.R
+        weight: 1
+      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R/PataTras_ik.R/PataTras_ik.R_end
+        weight: 1
+      - path: Armature/PataTras_pole_target.L
+        weight: 1
+      - path: Armature/PataTras_pole_target.L/PataTras_pole_target.L_end
+        weight: 1
+      - path: Armature/PataTras_pole_target.R
+        weight: 1
+      - path: Armature/PataTras_pole_target.R/PataTras_pole_target.R_end
+        weight: 1
+      - path: Horse
+        weight: 1
+      - path: Sumerian
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Sumerian_Cavalry_Advanced_Run
+      takeName: Armature|Sumerian_Cavalry_Advanced_Run
       firstFrame: 0
       lastFrame: 16
       wrapMode: 0
@@ -263,15 +850,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L/Dedos_Mano02.L/Dedos_Mano02.L_end
         weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Lance
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Lance/Lance_end
-        weight: 1
       - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L
         weight: 1
       - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L
         weight: 1
       - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L/Pulgar02.L_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Sword
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Sword/Sword_end
         weight: 1
       - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
         weight: 1
@@ -407,19 +994,15 @@ ModelImporter:
         weight: 1
       - path: Armature/PataTras_pole_target.R/PataTras_pole_target.R_end
         weight: 1
-      - path: Harness
-        weight: 1
       - path: Horse
         weight: 1
-      - path: Persian
-        weight: 1
-      - path: Spear
+      - path: Sumerian
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Armature|Persian_Cavalry_Advanced_Walk
-      takeName: Armature|Persian_Cavalry_Advanced_Walk
+      name: Armature|Sumerian_Cavalry_Advanced_Walk
+      takeName: Armature|Sumerian_Cavalry_Advanced_Walk
       firstFrame: 0
       lastFrame: 32
       wrapMode: 0
@@ -465,15 +1048,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L/Dedos_Mano02.L/Dedos_Mano02.L_end
         weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Lance
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Lance/Lance_end
-        weight: 1
       - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L
         weight: 1
       - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L
         weight: 1
       - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L/Pulgar02.L_end
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Sword
+        weight: 1
+      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Sword/Sword_end
         weight: 1
       - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
         weight: 1
@@ -609,215 +1192,9 @@ ModelImporter:
         weight: 1
       - path: Armature/PataTras_pole_target.R/PataTras_pole_target.R_end
         weight: 1
-      - path: Harness
-        weight: 1
       - path: Horse
         weight: 1
-      - path: Persian
-        weight: 1
-      - path: Spear
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Armature|Untitled
-      takeName: Armature|Untitled
-      firstFrame: 0
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Armature
-        weight: 1
-      - path: Armature/Coxis
-        weight: 1
-      - path: Armature/Coxis/Abdomen
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L/Dedos_Mano02.L
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Dedos_Mano01.L/Dedos_Mano02.L/Dedos_Mano02.L_end
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Lance
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Lance/Lance_end
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Brazo.L/Antebrazo.L/Mano.L/Pulgar01.L/Pulgar02.L/Pulgar02.L_end
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Abdomen_Yamato/Pecho_Yamato/Cuello_Yamato/Cabeza_Yamato/Cabeza_Yamato_end
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Pecho
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Pecho/Cuello
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Pecho/Cuello/Cabeza/Bone/Bone_end
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L/PataDel02.L
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.L/PataDel02.L/PataDel02.L_end
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R/PataDel02.R
-        weight: 1
-      - path: Armature/Coxis/Abdomen/Pecho/PataDel01.R/PataDel02.R/PataDel02.R_end
-        weight: 1
-      - path: Armature/Coxis/Cola01
-        weight: 1
-      - path: Armature/Coxis/Cola01/Cola02
-        weight: 1
-      - path: Armature/Coxis/Cola01/Cola02/Cola02_end
-        weight: 1
-      - path: Armature/Coxis/PataTras01.L
-        weight: 1
-      - path: Armature/Coxis/PataTras01.L/PataTras02.L
-        weight: 1
-      - path: Armature/Coxis/PataTras01.L/PataTras02.L/PataTras02.L_end
-        weight: 1
-      - path: Armature/Coxis/PataTras01.R
-        weight: 1
-      - path: Armature/Coxis/PataTras01.R/PataTras02.R
-        weight: 1
-      - path: Armature/Coxis/PataTras01.R/PataTras02.R/PataTras02.R_end
-        weight: 1
-      - path: Armature/PataDel_Control.L
-        weight: 1
-      - path: Armature/PataDel_Control.L/PezuDel_Control.L
-        weight: 1
-      - path: Armature/PataDel_Control.L/PezuDel_Control.L/PezuDel_Control.L_end
-        weight: 1
-      - path: Armature/PataDel_Control.L/TobilloDel.L
-        weight: 1
-      - path: Armature/PataDel_Control.L/TobilloDel.L/PezuDel.L
-        weight: 1
-      - path: Armature/PataDel_Control.L/TobilloDel.L/PezuDel.L/PezuDel.L_end
-        weight: 1
-      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L
-        weight: 1
-      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L/PataDel_ik.L
-        weight: 1
-      - path: Armature/PataDel_Control.L/TobilloDel_Roll.L/PataDel_ik.L/PataDel_ik.L_end
-        weight: 1
-      - path: Armature/PataDel_Control.R
-        weight: 1
-      - path: Armature/PataDel_Control.R/PezuDel_Control.R
-        weight: 1
-      - path: Armature/PataDel_Control.R/PezuDel_Control.R/PezuDel_Control.R_end
-        weight: 1
-      - path: Armature/PataDel_Control.R/TobilloDel.R
-        weight: 1
-      - path: Armature/PataDel_Control.R/TobilloDel.R/PezuDel.R
-        weight: 1
-      - path: Armature/PataDel_Control.R/TobilloDel.R/PezuDel.R/PezuDel.R_end
-        weight: 1
-      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R
-        weight: 1
-      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R/PataDel_ik.R
-        weight: 1
-      - path: Armature/PataDel_Control.R/TobilloDel_Roll.R/PataDel_ik.R/PataDel_ik.R_end
-        weight: 1
-      - path: Armature/PataDel_pole_target.L
-        weight: 1
-      - path: Armature/PataDel_pole_target.L/PataDel_pole_target.L_end
-        weight: 1
-      - path: Armature/PataDel_pole_target.R
-        weight: 1
-      - path: Armature/PataDel_pole_target.R/PataDel_pole_target.R_end
-        weight: 1
-      - path: Armature/PataTras_Control.L
-        weight: 1
-      - path: Armature/PataTras_Control.L/PezuTras_Control.L
-        weight: 1
-      - path: Armature/PataTras_Control.L/PezuTras_Control.L/PezuTras_Control.L_end
-        weight: 1
-      - path: Armature/PataTras_Control.L/TobilloTras.L
-        weight: 1
-      - path: Armature/PataTras_Control.L/TobilloTras.L/PezuTras.L
-        weight: 1
-      - path: Armature/PataTras_Control.L/TobilloTras.L/PezuTras.L/PezuTras.L_end
-        weight: 1
-      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L
-        weight: 1
-      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L/PataTras_ik.L
-        weight: 1
-      - path: Armature/PataTras_Control.L/TobilloTras_Roll.L/PataTras_ik.L/PataTras_ik.L_end
-        weight: 1
-      - path: Armature/PataTras_Control.R
-        weight: 1
-      - path: Armature/PataTras_Control.R/PezuTras_Control.R
-        weight: 1
-      - path: Armature/PataTras_Control.R/PezuTras_Control.R/PezuTras_Control.R_end
-        weight: 1
-      - path: Armature/PataTras_Control.R/TobilloTras.R
-        weight: 1
-      - path: Armature/PataTras_Control.R/TobilloTras.R/PezuTras.R
-        weight: 1
-      - path: Armature/PataTras_Control.R/TobilloTras.R/PezuTras.R/PezuTras.R_end
-        weight: 1
-      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R
-        weight: 1
-      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R/PataTras_ik.R
-        weight: 1
-      - path: Armature/PataTras_Control.R/TobilloTras_Roll.R/PataTras_ik.R/PataTras_ik.R_end
-        weight: 1
-      - path: Armature/PataTras_pole_target.L
-        weight: 1
-      - path: Armature/PataTras_pole_target.L/PataTras_pole_target.L_end
-        weight: 1
-      - path: Armature/PataTras_pole_target.R
-        weight: 1
-      - path: Armature/PataTras_pole_target.R/PataTras_pole_target.R_end
-        weight: 1
-      - path: Harness
-        weight: 1
-      - path: Horse
-        weight: 1
-      - path: Persian
-        weight: 1
-      - path: Spear
+      - path: Sumerian
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
