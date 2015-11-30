@@ -213,12 +213,12 @@ public class Building : RTSObject
             Debug.Log("Could not load resource '" + fModel);
         }
 		
-		if (constructionModel == null || constructionModel.GetComponent<Building>() == null)
+		if (constructionModel == null)
         {
             Debug.Log("Could not load resource '" + cModel);
         }
 		
-		if (demolishedModel == null || demolishedModel.GetComponent<Building>() == null)
+		if (demolishedModel == null)
         {
             Debug.Log("Could not load resource '" + dModel);
         }
