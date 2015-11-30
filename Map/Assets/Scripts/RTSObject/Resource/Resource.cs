@@ -4,7 +4,7 @@ using System.Collections;
 public class Resource : RTSObject {
 
     public float capacity;                          // Capacitat del recurs
-
+	public bool isTaken;
     public float amountLeft;                     // Indica la cantitat que queda del recurs
     protected ResourceType resourceType;            // Indica el tipus de recurs
 
@@ -19,6 +19,7 @@ public class Resource : RTSObject {
 		// Calculem la dimensio del BoxCollider
 		FittedBoxCollider ();
 		resourceType = ResourceType.Unknown;
+		isTaken = false;
 	}
 
     
