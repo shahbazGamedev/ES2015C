@@ -177,7 +177,7 @@ public class movimentCamera : MonoBehaviour {
 		} else {
 
 			if (recup.Contains (Input.mousePosition) && transform.position.z > -60) {
-				Vector3 trans = new Vector3(-1 * cspeed*direccioZ*direccioX, 0, -1 * cspeed*direccioZ);
+				Vector3 trans = new Vector3(-1 * cspeed*direccioX, 0, -1 * cspeed*direccioZ);
 				transform.Translate (trans, Space.World);
 				CameraPoint.transform.Translate(trans, Space.World);
 				//cube.transform.position = CameraPoint.transform.position;
