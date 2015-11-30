@@ -30,25 +30,25 @@ public class Hittite_civil : CivilUnit
 	{
 		switch (actionToPerform) {
             case "Town Center":
-                StartBuildingLocationSelection("Prefabs/Hittite_TownCenter", "Prefabs/Hittite_TownCenter_onConstruction");
+                StartBuildingLocationSelection("Prefabs/Hittite_TownCenter");
                 break;
             case "Army Building":
-                StartBuildingLocationSelection("Prefabs/Hittite_ArmyBuilding", "Prefabs/Hittite_ArmyBuilding_onConstruction");
+                StartBuildingLocationSelection("Prefabs/Hittite_ArmyBuilding");
 			    break;
 		    case "Wall Tower":
-                StartBuildingLocationSelection("Prefabs/Hittite_WallTower", "Prefabs/Hittite_WallTower_onConstruction");
+                StartBuildingLocationSelection("Prefabs/Hittite_WallTower");
                 break;
 		    case "Wall Entrance":
-                StartBuildingLocationSelection("Prefabs/Hittite_WallEntrance", "Prefabs/Hittite_WallEntrance_onConstruction");
+                StartBuildingLocationSelection("Prefabs/Hittite_WallEntrance");
                 break;
 		    case "Wall":
-                StartBuildingLocationSelection("Prefabs/Hittite_Wall", "Prefabs/Hittite_Wall_onConstruction");
+                StartBuildingLocationSelection("Prefabs/Hittite_Wall");
                 break;
 		    case "Civil House":
-                StartBuildingLocationSelection("Prefabs/Hittite_CivilHouse", "Prefabs/Hittite_CivilHouse_onConstruction");
+                StartBuildingLocationSelection("Prefabs/Hittite_CivilHouse");
                 break;
 		    case "Academy":
-                StartBuildingLocationSelection("Prefabs/Hittite_Academy", "Prefabs/Hittite_Academy_onConstruction");
+                StartBuildingLocationSelection("Prefabs/Hittite_Academy");
                 break;
 		}
 	}

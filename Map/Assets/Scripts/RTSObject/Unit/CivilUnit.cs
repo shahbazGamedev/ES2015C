@@ -19,7 +19,6 @@ public class CivilUnit : Unit
     public bool waitingForBuildingLocationSelection = false;
     protected Vector3 constructionPoint = Vector3.zero;
     protected GameObject creationBuilding = null;           // Objecte que anem a crear
-    protected GameObject creationBuildingConstruction = null; //Edifici que anem a crear, en construccio
     /// <summary>
     /// Object used to show the preview to the user and detect overlaps and unbuildable places.
     /// </summary>
@@ -198,8 +197,7 @@ public class CivilUnit : Unit
     /// on the map in order to select the place where the building should be built.
     /// </summary>
     /// <param name="creationBuildingPath">Name of the resource for the finished building.</param>
-    /// <param name="creationBuildingConstructionPath">Name of the resource for the in-progress building</param>
-    protected void StartBuildingLocationSelection(string creationBuildingPath, string creationBuildingConstructionPath)
+    protected void StartBuildingLocationSelection(string creationBuildingPath)
     {
         // Destroy old collision detector object if any
         if (creationCollisionDetectorObject != null)
@@ -215,20 +213,11 @@ public class CivilUnit : Unit
             return;
         }
 
-        // Load the in-construction building resource
-        var creationBuildingConstructionTmp = Resources.Load<GameObject>(creationBuildingConstructionPath);
-        if (creationBuildingConstructionTmp == null)
-        {
-			HUDInfo.insertMessage("Could not load resource '" + creationBuildingConstructionPath + "' to start building location selection.");
-            return;
-        }
-
         // Set up the unit state to work on a building
 		HUDInfo.insertMessage("Select the site where you want to build the selected building " + creationBuildingTmp.name);
         waitingForBuildingLocationSelection = true;
         constructionPoint = Vector3.zero;
         creationBuilding = creationBuildingTmp;
-        creationBuildingConstruction = creationBuildingConstructionTmp;
 
         // Create the building preview and overlap detector object
         creationCollisionDetectorObject = (GameObject)Instantiate(creationBuilding, Vector3.zero, Quaternion.identity);
@@ -270,7 +259,6 @@ public class CivilUnit : Unit
             waitingForBuildingLocationSelection = false;
             constructionPoint = Vector3.zero;
             creationBuilding = null;
-            creationBuildingConstruction = null;
             creationCollisionDetectorObject = null;
         }
         else
@@ -306,7 +294,14 @@ public class CivilUnit : Unit
         newProject.owner = owner;
         newProject.finishedModel = creationBuilding;
 
-        newProject.ReplaceChildWithChildFromGameObjectTemplate(creationBuildingConstruction);
+        if (newProject.constructionModel != null)
+        {
+            newProject.changeModel("construction");
+        }
+        else
+        {
+            HUDInfo.insertMessage("WARNING: No on-construction model for building " + newProject.objectName + ".");
+        }
 
         // Update physics
 		var guo = new GraphUpdateObject (newProject.GetComponent<BoxCollider> ().bounds);
