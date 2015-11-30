@@ -13,8 +13,8 @@ public class RTSObject : MonoBehaviour
     /// <summary>Default movement speed. Leave at zero if the object can't move.</summary>
     protected float baseMoveSpeed = 0;
 	
-	protected float currentBuildProgress = 10.0f;
-	protected int baseBuildSpeed=0;
+    /// <summary>Default speed factor of building (x1 = default building time, x2 = half building time, etc). Leave at zero if the unit can't build.</summary>
+	protected float baseBuildFactor=0;
     /// <summary>Default attack strength. Leave at zero if the object can't attack.</summary>
     protected int baseAttackStrength = 0;
     /// <summary>Default number of hits per second of the object. Leave at zero if the object can't attack.</summary>
@@ -52,9 +52,13 @@ public class RTSObject : MonoBehaviour
 
     protected List<RTSObject> nearbyObjects;        // Llista de objectes propers
 
-    protected Animator anim;                        // Referencia al component Animator.
+    protected Animator anim;                        // Referencia al component Animator
+	protected AudioSource audio;					// Referencia al component AudioSource
 	protected Rigidbody rigbody;					// Referenica al component Rigidbody
 	protected LOSEntity ent;
+
+	protected AudioClip fightSound;
+	protected AudioClip dieSound;
 
 	private int ObjectId { get; set; }               // Identificador unic del objecte
     private float currentWeaponChargeTime;
@@ -88,6 +92,7 @@ public class RTSObject : MonoBehaviour
 
     protected virtual void Awake()
     {
+		audio = gameObject.AddComponent<AudioSource> ();
 		rigbody = gameObject.AddComponent<Rigidbody> ();
 		rigbody.constraints = RigidbodyConstraints.FreezeAll;
 		ent = gameObject.AddComponent<LOSEntity> ();
@@ -101,8 +106,8 @@ public class RTSObject : MonoBehaviour
     {
 		if (currentlySelected) updateSelection ();
         if (attacking) PerformAttack();
-        if (dying && UpdateDeadObject()) return; ;
         if (this != null && anim && anim.runtimeAnimatorController) Animating();
+		if (dying && UpdateDeadObject()) return;
     }
 
     protected virtual void OnGUI()
@@ -110,9 +115,40 @@ public class RTSObject : MonoBehaviour
     }
 
 	private void OnMouseEnter() {
-		if (owner && owner.human) {
-			Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_select") as Texture2D;
-			Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+		if (owner) {
+			if (owner.human == true) {
+				Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_select") as Texture2D;
+				if (owner.SelectedObject && owner.SelectedObject.CanBuild() && CanBeBuilt()){
+					cursorTexture = Resources.Load ("HUD/Cursors/cursor_construct") as Texture2D;
+					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+				}
+				Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+			} else {
+				Player humanPlayer = GameObject.Find("Player").GetComponent<Player>();
+				if (humanPlayer && humanPlayer.SelectedObject && humanPlayer.SelectedObject.CanAttack()){
+					if (CanBeAttacked ()){
+						Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_fight") as Texture2D;
+						Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+					} else {
+						Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_none") as Texture2D;
+						Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+					}
+				}
+			}
+		} else {
+			Player humanPlayer = GameObject.Find("Player").GetComponent<Player>();
+			if (humanPlayer && humanPlayer.SelectedObject && humanPlayer.SelectedObject.GetComponent<CivilUnit>()){
+				if (this.GetComponent<Food>()){
+					Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_farm") as Texture2D;
+					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+				} else if (this.GetComponent<Gold>()){
+					Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_mine") as Texture2D;
+					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+				} else if (this.GetComponent<Wood>()){
+					Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_cut") as Texture2D;
+					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+				}
+			}
 		}
 	}
 	
@@ -130,7 +166,7 @@ public class RTSObject : MonoBehaviour
 	}
 
     // Metode per obtenir les accions del objecte
-    public string[] GetActions()
+    public virtual string[] GetActions()
     {
         return actions;
     }
@@ -179,9 +215,9 @@ public class RTSObject : MonoBehaviour
     /// given position.
     /// </summary>
     /// <param name="target">The position we want the object to move to.</param>
-    public void MoveTo(Vector3 target)
+    public void MoveTo(Vector3 target, bool isRunning)
     {
-        if (!CanAttack())
+        if (!CanMove())
             throw new InvalidOperationException("Called MoveTo over an object that can't move.");
 
         if (attacking)
@@ -189,7 +225,7 @@ public class RTSObject : MonoBehaviour
             EndAttack();
         }
 
-        SetNewPath(target);
+        SetNewPath(target, isRunning);
     }
 
     /// <summary>
@@ -197,7 +233,7 @@ public class RTSObject : MonoBehaviour
     /// following a route to the desired position.
     /// </summary>
     /// <param name="target">The position we want the object to move to.</param>
-    protected virtual void SetNewPath(Vector3 target)
+    protected virtual void SetNewPath(Vector3 target, bool isRunning)
     {
         throw new NotImplementedException();
     }
@@ -221,12 +257,34 @@ public class RTSObject : MonoBehaviour
 	
 	public virtual bool CanBuild()
 	{
-		return (baseBuildSpeed !=0);
+		return (baseBuildFactor !=0);
 	}
+
+    /// <summary>
+    /// Checks if the object is currently building another object.
+    /// </summary>
+    /// <returns>true if this object is building, false otherwise.</returns>
+    public virtual bool IsBuilding()
+    {
+        if (!CanBuild())
+            return false;
+
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Assigns a new building project to this object.
+    /// </summary>
+    /// <param name="newProject">The new project to assign, or null to deassign the current project.</param>
+    /// <returns></returns>
+    public virtual void AssignBuildingProject(Building newProject)
+    {
+        throw new NotImplementedException();
+    }
 	
 	public virtual bool CanBeBuilt()
 	{
-		return (currentBuildProgress<10.0f);
+        return false;
 	}
 
     /// <summary>
@@ -323,7 +381,7 @@ public class RTSObject : MonoBehaviour
     /// Substract health points from this object.
     /// </summary>
     /// <param name="damage">The number of health points to substract to this object.</param>
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         hitPoints = Math.Max(hitPoints - damage, 0);
         if (hitPoints == 0)
@@ -357,7 +415,7 @@ public class RTSObject : MonoBehaviour
 	// Metode que usem per animar el objecte
 	protected virtual void Animating()
 	{
-		anim.SetBool("IsAttacking", attacking);
+		anim.SetBool("IsFighting", attacking);
 		anim.SetBool("IsDead", hitPoints <= 0);
 	}
 	
@@ -379,7 +437,8 @@ public class RTSObject : MonoBehaviour
 	private void updateSelection(){
 		GameObject selArea = GameObject.Find("SelectedArea");
 		if (selArea) {
-			selArea.transform.localPosition = new Vector3 (gameObject.GetComponent<Collider> ().bounds.center.x, gameObject.transform.localPosition.y, gameObject.GetComponent<Collider> ().bounds.center.z);
+			float terrainY = Terrain.activeTerrain.SampleHeight(gameObject.GetComponent<Collider> ().bounds.center);
+			selArea.transform.localPosition = new Vector3 (gameObject.GetComponent<Collider> ().bounds.center.x, terrainY + 0.01f, gameObject.GetComponent<Collider> ().bounds.center.z);
 			selArea.transform.localScale = new Vector3 (gameObject.GetComponent<Collider> ().bounds.size.x * 1.2f, 0.01f, gameObject.GetComponent<Collider> ().bounds.size.z * 1.2f);
 		}
 	}
@@ -442,6 +501,10 @@ public class RTSObject : MonoBehaviour
 
         if (targetInRange)
         {
+			if (currentlySelected && fightSound && !audio.isPlaying)
+			{
+				audio.PlayOneShot (fightSound);
+			}
             // Cancel movement if we've just reached the target
             if (CanMove() && HasPath())
             {
@@ -464,7 +527,7 @@ public class RTSObject : MonoBehaviour
             // If we need to and the unit can't move, warn the user that the attack can't be done
             if (!CanMove())
             {
-                Debug.Log(string.Format("{0} can't attack {1}, because it is {2}m away",
+                HUDInfo.insertMessage(string.Format("{0} can't attack {1}, because it is {2}m away",
                     objectName, target.objectName, distanceToTarget));
                 EndAttack();
                 return;
@@ -477,7 +540,7 @@ public class RTSObject : MonoBehaviour
                 // Move to a point near the target to attack
                 var attackPosition = targetAttackPosition - (targetAttackPosition -
                     transform.position).normalized * AttackRangeTolerance / 4;
-                SetNewPath(attackPosition);
+                SetNewPath(attackPosition, false);
                 
                 programmedAttackPosition = attackPosition;
             }
@@ -500,8 +563,12 @@ public class RTSObject : MonoBehaviour
             // Begin the "dying" state
             dying = true;
             remainingTimeToDead = DefaultDeadTime;
+			if (owner.human && dieSound)
+			{
+				audio.PlayOneShot (dieSound);
+			}
 
-            // Enable fade mode for each material, for the fade-out animation
+            // Enable alpha mode (transparency) for each material, for the fade-out animation
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
             {
                 foreach (Material m in r.materials)
@@ -557,5 +624,36 @@ public class RTSObject : MonoBehaviour
         {
             AstarPath.active.UpdateGraphs(bounds);
         }
+    }
+
+    /// <summary>
+    /// Replaces all the child nodes of the GameObject associated with this object,
+    /// with the child nodes of the given GameObject template.
+    /// 
+    /// This can be used, for instance, to exchange the model that is used to
+    /// display the different versions (on construction, semidemolished, complete, ...) of a building.
+    /// </summary>
+    /// <param name="newGameObjectTemplate">The object to use as a template for the new child nodes.</param>
+    public void ReplaceChildWithChildFromGameObjectTemplate(GameObject newGameObjectTemplate)
+    {
+        // Remove all child nodes of the associated GameObject
+        // We use ToList() since we are changing the same structure we are enumerating
+        foreach (Transform child in transform.OfType<Transform>().ToList())
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        // Instantiate the object at the same position as our object temporarily
+        var finishedBuilding = (GameObject)Instantiate(newGameObjectTemplate, transform.position, Quaternion.identity);
+
+        // Reassociate all child nodes of the GameObject to our object
+        // We use ToList() since we are changing the same structure we are enumerating
+        foreach (Transform child in finishedBuilding.transform.OfType<Transform>().ToList())
+        {
+            child.parent = transform;
+        }
+
+        // Destroy the gameobject we've used to import its child
+        Destroy(finishedBuilding);
     }
 }

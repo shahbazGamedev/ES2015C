@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Pathfinding;
+using System;
+using System.Linq;
+
 
 public class CivilUnit : Unit
 {
@@ -8,13 +11,21 @@ public class CivilUnit : Unit
     public bool llegado = false;                            //he llegado a mi destino
     public int state;                                       //estado de recoleccion
 
-	public Vector3 constructionPoint = Vector3.zero;		// Posicio on crear el edifici
-	public Building currentProject = null;  				// Building actual de construccio
-	protected GameObject creationBuilding = null;			// Objecte que anem a crear
-	protected GameObject creationBuildingConstruction = null; //Edifici que anem a crear, en construccio
+    public bool harvesting = false;                         // Indicadors d'estat de la unitat
 
-    public bool harvesting = false;      					// Indicadors d'estat de la unitat
-	public bool building = false;
+    /// <summary>
+    /// true if we are in building location selection mode.
+    /// </summary>
+    public bool waitingForBuildingLocationSelection = false;
+    protected Vector3 constructionPoint = Vector3.zero;
+    protected GameObject creationBuilding = null;           // Objecte que anem a crear
+    /// <summary>
+    /// Object used to show the preview to the user and detect overlaps and unbuildable places.
+    /// </summary>
+    protected GameObject creationCollisionDetectorObject;
+
+    protected bool building = false;                        // true if the unit has a building project assigned
+    protected Building currentProject = null;  				// Building actual de construccio
 
     //private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
     private ResourceType harvestType;                       // Tipus de recolecció
@@ -23,14 +34,17 @@ public class CivilUnit : Unit
     private float amountBuilt = 0.0f;                       // Porcentatge de construcció feta
 	//public int mask = 1024;								// 10000001 checks default and obstacles
 
-	                      
+	public AudioClip farmingSound;
+	public AudioClip miningSound;
+	public AudioClip woodCuttingSound;
+	public AudioClip buildingSound;
 	
 	private static int layer1 = 0;
 	private static int layer2 = 10;
 	private static int layermask1 = 1 << layer1;
 	private static int layermask2 = 1 << layer2;
-	private int finalmask = layermask1 | layermask2;
-	
+    private int finalmask = layermask1 | layermask2;
+
     /*** Metodes per defecte de Unity ***/
 
     /* CODI COMENTAT - NO FA RES I DONA PROBLEMES AL INICIALITZAR (MERGE 03/11/2015, COMENTAT PER JOAN BRUGUERA)
@@ -42,23 +56,25 @@ public class CivilUnit : Unit
     }
     */
 
-	protected override void Awake()
+    protected override void Awake()
     {
 		base.Awake();
         objectName = "Civil Unit";
 		gameObject.tag = "civil";
         capacity = 50;
+        baseBuildFactor = 1.0f;
     }
 	
     protected override void Update()
     {
         base.Update();
+
         if (!moving)
         {
             if (harvesting)
             {
                 // tot el que implica la recoleccio de recursos
-                if(state == 0){ //No hacer nada
+                if(state==0){ //No hacer nada
                     //Idle();
                 }
                 if(state == 1){ //Vaciar en el almacen
@@ -76,29 +92,29 @@ public class CivilUnit : Unit
             }
 			else if (building)
 			{
-				if (currentProject && currentProject.UnderConstruction()) //Si tenemos un proyecto y lo estamos construyendo 
+                if (currentProject == null)
+                {
+                    AssignBuildingProject(null);
+                }
+				else if (currentProject.CanBeBuilt()) //Si tenemos un proyecto y lo estamos construyendo 
 				{
-					currentProject.Construct(baseBuildSpeed);
+                    // Check that the building is close enough to the unit to build it
+                    var closestPointInBuilding = currentProject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                    var distanceToBuilding = (closestPointInBuilding - transform.position).magnitude;
+
+                    if (distanceToBuilding <= 5)
+                    {
+                        currentProject.Construct(Time.deltaTime * baseBuildFactor);
+                    }
+                    else
+                    {
+						HUDInfo.insertMessage("Civil unit can't reach the target location, deassigning building project.");
+                        AssignBuildingProject(null);
+                    }
 				}
-				else if (currentProject && currentProject.UnderConstruction() == false) //Si tenemos un proyecto y se ha acabado de construir
+				else  // Si tenemos un proyecto y se ha acabado de construir
 				{
-					Destroy(creationBuildingConstruction);
-					Debug.Log("Destruimos el edificio en construccion");
-					currentProject=null;
-					building=false;
 					CreateFinishedBuilding();
-				}
-				else if (creationBuildingConstruction != null)
-				{
-					if (constructionPoint != Vector3.zero)
-					{
-						CreateBuilding ();
-					}
-				}
-				else
-				{
-					currentProject = null;
-					building = false;
 				}
 			}
         }
@@ -131,60 +147,189 @@ public class CivilUnit : Unit
         return collectionAmount;
     }
 
+    public override bool IsBuilding()
+    {
+        return building;
+    }
+
+    public override void AssignBuildingProject(Building newProject)
+    {
+        building = (newProject != null);
+        currentProject = newProject;
+
+        // Move to unit to the object to build
+        if (newProject != null)
+        {
+            SetNewPath(newProject.GetComponent<Collider>().ClosestPointOnBounds(transform.position), false);
+        }
+    }
+
     /*** Metodes interns accessibles per les subclasses ***/
 
-    // Metode que crea el edifici
-    public void CreateBuilding()
-    {
-		if (Physics.CheckSphere (constructionPoint, 0.8f, finalmask)) {
-			HUDInfo.message = "We can not build because there are other buildings nearby";
-			constructionPoint = Vector3.zero;
-		} else {
-			Debug.Log("Podemos crear el edificio");
-			creationBuildingConstruction = (GameObject) Instantiate (creationBuildingConstruction, constructionPoint, Quaternion.identity);
-			creationBuildingConstruction.SetActive(false);
-			float wood = owner.GetResourceAmount (RTSObject.ResourceType.Wood);
-			if (wood >= creationBuildingConstruction.GetComponent<Building>().cost) {
-				Debug.Log("Tenemos suficiente madera");
-				creationBuildingConstruction.SetActive(true);
-				currentProject = creationBuildingConstruction.GetComponent<Building> ();
-				currentProject.hitPoints = 0;
-				currentProject.needsBuilding = true;
-				currentProject.owner = owner;
-				var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
-				guo.updatePhysics = true;
-				AstarPath.active.UpdateGraphs (guo);
-				owner.resourceAmounts [RTSObject.ResourceType.Wood] -= currentProject.cost;
-				SetNewPath(constructionPoint);
-						
-			} else {
-				HUDInfo.message = "Not enough wood (" + creationBuilding.GetComponent<Building>().cost + ") to construct the " + creationBuilding.name;
-				Destroy(creationBuildingConstruction);
-				constructionPoint = Vector3.zero;
-				creationBuildingConstruction = null;
-			}
+	protected override void Animating ()
+	{
+		base.Animating ();
+		anim.SetBool ("IsFarming", harvesting && state == 2 && harvestType == ResourceType.Food);
+		if(currentlySelected && harvesting && state == 2 && harvestType == ResourceType.Food && farmingSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (farmingSound);
 		}
+		anim.SetBool ("IsMining", harvesting && state == 2 && harvestType == ResourceType.Gold);
+		if(currentlySelected && harvesting && state == 2 && harvestType == ResourceType.Gold && miningSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (miningSound);
+		}
+		anim.SetBool ("IsWoodCutting", harvesting && state == 2 && harvestType == ResourceType.Wood);
+		if(currentlySelected && harvesting && state == 2 && harvestType == ResourceType.Wood && woodCuttingSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (woodCuttingSound);
+		}
+		anim.SetBool ("IsBuilding", building && currentProject && currentProject.CanBeBuilt() && currentProject.inConstruction);
+		if(currentlySelected && building && currentProject && currentProject.CanBeBuilt() && currentProject.inConstruction && buildingSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (buildingSound);
+		}
+	}
+
+    // Metode que crea el edifici
+    /// <summary>
+    /// Starts the building location selection sequence, where the user has to click
+    /// on the map in order to select the place where the building should be built.
+    /// </summary>
+    /// <param name="creationBuildingPath">Name of the resource for the finished building.</param>
+    protected void StartBuildingLocationSelection(string creationBuildingPath)
+    {
+        // Destroy old collision detector object if any
+        if (creationCollisionDetectorObject != null)
+        {
+            Destroy(creationCollisionDetectorObject);
+        }
+
+        // Load the complete building resource
+        var creationBuildingTmp = Resources.Load<GameObject>(creationBuildingPath) as GameObject;
+        if (creationBuildingTmp == null || creationBuildingTmp.GetComponent<Building>() == null)
+        {
+			HUDInfo.insertMessage("Could not load resource '" + creationBuildingPath + "' to start building location selection.");
+            return;
+        }
+
+        // Set up the unit state to work on a building
+		HUDInfo.insertMessage("Select the site where you want to build the selected building " + creationBuildingTmp.name);
+        waitingForBuildingLocationSelection = true;
+        constructionPoint = Vector3.zero;
+        creationBuilding = creationBuildingTmp;
+
+        // Create the building preview and overlap detector object
+        creationCollisionDetectorObject = (GameObject)Instantiate(creationBuilding, Vector3.zero, Quaternion.identity);
+        creationCollisionDetectorObject.name = creationCollisionDetectorObject.name + "_CollisionDetector";
+        creationCollisionDetectorObject.AddComponent<BuildingOverlapDetector>();
+
+        // Remove all components of the preview / overlap detector object except
+        // - The transform, since this is basic and can't be removed
+        // - The collider, because we need it to detect the overlaps with other objects
+        // - The rigidbody, because otherwise, the object will be considered to have a 
+        //   "static collider" and the physics engine will not compute calculation correctly
+        //   after the object has moved
+        foreach (Component component in creationCollisionDetectorObject.GetComponents<Component>())
+        {
+            if (!(component is Transform) && !(component is Collider) && !(component is Rigidbody))
+            {
+                Destroy(component);
+            }
+        }
+
+        // Add our script to manage the preview object
+        creationCollisionDetectorObject.AddComponent<BuildingOverlapDetector>();
+    }
+
+    /// <summary>
+    /// Sets the location of the building on the building location selector to the current position.
+    /// </summary>
+    public void SetBuildingLocation()
+    {
+        if (creationCollisionDetectorObject.GetComponent<BuildingOverlapDetector>().IsBuildable)
+        {
+            constructionPoint = creationCollisionDetectorObject.transform.position;
+            Destroy(creationCollisionDetectorObject); // To avoid collisions with the new object
+
+            // Create the "on construction" building
+            CreateOnConstructionBuilding();
+
+            // Exit location selection mode
+            waitingForBuildingLocationSelection = false;
+            constructionPoint = Vector3.zero;
+            creationBuilding = null;
+            creationCollisionDetectorObject = null;
+        }
+        else
+        {
+			HUDInfo.insertMessage("The building cannot be placed in the selected location.");
+        }
+    }
+
+    public void CreateOnConstructionBuilding()
+    {
+        // Initialize the object to build, so we can access its cost and colliders
+        var creationBuildingConstructionProject =
+            (GameObject)Instantiate(creationBuilding, constructionPoint, Quaternion.identity);
+
+        // Check if there are enough resources available
+        float woodAvailable = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
+        float woodCost = creationBuildingConstructionProject.GetComponent<Building>().cost;
+
+        if (woodAvailable < woodCost)
+        {
+            Destroy(creationBuildingConstructionProject);
+			HUDInfo.insertMessage(string.Format("Not enough wood ({0}) to construct the {1}",
+                creationBuildingConstructionProject.GetComponent<Building>().cost,
+                creationBuildingConstructionProject.GetComponent<Building>().objectName));
+
+            return;
+        }
+
+        // Start the building project
+        var newProject = creationBuildingConstructionProject.GetComponent<Building> ();
+        newProject.hitPoints = 0;
+        newProject.needsBuilding = true;
+        newProject.owner = owner;
+        newProject.finishedModel = creationBuilding;
+
+        if (newProject.constructionModel != null)
+        {
+            newProject.changeModel("construction");
+        }
+        else
+        {
+            HUDInfo.insertMessage("WARNING: No on-construction model for building " + newProject.objectName + ".");
+        }
+
+        // Update physics
+		var guo = new GraphUpdateObject (newProject.GetComponent<BoxCollider> ().bounds);
+		guo.updatePhysics = true;
+		AstarPath.active.UpdateGraphs (guo);
+
+        // Substract resources needed for the building
+		owner.resourceAmounts [RTSObject.ResourceType.Wood] -= newProject.cost;
+        // Assign the building project to this unit
+        AssignBuildingProject(newProject);
     }
 	
 	public void CreateFinishedBuilding()
 	{
-		creationBuilding = (GameObject)Instantiate (creationBuilding, constructionPoint, Quaternion.identity);
-		currentProject = creationBuilding.GetComponent<Building> ();
-		currentProject.owner = owner;
-		var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
+		/*
+        currentProject.ReplaceChildWithChildFromGameObjectTemplate(currentProject.finishedModel);
+
+        var guo = new GraphUpdateObject (currentProject.GetComponent<BoxCollider> ().bounds);
 		guo.updatePhysics = true;
-		AstarPath.active.UpdateGraphs (guo);
-		SetNewPath(constructionPoint);		
-		constructionPoint = Vector3.zero;
-		creationBuilding = null;
-		currentProject=null;
-		creationBuildingConstruction = null;
-		constructionPoint = Vector3.zero;
+		AstarPath.active.UpdateGraphs (guo);*/
+		currentProject.GetComponent<Building>().changeModel("finished");
+
+        AssignBuildingProject(null);
 	}
 
     /*** Metodes privats ***/
 
-    // Metode que cridem per a començar a recolectar
+        // Metode que cridem per a començar a recolectar
     public void StartHarvest(Resource resource)
     {
         resourceDeposit = resource;
@@ -198,8 +343,8 @@ public class CivilUnit : Unit
     {
         //GetComponent<Animation>().Play (attack.name); 
         if(!resourceDeposit.isEmpty()){
-            resourceDeposit.Remove(Mathf.Round(5*Time.deltaTime));    //resta esto del arbol (ej)
-            collectionAmount += Mathf.Round(5*Time.deltaTime); //se lo suma al recolector
+            resourceDeposit.Remove(Mathf.Round(5));    //resta esto del arbol (ej) *Time.deltaTime
+            collectionAmount += Mathf.Round(5); //se lo suma al recolector *Time.deltaTime
         }
     }
 
@@ -219,8 +364,11 @@ public class CivilUnit : Unit
 		if (resourceStore == null){
 			resourceStore = findTownCenter();
 		}
-        SetNewPath(resourceStore.transform.position);
+        //ClosestPointOnBounds retorna el punto mas cercano del collider del objeto respecto al transform que le pasas
+        var closestPointResourceStore = resourceStore.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+        SetNewPath(closestPointResourceStore, false);
         state = 1;
+        
     }
     public void Recolectar(){
         Collect(resourceDeposit);
@@ -229,7 +377,9 @@ public class CivilUnit : Unit
         } 
     }
     public void IrRecolectar(){
-        SetNewPath(resourceDeposit.transform.position); //mi objetivo ahora es target = recurso (RTSObject)
+        //ClosestPointOnBounds retorna el punto mas cercano del collider del objeto respecto al transform que le pasas
+        var closestPointResource = resourceDeposit.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+        SetNewPath(closestPointResource, false); //mi objetivo ahora es target = recurso (RTSObject)
         state = 2;
     }
 

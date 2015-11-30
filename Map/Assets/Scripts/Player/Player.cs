@@ -1,6 +1,7 @@
 using Pathfinding;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -83,7 +84,7 @@ public class Player : MonoBehaviour {
 
         var townCenterSpawnPoint = townCenterSpawnPointTransform.position;
 
-        var townCenterTemplate = GetTownCenterTemplateForCivilization(civilization);
+        var townCenterTemplate = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilization, true);
         if (townCenterTemplate == null)
             return;
 
@@ -94,27 +95,6 @@ public class Player : MonoBehaviour {
         var guo = new GraphUpdateObject(townCenter.GetComponent<BoxCollider>().bounds);
         guo.updatePhysics = true;
         AstarPath.active.UpdateGraphs(guo);
-    }
-
-    /// <summary>
-    /// Get the default town center prefab for the specified civilization.
-    /// </summary>
-    /// <param name="civilization">The civilization of the player.</param>
-    /// <returns>A reference to the loaded town center resource.</returns>
-    private static GameObject GetTownCenterTemplateForCivilization(PlayerCivilization civilization)
-    {
-        switch (civilization)
-        {
-            case PlayerCivilization.Hittites:
-                return Resources.Load<GameObject>("Prefabs/Hittite_TownCenter");
-            case PlayerCivilization.Sumerians:
-                return Resources.Load<GameObject>("Prefabs/Sumerian_TownCenter");
-            case PlayerCivilization.Yamato:
-                return Resources.Load<GameObject>("Prefabs/Yamato_TownCenter");
-            default:
-                Debug.LogFormat("Can't find the town center template for civilization {0}.", civilization);
-                return null;
-        }       
     }
 
     /// <summary>
@@ -131,7 +111,7 @@ public class Player : MonoBehaviour {
 
         var civilUnitSpawnPoint = civilUnitSpawnPointTransform.position;
 
-        var civilUnitTemplate = GetCivilUnitTemplateForCivilization(civilization);
+        var civilUnitTemplate = RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilization, true);
         if (civilUnitTemplate == null)
             return;
 
@@ -140,28 +120,7 @@ public class Player : MonoBehaviour {
         civilUnit.transform.parent = transform; // Should have no effect, but easier for debugging
     }
 
-    /// <summary>
-    /// Get the default civil unit prefab for the specified civilization.
-    /// </summary>
-    /// <param name="civilization">The civilization of the player.</param>
-    /// <returns>A reference to the loaded civil unit resource.</returns>
-    private static GameObject GetCivilUnitTemplateForCivilization(PlayerCivilization civilization)
-    {
-        switch (civilization)
-        {
-            case PlayerCivilization.Hittites:
-                return Resources.Load<GameObject>("Prefabs/Hittite_civil");
-            case PlayerCivilization.Sumerians:
-                return Resources.Load<GameObject>("Prefabs/Sumerian_civil");
-            case PlayerCivilization.Yamato:
-                return Resources.Load<GameObject>("Prefabs/Yamato_civil");
-            case PlayerCivilization.Persians:
-                return Resources.Load<GameObject>("Prefabs/Persian_civil");
-            default:
-                Debug.LogFormat("Can't find the civil unit template for civilization {0}.", civilization);
-                return null;
-        }
-    }
+
 
     /// <summary>
     /// Spawn the initial player military unit.
@@ -177,7 +136,7 @@ public class Player : MonoBehaviour {
 
         var militaryUnitSpawnPoint = militaryUnitSpawnPointTransform.position;
 
-        var militaryUnitTemplate = GetMilitaryUnitTemplateForCivilization(civilization);
+        var militaryUnitTemplate = RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitWarrior, civilization, true);
         if (militaryUnitTemplate == null)
             return;
 
@@ -185,33 +144,6 @@ public class Player : MonoBehaviour {
         militaryUnit.GetComponent<RTSObject>().owner = this;
         militaryUnit.transform.parent = transform; // Should have no effect, but easier for debugging
     }
-
-    /// <summary>
-    /// Get the default military unit prefab for the specified civilization.
-    /// </summary>
-    /// <param name="civilization">The civilization of the player.</param>
-    /// <returns>A reference to the loaded military unit resource.</returns>
-    private static GameObject GetMilitaryUnitTemplateForCivilization(PlayerCivilization civilization)
-    {
-        switch (civilization)
-        {
-            case PlayerCivilization.Hittites:
-                return Resources.Load<GameObject>("Prefabs/Hittite_warrior");
-            case PlayerCivilization.Sumerians:
-                return Resources.Load<GameObject>("Prefabs/Sumerian_warrior");
-            case PlayerCivilization.Yamato:
-                return Resources.Load<GameObject>("Prefabs/Yamato_samurai");
-            case PlayerCivilization.Persians:
-                return Resources.Load<GameObject>("Prefabs/Persian_warrior");
-            default:
-                Debug.LogFormat("Can't find the military unit template for civilization {0}.", civilization);
-                return null;
-        }
-    }
-
-    void Update () {
-	
-	}
 
     /// <summary>
     /// Called when the RTS element selection begins.
