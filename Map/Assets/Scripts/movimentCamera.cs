@@ -3,6 +3,10 @@ using System.Collections;
 
 public class movimentCamera : MonoBehaviour {
 
+	void Awake(){
+		CameraPoint = new GameObject ("CameraPoint");
+	}
+
 	void Start () {
 		terrainHeight = Terrain.activeTerrain.terrainData.heightmapHeight;
 		terrainWidth = Terrain.activeTerrain.terrainData.heightmapWidth;
@@ -15,7 +19,6 @@ public class movimentCamera : MonoBehaviour {
 		recleft = new Rect (0, 0, wMargin, Screen.height);
 		recright = new Rect (Screen.width-wMargin, 0, wMargin, Screen.height);
 		//cube = GameObject.Find ("Cube");
-		CameraPoint = new GameObject ("CameraPoint");
 		//Instantiate (CameraPoint);
 		//CameraPoint.Instantiate ();
 		//CameraPoint = GameObject.Find("CameraPoint");
