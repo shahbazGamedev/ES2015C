@@ -21,18 +21,16 @@ public class CitizenAI : AI {
 	// Use this for initialization
 	void Start () {
 		this.tag = "Untagged";
+		GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
 		resources = new AIResources ();
 		enemy1 = GameObject.Find("EnemyPlayer1");
 		AIState = 0;
 		townCenter = GameObject.Find ("Sumerian_TownCenter").transform;
 		this.hit = new RaycastHit ();
 		this.aiResource = new Resource ();
-		this.auxAIResourcesw = GameObject.FindGameObjectsWithTag("wood");
-		this.auxAIResourcesf = GameObject.FindGameObjectsWithTag("food");
-		this.auxAIResourcesg = GameObject.FindGameObjectsWithTag("metal");
-		fullingResources ();
 		this.estoyOcupado = false;
 		this.estoyLleno = false;
+		this.AITarget = NextResource ();
 		
 	}
 	// Update is called once per frame
@@ -54,7 +52,7 @@ public class CitizenAI : AI {
 		if (Physics.SphereCast (fwd, 20, transform.forward, out hit, 20)) {
 			Debug.Log ("SOY "+this.tag +" Y HE DETECTADO EL OBJETO: " + hit.collider.name);
 			
-			// Si topo contra una madera
+			// Si topo contra una recurso
 			if (hit.collider.tag.Equals ("wood")||hit.collider.tag.Equals("food")||hit.collider.tag.Equals("gold") && !estoyOcupado) {	
 				// Si no existe en la lista
 				/*
@@ -74,7 +72,7 @@ public class CitizenAI : AI {
 		}
 		// --------------------------------- ESTOY JUNTO A ALGO ---------------------------------------
 		if (Physics.SphereCast (fwd, 0F, transform.forward, out hit, 1F)) {
-			//Debug.Log ("SOY "+this.tag +" Y ESTOY JUNTO AL OBJETO: "+hit.collider.name);
+			Debug.Log ("SOY "+this.tag +" Y ESTOY JUNTO AL OBJETO: "+hit.collider.name);
 			if((hit.collider.tag.Equals ("wood") || hit.collider.tag.Equals("food")||hit.collider.tag.Equals("gold")) && !estoyLleno && estoyOcupado){
 				this.auxAITarget = this.AITarget;
 				this.AIState = 3;
@@ -83,14 +81,17 @@ public class CitizenAI : AI {
 				this.AIState = 5;
 			}
 		}
-		if (this.AITarget == null) {
-			this.AIState = 1;
-			this.estoyOcupado = false;
-		}
-		
-		if(!resources.resourcesArray.Contains(this.auxAITarget.gameObject)){
+
+		try{
+			if(!resources.resourcesArray.Contains(this.auxAITarget.gameObject)){
+				this.AITarget = NextResource();
+				this.AIState = 2;
+			}
+		}catch(MissingReferenceException ex){
 			this.AITarget = NextResource();
+			this.AIState = 2;
 		}
+
 		// Control de busqueda de recursos 
 		// TODO: randomizarlo
 		if (patrolTime <= 0){this.patrolTime = 9;this.patrol=false;AIState =0;this.direction = 1;}
@@ -102,6 +103,12 @@ public class CitizenAI : AI {
 	
 	public void Idle(){ // estado 0
 		//GetComponent<Animation>().Play(idle.name); 
+		this.auxAIResourcesw = GameObject.FindGameObjectsWithTag("wood");
+		this.auxAIResourcesf = GameObject.FindGameObjectsWithTag("food");
+		this.auxAIResourcesg = GameObject.FindGameObjectsWithTag("gold");
+		fullingResources ();
+		this.AITarget = NextResource();
+		this.auxAITarget = this.AITarget;
 	}
 	
 	public void Walk() { // estado 1
@@ -125,6 +132,7 @@ public class CitizenAI : AI {
 			this.AIState = 2;
 		} else {
 			this.AITarget = this.auxAITarget;
+			this.estoyOcupado = true;
 			this.AIState = 2;
 		}
 		
@@ -175,22 +183,27 @@ public class CitizenAI : AI {
 		
 	}
 	public void fullingResources(){
-		
+		Debug.Log ("--------------------------- RELLENANDO RESOURCESARRAY -------------------------------");
 		for (int i =0; i<this.auxAIResourcesw.Length; i++) {
 			if(!resources.resourcesArray.Contains(auxAIResourcesw[i])){
 				resources.resourcesArray.Add(auxAIResourcesw[i]); // Añado el recurso al array
 			}
 		}
+		Debug.Log ("NUMERO DE ELEMENTOS DE MADERA : " + resources.resourcesArray.Count);
+
 		for (int i =0; i<this.auxAIResourcesf.Length; i++) {
-			if(!resources.resourcesArray.Contains(auxAIResourcesw[i])){
-				resources.resourcesArray.Add(auxAIResourcesw[i]); // Añado el recurso al array
+			if(!resources.resourcesArray.Contains(auxAIResourcesf[i])){
+				resources.resourcesArray.Add(auxAIResourcesf[i]); // Añado el recurso al array
 			}
 		}
-		for (int i =0; i<this.auxAIResourcesf.Length; i++) {
-			if(!resources.resourcesArray.Contains(auxAIResourcesw[i])){
-				resources.resourcesArray.Add(auxAIResourcesw[i]); // Añado el recurso al array
+		Debug.Log ("NUMERO DE ELEMENTOS DE MADERA + COMIDA : " + resources.resourcesArray.Count);
+		for (int i =0; i<this.auxAIResourcesg.Length; i++) {
+			if(!resources.resourcesArray.Contains(auxAIResourcesg[i])){
+				resources.resourcesArray.Add(auxAIResourcesg[i]); // Añado el recurso al array
 			}
 		}
+
+		Debug.Log ("NUMERO DE ELEMENTOS DE MADERA + COMIDA + ORO: " + resources.resourcesArray.Count);
 		
 	}
 	
@@ -228,6 +241,8 @@ public class CitizenAI : AI {
 				
 			}
 		}
+		Debug.Log ("SOY "+this.tag +" Y MI PROXIMO OBJETIVO ES: " + closest.name);
+
 		return closest;
 		
 	}
