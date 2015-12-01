@@ -14,11 +14,19 @@ public class ADS : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        speed = 2;
-        hit = new RaycastHit();
-        estado = aiState.wandering;
-        GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
-        enlace = GameObject.Find("EnemyPlayer1");
+        if (GetComponent<RTSObject>().owner != GameObject.Find("EnemyPlayer1").GetComponent<Player>())
+        {
+            GetComponent<ADS>().enabled = false;
+            GetComponent<MovimientoAleatorioCivil>().enabled = false;
+        }
+        else
+        {
+            speed = 2;
+            hit = new RaycastHit();
+            estado = aiState.wandering;
+            GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
+            enlace = GameObject.Find("EnemyPlayer1");
+        }
     }
 
     // Update is called once per frame
