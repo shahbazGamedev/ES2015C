@@ -11,5 +11,6 @@ public class Hittite_WallTower : Building {
 		cost = 250;
 		hitPoints = maxHitPoints = 900;
         baseDefense = 5;
+		getModels("Prefabs/Hittite_WallTower", "Prefabs/Hittite_WallTower_onConstruction", "Prefabs/Hittite_WallTower");
     }
 }

@@ -11,6 +11,7 @@ public class Hittite_ArmyBuilding : ArmyBuilding
 		objectName = "Hittite Army Building";
 		actions = new string[] {"Archer", "Cavalry", "Warrior", "Warrior Advanced"};
         baseDefense = 5;
+		getModels("Prefabs/Hittite_ArmyBuilding", "Prefabs/Hittite_ArmyBuilding_onConstruction", "Prefabs/Hittites Army Semidemolished");
     }
 
 	/*** Metodes interns accessibles per les subclasses ***/

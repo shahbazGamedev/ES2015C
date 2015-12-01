@@ -21,12 +21,10 @@ public class HUDImageYamatoButton2 : HUDElement
     {
         if (DisplayObject != null && DisplayObject.imageWallTower != null)
         {
-            imageComponent.enabled = true;
             imageComponent.sprite = DisplayObject.imageWallTower;
         }
         else
         {
-            imageComponent.enabled = false;
             imageComponent.sprite = null;
         }
     }
