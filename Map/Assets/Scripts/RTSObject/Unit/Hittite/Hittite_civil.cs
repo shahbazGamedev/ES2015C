@@ -8,7 +8,7 @@ public class Hittite_civil : CivilUnit
     {
 		base.Awake();
 		objectName = "Hittite Civil";
-		cost = 50;
+		cost = 100;
 		baseAttackStrength = 10;
         baseDefense = 3;
         baseAttackSpeed = 1.0f;

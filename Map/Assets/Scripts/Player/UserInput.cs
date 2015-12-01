@@ -125,9 +125,20 @@ public class UserInput : MonoBehaviour
                 //Recolecto
 				else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.GetComponent<Resource>())
 				{
+<<<<<<< HEAD
                     //Empieza a recolectar el recurso seleccionado
                     player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>());
 				}
+=======
+                    //player.SelectedObject.MoveTo(hit.point);
+                    player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>(),false,null);//, Building store)
+                    //player.SelectedObject.GetComponent<CivilUnit>().harvesting=true; //el civilunit es recolector
+                    //player.SelectedObject.GetComponent<CivilUnit>().resourceDeposit = targetRtsElement.GetComponent<Resource>(); //este es tu recurso
+                    //player.SelectedObject.GetComponent<CivilUnit>().harvestType = targetRtsElement.GetComponent<Resource>().GetResourceType();
+                    //player.SelectedObject.GetComponent<CivilUnit>().state = 2;
+                }
+				
+>>>>>>> dev_teamD4
                 else if (player.SelectedObject.CanMove())
                 {
                     // Otherwise, if the unit can move, start the movement sequence

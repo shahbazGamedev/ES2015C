@@ -31,7 +31,6 @@ public class zoomCamera : MonoBehaviour {
 			fov += Event.current.delta.y;// / Time.deltaTime;
 			fov = Mathf.Clamp (fov, minFov, maxFov);
 			Camera.main.fieldOfView = fov;
-			Debug.Log (Event.current.delta);
 		}
 	}
 
