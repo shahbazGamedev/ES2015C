@@ -19,12 +19,14 @@ public class CivilUnit : Unit
     public bool waitingForBuildingLocationSelection = false;
     protected Vector3 constructionPoint = Vector3.zero;
     protected GameObject creationBuilding = null;           // Objecte que anem a crear
+    protected GameObject creationBuildingConstruction = null;
     /// <summary>
+    /// 
     /// Object used to show the preview to the user and detect overlaps and unbuildable places.
     /// </summary>
     protected GameObject creationCollisionDetectorObject;
 
-    protected bool building = false;                        // true if the unit has a building project assigned
+    public bool building = false;                        // true if the unit has a building project assigned
     protected Building currentProject = null;  				// Building actual de construccio
 
     //private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
@@ -329,13 +331,9 @@ public class CivilUnit : Unit
 
     /*** Metodes privats ***/
 
-<<<<<<< HEAD
-        // Metode que cridem per a començar a recolectar
-    public void StartHarvest(Resource resource)
-=======
+
     // Metode que cridem per a començar a recolectar
     public void StartHarvest(Resource resource, bool ia,string tag)
->>>>>>> dev_teamD4
     {
         if (ia == false)
         {
@@ -452,7 +450,7 @@ public class CivilUnit : Unit
                 guo.updatePhysics = true;
                 AstarPath.active.UpdateGraphs(guo);
                 owner.resourceAmounts[RTSObject.ResourceType.Wood] -= currentProject.cost;
-                SetNewPath(coords);                    
+                SetNewPath(coords,false);                    
         }
     }
 

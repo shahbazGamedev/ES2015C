@@ -276,11 +276,6 @@ public class AI : MonoBehaviour
 
     private void CreateNewArcher()
     {
-<<<<<<< HEAD
-        civilian.GetComponent<CivilUnit>().GoTo(position, false);
-        civilian.GetComponent<CivilUnit>().StartHarvest(tree.GetComponent<Resource>());
-=======
->>>>>>> dev_teamD4
 
         coords = new Vector3(armyPos.x - 15, 0.4f, armyPos.z - 10 + z * 2);
         artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] - 170;
