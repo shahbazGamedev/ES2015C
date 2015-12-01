@@ -1,6 +1,5 @@
 using Pathfinding;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -12,9 +11,6 @@ public class Player : MonoBehaviour {
     public PlayerCivilization civilization;
 
     private bool findingPlacement = false;
-
-    public ArrayList objetivos;
-
 
     /// <summary>
     /// Gets the team that this player belongs to.
@@ -39,15 +35,13 @@ public class Player : MonoBehaviour {
 
     void Start ()
     {
-        this.objetivos = new ArrayList();
-
         // Set the initial resource amounts
         resourceAmounts = new Dictionary<RTSObject.ResourceType, float>();
         resourceAmounts[RTSObject.ResourceType.Food] = initialFood;
         resourceAmounts[RTSObject.ResourceType.Gold] = initialGold;
         resourceAmounts[RTSObject.ResourceType.Wood] = initialWood;
-        
-        Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
+
+		Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
 		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
 
         // Load player civilization from menu parameters
@@ -71,12 +65,9 @@ public class Player : MonoBehaviour {
         }
 
         // Spawn initial elements
-        if (human==true) {
-            SpawnInitialTownCenter();
-            SpawnInitialCivilUnit();
-            SpawnInitialMilitaryUnit();
-
-        }
+        SpawnInitialTownCenter();
+        SpawnInitialCivilUnit();
+        SpawnInitialMilitaryUnit();
     }
 
     /// <summary>

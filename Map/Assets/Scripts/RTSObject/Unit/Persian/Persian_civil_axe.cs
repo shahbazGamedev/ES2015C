@@ -8,7 +8,7 @@ public class Persian_civil_axe : CivilUnit
     {
 		base.Awake();
 		objectName = "Persian Civil Axe";
-		cost = 100;
+		cost = 50;
 		baseAttackStrength = 10;
         baseDefense = 3;
         baseAttackSpeed = 1.0f;
