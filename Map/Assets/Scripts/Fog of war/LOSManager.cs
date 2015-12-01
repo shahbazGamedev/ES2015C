@@ -68,6 +68,8 @@ public class LOSManager : MonoBehaviour {
     float[,] terrainHeightsCache;
     Texture2D losTexture;
 
+	bool revealed = false;
+
     // Used to determine when the user changes a field that requires
     // the texture to be recreated
     private int previewParameterHash = 0;
@@ -115,22 +117,24 @@ public class LOSManager : MonoBehaviour {
     }
 
     void Update() {
-		if (Input.GetKey (KeyCode.R)) {
-			if (this.Terrain.materialType != Terrain.MaterialType.BuiltInStandard){
-				this.Terrain.materialType = Terrain.MaterialType.BuiltInStandard;
-				foreach (var entity in Entities)
-					entity.IsRevealer = true;
-			}
-		}
-		if (Input.GetKey (KeyCode.U)) {
-			this.Terrain.materialTemplate = Resources.Load("Materials/Terrain", typeof(Material)) as Material;
-			this.Terrain.materialType = Terrain.MaterialType.Custom;
-			foreach (var entity in Entities){
-				if (entity.IsAlly != true){
-					entity.IsRevealer = false;
+		if ((Input.GetKey (KeyCode.R) || Input.GetKey (KeyCode.U))) {
+			if (!revealed) {
+				if (this.Terrain.materialType != Terrain.MaterialType.BuiltInStandard) {
+					this.Terrain.materialType = Terrain.MaterialType.BuiltInStandard;
+					foreach (var entity in Entities)
+						entity.reveal ();
 				}
+				revealed = !revealed;
+			} else {
+				this.Terrain.materialTemplate = Resources.Load ("Materials/Terrain", typeof(Material)) as Material;
+				this.Terrain.materialType = Terrain.MaterialType.Custom;
+				foreach (var entity in Entities) {
+					if (entity.IsAlly != true) {
+						entity.RevealState = LOSEntity.RevealStates.Fogged;
+					}
+				}
+				revealed = !revealed;
 			}
-
 		}
 
 #if UNITY_EDITOR
@@ -491,7 +495,7 @@ public class LOSManager : MonoBehaviour {
     public LOSEntity.RevealStates GetRevealFromFOW(Color32 px) {
         if (px.r >= 128) return LOSEntity.RevealStates.Unfogged;
         if (px.g >= 128) return LOSEntity.RevealStates.Fogged;
-        return LOSEntity.RevealStates.Hidden;
+        return LOSEntity.RevealStates.Fogged;
     }
     public LOSEntity.RevealStates IsVisible(Vector2 pos) {
         return GetRevealFromFOW(GetFOWColor(pos));

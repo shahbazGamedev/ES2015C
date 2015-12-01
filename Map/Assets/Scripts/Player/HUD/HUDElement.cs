@@ -24,11 +24,4 @@ public abstract class HUDElement : MonoBehaviour
             return Player.SelectedObject;
         }
     }
-
-    /// <summary>
-    /// Called when the element is clicked on the UI.
-    /// </summary>
-    public virtual void HandleClick()
-    {
-    }
 }

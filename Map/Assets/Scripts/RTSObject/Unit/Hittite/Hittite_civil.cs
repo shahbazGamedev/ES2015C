@@ -8,12 +8,19 @@ public class Hittite_civil : CivilUnit
     {
 		base.Awake();
 		objectName = "Hittite Civil";
-		cost = 50;
+		cost = 100;
 		baseAttackStrength = 10;
         baseDefense = 3;
         baseAttackSpeed = 1.0f;
-		baseBuildSpeed = 50;
 		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Hittite_civil_AC") as RuntimeAnimatorController;
+		walkingSound = Resources.Load ("Sounds/Hittite_civil_Walk") as AudioClip;
+		runningSound = Resources.Load ("Sounds/Hittite_civil_Run") as AudioClip;
+		fightSound = Resources.Load ("Sounds/Hittite_civil_Fight") as AudioClip;
+		dieSound = Resources.Load ("Sounds/Hittite_civil_Die") as AudioClip;
+		farmingSound = Resources.Load ("Sounds/Hittite_civil_Farming") as AudioClip;
+		miningSound = Resources.Load ("Sounds/Hittite_civil_Mining") as AudioClip;
+		woodCuttingSound = Resources.Load ("Sounds/Hittite_civil_WoodCutting") as AudioClip;
+		buildingSound = Resources.Load ("Sounds/Hittite_civil_Building") as AudioClip;
 		actions = new string[] { "Town Center", "Army Building", "Wall Tower", "Wall Entrance", "Wall", "Civil House", "Academy"};
     }
 
@@ -22,34 +29,27 @@ public class Hittite_civil : CivilUnit
 	public override void PerformAction(string actionToPerform)
 	{
 		switch (actionToPerform) {
-		case "Town Center":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_TownCenter") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_TownCenter") as GameObject;
-            break;
-		case "Army Building":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_ArmyBuilding") as GameObject;
-			creationBuildingConstruction = Resources.Load ("Prefabs/Hittite_ArmyBuildingConstruction") as GameObject;
-			break;
-		case "Wall Tower":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_WallTower") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_WallTower") as GameObject;
-            break;
-		case "Wall Entrance":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_WallEntrance") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_WallEntrance") as GameObject;
-            break;
-		case "Wall":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_Wall") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_Wall") as GameObject;
-            break;
-		case "Civil House":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_CivilHouse") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_CivilHouse") as GameObject;
-            break;
-		case "Academy":
-			creationBuilding = Resources.Load ("Prefabs/Hittite_Academy") as GameObject;
-            creationBuildingConstruction = Resources.Load("Prefabs/Hittite_Academy") as GameObject;
-            break;
+            case "Town Center":
+                StartBuildingLocationSelection("Prefabs/Hittite_TownCenter");
+                break;
+            case "Army Building":
+                StartBuildingLocationSelection("Prefabs/Hittite_ArmyBuilding");
+			    break;
+		    case "Wall Tower":
+                StartBuildingLocationSelection("Prefabs/Hittite_WallTower");
+                break;
+		    case "Wall Entrance":
+                StartBuildingLocationSelection("Prefabs/Hittite_WallEntrance");
+                break;
+		    case "Wall":
+                StartBuildingLocationSelection("Prefabs/Hittite_Wall");
+                break;
+		    case "Civil House":
+                StartBuildingLocationSelection("Prefabs/Hittite_CivilHouse");
+                break;
+		    case "Academy":
+                StartBuildingLocationSelection("Prefabs/Hittite_Academy");
+                break;
 		}
 	}
 }

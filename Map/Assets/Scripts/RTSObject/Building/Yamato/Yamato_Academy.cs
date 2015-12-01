@@ -11,5 +11,6 @@ public class Yamato_Academy : Building {
 		cost = 400;
 		hitPoints = maxHitPoints = 800;
         baseDefense = 5;
+		getModels("Prefabs/Yamato_Academy", "Prefabs/Yamato_Academy_onConstruction", "Prefabs/Yamato Academy Smidemolished");
     }
 }

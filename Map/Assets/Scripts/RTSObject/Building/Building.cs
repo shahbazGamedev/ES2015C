@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 
 public class Building : RTSObject
 {
-	protected float maxBuildProgress = 10.0f;	// Maxim progres de construccio
 	protected GameObject creationUnit = null;	// Objecte que indica la unitat a crear actual
 
 	protected Vector3 spawnPoint;               // Punt de creacio de les unitats
@@ -12,7 +12,9 @@ public class Building : RTSObject
 
 	private BoxCollider boxCollider;			// Referencia al component BoxCollider.
 	  
-	public bool needsBuilding = false;         // Indica si necesita se construit
+	public bool needsBuilding = false;         	// Indica si necesita ser construit
+	public bool inConstruction = false;			// Indica si s'esta construint ara mateix
+	private bool demolished = false;
 
 	private static int layer1 = 11; 
 	private static int layer2 = 10;
@@ -21,6 +23,15 @@ public class Building : RTSObject
 	private int mask = layermask1 | layermask2;
 
     public float visi = 60f;
+
+    /// <summary>For in-construction buildings, reference to the finished building model.</summary>
+    public GameObject finishedModel;
+	public GameObject constructionModel;
+	public GameObject demolishedModel;
+    /// <summary>Number of seconds that this building will take to be built at the default building factor.</summary>
+    public float buildingTime = 5.0f;
+    /// <summary>While building, number of "partial" hit points, to build at a consistent rate.</summary>
+    private float fractionalHitPoints = 0.0f;
 
     /*** Metodes per defecte de Unity ***/
 
@@ -32,15 +43,17 @@ public class Building : RTSObject
         gameObject.layer = 10;
         // Calculem la dimensio del BoxCollider
         FittedBoxCollider();
-        currentBuildProgress = 0.0f; // Progres actual de la construccio
 		ent.Range = visi;
-
     }
 
     protected override void Update()
     {
         base.Update();
         ProcessBuildQueue();
+		
+		if (!inConstruction && hitPoints<maxHitPoints) {
+			
+		}
     }
 
     protected override void OnGUI()
@@ -55,24 +68,44 @@ public class Building : RTSObject
     // Metode que obte el porcentatge de construccio actual
     public float getBuildPercentage()
     {
-        return currentBuildProgress / maxBuildProgress;
+        return hitPoints / maxHitPoints;
     }
 
     // Metode que obte si esta en construccio
-    public bool UnderConstruction()
+    public override bool CanBeBuilt()
     {
         return needsBuilding;
     }
 
     // Metode que va construint el edifici
-    public void Construct(int amount)
+    public void Construct(float timeFactor)
     {
-		hitPoints += amount;
-        if (hitPoints >= maxHitPoints)
+		inConstruction = true;
+        // Increment the number of hit point, taking into account the fractional hit points
+        float newHitPoints = hitPoints + fractionalHitPoints + (maxHitPoints/ buildingTime) * timeFactor;
+        // Split again into whole and fractional hit points
+        hitPoints = (int)newHitPoints;
+        fractionalHitPoints = newHitPoints - (int)newHitPoints;
+
+        if (hitPoints >= maxHitPoints) // Building is completed?
         {
+            // Clamp hit points at maximum
             hitPoints = maxHitPoints;
+            fractionalHitPoints = 0;
+
+            // Mark as completed
             needsBuilding = false;
+			inConstruction = false;
+			demolished = false;
         }
+    }
+
+    public override string[] GetActions()
+    {
+        if (CanBeBuilt())
+            return new string[0];
+
+        return base.GetActions();
     }
 
     public override void PerformAction(string actionToPerform)
@@ -94,7 +127,6 @@ public class Building : RTSObject
                 if (Physics.CheckSphere(point, 0.4f, mask))
                 {
                     point = new Vector3(point.x - 5, 0.0f, point.z); //si ya hay algo provamos en otra posicion
-                    Debug.Log("Habia algo en la posicion" + point);
                 }
                 else
                 {
@@ -109,7 +141,7 @@ public class Building : RTSObject
 					}
 					else
 					{
-						HUDInfo.message = "Not enough food (" + unitClone.GetComponent<Unit>().cost + ") to create a new " + unitClone.GetComponent<Unit>().name;
+						HUDInfo.insertMessage("Not enough food (" + unitClone.GetComponent<Unit>().cost + ") to create a new " + unitClone.GetComponent<Unit>().name);
 						Destroy(unitClone);
 					}
                 }
@@ -155,5 +187,49 @@ public class Building : RTSObject
 
         transform.rotation = rotation;
     }
+	
+	public void changeModel(string estat) {
+		if (estat=="finished") {
+			ReplaceChildWithChildFromGameObjectTemplate(finishedModel);
+		} else if (estat == "demolished") {
+			ReplaceChildWithChildFromGameObjectTemplate(demolishedModel);
+		} else if (estat == "construction") {
+			ReplaceChildWithChildFromGameObjectTemplate(constructionModel);
+		}
+
+        var guo = new GraphUpdateObject (this.GetComponent<BoxCollider> ().bounds);
+		guo.updatePhysics = true;
+		AstarPath.active.UpdateGraphs (guo);		
+	}
+	
+	public void getModels(string fModel, string cModel, string dModel) {
+		Debug.Log("get prefabs of Building");
+		finishedModel = Resources.Load<GameObject>(fModel) as GameObject;
+		constructionModel = Resources.Load<GameObject>(cModel) as GameObject;
+		demolishedModel = Resources.Load<GameObject>(dModel) as GameObject;
+		
+		if (finishedModel == null || finishedModel.GetComponent<Building>() == null)
+        {
+            Debug.Log("Could not load resource '" + fModel);
+        }
+		
+		if (constructionModel == null)
+        {
+            Debug.Log("Could not load resource '" + cModel);
+        }
+		
+		if (demolishedModel == null)
+        {
+            Debug.Log("Could not load resource '" + dModel);
+        }
+	}
+	
+	public override void TakeDamage(int damage){
+		base.TakeDamage(damage);
+		if(hitPoints>0 && hitPoints<maxHitPoints && !demolished) {
+			changeModel("demolished");
+			demolished=true;
+		}
+	}
 
 }

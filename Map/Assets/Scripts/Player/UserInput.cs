@@ -24,13 +24,19 @@ public class UserInput : MonoBehaviour
 
             bool leftClick = Input.GetMouseButtonDown(0);
             bool rightClick = Input.GetMouseButtonDown(1);
-            if (leftClick || rightClick)
-                HandleMouseClick(leftClick, rightClick);
+			bool middleClick = Input.GetMouseButtonDown(2);
+            if (leftClick || rightClick || middleClick)
+                HandleMouseClick(leftClick, rightClick, middleClick);
+
+            if (Input.GetKey (KeyCode.M)) morirEnemigos(); 
+            if (Input.GetKey (KeyCode.P)) morirJugador();
+			if (Input.GetKeyUp("k")) demolishBuildings();
 
             MoveCamera();
             RotateCamera();
             MouseActivity();
         }
+
     }
 
     private void OpenPauseMenu()
@@ -42,50 +48,26 @@ public class UserInput : MonoBehaviour
 		SelectedArea = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
 		SelectedArea.transform.position = new Vector3(0, 0, 0);
 		SelectedArea.transform.localScale = new Vector3(0, 0, 0);
+		SelectedArea.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+		SelectedArea.GetComponent<MeshRenderer>().material = Resources.Load("Materials/selectedArea") as Material;
 		SelectedArea.name = "SelectedArea";
 		Destroy (SelectedArea.GetComponent<Collider> ());
 	}
 
-    private void HandleMouseClick(bool leftClick, bool rightClick)
+    private void HandleMouseClick(bool leftClick, bool rightClick, bool middleClick)
     {
-        EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-        if (eventSystem.IsPointerOverGameObject()) // Click on UI element
+        if (!EventSystem.current.IsPointerOverGameObject()) // Click on non-UI element
         {
-            HUDElement element = null;
+            RaycastHit hit = FindMouseTargetHit();
+            RTSObject targetRtsElement = (hit.collider != null)
+                ? hit.collider.gameObject.GetComponent<RTSObject>() : null;
 
-            // Check if the currently selected element is an element from the HUD
-            if (eventSystem.currentSelectedGameObject != null)
-            {
-                element = eventSystem.currentSelectedGameObject.GetComponent<HUDElement>();
-            }
-
-            if (element != null && leftClick)
-            {
-                // Notify the element about the click event
-                element.HandleClick();
-            }
-        }
-        else // Click on non-UI element
-        {
-            RTSObject targetRtsElement = null;
-
-            // Cast a ray in the direction clicked by the user to detect the currently clicked element,
-            // and if it is a RTS element, then save its reference
-            GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-            Ray ray = camera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                GameObject objectHit = hit.collider.gameObject;
-                targetRtsElement = objectHit.GetComponent<RTSObject>();
-            }
-
-			if (player.SelectedObject && player.SelectedObject.tag == "civil" && player.SelectedObject.GetComponent<CivilUnit>()
-			    && player.SelectedObject.GetComponent<CivilUnit>().building == true && player.SelectedObject.GetComponent<CivilUnit>().constructionPoint == Vector3.zero)
+            if (player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>()
+			    && player.SelectedObject.GetComponent<CivilUnit>().waitingForBuildingLocationSelection)
 			{
-				player.SelectedObject.GetComponent<CivilUnit>().constructionPoint = hit.point;
+                player.SelectedObject.GetComponent<CivilUnit>().SetBuildingLocation();
 			}
+
 			else if (leftClick)
             {
 				object[] obj = GameObject.FindSceneObjectsOfType(typeof (RTSObject));
@@ -114,14 +96,17 @@ public class UserInput : MonoBehaviour
             }
             else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
             {
-                if (player.SelectedObject.GetType().Equals("CivilUnit"))
+				if (player.SelectedObject.GetComponent<CivilUnit>() && player.SelectedObject.GetComponent<CivilUnit>().harvesting)
                 {
                     player.SelectedObject.GetComponent<CivilUnit>().harvesting = false;
-                    if (player.SelectedObject.CanBuild())
-                    {
-                        player.SelectedObject.GetComponent<CivilUnit>().building = false;
-                    }
                 }
+
+                // If there is any building project for this object, deassign it before assigning other actions
+                if (player.SelectedObject.IsBuilding())
+                {
+                    player.SelectedObject.AssignBuildingProject(null);
+                }
+
 				//Atacar
                 if (player.SelectedObject.CanAttack() &&
                     targetRtsElement != null && targetRtsElement.owner != null &&
@@ -135,31 +120,145 @@ public class UserInput : MonoBehaviour
 				//Construir un edificio
 				else if (player.SelectedObject.CanBuild()&& targetRtsElement != null && targetRtsElement.owner==player && targetRtsElement.CanBeBuilt())
 				{
-					player.SelectedObject.MoveTo(hit.point);
-					player.SelectedObject.GetComponent<CivilUnit>().building=true;
-					player.SelectedObject.GetComponent<CivilUnit>().currentProject=targetRtsElement.GetComponent<Building>();
-					targetRtsElement.GetComponent<Building>().needsBuilding=true;
+                    player.SelectedObject.AssignBuildingProject(targetRtsElement.GetComponent<Building>());
 				}
-                
                 //Recolecto
-				else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.GetComponent<Resource>()) //tag == "wood"
+				else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.GetComponent<Resource>())
 				{
                     //player.SelectedObject.MoveTo(hit.point);
-                    player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>());//, Building store)
+                    player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>(),false,null);//, Building store)
                     //player.SelectedObject.GetComponent<CivilUnit>().harvesting=true; //el civilunit es recolector
                     //player.SelectedObject.GetComponent<CivilUnit>().resourceDeposit = targetRtsElement.GetComponent<Resource>(); //este es tu recurso
                     //player.SelectedObject.GetComponent<CivilUnit>().harvestType = targetRtsElement.GetComponent<Resource>().GetResourceType();
                     //player.SelectedObject.GetComponent<CivilUnit>().state = 2;
                 }
-				
                 else if (player.SelectedObject.CanMove())
                 {
                     // Otherwise, if the unit can move, start the movement sequence
-                    player.SelectedObject.MoveTo(hit.point);
+                    player.SelectedObject.MoveTo(hit.point, false);
                 }
+            }
+			else if (middleClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
+			{
+				if (player.SelectedObject.CanMove())
+                {
+                    player.SelectedObject.MoveTo(hit.point, true);
+                }
+			}
+        }
+    }
+
+    private RaycastHit FindMouseTargetHit()
+    {
+        RTSObject targetRtsElement = null;
+
+        // Cast a ray in the direction clicked by the user to detect the currently clicked element,
+        // and if it is a RTS element, then save its reference
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        Ray ray = camera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+
+        // First, cast a ray without considering the currently selected element
+        // (add it temporally to the "ignore raycast" layer), so if the user clicked
+        // on a unit that is occluded by the current element, it will be selected instead
+        int origSelectedObjectLayer = 0;
+        if (player.SelectedObject != null)
+        {
+            origSelectedObjectLayer = player.SelectedObject.gameObject.layer;
+            player.SelectedObject.gameObject.layer = 2; // IgnoreRaycast layer
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject objectHit = hit.collider.gameObject;
+            targetRtsElement = objectHit.GetComponent<RTSObject>();
+        }
+
+        if (player.SelectedObject != null)
+        {
+            player.SelectedObject.gameObject.layer = origSelectedObjectLayer; // Restore original layer
+        }
+
+        // If we didn't find a collision, repeat the raycast in order to test if the user
+        // clicked again on the unit he had already selected
+        if (targetRtsElement == null && Physics.Raycast(ray, out hit))
+        {
+            GameObject objectHit = hit.collider.gameObject;
+            targetRtsElement = objectHit.GetComponent<RTSObject>();
+        }
+
+        return hit;
+    }
+
+    //Funcion para que todos los objectos del jugador mueran
+    private void morirJugador(){
+        GameObject[] games;
+        games = GameObject.FindGameObjectsWithTag("civil");
+        foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(civil.GetComponent<CivilUnit>().owner==player){
+                Destroy(civil, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("townCenter");
+        foreach(var town in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(town.GetComponent<TownCenterBuilding>().owner==player){
+                Destroy(town, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("mility");
+        foreach(var mili in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(mili.GetComponent<Unit>().owner==player){
+                Destroy(mili, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("armyBuilding");
+        foreach(var army in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(army.GetComponent<ArmyBuilding>().owner==player){
+                Destroy(army, 2);
             }
         }
     }
+
+    //Funcion para que todos los objectos del enemigo mueran
+    private void morirEnemigos(){
+        GameObject[] games;
+        games = GameObject.FindGameObjectsWithTag("civil");
+        foreach(var civil in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(civil.GetComponent<CivilUnit>().owner!=player){
+                Destroy(civil, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("townCenter");
+        foreach(var town in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(town.GetComponent<TownCenterBuilding>().owner!=player){
+                Destroy(town, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("mility");
+        foreach(var mili in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(mili.GetComponent<Unit>().owner!=player){
+                Destroy(mili, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("armyBuilding");
+        foreach(var army in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(army.GetComponent<ArmyBuilding>().owner!=player){
+                Destroy(army, 2);
+            }
+        }
+    }
+	
+	private void demolishBuildings() {
+		
+		Building[] buildings = FindObjectsOfType(typeof(Building)) as Building[];
+         
+        foreach(Building b in buildings)
+        {
+			if (b.demolishedModel!=null) {
+				b.changeModel("demolished");
+			}
+        }
+	}
 
     private void MoveCamera()
     {

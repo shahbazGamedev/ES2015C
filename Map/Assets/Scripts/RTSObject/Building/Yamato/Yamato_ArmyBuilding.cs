@@ -11,6 +11,7 @@ public class Yamato_ArmyBuilding : ArmyBuilding
 		objectName = "Yamato Army Building";
 		actions = new string[] {"Archer", "Cavalry", "Samurai", "Samurai Advanced"};
         baseDefense = 5;
+		getModels("Prefabs/Yamato_ArmyBuilding", "Prefabs/Yamato_ArmyBuilding_onConstruction", "Prefabs/Yamato Army Semidemolished");
     }
 
 	/*** Metodes interns accessibles per les subclasses ***/

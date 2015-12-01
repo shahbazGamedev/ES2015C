@@ -29,6 +29,10 @@ public class HUDName : HUDElement
         if (DisplayObject != null)
         {
             textComponent.text = DisplayObject.objectName;
+            if (DisplayObject.CanBeBuilt())
+            {
+                textComponent.text += " (Project)";
+            }
         }
         else
         {
