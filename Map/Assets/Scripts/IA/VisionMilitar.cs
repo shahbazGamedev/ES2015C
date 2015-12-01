@@ -12,7 +12,10 @@ public class VisionMilitar : ADS {
 	void Update () {
 	
 	}
-
+    /// <summary>
+    /// //
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
         //if (other.gameObject.GetType(Player)) {
