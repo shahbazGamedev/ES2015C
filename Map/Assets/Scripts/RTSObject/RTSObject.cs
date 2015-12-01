@@ -30,7 +30,7 @@ public class RTSObject : MonoBehaviour
     protected string[] actions = { };               // Accions que pot realitzar
 	protected bool currentlySelected = false;       // Indica si esta seleccionat
     protected float healthPercentage = 1.0f;        // Percentatge de vida
-    protected RTSObject target = null;              // Posible objectiu
+    public RTSObject target = null;              // Posible objectiu
     protected bool aiming = false;
     /// <summary>true if the unit is attacking or moving into position to attack another unit.</summary>
     protected bool attacking = false;
@@ -293,7 +293,8 @@ public class RTSObject : MonoBehaviour
     /// <returns>Boolean saying if the object can attack or not.</returns>
     public virtual bool CanAttack()
     {
-        return (!dying && baseAttackStrength != 0 && baseAttackSpeed != 0.0f);
+        //return (!dying && baseAttackStrength != 0 && baseAttackSpeed != 0.0f);
+        return true;
     }
 
     /// <summary>
@@ -362,7 +363,8 @@ public class RTSObject : MonoBehaviour
     /// <returns>Boolean saying if the object can be attacked or not.</returns>
     public virtual bool CanBeAttacked()
     {
-        return (!dying && baseDefense.HasValue);
+        //return (!dying && baseDefense.HasValue);
+        return true;
     }
 
     /// <summary>
@@ -453,7 +455,7 @@ public class RTSObject : MonoBehaviour
     /// Begins an attack sequence on the given target.
     /// </summary>
     /// <param name="newTarget">The target of the attack.</param>
-    private void BeginAttack(RTSObject newTarget)
+    public void BeginAttack(RTSObject newTarget)
     {
         target = newTarget;
         attacking = true;
