@@ -102,7 +102,7 @@ public class movimentCamera : MonoBehaviour {
 		recleft = new Rect (0, 0, wMargin, Screen.height);
 		recright = new Rect (Screen.width-wMargin, 0, wMargin, Screen.height);
 
-		if(Input.GetMouseButtonDown(1))
+		if(Input.GetMouseButtonDown(2))
 		{
 			// Get mouse origin
 			mouseOrigin = Input.mousePosition;
@@ -121,7 +121,7 @@ public class movimentCamera : MonoBehaviour {
 			//obj.transform.position = auxiliar;
 		}
 
-		if (!Input.GetMouseButton(1)) isRotating=false;
+		if (!Input.GetMouseButton(2)) isRotating=false;
 		if (isRotating){
 
 			float turnSpeed = 4.0f;
