@@ -83,10 +83,11 @@ public class Mini : MonoBehaviour
 
                 float yPoint = itsMainCamera.transform.position.y;
                 Vector3 auxiliar = hit.point;
-                auxiliar.y = yPoint;
                 itsMainCamera.transform.position = auxiliar;
 				auxiliar = itsMainCamera.transform.position;
+				auxiliar.y = 0;
 				cameraPoint.transform.position = auxiliar;
+				auxiliar.y = yPoint;
 				auxiliar.z = auxiliar.z - 90f*Mathf.Cos((Camera.main.transform.eulerAngles.y * Mathf.PI)/180);
 				auxiliar.x = auxiliar.x - 90f*Mathf.Sin((Camera.main.transform.eulerAngles.y * Mathf.PI)/180);
 				itsMainCamera.transform.position = auxiliar;
