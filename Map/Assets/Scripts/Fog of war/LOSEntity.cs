@@ -123,4 +123,10 @@ public class LOSEntity : MonoBehaviour {
         }
     }
 
+	public void reveal(){
+		foreach (Renderer R in this.GetComponentsInChildren<Renderer>()) { 
+			R.enabled = true;
+		}
+	}
+
 }
