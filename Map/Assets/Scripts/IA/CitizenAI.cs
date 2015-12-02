@@ -86,11 +86,15 @@ public class CitizenAI : AI {
 		}
 		
 		try{
+
 			if(!resources.resourcesArray.Contains(this.auxAITarget.gameObject)){
 				this.AITarget = NextResource();
 				this.AIState = 2;
 			}
 		}catch(MissingReferenceException ex){
+			this.AITarget = NextResource();
+			this.AIState = 2;
+		}catch(UnassignedReferenceException ex){
 			this.AITarget = NextResource();
 			this.AIState = 2;
 		}
@@ -111,6 +115,7 @@ public class CitizenAI : AI {
 		this.auxAIResourcesg = GameObject.FindGameObjectsWithTag("gold");
 		fullingResources ();
 		this.AITarget = NextResource();
+		this.AIState = 2;
 		this.auxAITarget = this.AITarget;
 	}
 	
@@ -128,7 +133,8 @@ public class CitizenAI : AI {
 		transform.Translate (0, 0, 1 * speed * Time.deltaTime);
 	}
 	
-	public void Collect(){ // estado 3              
+	public void Collect(){ // estado 3    
+		try{
 		if (this.AITarget.gameObject.GetComponent<Resource>().isEmpty()) {
 			resources.resourcesArray.Remove(AITarget.gameObject);
 			this.auxAITarget = NextResource ();
@@ -136,6 +142,10 @@ public class CitizenAI : AI {
 		} else {
 			this.AITarget = this.auxAITarget;
 			this.estoyOcupado = true;
+			this.AIState = 2;
+		}
+		}catch(MissingReferenceException ex){
+			this.AITarget = NextResource();
 			this.AIState = 2;
 		}
 		
