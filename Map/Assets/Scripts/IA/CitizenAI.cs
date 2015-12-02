@@ -28,7 +28,7 @@ public class CitizenAI : AI {
 		resources = new AIResources ();
 		enemy1 = GameObject.Find("EnemyPlayer1");
 		AIState = 0;
-		townCenter = GameObject.Find ("Sumerian_TownCenter").transform;
+		townCenter = GameObject.FindGameObjectWithTag ("townCenter").transform;
 		this.hit = new RaycastHit ();
 		this.aiResource = new Resource ();
 		this.estoyOcupado = false;
@@ -53,7 +53,7 @@ public class CitizenAI : AI {
 		
 		// ---------------------------------- HE DETECTADO ALGO ---------------------------------------
 		if (Physics.SphereCast (fwd, 20, transform.forward, out hit, 20)) {
-			Debug.Log ("SOY "+this.tag +" Y HE DETECTADO EL OBJETO: " + hit.collider.name);
+			//Debug.Log ("SOY "+this.tag +" Y HE DETECTADO EL OBJETO: " + hit.collider.name);
 			
 			// Si topo contra una recurso
 			if (hit.collider.tag.Equals ("wood")||hit.collider.tag.Equals("food")||hit.collider.tag.Equals("gold") && !estoyOcupado) {	
@@ -75,7 +75,7 @@ public class CitizenAI : AI {
 		}
 		// --------------------------------- ESTOY JUNTO A ALGO ---------------------------------------
 		if (Physics.SphereCast (fwd, 0F, transform.forward, out hit, 1F)) {
-			Debug.Log ("SOY "+this.tag +" Y ESTOY JUNTO AL OBJETO: "+hit.collider.name);
+			//Debug.Log ("SOY "+this.tag +" Y ESTOY JUNTO AL OBJETO: "+hit.collider.name);
 			if((hit.collider.tag.Equals ("wood") || hit.collider.tag.Equals("food")||hit.collider.tag.Equals("gold")) && !estoyLleno && estoyOcupado){
 				this.auxAITarget = this.AITarget;
 				this.AIState = 3;
@@ -100,7 +100,7 @@ public class CitizenAI : AI {
 		if (patrolTime <= 0){this.patrolTime = 9;this.patrol=false;AIState =0;this.direction = 1;}
 		if (patrolTime >= 10) {this.patrol = true;AIState = 1;}
 		if (patrol && AIState == 1){patrolTime-=1 * Time.deltaTime;}
-		if (!patrol && AIState == 0){patrolTime+=1 * Time.deltaTime;}
+		if (!patrol && AIState == 1){patrolTime+=1 * Time.deltaTime;}
 		
 	}
 	
@@ -117,7 +117,7 @@ public class CitizenAI : AI {
 	public void Walk() { // estado 1
 		//GetComponent<Animation>().Play(walk.name); 
 		transform.LookAt(AITarget);
-		this.gameObject.transform.Rotate(0,(1*Random.Range(0,0)*this.direction)*Time.deltaTime,0);//(0, 25*this.direction, 0) * Time.deltaTime); //25*direction en el eje de las Y
+		this.gameObject.transform.Rotate(0,(1*Random.Range(-10,10)*this.direction)*Time.deltaTime,0);//(0, 25*this.direction, 0) * Time.deltaTime); //25*direction en el eje de las Y
 		this.gameObject.transform.Translate (0, 0, 1 * speed * Time.deltaTime);
 	}
 	
@@ -186,32 +186,32 @@ public class CitizenAI : AI {
 		
 	}
 	public void fullingResources(){
-		Debug.Log ("--------------------------- RELLENANDO RESOURCESARRAY -------------------------------");
+		//Debug.Log ("--------------------------- RELLENANDO RESOURCESARRAY -------------------------------");
 		for (int i =0; i<this.auxAIResourcesw.Length; i++) {
 			if(!resources.resourcesArray.Contains(auxAIResourcesw[i])){
 				resources.resourcesArray.Add(auxAIResourcesw[i]); // Añado el recurso al array
 			}
 		}
-		Debug.Log ("NUMERO DE ELEMENTOS DE MADERA : " + resources.resourcesArray.Count);
+		//Debug.Log ("NUMERO DE ELEMENTOS DE MADERA : " + resources.resourcesArray.Count);
 		
 		for (int i =0; i<this.auxAIResourcesf.Length; i++) {
 			if(!resources.resourcesArray.Contains(auxAIResourcesf[i])){
 				resources.resourcesArray.Add(auxAIResourcesf[i]); // Añado el recurso al array
 			}
 		}
-		Debug.Log ("NUMERO DE ELEMENTOS DE MADERA + COMIDA : " + resources.resourcesArray.Count);
+		//Debug.Log ("NUMERO DE ELEMENTOS DE MADERA + COMIDA : " + resources.resourcesArray.Count);
 		for (int i =0; i<this.auxAIResourcesg.Length; i++) {
 			if(!resources.resourcesArray.Contains(auxAIResourcesg[i])){
 				resources.resourcesArray.Add(auxAIResourcesg[i]); // Añado el recurso al array
 			}
 		}
 		
-		Debug.Log ("NUMERO DE ELEMENTOS DE MADERA + COMIDA + ORO: " + resources.resourcesArray.Count);
+		//Debug.Log ("NUMERO DE ELEMENTOS DE MADERA + COMIDA + ORO: " + resources.resourcesArray.Count);
 		
 	}
 	
 	public Transform NextResource(){
-		Debug.Log ("OBTENIENDO EL SIGUIENTE RECURSO A RECOLECTAR");
+		//Debug.Log ("OBTENIENDO EL SIGUIENTE RECURSO A RECOLECTAR");
 		GameObject closest;
 		if (resources.resourcesArray.Count >= 1) {
 			closest = Closest();
@@ -228,7 +228,7 @@ public class CitizenAI : AI {
 	}
 	
 	public GameObject Closest(){
-		Debug.Log ("BUSCANDO EL OBJECT MÁS CERCANO");
+		//Debug.Log ("BUSCANDO EL OBJECT MÁS CERCANO");
 		GameObject closest = new GameObject ();
 		GameObject aux;
 		closest.transform.position = new Vector3 (999,999,999);
@@ -244,7 +244,7 @@ public class CitizenAI : AI {
 				
 			}
 		}
-		Debug.Log ("SOY "+this.tag +" Y MI PROXIMO OBJETIVO ES: " + closest.name);
+		//Debug.Log ("SOY "+this.tag +" Y MI PROXIMO OBJETIVO ES: " + closest.name);
 		
 		return closest;
 		
