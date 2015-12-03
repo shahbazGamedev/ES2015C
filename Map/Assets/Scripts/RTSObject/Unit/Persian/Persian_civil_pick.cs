@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 
-public class Persian_civil_axe : CivilUnit
+public class Persian_civil_pick : CivilUnit
 {
     /*** Metodes per defecte de Unity ***/
 
 	protected override void Awake()
     {
 		base.Awake();
-		objectName = "Persian Civil Axe";
+		objectName = "Persian Civil Pick";
 		cost = 50;
 		baseAttackStrength = 10;
         baseDefense = 3;
         baseAttackSpeed = 1.0f;
-		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Persian_civil_axe_AC") as RuntimeAnimatorController;
+		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Persian_civil_pick_AC") as RuntimeAnimatorController;
 		walkingSound = Resources.Load ("Sounds/Persian_civil_Walk") as AudioClip;
 		runningSound = Resources.Load ("Sounds/Persian_civil_Run") as AudioClip;
 		fightSound = Resources.Load ("Sounds/Persian_civil_Fight") as AudioClip;

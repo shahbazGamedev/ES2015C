@@ -9,7 +9,7 @@ public class Hittite_ArmyBuilding : ArmyBuilding
 	{
 		base.Awake ();
 		objectName = "Hittite Army Building";
-		actions = new string[] {"Archer", "Archer Advanced","Cavalry","Cavalry Advanced", "Warrior", "Warrior Advanced"};
+		actions = new string[] {"Archer", "Archer Advanced", "Cavalry","Cavalry Advanced", "Warrior", "Warrior Advanced"};
         baseDefense = 5;
 		getModels("Prefabs/Hittite_ArmyBuilding", "Prefabs/Hittite_ArmyBuilding_onConstruction", "Prefabs/Hittite_ArmyBuilding_Semidemolished");
     }

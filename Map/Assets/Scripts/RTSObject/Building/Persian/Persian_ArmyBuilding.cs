@@ -9,7 +9,7 @@ public class Persian_ArmyBuilding : ArmyBuilding
 	{
 		base.Awake ();
 		objectName = "Persian Army Building";
-		actions = new string[] {"Archer", "Archer Advancer", "Cavalry", "Cavalry Advanced", "Warrior","Warrior Advanced"};
+		actions = new string[] {"Archer", "Archer Advanced", "Cavalry", "Cavalry Advanced", "Warrior","Warrior Advanced"};
         baseDefense = 5;
         getModels("Prefabs/Persian_ArmyBuilding", "Prefabs/Persian_ArmyBuilding_onConstruction", "Prefabs/Persian_ArmyBuilding_Semidemolished");
     }

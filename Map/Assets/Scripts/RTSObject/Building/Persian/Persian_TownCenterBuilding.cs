@@ -9,7 +9,8 @@ public class Persian_TownCenterBuilding : TownCenterBuilding {
 		base.Awake();
 		objectName = "Persian Town Center";
         baseDefense = 5;
-		actions = new string[] { "Civil Unit", "Civil Unit Axe" };
+		actions = new string[] { "Civil Unit", "Civil Unit Axe", "Civil Unit Pick", "Civil Unit Rack"};
+		getModels("Prefabs/Persian_TownCenter", "Prefabs/Persian_TownCenter_onConstruction", "Prefabs/Persian_TownCenter_Semidemolished");
     }
 
 	/*** Metodes interns accessibles per les subclasses ***/
@@ -22,6 +23,12 @@ public class Persian_TownCenterBuilding : TownCenterBuilding {
 			break;
 		case "Civil Unit Axe":
 			creationUnit = Resources.Load ("Prefabs/Persian_civil_axe") as GameObject;
+			break;
+		case "Civil Unit Pick":
+			creationUnit = Resources.Load ("Prefabs/Persian_civil_pick") as GameObject;
+			break;
+		case "Civil Unit Rack":
+			creationUnit = Resources.Load ("Prefabs/Persian_civil_rack") as GameObject;
 			break;
 		}
 		base.CreateUnit (unitName);

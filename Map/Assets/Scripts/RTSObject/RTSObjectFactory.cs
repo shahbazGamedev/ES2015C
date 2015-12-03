@@ -138,9 +138,9 @@ public static class RTSObjectFactory
             { RTSObjectType.BuildingUniversity, new Dictionary<PlayerCivilization, string>()
             {
                 { PlayerCivilization.Hittites, "Prefabs/Hittite_University" },
-                { PlayerCivilization.Persians, "Prefabs/Persian_university" },
-                { PlayerCivilization.Sumerians, "Prefabs/Sumerian_university" },
-                { PlayerCivilization.Yamato, "Prefabs/Yamato_university" },
+                { PlayerCivilization.Persians, "Prefabs/Persian_university" }, //No tiene
+                { PlayerCivilization.Sumerians, "Prefabs/Sumerian_university" },//No tiene
+                { PlayerCivilization.Yamato, "Prefabs/Yamato_university" },//No tiene
             } }
         };
 
