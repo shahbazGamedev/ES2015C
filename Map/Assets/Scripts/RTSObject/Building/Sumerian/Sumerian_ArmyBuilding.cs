@@ -18,7 +18,9 @@ public class Sumerian_ArmyBuilding : ArmyBuilding
 	
 	protected override void CreateUnit (string unitName)
 	{
-		switch (unitName) {
+        GameObject creationUnit = null;
+
+        switch (unitName) {
 		case "Archer":
 			creationUnit = Resources.Load ("Prefabs/Sumerian_archer") as GameObject;
 			break;
@@ -32,6 +34,7 @@ public class Sumerian_ArmyBuilding : ArmyBuilding
 			creationUnit = Resources.Load ("Prefabs/Sumerian_warrior_advanced") as GameObject;
 			break;
 		}
-		base.CreateUnit (unitName);
+
+        AddUnitToCreationQueue(creationUnit);
 	}
 }

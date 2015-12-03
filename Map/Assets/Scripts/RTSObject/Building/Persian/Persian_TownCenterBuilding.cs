@@ -16,7 +16,9 @@ public class Persian_TownCenterBuilding : TownCenterBuilding {
 	
 	protected override void CreateUnit (string unitName)
 	{
-		switch (unitName) {
+        GameObject creationUnit = null;
+
+        switch (unitName) {
 		case "Civil Unit":
 			creationUnit = Resources.Load ("Prefabs/Persian_civil") as GameObject;
 			break;
@@ -24,6 +26,7 @@ public class Persian_TownCenterBuilding : TownCenterBuilding {
 			creationUnit = Resources.Load ("Prefabs/Persian_civil_axe") as GameObject;
 			break;
 		}
-		base.CreateUnit (unitName);
-	}
+
+        AddUnitToCreationQueue(creationUnit);
+    }
 }

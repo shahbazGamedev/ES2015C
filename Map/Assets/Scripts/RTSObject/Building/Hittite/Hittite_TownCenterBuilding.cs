@@ -17,7 +17,9 @@ public class Hittite_TownCenterBuilding : TownCenterBuilding {
 	
 	protected override void CreateUnit (string unitName)
 	{
-		switch (unitName) {
+        GameObject creationUnit = null;
+
+        switch (unitName) {
 		case "Civil Unit":
 			creationUnit = Resources.Load ("Prefabs/Hittite_civil") as GameObject;
 			break;
@@ -25,6 +27,7 @@ public class Hittite_TownCenterBuilding : TownCenterBuilding {
 			creationUnit = Resources.Load ("Prefabs/Hittite_civil_axe") as GameObject;
 			break;
 		}
-		base.CreateUnit (unitName);
-	}
+
+        AddUnitToCreationQueue(creationUnit);
+    }
 }

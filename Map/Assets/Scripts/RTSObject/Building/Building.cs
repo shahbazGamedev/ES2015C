@@ -2,10 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using Pathfinding;
+using System;
+using System.Linq;
 
 public class Building : RTSObject
 {
-	protected GameObject creationUnit = null;	// Objecte que indica la unitat a crear actual
+    /// <summary>GameObject for the unit that is currently in the building queue. null if not spawning units.</summary>
+	private GameObject unitQueue = null;
+    /// <summary>Time, in seconds, until the next unit is spawned from the building.</summary>
+    private float timeToNextSpawn = 0.0f;
 
 	protected Vector3 spawnPoint;               // Punt de creacio de les unitats
 	protected Queue<string> buildQueue;         // Cua de construccio del edifici
@@ -116,44 +121,81 @@ public class Building : RTSObject
 
     protected virtual void CreateUnit(string unitName)
     {
-        if (creationUnit != null)
-        {
-            bool spawned = false;
-            int maximumSpawn = 5; //tenemos cinco intentos para instanciar una unidad. si no se instancian hay que mover las viejas 
-            Vector3 point = spawnPoint;
+        throw new NotImplementedException("CreateUnit not implemented by concrete building.");
+    }
 
-            while (spawned == false && maximumSpawn > 0)
-            {
-                if (Physics.CheckSphere(point, 0.4f, mask))
-                {
-                    point = new Vector3(point.x - 5, 0.0f, point.z); //si ya hay algo provamos en otra posicion
-                }
-                else
-                {
-					spawned = true;
-					GameObject unitClone = (GameObject)Instantiate(creationUnit, point, Quaternion.identity);
-					unitClone.SetActive(false);
-					float food = owner.GetResourceAmount (RTSObject.ResourceType.Food);
-					if (food >= unitClone.GetComponent<Unit>().cost) {
-						unitClone.SetActive(true);
-						unitClone.GetComponent<RTSObject>().owner = owner;
-						owner.resourceAmounts [RTSObject.ResourceType.Food] -= unitClone.GetComponent<Unit>().cost;
-					}
-					else
-					{
-						HUDInfo.insertMessage("Not enough food (" + unitClone.GetComponent<Unit>().cost + ") to create a new " + unitClone.GetComponent<Unit>().name);
-						Destroy(unitClone);
-					}
-                }
-                maximumSpawn--;
-            }
-            creationUnit = null;
+    protected void AddUnitToCreationQueue(GameObject creationUnit)
+    {
+        // Sanity check
+        if (creationUnit == null)
+            throw new ArgumentNullException("creationUnit");
+
+        // Check if the queue is full (currently units can't be queued, only one unit is supported at a time)
+        if (unitQueue != null)
+        {
+            HUDInfo.insertMessage("A unit is already in the queue. Please wait " + 
+                Math.Round(timeToNextSpawn, 1) + " seconds for the spawn.");
+            return;
+        }
+
+        // Add the unit to the queue. The rest will be done from Update().
+        unitQueue = creationUnit;
+        timeToNextSpawn = 3.0f;
+    }
+
+    /// <summary>
+    /// Updates the building's unit spawn queue status.
+    /// </summary>
+    private void ProcessBuildQueue()
+    {
+        // If there are no units in the queue, we're done!
+        if (unitQueue == null)
+            return;
+
+        // Update time until next unit is spawned
+        timeToNextSpawn = Math.Max(timeToNextSpawn - Time.deltaTime, 0.0f);
+        if (timeToNextSpawn != 0.0f) // Not spawning yet
+            return;
+
+        // Remove the unit from the building's creation queue
+        var unitToSpawn = unitQueue;
+        unitQueue = null;
+
+        // Figure out spawn point
+        Vector3 actualSpawnPoint = GetNextSpawnPoint();
+        if (actualSpawnPoint == Vector3.zero)
+        {
+            HUDInfo.insertMessage("Building spawn space is full, please move units to create new ones.");
+            return;
+        }
+
+        // Create the unit itself
+        GameObject unitClone = (GameObject)Instantiate(unitToSpawn, actualSpawnPoint, Quaternion.identity);
+        float food = owner.GetResourceAmount(RTSObject.ResourceType.Food);
+        if (food >= unitClone.GetComponent<Unit>().cost)
+        {
+            unitClone.GetComponent<RTSObject>().owner = owner;
+            owner.resourceAmounts[RTSObject.ResourceType.Food] -= unitClone.GetComponent<Unit>().cost;
+        }
+        else
+        {
+            HUDInfo.insertMessage("Not enough food (" + unitClone.GetComponent<Unit>().cost + ") to create a new " + unitClone.GetComponent<Unit>().name);
+            Destroy(unitClone);
         }
     }
 
-    // Metode per administrar el progres de construccio de la cua
-    protected void ProcessBuildQueue()
+    /// <summary>
+    /// Get the next available spawn point for an unit in the max.
+    /// </summary>
+    /// <returns>The position of the next spawn point for this building, or Vector3.zero if no point is available.</returns>
+    private Vector3 GetNextSpawnPoint()
     {
+        // Spawn attempts before considering the unit cannot spawn the units
+        const int maximumSpawnAttempts = 5;
+
+        return Enumerable.Range(0, maximumSpawnAttempts)
+            .Select(n => new Vector3(spawnPoint.x - 5.0f * n, spawnPoint.y, spawnPoint.z))
+            .FirstOrDefault(sp => !Physics.CheckSphere(sp, 0.4f, mask));
     }
 
     /*** Metodes privats ***/

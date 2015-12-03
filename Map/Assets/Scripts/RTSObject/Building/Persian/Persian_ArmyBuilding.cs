@@ -17,7 +17,9 @@ public class Persian_ArmyBuilding : ArmyBuilding
 	
 	protected override void CreateUnit (string unitName)
 	{
-		switch (unitName) {
+        GameObject creationUnit = null;
+
+        switch (unitName) {
 		case "Warrior":
 			creationUnit = Resources.Load ("Prefabs/Persian_warrior") as GameObject;
 			break;
@@ -25,6 +27,7 @@ public class Persian_ArmyBuilding : ArmyBuilding
 			creationUnit = Resources.Load ("Prefabs/Persian_warrior_advanced") as GameObject;
 			break;
 		}
-		base.CreateUnit (unitName);
-	}
+
+        AddUnitToCreationQueue(creationUnit);
+    }
 }
