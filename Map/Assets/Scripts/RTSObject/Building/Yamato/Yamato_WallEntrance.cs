@@ -11,6 +11,6 @@ public class Yamato_WallEntrance : Building {
 		cost = 100;
 		hitPoints = maxHitPoints = 700;
         baseDefense = 5;
-		getModels("Prefabs/Yamato_WallEntrance", "Prefabs/Yamato_WallEntrance_onConstruction", "Prefabs/Yamato_WallEntrance");
+		getModels("Prefabs/Yamato_WallEntrance", "Prefabs/Yamato_WallEntrance_onConstruction", "Prefabs/Yamato_WallEntrance_Semidemolished");
     }
 }

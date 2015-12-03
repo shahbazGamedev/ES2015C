@@ -14,5 +14,4 @@ public class Sumerian_Wall : Building {
         buildingTime = 1.0f;
         getModels("Prefabs/Sumerian_Wall", "Prefabs/Sumerian_Wall_onConstruction", "Prefabs/Sumerian_Wall_Semidemolished");
     }
-    }
 }
