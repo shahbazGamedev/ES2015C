@@ -30,6 +30,11 @@ public class BuildingUnitSpawnProgressBar : MonoBehaviour {
     public void UpdateProgressBar(float spawnProgress)
     {
         var frontPlaneObject = transform.GetChild(0);
+        frontPlaneObject.localPosition = new Vector3(5 * (1 - spawnProgress), 0.0f, 0.0f);
         frontPlaneObject.localScale = new Vector3(spawnProgress, 1.0f, 1.0f);
+
+        var backPlaneObject = transform.GetChild(1);
+        backPlaneObject.localPosition = new Vector3(-5 * spawnProgress, 0.0f, 0.0f);
+        backPlaneObject.localScale = new Vector3(1 - spawnProgress, 1.0f, 1.0f);
     }
 }

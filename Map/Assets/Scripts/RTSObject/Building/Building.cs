@@ -149,7 +149,8 @@ public class Building : RTSObject
         var spawnProgressObjectPrefab = Resources.Load<GameObject>("BuildingUnitSpawnProgressBar");
         spawnProgressObject = Instantiate(spawnProgressObjectPrefab);
         spawnProgressObject.transform.parent = transform;
-        spawnProgressObject.transform.localPosition = new Vector3(0.0f, GetComponent<BoxCollider>().size.y + 5.0f, 0.0f);
+        spawnProgressObject.transform.localPosition = new Vector3(0.0f,
+            GetComponent<BoxCollider>().size.y + 5.0f / transform.localScale.y, 0.0f);
     }
 
     /// <summary>
