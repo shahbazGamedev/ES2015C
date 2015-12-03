@@ -18,6 +18,8 @@ public class Hittite_ArmyBuilding : ArmyBuilding
 	
 	protected override void CreateUnit (string unitName)
 	{
+        GameObject creationUnit = null;
+
 		switch (unitName) {
 		case "Archer":
 			creationUnit = Resources.Load ("Prefabs/Hittite_archer") as GameObject;
@@ -38,6 +40,7 @@ public class Hittite_ArmyBuilding : ArmyBuilding
 			creationUnit = Resources.Load ("Prefabs/Hittite_warrior_advanced") as GameObject;
 			break;
 		}
-		base.CreateUnit (unitName);
+
+		AddUnitToCreationQueue(creationUnit);
 	}
 }

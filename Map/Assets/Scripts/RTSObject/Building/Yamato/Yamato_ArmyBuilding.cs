@@ -18,6 +18,8 @@ public class Yamato_ArmyBuilding : ArmyBuilding
 	
 	protected override void CreateUnit (string unitName)
 	{
+        GameObject creationUnit = null;
+
 		switch (unitName) {
 		case "Archer":
 			creationUnit = Resources.Load ("Prefabs/Yamato_archer") as GameObject;
@@ -38,6 +40,7 @@ public class Yamato_ArmyBuilding : ArmyBuilding
 			creationUnit = Resources.Load ("Prefabs/Yamato_samurai_advanced") as GameObject;
 			break;
 		}
-		base.CreateUnit (unitName);
-	}
+
+        AddUnitToCreationQueue(creationUnit);
+    }
 }
