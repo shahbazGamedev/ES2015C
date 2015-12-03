@@ -11,6 +11,6 @@ public class Hittite_CivilHouse : Building {
 		cost = 50;
 		hitPoints = maxHitPoints = 200;
         baseDefense = 5;
-		getModels("Prefabs/Hittite_CivilHouse", "Prefabs/Hittite_CivilHouse_onConstruction", "Prefabs/Hittites_house_demolished");
+		getModels("Prefabs/Hittite_CivilHouse", "Prefabs/Hittite_CivilHouse_onConstruction", "Prefabs/Hittite_CivilHouse_Semidemolished");
     }
 }

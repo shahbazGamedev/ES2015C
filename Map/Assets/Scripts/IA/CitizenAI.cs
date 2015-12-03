@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CitizenAI : AI {
 	/*public AnimationClip idle;*/
+	GameObject closest;
 	Resource aiResource;
 	GameObject enemy1;
 	public int AIState, speed = 5; 		 
@@ -21,9 +22,9 @@ public class CitizenAI : AI {
 	// Use this for initialization
 	void Start () {
 		this.tag = "Untagged";
-		if(GetComponent<RTSObject>().owner!=GameObject.Find("EnemyPlayer1").GetComponent<Player>()){
+		//if(GetComponent<RTSObject>().owner!=GameObject.Find("EnemyPlayer1").GetComponent<Player>()){
 			GetComponent<CitizenAI>().enabled = false;
-		}
+		//}
 		
 		resources = new AIResources ();
 		enemy1 = GameObject.Find("EnemyPlayer1");
@@ -88,14 +89,14 @@ public class CitizenAI : AI {
 		try{
 
 			if(!resources.resourcesArray.Contains(this.auxAITarget.gameObject)){
-				this.AITarget = NextResource();
+				//this.AITarget = NextResource();
 				this.AIState = 2;
 			}
 		}catch(MissingReferenceException ex){
-			this.AITarget = NextResource();
+			//this.AITarget = NextResource();
 			this.AIState = 2;
 		}catch(UnassignedReferenceException ex){
-			this.AITarget = NextResource();
+			//this.AITarget = NextResource();
 			this.AIState = 2;
 		}
 		
@@ -129,8 +130,10 @@ public class CitizenAI : AI {
 	public void Chase() { // Estado 2
 		//GetComponent<Animation>().Play (run.name); 
 		//gameObject.GetComponent<CivilUnit> ().StartHarvest (aiResource); // Esto es para los metodos de Logica
+		this.AITarget = NextResource();
 		transform.LookAt(this.AITarget);
 		transform.Translate (0, 0, 1 * speed * Time.deltaTime);
+
 	}
 	
 	public void Collect(){ // estado 3    
@@ -239,7 +242,7 @@ public class CitizenAI : AI {
 	
 	public GameObject Closest(){
 		//Debug.Log ("BUSCANDO EL OBJECT MÁS CERCANO");
-		GameObject closest = new GameObject ();
+		//GameObject closest = new GameObject ();
 		GameObject aux;
 		closest.transform.position = new Vector3 (999,999,999);
 		for(int i =0; i<resources.resourcesArray.Count;i++){

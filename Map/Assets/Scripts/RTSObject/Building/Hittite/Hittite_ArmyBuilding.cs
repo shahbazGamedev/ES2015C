@@ -9,9 +9,9 @@ public class Hittite_ArmyBuilding : ArmyBuilding
 	{
 		base.Awake ();
 		objectName = "Hittite Army Building";
-		actions = new string[] {"Archer", "Cavalry", "Warrior", "Warrior Advanced"};
+		actions = new string[] {"Archer", "Archer Advanced","Cavalry","Cavalry Advanced", "Warrior", "Warrior Advanced"};
         baseDefense = 5;
-		getModels("Prefabs/Hittite_ArmyBuilding", "Prefabs/Hittite_ArmyBuilding_onConstruction", "Prefabs/Hittites Army Semidemolished");
+		getModels("Prefabs/Hittite_ArmyBuilding", "Prefabs/Hittite_ArmyBuilding_onConstruction", "Prefabs/Hittite_ArmyBuilding_Semidemolished");
     }
 
 	/*** Metodes interns accessibles per les subclasses ***/
@@ -22,8 +22,14 @@ public class Hittite_ArmyBuilding : ArmyBuilding
 		case "Archer":
 			creationUnit = Resources.Load ("Prefabs/Hittite_archer") as GameObject;
 			break;
+		case "Archer Advanced":
+			creationUnit = Resources.Load ("Prefabs/Hittite_archer_advanced") as GameObject;
+			break;
 		case "Cavalry":
 			creationUnit = Resources.Load ("Prefabs/Hittite_cavalry") as GameObject;
+			break;
+		case "Cavalry Advanced":
+			creationUnit = Resources.Load ("Prefabs/Hittite_cavalry_advanced") as GameObject;
 			break;
 		case "Warrior":
 			creationUnit = Resources.Load ("Prefabs/Hittite_warrior") as GameObject;

@@ -21,7 +21,7 @@ public class Hittite_civil : CivilUnit
 		miningSound = Resources.Load ("Sounds/Hittite_civil_Mining") as AudioClip;
 		woodCuttingSound = Resources.Load ("Sounds/Hittite_civil_WoodCutting") as AudioClip;
 		buildingSound = Resources.Load ("Sounds/Hittite_civil_Building") as AudioClip;
-		actions = new string[] { "Town Center", "Army Building", "Wall Tower", "Wall Entrance", "Wall", "Civil House", "Academy"};
+		actions = new string[] { "Town Center", "Army Building", "Wall Tower", "Wall Entrance", "Wall", "Civil House", "Academy", "University"};
     }
 
 	/*** Metodes interns accessibles per les subclasses ***/
@@ -49,6 +49,9 @@ public class Hittite_civil : CivilUnit
                 break;
 		    case "Academy":
                 StartBuildingLocationSelection("Prefabs/Hittite_Academy");
+                break;
+            case "University":
+                StartBuildingLocationSelection("Prefabs/Hittite_University");
                 break;
 		}
 	}
