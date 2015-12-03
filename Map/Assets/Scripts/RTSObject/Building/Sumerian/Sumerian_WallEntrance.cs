@@ -11,5 +11,6 @@ public class Sumerian_WallEntrance : Building {
 		cost = 100;
 		hitPoints = maxHitPoints = 700;
         baseDefense = 5;
+        getModels("Prefabs/Sumerian_WallEntrance", "Prefabs/Sumerian_WallEntrance_onConstruction", "Prefabs/Sumerian_WallEntrance_Semidemolished");
     }
 }
