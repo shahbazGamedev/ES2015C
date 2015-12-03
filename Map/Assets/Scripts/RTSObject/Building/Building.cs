@@ -146,10 +146,10 @@ public class Building : RTSObject
         // Add the unit to the queue. The rest will be done from Update().
         unitQueue = creationUnit;
         timeToNextSpawn = unitSpawnTime;
-        spawnProgressObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        var spawnProgressObjectPrefab = Resources.Load<GameObject>("BuildingUnitSpawnProgressBar");
+        spawnProgressObject = Instantiate(spawnProgressObjectPrefab);
         spawnProgressObject.transform.parent = transform;
         spawnProgressObject.transform.localPosition = new Vector3(0.0f, GetComponent<BoxCollider>().size.y + 5.0f, 0.0f);
-        spawnProgressObject.transform.localScale = new Vector3(10.0f, 10.0f, 10.0f);
     }
 
     /// <summary>
@@ -163,9 +163,12 @@ public class Building : RTSObject
 
         // Update time until next unit is spawned
         timeToNextSpawn = Math.Max(timeToNextSpawn - Time.deltaTime, 0.0f);
-        spawnProgressObject.transform.localScale = new Vector3(10.0f, 10.0f, 10.0f) * (timeToNextSpawn / unitSpawnTime);
         if (timeToNextSpawn != 0.0f) // Not spawning yet
+        {
+            spawnProgressObject.GetComponent<BuildingUnitSpawnProgressBar>()
+                .UpdateProgressBar(1.0f - timeToNextSpawn / unitSpawnTime);
             return;
+        }
 
         // Remove the unit from the building's creation queue
         var unitToSpawn = unitQueue;
