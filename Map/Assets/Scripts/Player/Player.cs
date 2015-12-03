@@ -37,20 +37,11 @@ public class Player : MonoBehaviour {
     /// </summary>
     public Dictionary<RTSObject.ResourceType, float> resourceAmounts;
 
-    void Start ()
+    void Awake()
     {
-        this.objetivos = new ArrayList();
-
-        // Set the initial resource amounts
-        resourceAmounts = new Dictionary<RTSObject.ResourceType, float>();
-        resourceAmounts[RTSObject.ResourceType.Food] = initialFood;
-        resourceAmounts[RTSObject.ResourceType.Gold] = initialGold;
-        resourceAmounts[RTSObject.ResourceType.Wood] = initialWood;
-        
-        Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
-		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
-
         // Load player civilization from menu parameters
+        // We have to do this in Awake() and not in Start() because some scripts
+        // may depend on the player civilization on their initialization routines
         var menuGameParametersObject = GameObject.Find("MenuGameParameters");
         var menuGameParameters = (menuGameParametersObject != null) ?
             menuGameParametersObject.GetComponent<MenuGameParameters>() : null;
@@ -69,6 +60,20 @@ public class Player : MonoBehaviour {
             Debug.Log("Can't find the menu game parameters object (either it's not correctly " +
                 "configured, or you launched the game directly from the campaign scene). Setting defaults.");
         }
+    }
+
+    void Start ()
+    {
+        this.objetivos = new ArrayList();
+
+        // Set the initial resource amounts
+        resourceAmounts = new Dictionary<RTSObject.ResourceType, float>();
+        resourceAmounts[RTSObject.ResourceType.Food] = initialFood;
+        resourceAmounts[RTSObject.ResourceType.Gold] = initialGold;
+        resourceAmounts[RTSObject.ResourceType.Wood] = initialWood;
+        
+        Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
+		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
 
         // Spawn initial elements
         if (human==true) {
