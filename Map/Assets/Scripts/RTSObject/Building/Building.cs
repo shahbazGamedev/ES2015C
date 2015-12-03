@@ -7,10 +7,15 @@ using System.Linq;
 
 public class Building : RTSObject
 {
+    /// <summary>Time required to spawn a new unit.</summary>
+    const float unitSpawnTime = 3.0f;
+
     /// <summary>GameObject for the unit that is currently in the building queue. null if not spawning units.</summary>
 	private GameObject unitQueue = null;
     /// <summary>Time, in seconds, until the next unit is spawned from the building.</summary>
     private float timeToNextSpawn = 0.0f;
+    /// <summary>Object used to display the progress of the building queue's spawn.</summary>
+    private GameObject spawnProgressObject = null;
 
 	protected Vector3 spawnPoint;               // Punt de creacio de les unitats
 	protected Queue<string> buildQueue;         // Cua de construccio del edifici
@@ -140,7 +145,11 @@ public class Building : RTSObject
 
         // Add the unit to the queue. The rest will be done from Update().
         unitQueue = creationUnit;
-        timeToNextSpawn = 3.0f;
+        timeToNextSpawn = unitSpawnTime;
+        spawnProgressObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        spawnProgressObject.transform.parent = transform;
+        spawnProgressObject.transform.localPosition = new Vector3(0.0f, GetComponent<BoxCollider>().size.y + 5.0f, 0.0f);
+        spawnProgressObject.transform.localScale = new Vector3(10.0f, 10.0f, 10.0f);
     }
 
     /// <summary>
@@ -154,12 +163,14 @@ public class Building : RTSObject
 
         // Update time until next unit is spawned
         timeToNextSpawn = Math.Max(timeToNextSpawn - Time.deltaTime, 0.0f);
+        spawnProgressObject.transform.localScale = new Vector3(10.0f, 10.0f, 10.0f) * (timeToNextSpawn / unitSpawnTime);
         if (timeToNextSpawn != 0.0f) // Not spawning yet
             return;
 
         // Remove the unit from the building's creation queue
         var unitToSpawn = unitQueue;
         unitQueue = null;
+        Destroy(spawnProgressObject);
 
         // Figure out spawn point
         Vector3 actualSpawnPoint = GetNextSpawnPoint();
