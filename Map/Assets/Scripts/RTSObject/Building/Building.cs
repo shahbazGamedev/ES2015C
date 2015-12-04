@@ -127,12 +127,19 @@ public class Building : RTSObject
         CreateUnit(RTSObjectTypeExt.GetObjectTypeFromName(actionToPerform));
     }
 
-    protected void CreateUnit(RTSObjectType objectType)
+    private void CreateUnit(RTSObjectType objectType)
     {
-        AddUnitToCreationQueue(RTSObjectFactory.GetObjectTemplate(objectType, owner.civilization));
+        GameObject creationUnit = RTSObjectFactory.GetObjectTemplate(objectType, owner.civilization);
+        if (creationUnit == null)
+        {
+            HUDInfo.insertMessage("Could not load resource '" + objectType + "' for civilization '" + owner.civilization + "' to start unit spawning.");
+            return;
+        }
+
+        AddUnitToCreationQueue(creationUnit);
     }
 
-    protected void AddUnitToCreationQueue(GameObject creationUnit)
+    private void AddUnitToCreationQueue(GameObject creationUnit)
     {
         // Sanity check
         if (creationUnit == null)

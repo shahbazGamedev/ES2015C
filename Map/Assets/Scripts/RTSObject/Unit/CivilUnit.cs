@@ -13,6 +13,9 @@ public class CivilUnit : Unit
 
     public bool harvesting = false;                         // Indicadors d'estat de la unitat
 
+    /// <summary>Buildings that can be created by this civil unit.</summary>
+    protected RTSObjectType[] buildableBuildings = new RTSObjectType[0];
+
     /// <summary>
     /// true if we are in building location selection mode.
     /// </summary>
@@ -193,26 +196,41 @@ public class CivilUnit : Unit
 		}
 	}
 
+    public override string[] GetActions()
+    {
+        return buildableBuildings.Select(type => RTSObjectTypeExt.GetObjectName(type)).ToArray();
+    }
+
+    public override void PerformAction(string actionToPerform)
+    {
+        base.PerformAction(actionToPerform);
+        CreateBuilding(RTSObjectTypeExt.GetObjectTypeFromName(actionToPerform));
+    }
+
+    private void CreateBuilding(RTSObjectType objectType)
+    {
+        GameObject buildingPrefabTemplate = RTSObjectFactory.GetObjectTemplate(objectType, owner.civilization);
+        if (buildingPrefabTemplate == null)
+        {
+            HUDInfo.insertMessage("Could not load resource '" + objectType + "' for civilization '" + owner.civilization + "' to start building location selection.");
+            return;
+        }
+
+        StartBuildingLocationSelection(buildingPrefabTemplate);
+    }
+
     // Metode que crea el edifici
     /// <summary>
     /// Starts the building location selection sequence, where the user has to click
     /// on the map in order to select the place where the building should be built.
     /// </summary>
-    /// <param name="creationBuildingPath">Name of the resource for the finished building.</param>
-    protected void StartBuildingLocationSelection(string creationBuildingPath)
+    /// <param name="creationBuildingTmp">GameObject of the resource for the finished building.</param>
+    private void StartBuildingLocationSelection(GameObject creationBuildingTmp)
     {
         // Destroy old collision detector object if any
         if (creationCollisionDetectorObject != null)
         {
             Destroy(creationCollisionDetectorObject);
-        }
-
-        // Load the complete building resource
-        var creationBuildingTmp = Resources.Load<GameObject>(creationBuildingPath) as GameObject;
-        if (creationBuildingTmp == null || creationBuildingTmp.GetComponent<Building>() == null)
-        {
-			HUDInfo.insertMessage("Could not load resource '" + creationBuildingPath + "' to start building location selection.");
-            return;
         }
 
         // Set up the unit state to work on a building
