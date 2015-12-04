@@ -12,18 +12,25 @@ public class HUDAction : HUDElement
     /// </summary>
     public int ActionIndex;
 
-    private Text textComponent;
+    private Text nameTextComponent;
 
     private Button buttonComponent;
 
-    private Image imageComponent;
+    private Image actionImageComponent;
+
+    private Text costTextComponent;
+
+    private Image costResourceImageComponent;
 
     void Start()
     {
-        textComponent = GetComponentInChildren<Text>();
-        buttonComponent = GetComponentInChildren<Button>();
-        imageComponent = GetComponentInChildren<Image>();
-        if (textComponent == null || buttonComponent == null || imageComponent == null)
+        nameTextComponent = transform.GetChild(0).GetComponent<Text>();
+        buttonComponent = transform.GetChild(1).GetComponent<Button>();
+        actionImageComponent = transform.GetChild(1).GetComponent<Image>();
+        costTextComponent = transform.GetChild(2).GetComponent<Text>();
+        costResourceImageComponent = transform.GetChild(3).GetComponent<Image>();
+        if (nameTextComponent == null || buttonComponent == null || actionImageComponent == null
+            || costTextComponent == null || costResourceImageComponent == null)
         {
             Debug.Log("Script of type " + GetType().Name + " without a Button and Image component won't work.");
         }
@@ -34,23 +41,31 @@ public class HUDAction : HUDElement
     /// </summary>
     void Update()
     {
-        if (textComponent == null || buttonComponent == null || imageComponent == null)
+        if (nameTextComponent == null || buttonComponent == null || actionImageComponent == null
+            || costTextComponent == null || costResourceImageComponent == null)
             return;
 
         if (DisplayObject != null &&
             DisplayObject.IsOwnedBy(Player) &&
             ActionIndex < DisplayObject.GetActions().Length)
         {
-            textComponent.text = DisplayObject.GetActions()[ActionIndex];
+            var action = DisplayObject.GetActions()[ActionIndex];
+
+            nameTextComponent.text = action.Name;
             buttonComponent.enabled = true;
-            imageComponent.enabled = true;
-            
+            actionImageComponent.enabled = true;
+            costTextComponent.text = action.Cost.ToString();
+            costResourceImageComponent.enabled = true;
+            costResourceImageComponent.sprite = GetResourceSprite(action.CostResource);
+
         }
         else
         {
-            textComponent.text = "";
+            nameTextComponent.text = "";
             buttonComponent.enabled = false;
-            imageComponent.enabled = false;
+            actionImageComponent.enabled = false;
+            costTextComponent.text = "";
+            costResourceImageComponent.enabled = false;
         }
     }
 
@@ -63,7 +78,7 @@ public class HUDAction : HUDElement
             DisplayObject.IsOwnedBy(Player) &&
             ActionIndex < DisplayObject.GetActions().Length)
         {
-            DisplayObject.PerformAction(DisplayObject.GetActions()[ActionIndex]);
+            DisplayObject.PerformAction(DisplayObject.GetActions()[ActionIndex].Name);
         }
     }
 }

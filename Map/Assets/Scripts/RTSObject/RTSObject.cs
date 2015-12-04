@@ -27,7 +27,6 @@ public class RTSObject : MonoBehaviour
     public Player owner;                            // A quin player correspon
 
     // Variables accessibles per a les subclasses
-    protected string[] actions = { };               // Accions que pot realitzar
 	protected bool currentlySelected = false;       // Indica si esta seleccionat
     protected float healthPercentage = 1.0f;        // Percentatge de vida
     public RTSObject target = null;              // Posible objectiu
@@ -165,10 +164,25 @@ public class RTSObject : MonoBehaviour
 		currentlySelected = selected;
 	}
 
-    // Metode per obtenir les accions del objecte
-    public virtual string[] GetActions()
+    /// <summary>
+    /// Represents an action that can be done by an object.
+    /// </summary>
+    public class Action
     {
-        return actions;
+        /// <summary>Name of the action.</summary>
+        public string Name { get; set; }
+        /// <summary>In which resource the cost of executing this action is paid.</summary>
+        public ResourceType CostResource { get; set; }
+        /// <summary>Cost of executing this action. </summary>
+        public int Cost { get; set; }
+    }
+    /// <summary>
+    /// Get the list of actions available for this object.
+    /// </summary>
+    /// <returns>A list of (action, cost) for this object.</returns>
+    public virtual Action[] GetActions()
+    {
+        return new Action[0];
     }
 
     // Metode per realitzar la accio corresponent
