@@ -17,6 +17,8 @@ public class Sumerian_TownCenterBuilding : TownCenterBuilding {
 	
 	protected override void CreateUnit (string unitName)
 	{
+        GameObject creationUnit = null;
+
 		switch (unitName) {
 		case "Civil Unit":
 			creationUnit = Resources.Load ("Prefabs/Sumerian_civil") as GameObject;
@@ -31,6 +33,7 @@ public class Sumerian_TownCenterBuilding : TownCenterBuilding {
 			creationUnit = Resources.Load ("Prefabs/Sumerian_civil_rack") as GameObject;
 			break;
 		}
-		base.CreateUnit (unitName);
+
+        AddUnitToCreationQueue(creationUnit);
 	}
 }

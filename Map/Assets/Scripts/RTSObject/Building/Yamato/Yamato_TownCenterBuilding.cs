@@ -17,7 +17,9 @@ public class Yamato_TownCenterBuilding : TownCenterBuilding {
 	
 	protected override void CreateUnit (string unitName)
 	{
-		switch (unitName) {
+        GameObject creationUnit = null;
+
+        switch (unitName) {
 		case "Civil Unit":
 			creationUnit = Resources.Load ("Prefabs/Yamato_civil") as GameObject;
 			break;
@@ -31,6 +33,7 @@ public class Yamato_TownCenterBuilding : TownCenterBuilding {
 			creationUnit = Resources.Load ("Prefabs/Yamato_civil_rack") as GameObject;
 			break;
 		}
-		base.CreateUnit (unitName);
-	}
+
+        AddUnitToCreationQueue(creationUnit);
+    }
 }
