@@ -14,18 +14,8 @@ public class HUDCivilUnitResourceIcon : HUDElement
     /// </summary>
     private RTSObject.ResourceType? currentHarvestType = RTSObject.ResourceType.Gold;
 
-    /// <summary>
-    /// The sprites corresponding to each type of resource.
-    /// </summary>
-    private Dictionary<RTSObject.ResourceType, Sprite> resourceSprites;
-
     void Start()
     {
-        resourceSprites = new Dictionary<RTSObject.ResourceType, Sprite>();
-        resourceSprites[RTSObject.ResourceType.Gold] = Resources.Load<Sprite>("HUD/Resource/GoldIcon");
-        resourceSprites[RTSObject.ResourceType.Food] = Resources.Load<Sprite>("HUD/Resource/FoodIcon");
-        resourceSprites[RTSObject.ResourceType.Wood] = Resources.Load<Sprite>("HUD/Resource/WoodIcon");
-
         imageComponent = GetComponent<Image>();
         if (imageComponent == null)
         {
@@ -52,10 +42,10 @@ public class HUDCivilUnitResourceIcon : HUDElement
         currentHarvestType = harvestType;
 
         // The resource type has changed, so update the displayed sprite
-        if (harvestType != null && resourceSprites.ContainsKey(harvestType.Value))
+        if (harvestType != null)
         {
             imageComponent.enabled = true;
-            imageComponent.sprite = resourceSprites[harvestType.Value];
+            imageComponent.sprite = GetResourceSprite(harvestType.Value);
         }
         else
         {
