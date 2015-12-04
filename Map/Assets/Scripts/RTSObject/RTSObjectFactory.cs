@@ -222,6 +222,7 @@ public static class RTSObjectFactory
             if (objectTemplate == null)
             {
                 HUDInfo.insertMessage("Script for object '" + type + "' of civ. '" + civilization + "' doesn't have a object template.");
+                memoizedCosts[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)] = 0;
                 return 0;
             }
 
@@ -230,6 +231,7 @@ public static class RTSObjectFactory
             if (objectScript == null)
             {
                 HUDInfo.insertMessage("Script for object '" + type + "' of civ. '" + civilization + "' doesn't have a RTSObject script.");
+                memoizedCosts[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)] = 0;
                 return 0;
             }
 
@@ -260,7 +262,9 @@ public static class RTSObjectFactory
             sw.Write(string.Format("|{0,20}", type));
             foreach (PlayerCivilization civ in Enum.GetValues(typeof(PlayerCivilization)))
             {
-                sw.Write(string.Format("|    {0}    ", GetObjectTemplate(type, civ, false) != null ? 'X' : ' '));
+                GameObject objectTemplate = GetObjectTemplate(type, civ, false);
+                RTSObject objectScript = (objectTemplate != null) ? objectTemplate.GetComponent<RTSObject>() : null;
+                sw.Write(string.Format("|    {0}    ", (objectTemplate != null) ? ((objectScript != null) ? 'X' : 'N') : ' '));
             }
             sw.WriteLine("|");
         }
