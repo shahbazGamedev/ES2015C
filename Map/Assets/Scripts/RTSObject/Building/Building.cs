@@ -17,6 +17,9 @@ public class Building : RTSObject
     /// <summary>Object used to display the progress of the building queue's spawn.</summary>
     private GameObject spawnProgressObject = null;
 
+    /// <summary>Units that can be spawned from this building.</summary>
+    protected RTSObjectType[] spawnableUnits = new RTSObjectType[0];
+
 	protected Vector3 spawnPoint;               // Punt de creacio de les unitats
 	protected Queue<string> buildQueue;         // Cua de construccio del edifici
 
@@ -115,18 +118,18 @@ public class Building : RTSObject
         if (CanBeBuilt())
             return new string[0];
 
-        return base.GetActions();
+        return spawnableUnits.Select(type => RTSObjectTypeExt.GetObjectName(type)).ToArray();
     }
 
     public override void PerformAction(string actionToPerform)
     {
         base.PerformAction(actionToPerform);
-        CreateUnit(actionToPerform);
+        CreateUnit(RTSObjectTypeExt.GetObjectTypeFromName(actionToPerform));
     }
 
-    protected virtual void CreateUnit(string unitName)
+    protected void CreateUnit(RTSObjectType objectType)
     {
-        throw new NotImplementedException("CreateUnit not implemented by concrete building.");
+        AddUnitToCreationQueue(RTSObjectFactory.GetObjectTemplate(objectType, owner.civilization));
     }
 
     protected void AddUnitToCreationQueue(GameObject creationUnit)
