@@ -199,6 +199,48 @@ public static class RTSObjectFactory
         return null;
     }
 
+    public static Dictionary<KeyValuePair<RTSObjectType, PlayerCivilization>, int> memoizedCosts
+        = new Dictionary<KeyValuePair<RTSObjectType, PlayerCivilization>, int>();
+
+    /// <summary>
+    /// Get the cost of creating the specified object for the specified civilization.
+    /// </summary>
+    /// <param name="type">The type of the object to create.</param>
+    /// <param name="civilization">The civilization of the object to create.</param>
+    /// <returns>The cost in resources required to create the object</returns>
+    public static int GetObjectCost(RTSObjectType type, PlayerCivilization civilization)
+    {
+        // We have a pretty big problem here, which is that the costs of the object
+        // are actually defined in the object initialization scripts and not in the prefab
+        // For this reason, to get the cost, we need to actually initialize the object,
+        // get the cost, and destroy it again. Since this is pretty costly, once we get it,
+        // memoize the value to avoid recaculating it in future calls
+
+        if (!memoizedCosts.ContainsKey(new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)))
+        {
+            var objectTemplate = GetObjectTemplate(type, civilization);
+            if (objectTemplate == null)
+            {
+                HUDInfo.insertMessage("Script for object '" + type + "' of civ. '" + civilization + "' doesn't have a object template.");
+                return 0;
+            }
+
+            var objectInstance = GameObject.Instantiate(objectTemplate);
+            var objectScript = objectInstance.GetComponent<RTSObject>();
+            if (objectScript == null)
+            {
+                HUDInfo.insertMessage("Script for object '" + type + "' of civ. '" + civilization + "' doesn't have a RTSObject script.");
+                return 0;
+            }
+
+            memoizedCosts[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)] = objectScript.cost;
+
+            GameObject.Destroy(objectInstance);
+        }
+
+        return memoizedCosts[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)];
+    }
+
     /// <summary>
     /// Prints a table to the log showing which objects are available for each civilization.
     /// </summary>

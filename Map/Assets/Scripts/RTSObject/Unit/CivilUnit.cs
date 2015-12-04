@@ -202,7 +202,7 @@ public class CivilUnit : Unit
         {
             Name = RTSObjectTypeExt.GetObjectName(type),
             CostResource = ResourceType.Wood,
-            Cost = 123
+            Cost = RTSObjectFactory.GetObjectCost(type, owner.civilization)
         }).ToArray();
     }
 

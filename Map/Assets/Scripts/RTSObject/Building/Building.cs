@@ -122,7 +122,7 @@ public class Building : RTSObject
         {
             Name = RTSObjectTypeExt.GetObjectName(type),
             CostResource = ResourceType.Food,
-            Cost = 123
+            Cost = RTSObjectFactory.GetObjectCost(type, owner.civilization)
         }).ToArray();
     }
 
