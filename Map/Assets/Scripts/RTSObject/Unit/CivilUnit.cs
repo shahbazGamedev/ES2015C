@@ -196,9 +196,14 @@ public class CivilUnit : Unit
 		}
 	}
 
-    public override string[] GetActions()
+    public override Action[] GetActions()
     {
-        return buildableBuildings.Select(type => RTSObjectTypeExt.GetObjectName(type)).ToArray();
+        return buildableBuildings.Select(type => new Action
+        {
+            Name = RTSObjectTypeExt.GetObjectName(type),
+            CostResource = ResourceType.Wood,
+            Cost = 123
+        }).ToArray();
     }
 
     public override void PerformAction(string actionToPerform)

@@ -41,7 +41,7 @@ public class HUDAction : HUDElement
             DisplayObject.IsOwnedBy(Player) &&
             ActionIndex < DisplayObject.GetActions().Length)
         {
-            textComponent.text = DisplayObject.GetActions()[ActionIndex];
+            textComponent.text = DisplayObject.GetActions()[ActionIndex].Name;
             buttonComponent.enabled = true;
             imageComponent.enabled = true;
             
@@ -63,7 +63,7 @@ public class HUDAction : HUDElement
             DisplayObject.IsOwnedBy(Player) &&
             ActionIndex < DisplayObject.GetActions().Length)
         {
-            DisplayObject.PerformAction(DisplayObject.GetActions()[ActionIndex]);
+            DisplayObject.PerformAction(DisplayObject.GetActions()[ActionIndex].Name);
         }
     }
 }

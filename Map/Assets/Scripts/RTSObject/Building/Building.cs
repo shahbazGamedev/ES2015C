@@ -113,12 +113,17 @@ public class Building : RTSObject
         }
     }
 
-    public override string[] GetActions()
+    public override Action[] GetActions()
     {
         if (CanBeBuilt())
-            return new string[0];
+            return new Action[0];
 
-        return spawnableUnits.Select(type => RTSObjectTypeExt.GetObjectName(type)).ToArray();
+        return spawnableUnits.Select(type => new Action
+        {
+            Name = RTSObjectTypeExt.GetObjectName(type),
+            CostResource = ResourceType.Food,
+            Cost = 123
+        }).ToArray();
     }
 
     public override void PerformAction(string actionToPerform)
