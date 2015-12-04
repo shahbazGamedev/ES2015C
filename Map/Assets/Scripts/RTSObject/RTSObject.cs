@@ -27,7 +27,6 @@ public class RTSObject : MonoBehaviour
     public Player owner;                            // A quin player correspon
 
     // Variables accessibles per a les subclasses
-    protected string[] actions = { };               // Accions que pot realitzar
 	protected bool currentlySelected = false;       // Indica si esta seleccionat
     protected float healthPercentage = 1.0f;        // Percentatge de vida
     public RTSObject target = null;              // Posible objectiu
@@ -168,7 +167,7 @@ public class RTSObject : MonoBehaviour
     // Metode per obtenir les accions del objecte
     public virtual string[] GetActions()
     {
-        return actions;
+        return new string[0];
     }
 
     // Metode per realitzar la accio corresponent

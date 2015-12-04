@@ -21,35 +21,7 @@ public class Sumerian_civil : CivilUnit
 		miningSound = Resources.Load ("Sounds/Sumerian_civil_Mining") as AudioClip;
 		woodCuttingSound = Resources.Load ("Sounds/Sumerian_civil_WoodCutting") as AudioClip;
 		buildingSound = Resources.Load ("Sounds/Sumerian_civil_Building") as AudioClip;
-		actions = new string[] { "Town Center", "Army Building", "Wall Tower", "Wall Entrance", "Wall", "Civil House", "Academy" };
+        buildableBuildings = new RTSObjectType[] { RTSObjectType.BuildingTownCenter, RTSObjectType.BuildingArmyBuilding, RTSObjectType.BuildingWallTower,
+            RTSObjectType.BuildingWallEntrance, RTSObjectType.BuildingWall, RTSObjectType.BuildingCivilHouse, RTSObjectType.BuildingAcademy, RTSObjectType.BuildingUniversity };
     }
-
-    /*** Metodes interns accessibles per les subclasses ***/
-
-	public override void PerformAction(string actionToPerform)
-	{
-		switch (actionToPerform) {
-		    case "Town Center":
-                StartBuildingLocationSelection("Prefabs/Sumerian_TownCenter");
-                break;
-		    case "Army Building":
-                StartBuildingLocationSelection("Prefabs/Sumerian_ArmyBuilding");
-                break;
-		    case "Wall Tower":
-                StartBuildingLocationSelection("Prefabs/Sumerian_WallTower");
-                break;
-		    case "Wall Entrance":
-                StartBuildingLocationSelection("Prefabs/Sumerian_WallEntrance");
-                break;
-		    case "Wall":
-                StartBuildingLocationSelection("Prefabs/Sumerian_Wall");
-                break;
-		    case "Civil House":
-                StartBuildingLocationSelection("Prefabs/Sumerian_CivilHouse");
-                break;
-		    case "Academy":
-                StartBuildingLocationSelection("Prefabs/Sumerian_Academy");
-                break;
-		}
-	}
 }
