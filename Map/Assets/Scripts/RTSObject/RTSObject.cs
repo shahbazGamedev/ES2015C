@@ -394,6 +394,33 @@ public class RTSObject : MonoBehaviour
     }
 
     /// <summary>
+    /// Check if the unit is currently harvesting.
+    /// </summary>
+    /// <returns>true if the unit is harvesting, false otherwise.</returns>
+    public virtual bool IsHarvesting()
+    {
+        return false;
+    }
+
+    /// <summary>
+    /// Get the current type of resource that the unit is harvesting.
+    /// </summary>
+    /// <returns>The type of the resource being harvested.</returns>
+    public virtual ResourceType GetHarvestType()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Get the current amount of resource that the unit has harvested.
+    /// </summary>
+    /// <returns>The amount of resource that has been harvested.</returns>
+    public virtual float GetHarvestAmount()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Substract health points from this object.
     /// </summary>
     /// <param name="damage">The number of health points to substract to this object.</param>

@@ -133,22 +133,35 @@ public class CivilUnit : Unit
     /*** Metodes publics ***/
 
     /// <summary>
-    /// Get the current type of resource that the unit is harvesting. If the unit is not harvesting any resource, returns null.
+    /// Check if the unit is currently harvesting.
     /// </summary>
-    /// <returns>The type of the resource being harvested, or null.</returns>
-    public ResourceType? GetHarvestType()
+    /// <returns>true if the unit is harvesting, false otherwise.</returns>
+    public override bool IsHarvesting()
     {
-        // TODO: Implement this method properly
+        return harvesting;
+    }
+
+    /// <summary>
+    /// Get the current type of resource that the unit is harvesting.
+    /// </summary>
+    /// <returns>The type of the resource being harvested.</returns>
+    public override ResourceType GetHarvestType()
+    {
+        if (!harvesting)
+            throw new InvalidOperationException("Called GetHarvestType when unit is not harvesting.");
+
         return harvestType;
     }
 
     /// <summary>
-    /// Get the current amount of resource that the unit has harvested. If the unit is not harvesting any resource, returns null.
+    /// Get the current amount of resource that the unit has harvested.
     /// </summary>
-    /// <returns>The amount of resource that has been harvested, or null.</returns>
-    public float? GetHarvestAmount()
+    /// <returns>The amount of resource that has been harvested.</returns>
+    public override float GetHarvestAmount()
     {
-        // TODO: Implement this method properly
+        if (!harvesting)
+            throw new InvalidOperationException("Called GetHarvestAmount when unit is not harvesting.");
+
         return collectionAmount;
     }
 
