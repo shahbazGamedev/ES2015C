@@ -379,6 +379,7 @@ public class CivilUnit : Unit
             resourceDeposit = FindResource(tag);
         }
         harvestType = resourceDeposit.GetResourceType();
+        collectionAmount = 0.0f;
         harvesting = true;
         state = 4;
     }
