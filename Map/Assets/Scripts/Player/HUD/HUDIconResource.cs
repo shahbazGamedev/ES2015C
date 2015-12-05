@@ -19,7 +19,7 @@ public class HUDIconResource : HUDElement
     /// </summary>
 	void Update()
     {
-        if (DisplayObject != null && DisplayObject.objectIconResource != null)
+        if (DisplayObject != null && DisplayObject.IsHarvesting() && DisplayObject.objectIconResource != null)
         {
             imageComponent.enabled = true;
             imageComponent.sprite = DisplayObject.objectIconResource;
