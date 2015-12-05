@@ -30,11 +30,8 @@ public class HUDCivilUnitResourceIcon : HUDElement
     {
         // Try to get the harvest type from the selected unit
         RTSObject.ResourceType? harvestType = null;
-        if (DisplayObject != null && DisplayObject is CivilUnit)
-        {
-            CivilUnit displayUnit = (CivilUnit)DisplayObject;
-            harvestType = displayUnit.GetHarvestType();
-        }
+        if (DisplayObject != null && DisplayObject.IsHarvesting())
+            harvestType = DisplayObject.GetHarvestType();
 
         // Don't load the icon again if the type hasn't changed, to save resources
         if (currentHarvestType == harvestType)

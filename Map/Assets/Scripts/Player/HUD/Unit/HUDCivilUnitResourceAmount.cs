@@ -23,11 +23,8 @@ public class HUDCivilUnitResourceAmount : HUDElement
 	void Update()
     {
         float? harvestedAmount = null;
-        if (DisplayObject != null && DisplayObject is CivilUnit)
-        {
-            CivilUnit displayUnit = (CivilUnit)DisplayObject;
-            harvestedAmount = displayUnit.GetHarvestAmount();
-        }
+        if (DisplayObject != null && DisplayObject.IsHarvesting())
+            harvestedAmount = DisplayObject.GetHarvestAmount();
 
         if (harvestedAmount.HasValue)
         {
