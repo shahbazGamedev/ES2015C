@@ -11,9 +11,9 @@
 /*  04. =forms
 /*  05. =theme common styles
 /*  06. =header styles
-/*  07. =hero section
-/*  08. =portfolio styles
-/*  09. =services
+/*  07. =home section
+/*  08. =storyline styles
+/*  09. =gameplay
 /*  10. =about
 /*  11. =testimonials
 /*  12. =contact
@@ -977,10 +977,10 @@ ul#nav li.current a:after {
 
 
 /* 
-/* 07. =hero section
+/* 07. =home section
 /* =================================================================== */
 
-#hero {
+#home {
 	background: #0F1215 url(../images/banner_bw.jpeg) no-repeat center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -1113,7 +1113,7 @@ ul#nav li.current a:after {
 }
 
 @media only screen and (max-width:768px) {
-	#hero {
+	#home {
 		min-height: auto;
 	}
 
@@ -1210,7 +1210,7 @@ ul#nav li.current a:after {
 }
 
 /* control nav */
-#hero .flex-control-nav {
+#home .flex-control-nav {
 	width: 100%;
 	text-align: left;
 	display: block;
@@ -1220,13 +1220,13 @@ ul#nav li.current a:after {
 	z-index: 500;
 }
 
-#hero .flex-control-nav li {
+#home .flex-control-nav li {
 	margin: 0 6px;
 	display: inline-block;
 	zoom: 1;
 }
 
-#hero .flex-control-paging li a {
+#home .flex-control-paging li a {
 	width: 12px;
 	height: 12px;
 	display: block;
@@ -1236,18 +1236,18 @@ ul#nav li.current a:after {
 	background: #FFFFFF;
 }
 
-#hero .flex-control-paging li a:hover {
+#home .flex-control-paging li a:hover {
 	background: #c8c8c8;
 }
 
-#hero .flex-control-paging li a.flex-active {
+#home .flex-control-paging li a.flex-active {
 	background: #fdc501;
 	cursor: default;
 }
 
 /* media queries - .flex-control-nav */
 @media only screen and (max-width:1024px) {
-	#hero .flex-control-nav {
+	#home .flex-control-nav {
 		text-align: center;
 		left: 0;
 	}
@@ -1255,14 +1255,14 @@ ul#nav li.current a:after {
 }
 
 /* more link */
-#hero #more {
+#home #more {
 	position: absolute;
 	left: 50%;
 	bottom: -27px;
 	margin-left: 250px;
 }
 
-#hero #more a {
+#home #more a {
 	font: 12px/54px "raleway-heavy", sans-serif;
 	text-align: center;
 	text-transform: uppercase;
@@ -1282,12 +1282,12 @@ ul#nav li.current a:after {
 	transition: all 0.4s ease-on-out;
 }
 
-#hero #more a:hover {
+#home #more a:hover {
 	background: #fdc501;
 	color: #000000;
 }
 
-#hero #more a i {
+#home #more a i {
 	margin-left: 6px;
 	position: relative;
 	right: -5px;
@@ -1295,7 +1295,7 @@ ul#nav li.current a:after {
 
 /* media queries - #more */
 @media only screen and (max-width:1024px) {
-	#hero #more {
+	#home #more {
 		margin-left: -100px;
 	}
 
@@ -1303,35 +1303,35 @@ ul#nav li.current a:after {
 
 
 /** 
-/* 08. =portfolio styles
+/* 08. =storyline styles
 /* =================================================================== */
 
-#portfolio {
+#storyline {
 	background: #111417;
 	padding-top: 120px;
 	border-bottom: 1px solid #15191d;  
 }
 
-#portfolio .row.items {
+#storyline .row.items {
 	max-width: 1260px;
 	margin-top: 24px;
 }
 
-/* media queries - portfolio */
+/* media queries - storyline */
 
 @media only screen and (max-width:1300px) {
-	#portfolio .row.items {
+	#storyline .row.items {
 		width: 100%;
 		padding: 0;
 	}
 
-	#portfolio .row.items .columns {
+	#storyline .row.items .columns {
 		padding: 0;
 	}
 
 }
 
-/* portfolio content */
+/* storyline content */
 #portfolio-wrapper {
 	margin-top: 36px;
 }
@@ -1664,10 +1664,10 @@ ul#nav li.current a:after {
 }
 
 /* 
-/* 09. =services
+/* 09. =gameplay
 /* =================================================================== */
 
-#services {
+#gameplay {
 	background: #12151B;
 	padding-top: 120px;
 	padding-bottom: 120px;
@@ -1702,7 +1702,7 @@ ul#nav li.current a:after {
 
 }
 
-#services .service-list h3, .civilization-title h3 {
+#gameplay .service-list h3, .civilization-title h3 {
 	font: 18px/36px "raleway-heavy", sans-serif;
 	color: #fdc501;
 	padding: 0;
@@ -1712,7 +1712,7 @@ ul#nav li.current a:after {
 }
 
 /* media queries:  
-/* #services / .service-list */
+/* #gameplay / .service-list */
 
 @media only screen and (max-width:1024px) {
 	.service-list {
