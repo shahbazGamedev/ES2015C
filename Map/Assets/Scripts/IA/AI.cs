@@ -35,7 +35,7 @@ public class AI : MonoBehaviour
         BuildTownCenter(coords,true);
         CreateNewCivil(true);
         spawnPos = townCenters[0].transform.position;
-        civils[0].GetComponent<CivilUnit>().StartHarvest(null, true,"food");
+        civils[0].GetComponent<CivilUnit>().StartHarvest(null, "food");
     }
 
     // Update is called once per frame
@@ -45,12 +45,12 @@ public class AI : MonoBehaviour
             civils[0].GetComponent<CivilUnit>().building = true;
             civils[0].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilitzation), coords);
             civils[0].GetComponent<CivilUnit>().building = false;
-            civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+            civils[0].GetComponent<CivilUnit>().StartHarvest(null, "food");
         }
 
         if (artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] > 100 && civils.Count < 3) {
             CreateNewCivil(false); ;
-            civils[i].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+            civils[i].GetComponent<CivilUnit>().StartHarvest(null, "food");
             i++;
         }
         else if (civils.Count >= 3 &&
@@ -58,7 +58,7 @@ public class AI : MonoBehaviour
                 civils.Count < 5)
         {
             CreateNewCivil(false);
-            civils[i].GetComponent<CivilUnit>().StartHarvest(null, true, "wood");
+            civils[i].GetComponent<CivilUnit>().StartHarvest(null, "wood");
             i++;
         }
 
@@ -84,7 +84,7 @@ public class AI : MonoBehaviour
 
             civils[i].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingCivilHouse, civilitzation), spawnPos);
             civils[i].GetComponent<CivilUnit>().building = false;
-            civils[i].GetComponent<CivilUnit>().StartHarvest(null, true, "wood");
+            civils[i].GetComponent<CivilUnit>().StartHarvest(null, "wood");
             i++;
             housesBuilt = true;
         }
@@ -101,7 +101,7 @@ public class AI : MonoBehaviour
             civils[i].GetComponent<CivilUnit>().CreateBuildingIA(armyBuilding, armyPos);
             civils[i].GetComponent<CivilUnit>().building = false;
 
-            civils[i].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+            civils[i].GetComponent<CivilUnit>().StartHarvest(null, "food");
             i++;
             armyBuilt = true;
         }
@@ -133,7 +133,7 @@ public class AI : MonoBehaviour
             artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] > 100 &&
             civils.Count < 7) {
             CreateNewCivil(false);
-            civils[i].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+            civils[i].GetComponent<CivilUnit>().StartHarvest(null, "food");
             i++;
         }
 
