@@ -54,6 +54,7 @@ public class HUDAction : HUDElement
             nameTextComponent.text = action.Name;
             buttonComponent.enabled = true;
             actionImageComponent.enabled = true;
+            actionImageComponent.sprite = action.Icon;
             costTextComponent.text = action.Cost.ToString();
             costResourceImageComponent.enabled = true;
             costResourceImageComponent.sprite = GetResourceSprite(action.CostResource);

@@ -214,6 +214,7 @@ public class CivilUnit : Unit
         return buildableBuildings.Select(type => new Action
         {
             Name = RTSObjectTypeExt.GetObjectName(type),
+            Icon = RTSObjectFactory.GetObjectIconSprite(type, owner.civilization),
             CostResource = ResourceType.Wood,
             Cost = RTSObjectFactory.GetObjectCost(type, owner.civilization)
         }).ToArray();

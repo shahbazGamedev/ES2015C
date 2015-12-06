@@ -76,15 +76,6 @@ public class RTSObject : MonoBehaviour
 
     //sprite publica image de unidad de resoruce
     public Sprite objectIconResource;
-    
-    //ACTION OF YAMATO CIVIL
-    public Sprite imageTownCenter;
-    public Sprite imageArmyBuilding;
-    public Sprite imageWallTower;
-    public Sprite imageWallEntrance;
-    public Sprite imageWall;
-    public Sprite imageCivilHouse;
-    public Sprite imageAcademy;
 
 
     /*** Metodes per defecte de Unity ***/
@@ -171,6 +162,8 @@ public class RTSObject : MonoBehaviour
     {
         /// <summary>Name of the action.</summary>
         public string Name { get; set; }
+        /// <summary>Icon for the action.</summary>
+        public Sprite Icon { get; set; }
         /// <summary>In which resource the cost of executing this action is paid.</summary>
         public ResourceType CostResource { get; set; }
         /// <summary>Cost of executing this action. </summary>
