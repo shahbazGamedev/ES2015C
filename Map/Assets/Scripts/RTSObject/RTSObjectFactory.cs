@@ -170,7 +170,7 @@ public static class RTSObjectFactory
         // Try to load the resource for the exact civilization passed as an argument
         if (prefabsForObject.ContainsKey(civilization))
         {
-            var loadedResource = Resources.Load<GameObject>(prefabsForObject[civilization]);
+            var loadedResource = LoadAndCheckPrefab(prefabsForObject[civilization], true);
             if (loadedResource != null)
                 return loadedResource;
         }
@@ -182,7 +182,7 @@ public static class RTSObjectFactory
             // (dictionary enumeration order is undefined)
             foreach (var fallbackCivilization in prefabsForObject.Keys.Where(k => k != civilization).OrderBy(k => k))
             {
-                var loadedResource = Resources.Load<GameObject>(prefabsForObject[fallbackCivilization]);
+                var loadedResource = LoadAndCheckPrefab(prefabsForObject[fallbackCivilization], false);
                 if (loadedResource != null)
                 {
                     Debug.LogWarning("Using model for civilization " + fallbackCivilization + " for object of type " +
@@ -197,6 +197,44 @@ public static class RTSObjectFactory
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Loads a prefab (as in Resources.Load) and checks that the prefab is correctly configured.
+    /// </summary>
+    /// <param name="prefabPath">The path of the prefab. Same as in Resources.Load.</param>
+    /// <param name="warnNotExisting">True to warn if the prefab doesn't exist, false otherwise.</param>
+    /// <returns>The instance of the prefab, or null if it couldn't be found.</returns>
+    private static GameObject LoadAndCheckPrefab(string prefabPath, bool warnNotExisting)
+    {
+        // Try to load the prefab resource
+        var prefab = Resources.Load<GameObject>(prefabPath);
+        if (prefab == null)
+        {
+            if (warnNotExisting)
+            {
+                HUDInfo.insertMessage("Error loading prefab '" + prefabPath + "': Resource does not exist.");
+                Debug.LogWarning("Error loading prefab '" + prefabPath + "': Resource does not exist.");
+            }
+
+            return null;
+        }
+
+        // Check that the prefab has one, and only one, RTSObject script
+        // In this case we will just print a warning but return it anyway to get the model working at least
+        var scripts = prefab.GetComponents<RTSObject>();
+        if (scripts.Length == 0)
+        {
+            HUDInfo.insertMessage("Error loading prefab '" + prefabPath + "': Object doesn't have a RTSObject script associated.");
+            Debug.LogWarning("Error loading prefab '" + prefabPath + "': Object doesn't have a RTSObject script associated.");
+        }
+        else if (scripts.Length >= 2)
+        {
+            HUDInfo.insertMessage("Error loading prefab '" + prefabPath + "': Object has multiple RTSObject scripts associated.");
+            Debug.LogWarning("Error loading prefab '" + prefabPath + "': Object has multiple RTSObject scripts associated.");
+        }
+
+        return prefab;
     }
 
     class ObjectInfo
@@ -226,7 +264,6 @@ public static class RTSObjectFactory
             var objectTemplate = GetObjectTemplate(type, civilization);
             if (objectTemplate == null)
             {
-                HUDInfo.insertMessage("Script for object '" + type + "' of civ. '" + civilization + "' doesn't have a object template.");
                 memoizedObjectInfo[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)] = new ObjectInfo();
                 return memoizedObjectInfo[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)];
             }
@@ -238,7 +275,6 @@ public static class RTSObjectFactory
                 var objectScript = objectInstance.GetComponent<RTSObject>();
                 if (objectScript == null)
                 {
-                    HUDInfo.insertMessage("Script for object '" + type + "' of civ. '" + civilization + "' doesn't have a RTSObject script.");
                     memoizedObjectInfo[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)] = new ObjectInfo();
                     return memoizedObjectInfo[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)];
                 }

@@ -137,10 +137,7 @@ public class Building : RTSObject
     {
         GameObject creationUnit = RTSObjectFactory.GetObjectTemplate(objectType, owner.civilization);
         if (creationUnit == null)
-        {
-            HUDInfo.insertMessage("Could not load resource '" + objectType + "' for civilization '" + owner.civilization + "' to start unit spawning.");
             return;
-        }
 
         AddUnitToCreationQueue(creationUnit);
     }
