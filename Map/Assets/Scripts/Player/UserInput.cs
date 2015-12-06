@@ -96,6 +96,11 @@ public class UserInput : MonoBehaviour
             }
             else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
             {
+				if (player.SelectedObject.GetComponent<Unit>())
+				{
+					player.SelectedObject.GetComponent<Unit>().makeDoSound();
+				}
+
 				if (player.SelectedObject.GetComponent<CivilUnit>() && player.SelectedObject.GetComponent<CivilUnit>().IsHarvesting())
 				{
 					player.SelectedObject.GetComponent<CivilUnit>().StopHarvest();
@@ -137,6 +142,7 @@ public class UserInput : MonoBehaviour
 			{
 				if (player.SelectedObject.CanMove())
                 {
+					player.SelectedObject.GetComponent<Unit>().makeDoSound();
                     player.SelectedObject.MoveTo(hit.point, true);
                 }
 			}

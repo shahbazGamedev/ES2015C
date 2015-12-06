@@ -15,9 +15,6 @@ public class Sumerian_cavalry : Unit
         baseDefense = 5;
         baseAttackSpeed = 2.0f;
 		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Sumerian_cavalry_AC") as RuntimeAnimatorController;
-		walkingSound = Resources.Load ("Sounds/Sumerian_cavalry_Walk") as AudioClip;
-		runningSound = Resources.Load ("Sounds/Sumerian_cavalry_Run") as AudioClip;
-		fightSound = Resources.Load ("Sounds/Sumerian_cavalry_Fight") as AudioClip;
-		dieSound = Resources.Load ("Sounds/Sumerian_cavalry_Die") as AudioClip;
+		chargeSounds ("Sumerian_cavalry");
     }
 }
