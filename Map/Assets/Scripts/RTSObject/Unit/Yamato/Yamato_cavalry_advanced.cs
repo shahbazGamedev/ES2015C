@@ -16,9 +16,6 @@ public class Yamato_cavalry_advanced : Unit
         baseDefense = 5;
         baseAttackSpeed = 2.0f;
 		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Yamato_cavalry_advanced_AC") as RuntimeAnimatorController;
-		walkingSound = Resources.Load ("Sounds/Yamato_cavalry_Walk") as AudioClip;
-		runningSound = Resources.Load ("Sounds/Yamato_cavalry_Run") as AudioClip;
-		fightSound = Resources.Load ("Sounds/Yamato_cavalry_Fight") as AudioClip;
-		dieSound = Resources.Load ("Sounds/Yamato_cavalry_Die") as AudioClip;
+		chargeSounds ("Yamato_cavalry");
     }
 }

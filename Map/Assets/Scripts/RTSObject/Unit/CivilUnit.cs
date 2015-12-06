@@ -132,6 +132,13 @@ public class CivilUnit : Unit
         base.OnGUI();
     }
 
+	protected override void OnMouseDown() {
+		if (owner && owner.human && !moving && !aiming && !attacking && !harvesting && !building && idleSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (idleSound);
+		}
+	}
+
     /*** Metodes publics ***/
 
     /// <summary>
@@ -209,6 +216,16 @@ public class CivilUnit : Unit
 		{
 			audio.PlayOneShot (buildingSound);
 		}
+	}
+	
+	protected virtual void chargeSounds(string objectName)
+	{
+		base.chargeSounds (objectName);
+		farmingSound = Resources.Load ("Sounds/" + objectName + "_Farming") as AudioClip;
+		miningSound = Resources.Load ("Sounds/" + objectName + "_Mining") as AudioClip;
+		woodCuttingSound = Resources.Load ("Sounds/" + objectName + "_WoodCutting") as AudioClip;
+		buildingSound = Resources.Load ("Sounds/" + objectName + "_Building") as AudioClip;
+		
 	}
 
     public override Action[] GetActions()

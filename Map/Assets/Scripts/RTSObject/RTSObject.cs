@@ -56,6 +56,7 @@ public class RTSObject : MonoBehaviour
 	protected Rigidbody rigbody;					// Referenica al component Rigidbody
 	protected LOSEntity ent;
 
+	protected AudioClip creationSound;
 	protected AudioClip fightSound;
 	protected AudioClip dieSound;
 
@@ -83,6 +84,7 @@ public class RTSObject : MonoBehaviour
     protected virtual void Awake()
     {
 		audio = gameObject.AddComponent<AudioSource> ();
+		audio.volume = 0.4f;
 		rigbody = gameObject.AddComponent<Rigidbody> ();
 		rigbody.constraints = RigidbodyConstraints.FreezeAll;
 		ent = gameObject.AddComponent<LOSEntity> ();
@@ -431,6 +433,12 @@ public class RTSObject : MonoBehaviour
         }
     }
 
+	public void makeCreationSound(){
+		if (owner && owner.human && creationSound) {
+			audio.PlayOneShot (creationSound);
+		}
+	}
+
 	/*** Metodes interns accessibles per les subclasses ***/
 	
 	// Funcio auxiliar per al calcul del BoxCollider i el CharacterController
@@ -458,6 +466,13 @@ public class RTSObject : MonoBehaviour
 	{
 		anim.SetBool("IsFighting", attacking);
 		anim.SetBool("IsDead", hitPoints <= 0);
+	}
+	
+	protected virtual void chargeSounds(string objectName)
+	{
+		creationSound = Resources.Load ("Sounds/" + objectName + "_Creation") as AudioClip;
+		fightSound = Resources.Load ("Sounds/" + objectName + "_Fight") as AudioClip;
+		dieSound = Resources.Load ("Sounds/" + objectName + "_Die") as AudioClip;
 	}
 	
 	// Metode per disparar

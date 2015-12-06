@@ -15,9 +15,6 @@ public class Sumerian_warrior_advanced : Unit
         baseDefense = 10;
         baseAttackSpeed = 2.0f;
 		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Sumerian_warrior_advanced_AC") as RuntimeAnimatorController;
-		walkingSound = Resources.Load ("Sounds/Sumerian_warrior_Walk") as AudioClip;
-		runningSound = Resources.Load ("Sounds/Sumerian_warrior_Run") as AudioClip;
-		fightSound = Resources.Load ("Sounds/Sumerian_warrior_Fight") as AudioClip;
-		dieSound = Resources.Load ("Sounds/Sumerian_warrior_Die") as AudioClip;
+		chargeSounds ("Sumerian_warrior");
     }
 }

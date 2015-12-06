@@ -204,6 +204,7 @@ public class Building : RTSObject
         {
             unitClone.GetComponent<RTSObject>().owner = owner;
             owner.resourceAmounts[RTSObject.ResourceType.Food] -= unitClone.GetComponent<Unit>().cost;
+			makeCreationSound();
         }
         else
         {
