@@ -19,7 +19,7 @@ public class HUDIcon : HUDElement
     /// </summary>
 	void Update()
     {
-        if (DisplayObject != null && DisplayObject.objectIconSprite != null)
+        if (DisplayObject != null)
         {
             imageComponent.enabled = true;
             imageComponent.sprite = DisplayObject.objectIconSprite;

@@ -86,6 +86,7 @@ public class RTSObject : MonoBehaviour
 		rigbody = gameObject.AddComponent<Rigidbody> ();
 		rigbody.constraints = RigidbodyConstraints.FreezeAll;
 		ent = gameObject.AddComponent<LOSEntity> ();
+        objectIconSprite = Resources.Load<Sprite>("ObjectIcons/" + GetType().ToString());
     }
 
     protected virtual void Start()
