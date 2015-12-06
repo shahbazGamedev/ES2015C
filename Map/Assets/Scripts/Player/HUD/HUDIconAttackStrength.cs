@@ -19,7 +19,7 @@ public class HUDIconAttackStrength : HUDElement
     /// </summary>
 	void Update()
     {
-        if (DisplayObject != null && DisplayObject.objectIconAttack != null)
+        if (DisplayObject != null && DisplayObject.CanAttack())
         {
             imageComponent.enabled = true;
             imageComponent.sprite = DisplayObject.objectIconAttack;

@@ -19,7 +19,7 @@ public class HUDIconDefense : HUDElement
     /// </summary>
 	void Update()
     {
-        if (DisplayObject != null && DisplayObject.objectIconDefense != null)
+        if (DisplayObject != null && DisplayObject.CanBeAttacked())
         {
             imageComponent.enabled = true;
             imageComponent.sprite = DisplayObject.objectIconDefense;
