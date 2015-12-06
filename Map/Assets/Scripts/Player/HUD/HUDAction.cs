@@ -18,6 +18,8 @@ public class HUDAction : HUDElement
 
     private Image actionImageComponent;
 
+    private Image actionImagePlusComponent;
+
     private Text costTextComponent;
 
     private Image costResourceImageComponent;
@@ -27,10 +29,11 @@ public class HUDAction : HUDElement
         nameTextComponent = transform.GetChild(0).GetComponent<Text>();
         buttonComponent = transform.GetChild(1).GetComponent<Button>();
         actionImageComponent = transform.GetChild(1).GetComponent<Image>();
-        costTextComponent = transform.GetChild(2).GetComponent<Text>();
-        costResourceImageComponent = transform.GetChild(3).GetComponent<Image>();
-        if (nameTextComponent == null || buttonComponent == null || actionImageComponent == null
-            || costTextComponent == null || costResourceImageComponent == null)
+        actionImagePlusComponent = transform.GetChild(2).GetComponent<Image>();
+        costTextComponent = transform.GetChild(3).GetComponent<Text>();
+        costResourceImageComponent = transform.GetChild(4).GetComponent<Image>();
+        if (nameTextComponent == null || buttonComponent == null || actionImageComponent == null ||
+            actionImagePlusComponent == null || costTextComponent == null || costResourceImageComponent == null)
         {
             Debug.Log("Script of type " + GetType().Name + " without a Button and Image component won't work.");
         }
@@ -41,8 +44,8 @@ public class HUDAction : HUDElement
     /// </summary>
     void Update()
     {
-        if (nameTextComponent == null || buttonComponent == null || actionImageComponent == null
-            || costTextComponent == null || costResourceImageComponent == null)
+        if (nameTextComponent == null || buttonComponent == null || actionImageComponent == null ||
+            actionImagePlusComponent == null || costTextComponent == null || costResourceImageComponent == null)
             return;
 
         if (DisplayObject != null &&
@@ -55,6 +58,7 @@ public class HUDAction : HUDElement
             buttonComponent.enabled = true;
             actionImageComponent.enabled = true;
             actionImageComponent.sprite = action.Icon;
+            actionImagePlusComponent.enabled = true;
             costTextComponent.text = action.Cost.ToString();
             costResourceImageComponent.enabled = true;
             costResourceImageComponent.sprite = GetResourceSprite(action.CostResource);
@@ -65,6 +69,7 @@ public class HUDAction : HUDElement
             nameTextComponent.text = "";
             buttonComponent.enabled = false;
             actionImageComponent.enabled = false;
+            actionImagePlusComponent.enabled = false;
             costTextComponent.text = "";
             costResourceImageComponent.enabled = false;
         }
