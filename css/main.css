@@ -1254,6 +1254,35 @@ ul#nav li.current a:after {
 
 }
 
+/* download links */
+#home #download {
+    position: absolute;
+    right: 50%;
+    top: 100px;
+    margin-right: 400px;
+}
+
+#home #download a {
+    margin-top: 5px;
+
+    font: 12px/54px "raleway-heavy", sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    display: block;
+    height: 54px;
+    width: 200px;
+    border-radius: 3px;
+
+    color: rgba(255, 255, 255, 0.701961);
+    background-color: rgba(255, 255, 255, 0.0784314);
+    border-color: rgba(255, 255, 255, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
 /* more link */
 #home #more {
 	position: absolute;
@@ -1282,7 +1311,7 @@ ul#nav li.current a:after {
 	transition: all 0.4s ease-on-out;
 }
 
-#home #more a:hover {
+#home #more a:hover, #home #download a:hover {
 	background: #fdc501;
 	color: #000000;
 }
@@ -2055,8 +2084,8 @@ ul#nav li.current a:after {
 #testimonials p {
 	text-align: left;
 	width: 300px;
-	font: 27px/1.9 "merriweather-regular", sans-serif;
-	color: #FFFFFF;
+	font: 25px/1.9 "merriweather-regular", sans-serif;
+	color: #000000;
 	padding: 0;
 	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 	float: left;
