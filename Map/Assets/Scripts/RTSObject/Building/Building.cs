@@ -121,6 +121,7 @@ public class Building : RTSObject
         return spawnableUnits.Select(type => new Action
         {
             Name = RTSObjectTypeExt.GetObjectName(type),
+            Icon = RTSObjectFactory.GetObjectIconSprite(type, owner.civilization),
             CostResource = ResourceType.Food,
             Cost = RTSObjectFactory.GetObjectCost(type, owner.civilization)
         }).ToArray();

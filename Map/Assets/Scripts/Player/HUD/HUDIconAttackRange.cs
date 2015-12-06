@@ -19,7 +19,7 @@ public class HUDIconAttackRange : HUDElement
     /// </summary>
 	void Update()
     {
-        if (DisplayObject != null && DisplayObject.objectIconAttackRange != null)
+        if (DisplayObject != null && DisplayObject.GetAttackRange() != 0)
         {
             imageComponent.enabled = true;
             imageComponent.sprite = DisplayObject.objectIconAttackRange;

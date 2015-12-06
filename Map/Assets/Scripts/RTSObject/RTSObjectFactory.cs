@@ -199,8 +199,66 @@ public static class RTSObjectFactory
         return null;
     }
 
-    public static Dictionary<KeyValuePair<RTSObjectType, PlayerCivilization>, int> memoizedCosts
-        = new Dictionary<KeyValuePair<RTSObjectType, PlayerCivilization>, int>();
+    class ObjectInfo
+    {
+        public int Cost { get; set; }
+        public Sprite ObjectIconSprite { get; set; }
+    }
+
+    static Dictionary<KeyValuePair<RTSObjectType, PlayerCivilization>, ObjectInfo> memoizedObjectInfo
+        = new Dictionary<KeyValuePair<RTSObjectType, PlayerCivilization>, ObjectInfo>();
+
+    /// <summary>
+    /// Memoize, if required, the information for the specified object and civilization which is initialized on the start script.
+    /// </summary>
+    /// <param name="type">The type of the object.</param>
+    /// <param name="civilization">The civilization of the object.</param>
+    private static ObjectInfo GetObjectInfo(RTSObjectType type, PlayerCivilization civilization)
+    {
+        // We have a pretty big problem here, which is that the costs of the object
+        // are actually defined in the object initialization scripts and not in the prefab
+        // For this reason, to get the cost, we need to actually initialize the object,
+        // get the cost, and destroy it again. Since this is pretty costly, once we get it,
+        // memoize the value to avoid recaculating it in future calls
+        if (!memoizedObjectInfo.ContainsKey(new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)))
+        {
+            // Get object template. If not existing return empty ObjectInfo.
+            var objectTemplate = GetObjectTemplate(type, civilization);
+            if (objectTemplate == null)
+            {
+                HUDInfo.insertMessage("Script for object '" + type + "' of civ. '" + civilization + "' doesn't have a object template.");
+                memoizedObjectInfo[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)] = new ObjectInfo();
+                return memoizedObjectInfo[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)];
+            }
+
+            // Initialize object instance and script. Otherwise return empty ObjectInfo.
+            var objectInstance = GameObject.Instantiate(objectTemplate);
+            try
+            {
+                var objectScript = objectInstance.GetComponent<RTSObject>();
+                if (objectScript == null)
+                {
+                    HUDInfo.insertMessage("Script for object '" + type + "' of civ. '" + civilization + "' doesn't have a RTSObject script.");
+                    memoizedObjectInfo[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)] = new ObjectInfo();
+                    return memoizedObjectInfo[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)];
+                }
+
+                // Get properties from initialized script
+                memoizedObjectInfo[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)] = new ObjectInfo
+                {
+                    Cost = objectScript.cost,
+                    ObjectIconSprite = objectScript.objectIconSprite
+                };
+            }
+            finally
+            {
+                // Make sure we destroy the temporary GameObject we created
+                GameObject.Destroy(objectInstance);
+            }
+        }
+
+        return memoizedObjectInfo[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)];
+    }
 
     /// <summary>
     /// Get the cost of creating the specified object for the specified civilization.
@@ -210,37 +268,18 @@ public static class RTSObjectFactory
     /// <returns>The cost in resources required to create the object</returns>
     public static int GetObjectCost(RTSObjectType type, PlayerCivilization civilization)
     {
-        // We have a pretty big problem here, which is that the costs of the object
-        // are actually defined in the object initialization scripts and not in the prefab
-        // For this reason, to get the cost, we need to actually initialize the object,
-        // get the cost, and destroy it again. Since this is pretty costly, once we get it,
-        // memoize the value to avoid recaculating it in future calls
+        return GetObjectInfo(type, civilization).Cost;
+    }
 
-        if (!memoizedCosts.ContainsKey(new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)))
-        {
-            var objectTemplate = GetObjectTemplate(type, civilization);
-            if (objectTemplate == null)
-            {
-                HUDInfo.insertMessage("Script for object '" + type + "' of civ. '" + civilization + "' doesn't have a object template.");
-                memoizedCosts[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)] = 0;
-                return 0;
-            }
-
-            var objectInstance = GameObject.Instantiate(objectTemplate);
-            var objectScript = objectInstance.GetComponent<RTSObject>();
-            if (objectScript == null)
-            {
-                HUDInfo.insertMessage("Script for object '" + type + "' of civ. '" + civilization + "' doesn't have a RTSObject script.");
-                memoizedCosts[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)] = 0;
-                return 0;
-            }
-
-            memoizedCosts[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)] = objectScript.cost;
-
-            GameObject.Destroy(objectInstance);
-        }
-
-        return memoizedCosts[new KeyValuePair<RTSObjectType, PlayerCivilization>(type, civilization)];
+    /// <summary>
+    /// Get the preview icon sprite the specified object for the specified civilization.
+    /// </summary>
+    /// <param name="type">The type of the object.</param>
+    /// <param name="civilization">The civilization of the object.</param>
+    /// <returns>The preview icon sprite for the required object.</returns>
+    public static Sprite GetObjectIconSprite(RTSObjectType type, PlayerCivilization civilization)
+    {
+        return GetObjectInfo(type, civilization).ObjectIconSprite;
     }
 
     /// <summary>
