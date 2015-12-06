@@ -21,26 +21,26 @@ public class Resource : RTSObject {
 		resourceType = ResourceType.Unknown;
 	}
 
-    
-    protected void Update () {
-        if (isEmpty()){
-            Destroy(this.gameObject, 4);
-        }
-    }
-
     /*** Metodes publics ***/
 
     // Metode per extreure una quantitat al recurs
     public void Remove(float amount)
     {
-        amountLeft -= amount;
-        if (amountLeft < 0) amountLeft = 0;
+		amountLeft -= amount;
+		if (amountLeft < 0)
+		{
+			amountLeft = 0;
+		}
+		if (hitPoints > (int)amountLeft)
+		{
+			TakeDamage(hitPoints - (int)amountLeft);
+		}
     }
 
     // Metode per obtenir si el recurs es buit o no
     public bool isEmpty()
     {
-        return amountLeft <= 0;
+		return (amountLeft <= 0 || hitPoints <= 0);
     }
 
     // Metode per obtenir el tipus de recurs

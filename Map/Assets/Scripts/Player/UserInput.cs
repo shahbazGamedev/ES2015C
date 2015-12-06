@@ -96,10 +96,10 @@ public class UserInput : MonoBehaviour
             }
             else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
             {
-				if (player.SelectedObject.GetComponent<CivilUnit>() && player.SelectedObject.GetComponent<CivilUnit>().harvesting)
-                {
-                    player.SelectedObject.GetComponent<CivilUnit>().harvesting = false;
-                }
+				if (player.SelectedObject.GetComponent<CivilUnit>() && player.SelectedObject.GetComponent<CivilUnit>().IsHarvesting())
+				{
+					player.SelectedObject.GetComponent<CivilUnit>().StopHarvest();
+				}
 
                 // If there is any building project for this object, deassign it before assigning other actions
                 if (player.SelectedObject.IsBuilding())
@@ -125,12 +125,7 @@ public class UserInput : MonoBehaviour
                 //Recolecto
 				else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.GetComponent<Resource>())
 				{
-                    //player.SelectedObject.MoveTo(hit.point);
-                    player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>(),false,null);//, Building store)
-                    //player.SelectedObject.GetComponent<CivilUnit>().harvesting=true; //el civilunit es recolector
-                    //player.SelectedObject.GetComponent<CivilUnit>().resourceDeposit = targetRtsElement.GetComponent<Resource>(); //este es tu recurso
-                    //player.SelectedObject.GetComponent<CivilUnit>().harvestType = targetRtsElement.GetComponent<Resource>().GetResourceType();
-                    //player.SelectedObject.GetComponent<CivilUnit>().state = 2;
+                    player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>(), null);
                 }
                 else if (player.SelectedObject.CanMove())
                 {

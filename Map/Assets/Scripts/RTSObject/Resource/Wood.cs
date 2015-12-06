@@ -9,10 +9,7 @@ public class Wood : Resource {
         base.Awake();
 		resourceType = ResourceType.Wood;
 		objectName = "Wood Resource";
-		gameObject.tag = "tree";
-		hitPoints = 100;
-		maxHitPoints = 100;
 		gameObject.tag = "wood";
-		amountLeft = capacity = hitPoints = maxHitPoints = 100;
+		amountLeft = capacity = hitPoints = maxHitPoints = 200;
     }
 }

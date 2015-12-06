@@ -29,7 +29,7 @@ public class HUDCivilUnitResourceAmount : HUDElement
         if (harvestedAmount.HasValue)
         {
             textComponent.enabled = true;
-            textComponent.text = harvestedAmount.ToString();
+			textComponent.text = Mathf.Round(harvestedAmount.Value).ToString();
         }
         else
         {
