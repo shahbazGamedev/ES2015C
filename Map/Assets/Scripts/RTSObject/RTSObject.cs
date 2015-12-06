@@ -604,7 +604,7 @@ public class RTSObject : MonoBehaviour
             // Begin the "dying" state
             dying = true;
             remainingTimeToDead = DefaultDeadTime;
-			if (owner.human && dieSound)
+			if (currentlySelected && dieSound)
 			{
 				audio.PlayOneShot (dieSound);
 			}

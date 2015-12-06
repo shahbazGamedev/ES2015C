@@ -7,11 +7,11 @@ using System.Linq;
 public class CivilUnit : Unit
 {
 
-    public float capacity, collectionAmount, depositAmount; // Dades sobre la recolecció
-    public bool llegado = false;                            //he llegado a mi destino
-    public int state;                                       //estado de recoleccion
-
-    public bool harvesting = false;                         // Indicadors d'estat de la unitat
+	public float collectionAmount, capacity = 50.0f;		// Dades sobre la recolecció
+	private int harvestingState;                            // Estat recoleccio, 1: recolectant, 2: deixant
+	
+	public bool harvesting = false;                         // Indicadors d'estat de la unitat
+	public bool collecting = false;
 
     /// <summary>Buildings that can be created by this civil unit.</summary>
     protected RTSObjectType[] buildableBuildings = new RTSObjectType[0];
@@ -31,10 +31,10 @@ public class CivilUnit : Unit
 
     public bool building = false;                        // true if the unit has a building project assigned
     protected Building currentProject = null;  				// Building actual de construccio
-
-    //private float currentLoad = 0.0f, currentDeposit = 0.0f;    // Contadors en temps real de la recolecció
-    private ResourceType harvestType;                       // Tipus de recolecció
-    private Resource resourceDeposit;                       // Recurs de la recolecció
+	
+	private ResourceType harvestType = ResourceType.Unknown;    // Tipus de recolecció
+	private string resourceTag = "";
+    private Resource resourceDeposit = null;                    // Recurs de la recolecció
 	private TownCenterBuilding resourceStore;				// Edifici on es deposita la recolecció
     private float amountBuilt = 0.0f;                       // Porcentatge de construcció feta
 	//public int mask = 1024;								// 10000001 checks default and obstacles
@@ -78,22 +78,24 @@ public class CivilUnit : Unit
         {
             if (harvesting)
             {
-                // tot el que implica la recoleccio de recursos
-                if(state==0){ //No hacer nada
-                    //Idle();
-                }
-                if(state == 1){ //Vaciar en el almacen
-                    Vaciar();
-                }
-                if(state == 2){ //Recolectar el recurso
-                    Recolectar();
-                }
-                if(state == 3){ //Ir hacia el almacen
-                    IrVaciar();
-                }
-                if(state == 4){ //Ir hacia el recurso
-                    IrRecolectar();
-                } 
+				if (harvestingState == 1)
+				{
+					var closestPointResource = resourceDeposit.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+					var distanceToResource = (closestPointResource - transform.position).magnitude;
+					if (distanceToResource <= 4)
+					{
+						Collect ();
+					}
+				}
+				else if (harvestingState == 2)
+				{
+					var closestPointResourceStore = resourceStore.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+					var distanceToTownCenter = (closestPointResourceStore - transform.position).magnitude;
+					if (distanceToTownCenter <= 4)
+					{
+						Deposit ();
+					}
+				}
             }
 			else if (building)
 			{
@@ -187,18 +189,18 @@ public class CivilUnit : Unit
 	protected override void Animating ()
 	{
 		base.Animating ();
-		anim.SetBool ("IsFarming", harvesting && state == 2 && harvestType == ResourceType.Food);
-		if(currentlySelected && harvesting && state == 2 && harvestType == ResourceType.Food && farmingSound && !audio.isPlaying)
+		anim.SetBool ("IsFarming", harvesting && collecting && harvestType == ResourceType.Food);
+		if(currentlySelected && harvesting && collecting && harvestType == ResourceType.Food && farmingSound && !audio.isPlaying)
 		{
 			audio.PlayOneShot (farmingSound);
 		}
-		anim.SetBool ("IsMining", harvesting && state == 2 && harvestType == ResourceType.Gold);
-		if(currentlySelected && harvesting && state == 2 && harvestType == ResourceType.Gold && miningSound && !audio.isPlaying)
+		anim.SetBool ("IsMining", harvesting && collecting && harvestType == ResourceType.Gold);
+		if(currentlySelected && harvesting && collecting && harvestType == ResourceType.Gold && miningSound && !audio.isPlaying)
 		{
 			audio.PlayOneShot (miningSound);
 		}
-		anim.SetBool ("IsWoodCutting", harvesting && state == 2 && harvestType == ResourceType.Wood);
-		if(currentlySelected && harvesting && state == 2 && harvestType == ResourceType.Wood && woodCuttingSound && !audio.isPlaying)
+		anim.SetBool ("IsWoodCutting", harvesting && collecting && harvestType == ResourceType.Wood);
+		if(currentlySelected && harvesting && collecting && harvestType == ResourceType.Wood && woodCuttingSound && !audio.isPlaying)
 		{
 			audio.PlayOneShot (woodCuttingSound);
 		}
@@ -369,104 +371,123 @@ public class CivilUnit : Unit
     /*** Metodes privats ***/
 
 
-    // Metode que cridem per a començar a recolectar
-    public void StartHarvest(Resource resource, bool ia,string tag)
-    {
-        if (ia == false)
-        {
-            resourceDeposit = resource;
-        }
-        else {
-            resourceDeposit = FindResource(tag);
-        }
-        harvestType = resourceDeposit.GetResourceType();
-        collectionAmount = 0.0f;
-        harvesting = true;
-        state = 4;
-    }
-
-    // Metode de recolecció
-    public void Collect(Resource resourceDeposit)
-    {
-        //GetComponent<Animation>().Play (attack.name); 
-        if(!resourceDeposit.isEmpty()){
-            resourceDeposit.Remove(Mathf.Round(5));    //resta esto del arbol (ej) *Time.deltaTime
-            collectionAmount += Mathf.Round(5); //se lo suma al recolector *Time.deltaTime
-        }
-    }
-
-    // Metode per depositar els recursos al edifici resourceStore
-    public void Deposit(Resource resourceDeposit)
-    {
-		//vaciarme
+	// Metode que cridem per a començar a recolectar
+	public void StartHarvest(Resource resource, string tag)
+	{
+		resourceDeposit = resource;
+		if (resourceDeposit == null)
+		{
+			resourceDeposit = FindResource(tag);
+		}
+		resourceTag = resourceDeposit.tag;
+		ResourceType newHarvestType = resourceDeposit.GetResourceType();
+		// Si tenim en el civil ple o el nou recurs es diferent al anterior anem a Buidar
+		if (collectionAmount >= 50.0f && harvestType == newHarvestType)
+		{
+			goToLeaving ();
+		}
+		else
+		{
+			if (harvestType != newHarvestType)
+			{
+				collectionAmount = 0.0f;
+			}
+			goToResourcing();
+		}
+		harvestType = newHarvestType;
+		harvesting = true;
+	}
+	
+	public void StopHarvest(){
+		harvesting = false;
+		collecting = false;
+		resourceDeposit = null;
+	}
+	
+	// Metode de recolecció
+	private void Collect()
+	{
+		if (collectionAmount >= capacity)
+		{
+			collecting = false;
+			collectionAmount = capacity;
+			goToLeaving ();
+		}
+		else if (resourceDeposit && !resourceDeposit.isEmpty ())
+		{
+			collecting = true;
+			resourceDeposit.Remove (5 * Time.deltaTime);
+			collectionAmount += (5 * Time.deltaTime);
+		}
+		else
+		{
+			StopHarvest();
+			StartHarvest(null, resourceTag);
+		}
+	}
+	
+	// Metode per depositar els recursos al edifici towncenter i que es sumi al jugador
+	private void Deposit()
+	{
 		owner.resourceAmounts[harvestType] += collectionAmount;
-        collectionAmount = 0;
-    }
-
-    public void Vaciar(){
-        Deposit(resourceDeposit);
-        state = 4; //como ya he vaciado, vuelvo al recurso
-    }
-    public void IrVaciar(){
-		if (resourceStore == null){
+		collectionAmount = 0.0f;
+		goToResourcing();
+	}
+	
+	private void goToResourcing(){
+		var closestPointResource = resourceDeposit.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+		SetNewPath(closestPointResource, false);
+		harvestingState = 1;
+	}
+	
+	private void goToLeaving(){
+		if (resourceStore == null)
+		{
 			resourceStore = findTownCenter();
 		}
-        //ClosestPointOnBounds retorna el punto mas cercano del collider del objeto respecto al transform que le pasas
-        var closestPointResourceStore = resourceStore.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-        SetNewPath(closestPointResourceStore, false);
-        state = 1;
-        
-    }
-    public void Recolectar(){
-        Collect(resourceDeposit);
-        if(collectionAmount >= capacity){ //Ir a Vaciar deposito
-           state = 3;
-        } 
-    }
-    public void IrRecolectar(){
-        //ClosestPointOnBounds retorna el punto mas cercano del collider del objeto respecto al transform que le pasas
-        var closestPointResource = resourceDeposit.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-        SetNewPath(closestPointResource, false); //mi objetivo ahora es target = recurso (RTSObject)
-        state = 2;
-    }
-
+		var closestPointResourceStore = resourceStore.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+		SetNewPath(closestPointResourceStore, false);
+		harvestingState = 2;
+	}
+	
 	private TownCenterBuilding findTownCenter(){
-        GameObject[] centers;
+		GameObject[] centers;
 		centers = GameObject.FindGameObjectsWithTag("townCenter");
-        GameObject closest = null;
-        float distance = Mathf.Infinity;
-        Vector3 position = transform.position;
-        foreach (GameObject go in centers){
-            Vector3 diff = go.transform.position - position;
-            float curDistance =  diff.sqrMagnitude;
-            if(curDistance < distance){
-                closest = go;
-                distance = curDistance;
-            }
-        }
-        return closest.GetComponent<TownCenterBuilding>();
-    }
-
-
-    private Resource FindResource(string tag)
-    {
-        GameObject[] centers;
-        centers = GameObject.FindGameObjectsWithTag(tag);
-        GameObject closest = null;
-        float distance = Mathf.Infinity;
-        Vector3 position = transform.position;
-        foreach (GameObject go in centers)
-        {
-            Vector3 diff = go.transform.position - position;
-            float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance)
-            {
-                closest = go;
-                distance = curDistance;
-            }
-        }
-        return closest.GetComponent<Resource>();
-    }
+		GameObject closest = null;
+		float distance = Mathf.Infinity;
+		Vector3 position = transform.position;
+		foreach (GameObject go in centers){
+			Vector3 diff = go.transform.position - position;
+			float curDistance =  diff.sqrMagnitude;
+			if (go.GetComponent<TownCenterBuilding>() && go.GetComponent<TownCenterBuilding>().owner == owner && curDistance < distance)
+			{
+				closest = go;
+				distance = curDistance;
+			}
+		}
+		return closest.GetComponent<TownCenterBuilding>();
+	}
+	
+	
+	private Resource FindResource(string tag)
+	{
+		GameObject[] centers;
+		centers = GameObject.FindGameObjectsWithTag(tag);
+		GameObject closest = null;
+		float distance = Mathf.Infinity;
+		Vector3 position = transform.position;
+		foreach (GameObject go in centers)
+		{
+			Vector3 diff = go.transform.position - position;
+			float curDistance = diff.sqrMagnitude;
+			if (go.GetComponent<Resource>() && go.GetComponent<Resource>().amountLeft > 1 && curDistance < distance)
+			{
+				closest = go;
+				distance = curDistance;
+			}
+		}
+		return closest.GetComponent<Resource>();
+	}
 
 
 
