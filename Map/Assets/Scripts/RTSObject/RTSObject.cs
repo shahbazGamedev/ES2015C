@@ -86,7 +86,11 @@ public class RTSObject : MonoBehaviour
 		rigbody = gameObject.AddComponent<Rigidbody> ();
 		rigbody.constraints = RigidbodyConstraints.FreezeAll;
 		ent = gameObject.AddComponent<LOSEntity> ();
-        objectIconSprite = Resources.Load<Sprite>("ObjectIcons/" + GetType().ToString());
+        objectIconSprite = Resources.Load<Sprite>("HUD/ObjectIcons/" + GetType().ToString());
+        objectIconAttack = Resources.Load<Sprite>("HUD/Unit/AttackStrengthIcon");
+        objectIconDefense = Resources.Load<Sprite>("HUD/Unit/DefenseIcon");
+        objectIconAttackRange = Resources.Load<Sprite>("HUD/Unit/AttackRangeIcon");
+        objectIconResource = Resources.Load<Sprite>("HUD/Unit/Resource");
     }
 
     protected virtual void Start()
