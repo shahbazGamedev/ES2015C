@@ -232,10 +232,7 @@ public class CivilUnit : Unit
     {
         GameObject buildingPrefabTemplate = RTSObjectFactory.GetObjectTemplate(objectType, owner.civilization);
         if (buildingPrefabTemplate == null)
-        {
-            HUDInfo.insertMessage("Could not load resource '" + objectType + "' for civilization '" + owner.civilization + "' to start building location selection.");
             return;
-        }
 
         StartBuildingLocationSelection(buildingPrefabTemplate);
     }
