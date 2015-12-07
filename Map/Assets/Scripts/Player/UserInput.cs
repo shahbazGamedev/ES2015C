@@ -7,7 +7,6 @@ public class UserInput : MonoBehaviour
 
     private Player player;
     private bool isPaused = false;
-    private MenuPause menuPause;
 	public GameObject SelectedArea;
 
     // Inicialitzem
@@ -22,13 +21,13 @@ public class UserInput : MonoBehaviour
     {
         if (player && player.human)
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) OpenPauseMenu();
+            if (Input.GetKeyDown(KeyCode.Escape)) OpenPauseMenu(); //Activar o desactivar modo Pausa
+            // if (Input.GetKey (KeyCode.Space)) gamePause(); //Activar o desactivar modo Pausa opcion 2
+            //Comprueva si el modo pausa esta activado
             if(isPaused){
-                Time.timeScale = 0.0f;
-                //Application.LoadLevel("pauseGame");
+                Time.timeScale = 0.0f; //Para el juego
             }else{
-                //Application.LoadLevel("map");
-                Time.timeScale = 1.0f;
+                Time.timeScale = 1.0f; //Continua jugando
             }
             bool leftClick = Input.GetMouseButtonDown(0);
             bool rightClick = Input.GetMouseButtonDown(1);
@@ -38,7 +37,6 @@ public class UserInput : MonoBehaviour
 
             if (Input.GetKey (KeyCode.M)) morirEnemigos(); 
             if (Input.GetKey (KeyCode.P)) morirJugador();
-            //if (Input.GetKey (KeyCode.Space)) gamePause();
 			if (Input.GetKeyUp("k")) demolishBuildings();
 
             MoveCamera();
@@ -48,30 +46,31 @@ public class UserInput : MonoBehaviour
 
     }
 
-    private void OpenPauseMenu()
-    {
+    //Funcion para activar o descativar el modo Pausa
+    private void OpenPauseMenu() {
+        Debug.Log("GamePause");
         isPaused = !isPaused;
-        
     }
+    //Funcion para activar o descativar el modo Pausa opcion 2
+    /*public void gamePause(){
+        Debug.Log("GamePausev2");
+        ChangeMenuPause();
+    }*/
 
+    //Funcion que cuando esta en modo pausa, enseña 3 botones (continuar jugando, menu principal, quitar juego)
     private void OnGUI (){
-        if(isPaused){
-         
-            // Si le bouton est présser alors isPaused devient faux donc le jeu reprend.
-            if(GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 60, 100, 40), "Continuer")){
+        if(isPaused){ //Modo pausa activado
+            // Boton para seguir el juego, "despausarlo"
+            if(GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 60, 100, 40), "Continue")){
                 isPaused = !isPaused;
             }
- 
-            // Si le bouton est présser alors on ferme completement le jeu ou charge la scene "Menu Principal
-            // Dans le cas du bouton quitter il faut augmenter sa postion Y pour qu'il soit plus bas
+            // Boton para volver al menu principal
             if(GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 + 00, 100, 40), "Main Menu")){
-                // Application.Quit(); 
                 Application.LoadLevel("menu");
             }
- 
-            if(GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 + 60, 100, 40), "Quitter")){
+            //Boton para quitar el juego
+            if(GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 + 60, 100, 40), "Quit Game")){
                 Application.Quit(); 
-                // Application.LoadLevel("CarBigParcour"); 
             }
         }
     }
@@ -280,11 +279,6 @@ public class UserInput : MonoBehaviour
                 Destroy(army, 2);
             }
         }
-    }
-
-    public void gamePause(){
-        Debug.Log("GamePause");
-        menuPause.ChangeMenuPause();
     }
 	
 	private void demolishBuildings() {
