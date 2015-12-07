@@ -6,6 +6,8 @@ public class UserInput : MonoBehaviour
 {
 
     private Player player;
+    private bool isPaused = false;
+    private MenuPause menuPause;
 	public GameObject SelectedArea;
 
     // Inicialitzem
@@ -21,7 +23,13 @@ public class UserInput : MonoBehaviour
         if (player && player.human)
         {
             if (Input.GetKeyDown(KeyCode.Escape)) OpenPauseMenu();
-
+            if(isPaused){
+                Time.timeScale = 0.0f;
+                //Application.LoadLevel("pauseGame");
+            }else{
+                //Application.LoadLevel("map");
+                Time.timeScale = 1.0f;
+            }
             bool leftClick = Input.GetMouseButtonDown(0);
             bool rightClick = Input.GetMouseButtonDown(1);
 			bool middleClick = Input.GetMouseButtonDown(2);
@@ -30,10 +38,7 @@ public class UserInput : MonoBehaviour
 
             if (Input.GetKey (KeyCode.M)) morirEnemigos(); 
             if (Input.GetKey (KeyCode.P)) morirJugador();
-            if (Input.GetKey (KeyCode.Space)) {
-                Debug.Log("IIIIF Pause");
-                gamePause();
-            }
+            //if (Input.GetKey (KeyCode.Space)) gamePause();
 			if (Input.GetKeyUp("k")) demolishBuildings();
 
             MoveCamera();
@@ -45,6 +50,30 @@ public class UserInput : MonoBehaviour
 
     private void OpenPauseMenu()
     {
+        isPaused = !isPaused;
+        
+    }
+
+    private void OnGUI (){
+        if(isPaused){
+         
+            // Si le bouton est présser alors isPaused devient faux donc le jeu reprend.
+            if(GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 60, 100, 40), "Continuer")){
+                isPaused = !isPaused;
+            }
+ 
+            // Si le bouton est présser alors on ferme completement le jeu ou charge la scene "Menu Principal
+            // Dans le cas du bouton quitter il faut augmenter sa postion Y pour qu'il soit plus bas
+            if(GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 + 00, 100, 40), "Main Menu")){
+                // Application.Quit(); 
+                Application.LoadLevel("menu");
+            }
+ 
+            if(GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 + 60, 100, 40), "Quitter")){
+                Application.Quit(); 
+                // Application.LoadLevel("CarBigParcour"); 
+            }
+        }
     }
 
 	private void createSelectedArea()
@@ -253,9 +282,9 @@ public class UserInput : MonoBehaviour
         }
     }
 
-    private void gamePause(){
-        Debug.Log("Pausa!!!");
-        Application.LoadLevel("pauseGame");
+    public void gamePause(){
+        Debug.Log("GamePause");
+        menuPause.ChangeMenuPause();
     }
 	
 	private void demolishBuildings() {
