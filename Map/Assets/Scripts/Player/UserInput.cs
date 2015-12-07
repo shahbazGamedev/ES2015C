@@ -30,6 +30,10 @@ public class UserInput : MonoBehaviour
 
             if (Input.GetKey (KeyCode.M)) morirEnemigos(); 
             if (Input.GetKey (KeyCode.P)) morirJugador();
+            if (Input.GetKey (KeyCode.Space)) {
+                Debug.Log("IIIIF Pause");
+                gamePause();
+            }
 			if (Input.GetKeyUp("k")) demolishBuildings();
 
             MoveCamera();
@@ -247,6 +251,11 @@ public class UserInput : MonoBehaviour
                 Destroy(army, 2);
             }
         }
+    }
+
+    private void gamePause(){
+        Debug.Log("Pausa!!!");
+        Application.LoadLevel("pauseGame");
     }
 	
 	private void demolishBuildings() {
