@@ -126,7 +126,7 @@ public class UserInput : MonoBehaviour
 					SelectedArea.GetComponent<MeshRenderer>().enabled = false;
 				}
             }
-            else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
+            else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player) && Input.GetKey(KeyCode.RightControl)==false && Input.GetKey(KeyCode.LeftControl)==false)
             {
 				if (player.SelectedObject.GetComponent<Unit>())
 				{
