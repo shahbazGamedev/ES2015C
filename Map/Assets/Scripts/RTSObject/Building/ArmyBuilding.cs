@@ -8,6 +8,7 @@ public class ArmyBuilding : Building {
     {
 		base.Awake();
         objectName = "Army Building";
+        gameObject.tag = "armyBuilding";
 		cost = 100;
 		hitPoints = maxHitPoints = 3000;
         baseDefense = 5;

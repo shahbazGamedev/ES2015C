@@ -11,5 +11,6 @@ public class Hittite_WallEntrance : Building {
 		cost = 100;
 		hitPoints = maxHitPoints = 700;
         baseDefense = 5;
+		getModels("Prefabs/Hittite_WallEntrance", "Prefabs/Hittite_WallEntrance_onConstruction", "Prefabs/Hittite_WallEntrance_Semidemolished");
     }
 }
