@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(CharacterController))]
-public class MovimientoAleatorioCivil : RTSObject
+public class MovimientoAleatorioCivil : MonoBehaviour
 {
     public float speed = 1;
     public float directionChangeInterval = 6;

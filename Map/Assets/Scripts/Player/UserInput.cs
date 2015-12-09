@@ -7,6 +7,7 @@ public class UserInput : MonoBehaviour
 
     private Player player;
     private bool isPaused = false;
+    private bool paused = true;
 	public GameObject SelectedArea;
 
     // Inicialitzem
@@ -22,7 +23,7 @@ public class UserInput : MonoBehaviour
         if (player && player.human)
         {
             if (Input.GetKeyDown(KeyCode.Escape)) OpenPauseMenu(); //Activar o desactivar modo Pausa
-            // if (Input.GetKey (KeyCode.Space)) gamePause(); //Activar o desactivar modo Pausa opcion 2
+            if (Input.GetKey (KeyCode.Space)) gamePause(); //Activar o desactivar modo Pausa opcion 2
             //Comprueva si el modo pausa esta activado
             if(isPaused){
                 Time.timeScale = 0.0f; //Para el juego
@@ -52,10 +53,18 @@ public class UserInput : MonoBehaviour
         isPaused = !isPaused;
     }
     //Funcion para activar o descativar el modo Pausa opcion 2
-    /*public void gamePause(){
+    public void gamePause(){
         Debug.Log("GamePausev2");
-        ChangeMenuPause();
-    }*/
+        if(paused){
+            paused=false;
+            Time.timeScale = 0;
+            Application.LoadLevel("pauseGame");
+        }else{
+            Application.LoadLevel("map");
+            paused=true;
+            Time.timeScale = 1;
+        }
+    }
 
     //Funcion que cuando esta en modo pausa, enseña 3 botones (continuar jugando, menu principal, quitar juego)
     private void OnGUI (){
