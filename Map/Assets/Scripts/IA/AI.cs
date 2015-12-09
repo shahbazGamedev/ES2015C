@@ -168,6 +168,40 @@ public class AI : MonoBehaviour
             CreateNewWarrior();
         }
 
+    //_______________________________
+
+    // Dependiendo de lo que se marque por teclado se aumentaran o disminiuirán los recursos de la IA.
+    // Esto se crea para tener un acceso más fácil a que todo funciona.
+        if (Input.GetKey (KeyCode.G) && Input.GetKey(KeyCode.UpArrow)) {
+            artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Gold] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Gold] + 1000; 
+        }
+
+        if (Input.GetKey (KeyCode.G) && Input.GetKey (KeyCode.DownArrow)) {
+            if (artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Gold] >= 1000) {
+                artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Gold] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Gold] - 1000; 
+            }
+        }    
+
+        if (Input.GetKey (KeyCode.F) && Input.GetKey(KeyCode.UpArrow)) {
+            artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] + 1000; 
+        }
+
+        if (Input.GetKey (KeyCode.F) && Input.GetKey (KeyCode.DownArrow)) {
+            if (artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] >= 1000) {
+                artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] - 1000; 
+            }
+        }     
+
+        if (Input.GetKey (KeyCode.W) && Input.GetKey(KeyCode.UpArrow)) {
+            artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] + 1000; 
+        }
+
+        if (Input.GetKey (KeyCode.W) && Input.GetKey (KeyCode.DownArrow)) {
+            if (artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] >= 1000) {
+                artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] - 1000; 
+            }
+        }      
+
     }
 
 
