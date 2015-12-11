@@ -14,19 +14,15 @@ public class ADS : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (GetComponent<RTSObject>().owner.human)
-        {
+        if (gameObject.GetComponent<RTSObject>().owner.human) {
             GetComponent<ADS>().enabled = false;
             GetComponent<MovimientoAleatorioCivil>().enabled = false;
         }
-        else
-        {
-            speed = 2;
-            hit = new RaycastHit();
-            estado = aiState.wandering;
-            //GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
-            enlace = GameObject.Find("EnemyPlayer1");
-        }
+        speed = 2;
+        hit = new RaycastHit();
+        estado = aiState.wandering;
+        GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
+        enlace = GameObject.Find("EnemyPlayer1");
     }
 
     // Update is called once per frame
@@ -56,21 +52,23 @@ public class ADS : MonoBehaviour
     {
         if (enlace.GetComponent<Player>().objetivos.Count > 0) {
             targetlocal = (RTSObject)enlace.GetComponent<Player>().objetivos[0];
-            transform.LookAt(targetlocal.transform);
-            GetComponent<MovimientoAleatorioCivil>().enabled = false; // desactivo el movimiento aleatorio
-            dist = Vector3.Distance(transform.position, targetlocal.transform.position);
-            if (targetlocal.GetComponent<RTSObject>().hitPoints == 0)
-            {
-                enlace.GetComponent<Player>().objetivos.Remove(targetlocal);
-            }
-            if (dist > 2)
-            {
-                transform.Translate(0, 0, 1 * speed * Time.deltaTime);
-            }
-            else
-            {
-                transform.Translate(0, 0, 0);
-                GetComponent<RTSObject>().AttackObject(targetlocal);
+            if (targetlocal != null) { 
+                transform.LookAt(targetlocal.transform);
+                GetComponent<MovimientoAleatorioCivil>().enabled = false; // desactivo el movimiento aleatorio
+                dist = Vector3.Distance(transform.position, targetlocal.transform.position);
+                if (targetlocal.GetComponent<RTSObject>().hitPoints == 0)
+                {
+                    enlace.GetComponent<Player>().objetivos.Remove(targetlocal);
+                }
+                if (dist > 2)
+                {
+                    transform.Translate(0, 0, 1 * speed * Time.deltaTime);
+                }
+                else
+                {
+                    transform.Translate(0, 0, 0);
+                    GetComponent<RTSObject>().AttackObject(targetlocal);
+                }
             }
         }
     }
@@ -88,10 +86,10 @@ public class ADS : MonoBehaviour
             || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, -40), out hit, 10))
             || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, -40), out hit, 10)))
         {*/
-        if (Physics.SphereCast(transform.position, 0, transform.forward, out hit, 15))
+        if (Physics.SphereCast(transform.position, 20f, transform.forward, out hit, 20f))
         { 
-            if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner.human)
-            { 
+            //if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner.human)
+            //{ 
             
                 if (!enlace.GetComponent<Player>().objetivos.Contains(hit.collider.gameObject.GetComponent<RTSObject>())) // compruebo si el objetivo ya esta en la lista 
                 {
@@ -99,7 +97,7 @@ public class ADS : MonoBehaviour
                     Debug.Log("HE DETECTADO UN OBJETO DE CLASE: " + hit.collider.tag);
                     Debug.Log("TENGO EL TARGET AÑADIDO-->" + targetlocal);
                 }
-            }
+            //}
         }
     }
 
