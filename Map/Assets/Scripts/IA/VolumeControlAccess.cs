@@ -14,17 +14,10 @@ public class VolumeControlAccess : MonoBehaviour
 	//GameObject prefab;
 
 	public AudioSource ambiente;
-	public int xxx;
+
 
 	void Start () {
-		/*
-		ambiente = gameObject.AddComponent<AudioSource>();
-		ambiente.clip = Resources.Load("Sounds/music1") as AudioClip;
-		ambiente.volume = 0.5f;
-		ambiente.Play();
-		GameObject menuVol;
-		//artificialIntelligence = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
-        //civilitzation = GameObject.Find("EnemyPlayer1").GetComponent<Player>().civilization;*/
+
 
 	}
 	

@@ -7,6 +7,8 @@ public class VolumeControl : MonoBehaviour
 
 	private GameObject menuVol;
 	private bool activated = false;
+	public bool is_mute = true;
+	public float auxiliar = 0.5f;
 	//public Player artificialIntelligence;
 	//public PlayerCivilization civilitzation;
 
@@ -18,7 +20,7 @@ public class VolumeControl : MonoBehaviour
 	void Start () {
 		ambiente = gameObject.AddComponent<AudioSource>();
 		ambiente.clip = Resources.Load("Sounds/music1") as AudioClip;
-		ambiente.volume = 0.5f;
+		ambiente.volume = 0.0f;
 		ambiente.Play();
 		GameObject menuVol;
 		
@@ -33,6 +35,23 @@ public class VolumeControl : MonoBehaviour
 		
 	}
 
+	public void mute () {
+		if (is_mute) {
+      		ambiente.volume = auxiliar;
+      		is_mute = false;
+
+		}
+		else {
+			auxiliar = ambiente.volume;
+			ambiente.volume = 0.0f;
+      		//ambiente.mute = true;
+      		is_mute = true;
+		}
+		
+	}
+
 	void Update() {
+
+		
 	}
 }
