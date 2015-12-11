@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e3fd50de411f88d4a848c1b4605bffd0
-timeCreated: 1447673412
+timeCreated: 1449853433
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -805,7 +805,7 @@ ModelImporter:
       name: Armature|Hittite_Cavalry_Run
       takeName: Armature|Hittite_Cavalry_Run
       firstFrame: 0
-      lastFrame: 16
+      lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
