@@ -1724,6 +1724,10 @@ ul#nav li.current a:after {
 	background: rgba(0, 0, 0, 0.1);
 }
 
+.bgrid.large {
+	width: 50%;
+}
+
 @media only screen and (max-width:600px) {
 	.service-list .bgrid:hover {
 		background: inherit;
