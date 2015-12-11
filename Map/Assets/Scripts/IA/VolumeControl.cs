@@ -21,34 +21,18 @@ public class VolumeControl : MonoBehaviour
 		ambiente.volume = 0.5f;
 		ambiente.Play();
 		GameObject menuVol;
+		
+		//ambiente2.GetComponent.<VolumeControlAccess>().xxx = 2;
 		//artificialIntelligence = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
         //civilitzation = GameObject.Find("EnemyPlayer1").GetComponent<Player>().civilization;
 	}
 	
 	public void PonVolumen (float valor) {
-		ambiente.volume = valor/20f; //divido 20 porque hemos asginado que va entre 0 y 20
-	}
 
-	private void CreateMenuVC() {
-        menuVol = Instantiate(Resources.Load("ControlVolumen")) as GameObject;     
-    }
+		ambiente.volume = valor/20f; //divido 20 porque hemos asginado que va entre 0 y 20
+		
+	}
 
 	void Update() {
-
-		if (!activated) {
-			if (Input.GetKey (KeyCode.V)) {
-				activated=true;
-				CreateMenuVC();
-
-			}
-		}
-
-		else {
-			if (Input.GetKey (KeyCode.V)) {
-				activated=false;
-				menuVol.active = false;
-			}
-		}
 	}
-	
 }

@@ -20,6 +20,8 @@ public class AI : MonoBehaviour
     private GameObject armyBuilding;
     private PlayerCivilization civilitzation;
 
+    private GameObject menu;
+
 
     private int prova =1;
 
@@ -36,6 +38,7 @@ public class AI : MonoBehaviour
         CreateNewCivil(true);
         spawnPos = townCenters[0].transform.position;
         civils[0].GetComponent<CivilUnit>().StartHarvest(null, true,"food");
+
     }
 
     // Update is called once per frame
