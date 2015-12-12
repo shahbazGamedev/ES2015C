@@ -2583,6 +2583,6 @@ footer .social-links li:first-child {
 	right: -5px;
 }
 
-.info p {
+.info p, .portfolio-item-meta p {
 	text-align: center;
 }
