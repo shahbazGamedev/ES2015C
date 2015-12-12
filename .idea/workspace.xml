@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dafaf3a-f45d-4e52-b4d4-5aa81f90db7b" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/doc/RTSObject API.pdf" afterPath="$PROJECT_DIR$/doc/apidoc.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/others/map.jpeg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
@@ -28,8 +28,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7451456">
-              <caret line="1499" column="35" selection-start-line="1499" selection-start-column="35" selection-end-line="1499" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.47451457">
+              <caret line="1461" column="33" selection-start-line="1461" selection-start-column="33" selection-end-line="1461" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -95,6 +95,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -113,23 +114,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Website" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ES2015C" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="doc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -139,19 +125,19 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\doc" />
-      <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\others" />
-      <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\destructed" />
-      <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\modals\yamato\characters" />
-      <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\modals\sumerian\characters" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\others" />
       <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\modals\yamato\characters" />
       <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\modals\sumerian\characters" />
       <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\modals\persian\characters" />
       <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\modals" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\others" />
+      <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images" />
+      <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\doc" />
+      <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\destructed" />
+      <recent name="C:\Users\Cyan\Documents\GitHub\ES2015C\images\portfolio\modals\yamato\characters" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.html (1)">
@@ -271,13 +257,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.861111">
-          <caret line="143" column="13" selection-start-line="143" selection-start-column="8" selection-end-line="143" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/characters/standard/hitties_civil.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -528,10 +507,15 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/images/portfolio/others/map.jpeg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7451456">
-          <caret line="1499" column="35" selection-start-line="1499" selection-start-column="35" selection-end-line="1499" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.47451457">
+          <caret line="1461" column="33" selection-start-line="1461" selection-start-column="33" selection-end-line="1461" selection-end-column="33" />
           <folding />
         </state>
       </provider>
