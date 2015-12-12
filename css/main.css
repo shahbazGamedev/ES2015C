@@ -1285,6 +1285,27 @@ ul#nav li.current a:after {
     transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
+#download-pdf a {
+	margin-top: 5px;
+
+	font: 12px/54px "raleway-heavy", sans-serif;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	text-decoration: none;
+	display: block;
+	height: 54px;
+	width: 200px;
+	border-radius: 3px;
+
+	color: rgba(174, 121, 41, 1);
+	background-color: rgba(43, 43, 43, 0.08);
+	border-color: rgba(0, 0, 0, 0.2);
+	border-style: solid;
+	border-width: 1px;
+	transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
 /* more link */
 #home #more {
 	position: absolute;
@@ -1575,6 +1596,14 @@ ul#nav li.current a:after {
 	width: 650px;
 	height: 150px;
 	margin-left: 30px;
+}
+
+.popup-modal .ai {
+	height: auto;
+}
+
+.popup-modal .download-pdf {
+	float: left;
 }
 
 .popup-modal .item-description h4 {
