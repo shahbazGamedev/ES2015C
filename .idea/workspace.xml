@@ -2,35 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dafaf3a-f45d-4e52-b4d4-5aa81f90db7b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_Academy.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_ArmyBuilding.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_CivilHouse.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_TownCenter.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/hitties/walls/Hittites_Wall.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/hitties/walls/Hittites_WallEntrance.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/hitties/walls/Hittites_WallTower.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/persian/buildings/Persian_Academy.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/persian/buildings/Persian_ArmyBuilding.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/persian/buildings/Persian_CivilHouse.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/persian/buildings/Persian_TownCenter.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/persian/walls/Persian_Wall.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/persian/walls/Persian_WallEntrance.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/persian/walls/Persian_WallTower.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/sumerian/buildings/Sumerian_Academy.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/sumerian/buildings/Sumerian_ArmyBuilding.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/sumerian/buildings/Sumerian_CivilHouse.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/sumerian/buildings/Sumerian_TownCenter.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/sumerian/walls/Sumerian_Wall.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/sumerian/walls/Sumerian_WallEntrance.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/sumerian/walls/Sumerian_WallTower.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/yamato/buildings/Yamato_Academy.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/yamato/buildings/Yamato_ArmyBuilding.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/yamato/buildings/Yamato_CivilHouse.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/yamato/buildings/Yamato_TownCenter.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/yamato/walls/Yamato_Wall.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/yamato/walls/Yamato_WallEntrance.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/portfolio/modals/yamato/walls/Yamato_WallTower.jpeg" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/portfolio/banjo-player.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/portfolio/beetle.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/portfolio/buiding.jpeg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/portfolio/buiding_advanced.jpeg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/portfolio/coffee.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/portfolio/girl.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/portfolio/hotel.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/portfolio/judah.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/portfolio/lighthouse.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/portfolio/underwater.jpg" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="Kreo10.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,8 +37,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21860465">
-              <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.49534884">
+              <caret line="492" column="30" selection-start-line="492" selection-start-column="30" selection-end-line="492" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -303,18 +286,18 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -333,13 +316,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/inc/sendEmail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/vendor.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20581114">
@@ -419,32 +395,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/images/portfolio/banjo-player.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/portfolio/underwater.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/portfolio/character_advanced.jpeg">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/images/portfolio/buiding_advanced.jpeg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/portfolio/character.jpeg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/portfolio/buiding.jpeg">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -492,37 +448,12 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_Academy.jpeg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_ArmyBuilding.jpeg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_CivilHouse.jpeg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_TownCenter.jpeg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/walls/Hittites_Wall.jpeg">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/walls/Hittites_WallEntrance.jpeg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/walls/Hittites_WallTower.jpeg">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -602,10 +533,40 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_Academy.jpeg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_ArmyBuilding.jpeg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_CivilHouse.jpeg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/buildings/Hittites_TownCenter.jpeg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/portfolio/modals/hitties/walls/Hittites_WallTower.jpeg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/portfolio/modals/m-beetle.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21860465">
-          <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.49534884">
+          <caret line="492" column="30" selection-start-line="492" selection-start-column="30" selection-end-line="492" selection-end-column="30" />
           <folding />
         </state>
       </provider>
