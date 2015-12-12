@@ -18,11 +18,13 @@ public class ADS : MonoBehaviour
             GetComponent<ADS>().enabled = false;
             GetComponent<MovimientoAleatorioCivil>().enabled = false;
         }
-        speed = 2;
-        hit = new RaycastHit();
-        estado = aiState.wandering;
-        GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
-        enlace = GameObject.Find("EnemyPlayer1");
+        else { 
+            speed = 2;
+            hit = new RaycastHit();
+            estado = aiState.wandering;
+            GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
+            enlace = GameObject.Find("EnemyPlayer1");
+        }
     }
 
     // Update is called once per frame
@@ -86,7 +88,7 @@ public class ADS : MonoBehaviour
             || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, -40), out hit, 10))
             || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, -40), out hit, 10)))
         {*/
-        if (Physics.SphereCast(transform.position, 20f, transform.forward, out hit, 20f))
+        if (Physics.SphereCast(transform.position, 15f, transform.forward, out hit, 20))
         { 
             //if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner.human)
             //{ 
