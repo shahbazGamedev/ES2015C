@@ -16,9 +16,9 @@ public class AI : MonoBehaviour
     private List<GameObject> cavalry;
     private int z = 0, civilian = 1, numWall = 1;
     private float CoordX, CoordZ;
-    private Vector3 position, coords, armyPos;
+    private Vector3 coords, armyPos;
     private Vector3 spawnPos;
-    private bool housesBuilt = false, armyBuilt=false, towerBuilt=false, academyBuilt=false, wallBuilt=false;
+    private bool housesBuilt = false, armyBuilt=false, towerBuilt=false, academyBuilt=false;
     private PlayerCivilization civilitzation;
     GameObject wall;
 
@@ -127,7 +127,6 @@ public class AI : MonoBehaviour
             {
 
                 numWall++;
-                wallBuilt = true;
                 if (numWall <= 5)
                 {
                     CoordX = townCenters[0].transform.position.x - 28 + (5f * numWall);
