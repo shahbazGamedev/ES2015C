@@ -44,13 +44,15 @@ public class AI : MonoBehaviour
     void Update()
     {
         CivilsRecollect();
+
+        /*TownCenter*/
         if (townCenters.Count == 0)
             {
                 GameObject townCenter = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilitzation);
                 townCenters.Add(townCenter);
                 spawnPos = new Vector3(450f,0,150f);
                 civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(townCenter, spawnPos);
-                Debug.Log("Wood: " + artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood]);
+
             }
 
             if (artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] >= 100 && civils.Count < 4)
@@ -66,10 +68,7 @@ public class AI : MonoBehaviour
                 armyBuilt = true;
                 armyPos = new Vector3(spawnPos.x, 0, spawnPos.z + 20);
                 GameObject armyBuilding = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingArmyBuilding, civilitzation);
-                civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(armyBuilding, armyPos);
-                Debug.Log("Wood: " + artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood]);
-                while (armyBuilding.GetComponent<Building>().hitPoints < armyBuilding.GetComponent<Building>().maxHitPoints) {
-                }
+                civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(armyBuilding, armyPos);              
             }
 
 
@@ -94,14 +93,10 @@ public class AI : MonoBehaviour
                    academyBuilt == true &&
                    housesBuilt == false)
             {
-                Debug.Log("Estic a dins de construir cases");
                 housesBuilt = true;
                 spawnPos = new Vector3(townCenters[0].transform.position.x + 70, -46, townCenters[0].transform.position.z + 100);
                 GameObject civilHouse = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingCivilHouse, civilitzation);
                 civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(civilHouse, spawnPos);
-                Debug.Log("Wood: " + artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood]);
-
-
 
             }
 
@@ -114,13 +109,10 @@ public class AI : MonoBehaviour
                 towerBuilt == false)
             {
 
-
-                Debug.Log("Estic a dins de construir cases");
                 towerBuilt = true;
                 spawnPos = new Vector3(townCenters[0].transform.position.x - 25, 0, townCenters[0].transform.position.z - 25);
                 GameObject wallTower = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingWallTower, civilitzation);
                 civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(wallTower, spawnPos);
-                Debug.Log("Wood: " + artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood]);
 
             }
 
@@ -157,10 +149,9 @@ public class AI : MonoBehaviour
                 soldiers.Count<10 &&              
                 armyBuilt == true)
             {
-            Debug.Log("Guerrers"+soldiers.Count);
-            Debug.Log("arquers" + archers.Count);
             CreateNewWarrior();
             }
+
              /*Arquers*/
             if (civils.Count >=  4 &&
                  artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] >= 175 &&
@@ -168,8 +159,7 @@ public class AI : MonoBehaviour
                  archers.Count<=5 &&
                  armyBuilt == true)
             {
-            Debug.Log("Guerrers" + soldiers.Count);
-            Debug.Log("arquers" + archers.Count);
+
             CreateNewArcher();
             }
 
