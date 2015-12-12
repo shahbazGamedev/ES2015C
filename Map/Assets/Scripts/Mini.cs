@@ -1,5 +1,6 @@
 using UnityEngine;
- 
+using UnityEngine.UI; 
+
 public class Mini : MonoBehaviour
 {
     public float dragSpeed = 2;
@@ -9,6 +10,9 @@ public class Mini : MonoBehaviour
 
     private Camera itsMinimapCamera;
     private Camera itsMainCamera;
+
+	RawImage image;
+	Canvas canvas;
 
 	public float y = 7.5f;
 	public float x = 12.5f;
@@ -62,6 +66,11 @@ public class Mini : MonoBehaviour
 		itsMinimapCamera = GameObject.Find("MiniMap").GetComponent<Camera>();
         itsMainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		cameraPoint = GameObject.Find ("CameraPoint");
+		image = GameObject.Find("RawImage").GetComponent<RawImage>();
+		canvas = GameObject.Find("HUD").GetComponent<Canvas>();
+		Vector2 origin = new Vector2 (image.transform.position.x - (image.GetPixelAdjustedRect ().width * canvas.scaleFactor) / 2, image.transform.position.y - (image.GetPixelAdjustedRect ().height * canvas.scaleFactor) / 2);
+		float miniscale = Terrain.activeTerrain.terrainData.heightmapHeight / (image.GetPixelAdjustedRect ().height*canvas.scaleFactor);
+		mp = new Vector2 (cameraPoint.transform.position.x / miniscale + origin.x, cameraPoint.transform.position.z / miniscale + origin.y);
         
     }
 
@@ -73,6 +82,36 @@ public class Mini : MonoBehaviour
 
     void Update()
     {
+		if ( Input.GetMouseButtonDown(0) )
+		{
+			/*
+			Ray2D ray;
+			RaycastHit2D hit;
+			GameObject objectAtMouse;
+			//Vector2 r2 = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+			//ray = r2;
+			Renderer rend = hit.transform.GetComponent<Renderer>();
+
+			MeshCollider meshCollider = hit.collider as MeshCollider;
+			if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
+				return;
+
+			Vector2 pixelUV = hit.textureCoord;
+
+
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			Debug.Log(Input.mousePosition);
+			if (Physics.Raycast (ray, out hit))
+			{
+				Vector2 hitPos = Camera.main.WorldToScreenPoint(hit.point);
+				Debug.Log(hitPos);
+				Debug.Log(GUIUtility.ScreenToGUIPoint(hitPos));
+			}
+			*/
+		}
+
+		/*
         if (Input.GetMouseButtonDown(0)){ // if left button pressed...
 
             RaycastHit hit;
@@ -106,7 +145,27 @@ public class Mini : MonoBehaviour
 		p.y += y;
 		p.x -= x;
 		mp = p;
+		*/
+		
+		Vector2 origin = new Vector2 (image.transform.position.x - (image.GetPixelAdjustedRect ().width * canvas.scaleFactor) / 2, image.transform.position.y - (image.GetPixelAdjustedRect ().height * canvas.scaleFactor) / 2);
+		float miniscale = Terrain.activeTerrain.terrainData.heightmapHeight / (image.GetPixelAdjustedRect ().height*canvas.scaleFactor);
+		mp = new Vector2 ((cameraPoint.transform.position.x / miniscale + origin.x)-x, (cameraPoint.transform.position.z / miniscale + origin.y)+y);
 
-    }
+	}
+
+	public void click(){
+		float miniscale = Terrain.activeTerrain.terrainData.heightmapHeight / (image.GetPixelAdjustedRect ().height * canvas.scaleFactor);
+		Vector2 origin = new Vector2 (image.transform.position.x - (image.GetPixelAdjustedRect ().width * canvas.scaleFactor) / 2, image.transform.position.y - (image.GetPixelAdjustedRect ().height * canvas.scaleFactor) / 2);
+		Vector2 mouse = Input.mousePosition;
+		Vector2 dif = mouse - origin;
+		Debug.Log ("DIFERENCIA " + dif);
+		Vector3 posicio = new Vector3 (dif.x*miniscale, 0, dif.y*miniscale);
+		float yPoint = itsMainCamera.transform.position.y;
+		Vector3 relacio = itsMainCamera.transform.position - cameraPoint.transform.position;
+		cameraPoint.transform.position = posicio;
+		itsMainCamera.transform.position = posicio + relacio;
+
+		mp = new Vector2 ((cameraPoint.transform.position.x / miniscale + origin.x)-x, (cameraPoint.transform.position.z / miniscale + origin.y)+y);
+	}
 
  }
