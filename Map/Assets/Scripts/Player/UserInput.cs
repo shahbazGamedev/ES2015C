@@ -39,6 +39,9 @@ public class UserInput : MonoBehaviour
             if (Input.GetKey (KeyCode.M)) morirEnemigos(); 
             if (Input.GetKey (KeyCode.P)) morirJugador();
 			if (Input.GetKeyUp("k")) demolishBuildings();
+			if (Input.GetKey(KeyCode.Alpha1)) increaseFood();
+			if (Input.GetKey(KeyCode.Alpha2)) increaseWood();
+			if (Input.GetKey(KeyCode.Alpha3)) increaseGold();
 
             MoveCamera();
             RotateCamera();
@@ -300,6 +303,18 @@ public class UserInput : MonoBehaviour
 				b.changeModel("demolished");
 			}
         }
+	}
+	
+	private void increaseGold() {
+		player.resourceAmounts[RTSObject.ResourceType.Gold] += 1000;
+	}
+	
+	private void increaseFood() {
+		player.resourceAmounts[RTSObject.ResourceType.Food] += 1000;
+	}
+	
+	private void increaseWood() {
+		player.resourceAmounts[RTSObject.ResourceType.Wood] += 1000;
 	}
 
     private void MoveCamera()
