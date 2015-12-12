@@ -32,7 +32,7 @@ public class AI : MonoBehaviour
         BuildTownCenter(coords,true);
         CreateNewCivil(true);
         spawnPos = townCenters[0].transform.position;
-        civils[0].GetComponent<CivilUnit>().StartHarvest(null, true,"food");
+        //civils[0].GetComponent<CivilUnit>().StartHarvest(null, true,"food");
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class AI : MonoBehaviour
         CivilsRecollect();
         if (townCenters.Count==0) {
             civils[0].GetComponent<CivilUnit>().building = true;
-            civils[0].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilitzation), coords);
+            //civils[0].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilitzation), coords);
             civils[0].GetComponent<CivilUnit>().building = false;
             civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
         }
@@ -51,24 +51,27 @@ public class AI : MonoBehaviour
         }
 
         /*ArmyBuilding*/
-        else if (civils.Count < 4 &&
+        if (civils.Count >= 4 &&
                 artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] >= 100 &&
-                civils.Count < 4 &&
                 armyBuilt==false)
         {
             /*armyPos = new Vector3(townCenters[0].transform.position.x - 35, 0, townCenters[0].transform.position.z + 15);
             civils[3].GetComponent<CivilUnit>().CreateBuildingIA(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilitzation), coords);
             armyBuilt = true;*/
+            armyBuilt = true;
+            armyPos = new Vector3(townCenters[0].transform.position.x - 35, 0, townCenters[0].transform.position.z + 15);
+            GameObject armyBuilding = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingArmyBuilding, civilitzation);
+            civils[1].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(armyBuilding, armyPos);
         }
 
 
 
         /*Academy*/
-        else if (civils.Count < 4 &&
+        if (civils.Count >= 4 &&
              artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] >= 400 &&
              armyBuilt == true && 
              academyBuilt == false) {
-
+          
             /*spawnPos = new Vector3(spawnPos.x, 0, spawnPos.z - 30);
 
             civils[3].GetComponent<CivilUnit>().building = true;
@@ -82,7 +85,7 @@ public class AI : MonoBehaviour
         }
 
         /*houses*/
-        else if (civils.Count < 4 &&
+        if (civils.Count >=  4 &&
                artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] >= 100 &&
                armyBuilt == true && 
                academyBuilt == true &&
@@ -100,7 +103,7 @@ public class AI : MonoBehaviour
         }
 
         /*tower*/
-        else if (civils.Count < 4 &&
+        if (civils.Count >= 4 &&
             artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] >= 250 &&
             armyBuilt == true &&
             academyBuilt == true &&
@@ -123,32 +126,32 @@ public class AI : MonoBehaviour
 
 
         /*Soldat*/
-        if (civils.Count < 4 &&
+        /*if (civils.Count >= 4 &&
             artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] >= 100 &&
             soldiers.Count <= archers.Count*2 &&
             soldiers.Count <= cavalry.Count*02 &&
             armyBuilt == true) {
 
             CreateNewWarrior();
-        }
+        }*/
 
         /*Arquer*/
-        if (civils.Count < 4 &&
+       /* if (civils.Count >=  4 &&
             artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] >= 175 &&
             soldiers.Count/2 > archers.Count && 
             armyBuilt == true) {
                 CreateNewArcher();
-         }
+         }*/
 
         /*Cavall*/
-        if (civils.Count < 4 &&
+        /*if (civils.Count >= 4 &&
             artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] >= 250 &&
             soldiers.Count/2 > cavalry.Count &&
             archers.Count > cavalry.Count &&
             armyBuilt==true)
         {
             CreateNewArcher();
-        }
+        }*/
 
 
     //_______________________________
@@ -336,7 +339,7 @@ public class AI : MonoBehaviour
     }
 
     private void CivilsRecollect() {
-            int len = civils.Count;
+            /*int len = civils.Count;
             switch (len) {
                 case 1:                 
                     civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
@@ -358,7 +361,7 @@ public class AI : MonoBehaviour
                     break;
 
 
-            }
+            }*/
 
         }
 }
