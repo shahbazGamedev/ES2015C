@@ -129,6 +129,8 @@ h6 {
 
 p {
 	margin: 15px 0 15px 0;
+	text-align: justify;
+	text-justify: inter-word;
 }
 
 p img {
@@ -1338,6 +1340,7 @@ ul#nav li.current a:after {
 #storyline {
 	background: #111417;
 	padding-top: 120px;
+	padding-bottom: 120px;
 	border-bottom: 1px solid #15191d;  
 }
 
@@ -1532,10 +1535,57 @@ ul#nav li.current a:after {
 /* Popup Modal 
 /* ------------------------------------------------------------------ */
 .popup-modal {
-	max-width: 550px;
+	max-width: 850px;
 	background: #FFFFFF;
 	position: relative;
 	margin: 0 auto;  	
+}
+
+.popup-modal ul {
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0;
+}
+
+.popup-modal ul li {
+	width: 100%;
+	height: 150px;
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.popup-modal .item-img {
+	height: 150px;
+	width: 150px;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+.popup-modal .item-img img {
+	width: 100%;
+	height: 100%;
+}
+
+.popup-modal .item-description {
+	float: left;
+	width: 650px;
+	height: 150px;
+	margin-left: 30px;
+}
+
+.popup-modal .item-description h4 {
+	font: 15px/24px "raleway-heavy", sans-serif;
+	color: #000000;
+}
+
+.popup-modal .item-description p {
+	font: 14px/24px "merriweather-regular", serif;
+	color: #A1A1A1;
+	margin-bottom: 12px;
 }
 
 .popup-modal .media {
@@ -2531,4 +2581,8 @@ footer .social-links li:first-child {
 	margin-left: 6px;
 	position: relative;
 	right: -5px;
+}
+
+.info p {
+	text-align: center;
 }
