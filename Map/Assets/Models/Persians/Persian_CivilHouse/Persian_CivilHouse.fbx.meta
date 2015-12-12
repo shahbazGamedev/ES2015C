@@ -20,6 +20,7 @@ ModelImporter:
     100024: Lamp
     100026: Lamp.001
     100028: //RootNode
+    100030: cupula2.000
     400000: Camera
     400002: Cone
     400004: Cube.000
@@ -35,6 +36,7 @@ ModelImporter:
     400024: Lamp
     400026: Lamp.001
     400028: //RootNode
+    400030: cupula2.000
     2300000: Cone
     2300002: Cube.000
     2300004: Cube.001
@@ -46,6 +48,7 @@ ModelImporter:
     2300016: Cylinder.003
     2300018: Cylinder.004
     2300020: Cylinder.005
+    2300022: cupula2.000
     3300000: Cone
     3300002: Cube.000
     3300004: Cube.001
@@ -57,12 +60,14 @@ ModelImporter:
     3300016: Cylinder.003
     3300018: Cylinder.004
     3300020: Cylinder.005
+    3300022: cupula2.000
     4300000: Cube.002
     4300002: Cube.001
     4300004: Cube.007
     4300006: Cylinder.005
     4300008: Cylinder.004
     4300010: Cone
+    4300012: cupula2.000
   materials:
     importMaterials: 1
     materialName: 0

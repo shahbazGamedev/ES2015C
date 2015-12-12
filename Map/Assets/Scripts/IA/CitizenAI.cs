@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿//using UnityEngine;
 using System.Collections;
 
-public class CitizenAI : AI {
+//public class CitizenAI : AI {
 	/*public AnimationClip idle;*/
 	//Resource aiResource;
-	GameObject enemy1, closest,closestTownCenter;
+	/*GameObject enemy1, closest,closestTownCenter;
 	GameObject[] auxAIResourcesw,auxAIResourcesf,auxAIResourcesg,AITownCenters;
 	
 	public int AIState, speed = 5; 		 
@@ -18,9 +18,9 @@ public class CitizenAI : AI {
 	public bool estoyLleno;
 	public bool estoyOcupado;
 	AIResources resources;
-	string resourceName;
+	string resourceName;*/
 	// Use this for initialization
-	void Start () {
+	/*void Start () {
 		this.tag = "civil";
 		if(this.gameObject.GetComponent<RTSObject>().owner != GameObject.Find("EnemyPlayer1").GetComponent<Player>()){
 			Debug.Log ("CITIZENAI DISABLED");
@@ -45,11 +45,11 @@ public class CitizenAI : AI {
 		LookForResources ();
 		this.AITarget = NextResource ();
 		this.AIState = 2;
-		
-	}
+		*/
+	//}
 	// Update is called once per frame
-	void Update () {
-		switch (this.AIState) {
+	//void Update () {
+		/*switch (this.AIState) {
 		case 0: Idle ();break;
 		case 1: Walk ();break;
 		case 2: Chase ();break;
@@ -75,8 +75,8 @@ public class CitizenAI : AI {
 				
 				
 				//this.estoyOcupado = true;
-			}
-			distanceToObstacle = hit.distance;
+			//}
+			/*distanceToObstacle = hit.distance;
 		}
 		
 		this.estoyLleno = gameObject.GetComponent<CivilUnit> ().collectionAmount >= MAX_COLLECT;
@@ -110,9 +110,9 @@ public class CitizenAI : AI {
 		if (patrolTime >= 10) {this.patrol = true;AIState = 1;}
 		if (patrol && AIState == 1){patrolTime-=1 * Time.deltaTime;}
 		if (!patrol && AIState == 0){patrolTime+=1 * Time.deltaTime;}
-	}
+	}*/
 	
-	public void Idle(){ // estado 0
+	/*public void Idle(){ // estado 0
 		//GetComponent<Animation>().Play(idle.name); 
 		
 		//this.resourceName = this.AITarget.gameObject.name;
@@ -166,7 +166,7 @@ public class CitizenAI : AI {
 				this.AIState = 2;
 			}
 			*/
-		} else {
+		/*} else {
 			//this.estoyLleno = true;
 			this.AIState = 4;
 		}
@@ -263,7 +263,7 @@ public class CitizenAI : AI {
 	 * Función que devuelve el townCenter más cercano. Se presupone que éste será el correspondiente al tipo de unidad que ejerce
 	 * de Enemy.
 	 */
-	public GameObject ClosestTownCenter(){
+	/*public GameObject ClosestTownCenter(){
 		GameObject auxTown;
 		for (int i=0; i<AITownCenters.Length; i++) {
 			auxTown = (GameObject)AITownCenters.GetValue(i);
@@ -275,6 +275,6 @@ public class CitizenAI : AI {
 		return closestTownCenter;
 	}
 	
-}
+}*/
 
 

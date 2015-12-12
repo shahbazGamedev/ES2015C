@@ -21,12 +21,10 @@ public class AI : MonoBehaviour
     private bool housesBuilt = false, armyBuilt=false, towerBuilt=false, academyBuilt=false;
     private PlayerCivilization civilitzation;
 
-<<<<<<< HEAD
-    private GameObject menu;
+
+    //private GameObject menu;
 
 
-=======
->>>>>>> issue#789
     void Start()
     {
         artificialIntelligence = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
@@ -40,12 +38,9 @@ public class AI : MonoBehaviour
         BuildTownCenter(coords,true);
         CreateNewCivil(true);
         spawnPos = townCenters[0].transform.position;
-<<<<<<< HEAD
-        civils[0].GetComponent<CivilUnit>().StartHarvest(null, true,"food");
 
-=======
         //civils[0].GetComponent<CivilUnit>().StartHarvest(null, true,"food");
->>>>>>> issue#789
+
     }
 
 
