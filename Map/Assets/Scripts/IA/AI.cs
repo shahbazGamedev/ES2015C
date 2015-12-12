@@ -20,8 +20,6 @@ public class AI : MonoBehaviour
     private Vector3 spawnPos;
     private bool housesBuilt = false, armyBuilt=false, towerBuilt=false, academyBuilt=false;
     private PlayerCivilization civilitzation;
-    GameObject wall;
-
 
     void Start()
     {
@@ -215,19 +213,15 @@ public class AI : MonoBehaviour
 
 
 
-
-
-
-
     private void BuildTownCenter(Vector3 coords,Boolean resourceFree)
     {
-            var townCenter = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilitzation), coords, Quaternion.identity) as GameObject;
-            townCenter.GetComponent<RTSObject>().owner = artificialIntelligence;
-            if (resourceFree == false)
-            {
-                artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] - 100; //resta fusta 
-            }
-            townCenters.Add(townCenter);
+        var townCenter = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilitzation), coords, Quaternion.identity) as GameObject;
+        townCenter.GetComponent<RTSObject>().owner = artificialIntelligence;
+        if (resourceFree == false)
+        {
+            artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] - 100; //resta fusta 
+        }
+        townCenters.Add(townCenter);
     }
 
 
@@ -254,14 +248,12 @@ public class AI : MonoBehaviour
         }
 
         if (resourceFree == false) {
-                    artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] - 100;
-                }
-                GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation), coords, Quaternion.identity) as GameObject;
-                civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
-                civils.Add(civil);
-            
+            artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] - 100;
+        }
+        GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation), coords, Quaternion.identity) as GameObject;
+        civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
+        civils.Add(civil);      
     }
-
 
 
     private void CreateNewWarrior()
@@ -286,7 +278,6 @@ public class AI : MonoBehaviour
 
     private void CreateNewArcher()
     {
-
         coords = new Vector3(armyPos.x - 15, 0.4f, armyPos.z - 10 + z * 2);
         artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] - 170;
 
@@ -325,25 +316,24 @@ public class AI : MonoBehaviour
     private void CivilsRecollect() {
         int len = civils.Count;     
         switch (len) {
-                case 1:                 
-                    civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                    break;
-                case 2:
-                    civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                    civils[1].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                    break;
-                case 3:
-                    civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                    civils[1].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                    civils[2].GetComponent<CivilUnit>().StartHarvest(null, true, "wood");
-                    break;
-                case 4:
-                    civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                    civils[1].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                    civils[2].GetComponent<CivilUnit>().StartHarvest(null, true, "wood");
-                    //civils[3].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                    break;
-    
+            case 1:                 
+                civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+                break;
+            case 2:
+                civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+                civils[1].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+                break;
+            case 3:
+                civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+                civils[1].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+                civils[2].GetComponent<CivilUnit>().StartHarvest(null, true, "wood");
+                break;
+            case 4:
+                civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+                civils[1].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+                civils[2].GetComponent<CivilUnit>().StartHarvest(null, true, "wood");
+                //civils[3].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+                break;
             }
         }
    
