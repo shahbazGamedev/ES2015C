@@ -26,7 +26,7 @@ public class VolumeControl : MonoBehaviour
 		ambiente.volume = 0.0f;
 		ambiente.Play();
 		GameObject menuVol;
-		myBtn = GameObject.Find("ButtonSound").GetComponent<Button>();
+		myBtn = GameObject.Find("ButtonSound").GetComponent<Button>();;
 		myImage = Resources.Load<Sprite>("mute"); // Make sure not to include the file extension
 	    //Make sure it is added in the Inspector. Or reference it using GameObject.Find.
 	    myBtn.image.sprite = myImage; // That is right, no need to GetComponent.
