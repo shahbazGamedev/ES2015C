@@ -14,16 +14,12 @@ public class AI : MonoBehaviour
     private List<GameObject> soldiers;
     private List<GameObject> archers;
     private List<GameObject> cavalry;
-    private int civilhouse = 0;
+    private int z=0, civilian = 1;
     private Vector3 position, coords, armyPos;
     private Vector3 spawnPos;
     private bool housesBuilt = false, armyBuilt=false, towerBuilt=false, academyBuilt=false;
-    private int i, z = 0;
-    private GameObject armyBuilding;
     private PlayerCivilization civilitzation;
 
-
-    private int prova =1;
 
     void Start()
     {
@@ -33,7 +29,6 @@ public class AI : MonoBehaviour
         townCenters = new List<GameObject>();
         civils = new List<GameObject>();
         Vector3 coords = new Vector3(453.51f, 0f, 435.28f);        
-        i = 1;
         BuildTownCenter(coords,true);
         CreateNewCivil(true);
         spawnPos = townCenters[0].transform.position;
@@ -257,18 +252,18 @@ public class AI : MonoBehaviour
 
     private void CreateNewCivil(Boolean resourceFree)
     {
-        if (prova ==1) {
+        if (civilian == 1) {
             coords = new Vector3(townCenters[0].transform.position.x - 10, 0.4f, townCenters[0].transform.position.z - 10);
-            prova = 2;
+            civilian = 2;
         }
-        else if (prova == 2){
+        else if (civilian == 2){
             coords = new Vector3(townCenters[0].transform.position.x - 15, 0.4f, townCenters[0].transform.position.z - 10);
-            prova = 3;
+            civilian = 3;
         }
-        else if (prova == 3)
+        else if (civilian == 3)
         {
             coords = new Vector3(townCenters[0].transform.position.x - 15, 0.4f, townCenters[0].transform.position.z - 15);
-            prova = 1;
+            civilian = 1;
         }
          
                 if (resourceFree == false) {
