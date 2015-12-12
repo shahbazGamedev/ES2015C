@@ -263,7 +263,10 @@ public class Building : RTSObject
 		if (estat=="finished") {
 			ReplaceChildWithChildFromGameObjectTemplate(finishedModel);
 		} else if (estat == "demolished") {
+            //var exp = demolishedModel.GetComponent<ParticleSystem>();
 			ReplaceChildWithChildFromGameObjectTemplate(demolishedModel);
+            //exp.Play();
+            //Destroy(gameObject, exp.duration);
 		} else if (estat == "construction") {
 			ReplaceChildWithChildFromGameObjectTemplate(constructionModel);
 		}
