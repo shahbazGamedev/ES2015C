@@ -78,7 +78,10 @@ public class CivilUnit : Unit
         {
             if (harvesting)
             {
-				if (harvestingState == 1)
+				if (!resourceDeposit && resourceTag != ""){
+					StartHarvest(null, resourceTag);
+				}
+				else if (harvestingState == 1)
 				{
 					var closestPointResource = resourceDeposit.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
 					var distanceToResource = (closestPointResource - transform.position).magnitude;
@@ -432,11 +435,6 @@ public class CivilUnit : Unit
 			collecting = true;
 			resourceDeposit.Remove (5 * Time.deltaTime);
 			collectionAmount += (5 * Time.deltaTime);
-		}
-		else
-		{
-			StopHarvest();
-			StartHarvest(null, resourceTag);
 		}
 	}
 	
