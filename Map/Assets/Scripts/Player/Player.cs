@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     public bool human;
     public float initialFood, initialGold, initialWood;
     public PlayerCivilization civilization;
-
+	public int population = 0, maxPopulation = 20;
     private bool findingPlacement = false;
 
     public ArrayList objetivos;
@@ -80,7 +80,8 @@ public class Player : MonoBehaviour {
             SpawnInitialTownCenter();
             SpawnInitialCivilUnit();
             SpawnInitialMilitaryUnit();
-
+			PlaceResources pr = new PlaceResources();
+			pr.Start();
         }
     }
 
@@ -132,6 +133,7 @@ public class Player : MonoBehaviour {
         var civilUnit = (GameObject)Instantiate(civilUnitTemplate, civilUnitSpawnPoint, Quaternion.identity);
         civilUnit.GetComponent<RTSObject>().owner = this;
         civilUnit.transform.parent = transform; // Should have no effect, but easier for debugging
+		population++;
     }
 
 
@@ -157,6 +159,7 @@ public class Player : MonoBehaviour {
         var militaryUnit = (GameObject)Instantiate(militaryUnitTemplate, militaryUnitSpawnPoint, Quaternion.identity);
         militaryUnit.GetComponent<RTSObject>().owner = this;
         militaryUnit.transform.parent = transform; // Should have no effect, but easier for debugging
+		population++;
     }
 
     /// <summary>

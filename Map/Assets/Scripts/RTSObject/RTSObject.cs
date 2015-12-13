@@ -3,437 +3,442 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class RTSObject : MonoBehaviour
 {
 
-    // Variables publiques generals
+	// Variables publiques generals
 	public string objectName = "Generic RTS Object";     // Nom del objecte
 	public int cost = 50, hitPoints = 100, maxHitPoints = 100; // Cost, punts de vida i vida maxima
-    /// <summary>Default movement speed. Leave at zero if the object can't move.</summary>
-    protected float baseMoveSpeed = 0;
+	/// <summary>Default movement speed. Leave at zero if the object can't move.</summary>
+	protected float baseMoveSpeed = 0;
 	
-    /// <summary>Default speed factor of building (x1 = default building time, x2 = half building time, etc). Leave at zero if the unit can't build.</summary>
-	protected float baseBuildFactor=0;
-    /// <summary>Default attack strength. Leave at zero if the object can't attack.</summary>
-    protected int baseAttackStrength = 0;
-    /// <summary>Default number of hits per second of the object. Leave at zero if the object can't attack.</summary>
-    protected float baseAttackSpeed = 0.0f;
-    /// <summary>Default attack strength. Leave at zero if the object isn't a range unit.</summary>
-    protected int baseAttackRange = 0;
-    /// <summary>Default attack defense. Leave at null if the object can't defend.</summary>
-    protected int? baseDefense = 0;                 // Punt de atac, Habilitat defensa, Habilitat atac
-    public enum ResourceType { Gold, Wood, Food, Unknown }	// Declarem els tipus de recursos
-    public Player owner;                            // A quin player correspon
+	/// <summary>Default speed factor of building (x1 = default building time, x2 = half building time, etc). Leave at zero if the unit can't build.</summary>
+	protected float baseBuildFactor = 0;
+	/// <summary>Default attack strength. Leave at zero if the object can't attack.</summary>
+	protected int baseAttackStrength = 0;
+	/// <summary>Default number of hits per second of the object. Leave at zero if the object can't attack.</summary>
+	protected float baseAttackSpeed = 0.0f;
+	/// <summary>Default attack strength. Leave at zero if the object isn't a range unit.</summary>
+	protected int baseAttackRange = 0;
+	/// <summary>Default attack defense. Leave at null if the object can't defend.</summary>
+	protected int? baseDefense = 0;                 // Punt de atac, Habilitat defensa, Habilitat atac
+	public enum ResourceType
+	{
+		Gold,
+		Wood,
+		Food,
+		Unknown
+	}	// Declarem els tipus de recursos
+	public Player owner;                            // A quin player correspon
 
-    // Variables accessibles per a les subclasses
+	// Variables accessibles per a les subclasses
 	protected bool currentlySelected = false;       // Indica si esta seleccionat
-    protected float healthPercentage = 1.0f;        // Percentatge de vida
-    public RTSObject target = null;              // Posible objectiu
-    protected bool aiming = false;
-    /// <summary>true if the unit is attacking or moving into position to attack another unit.</summary>
-    protected bool attacking = false;
-    /// <summary>If attacking, position where the unit is programmed to move in order to attack another unit.</summary>
-    protected Vector3 programmedAttackPosition;
-    /// <summary>If attacking, number of seconds remaining until the unit takes another hit to the target.</summary>
-    protected float remainingTimeToAttack = 0;
+	protected float healthPercentage = 1.0f;        // Percentatge de vida
+	public RTSObject target = null;              // Posible objectiu
+	protected bool aiming = false;
+	/// <summary>true if the unit is attacking or moving into position to attack another unit.</summary>
+	protected bool attacking = false;
+	/// <summary>If attacking, position where the unit is programmed to move in order to attack another unit.</summary>
+	protected Vector3 programmedAttackPosition;
+	/// <summary>If attacking, number of seconds remaining until the unit takes another hit to the target.</summary>
+	protected float remainingTimeToAttack = 0;
 
-    /// <summary>true if the unit is dying (it has zero hit points and it playing the dead animation).</summary>
-    protected bool dying = false;
-    /*
+	/// <summary>true if the unit is dying (it has zero hit points and it playing the dead animation).</summary>
+	protected bool dying = false;
+	/*
     protected bool deadAnimationStarted = false;
     protected bool deadAnimationFinished = false;
     */
-    /// <summary>Default time between the object having 0 HP and the object being destroyed.</summary>
-    private const float DefaultDeadTime = 3.0f;
-    /// <summary>Number of seconds until the unit is considered dead and it disappears from the map.</summary>
-    protected float remainingTimeToDead = 0;
+	/// <summary>Default time between the object having 0 HP and the object being destroyed.</summary>
+	private const float DefaultDeadTime = 3.0f;
+	/// <summary>Number of seconds until the unit is considered dead and it disappears from the map.</summary>
+	protected float remainingTimeToDead = 0;
+	protected List<RTSObject> nearbyObjects;        // Llista de objectes propers
 
-    protected List<RTSObject> nearbyObjects;        // Llista de objectes propers
-
-    protected Animator anim;                        // Referencia al component Animator
+	protected Animator anim;                        // Referencia al component Animator
 	protected AudioSource audio;					// Referencia al component AudioSource
 	protected Rigidbody rigbody;					// Referenica al component Rigidbody
 	protected LOSEntity ent;
-
 	protected AudioClip creationSound;
 	protected AudioClip fightSound;
 	protected AudioClip dieSound;
 
 	private int ObjectId { get; set; }               // Identificador unic del objecte
-    private float currentWeaponChargeTime;
+	private float currentWeaponChargeTime;
 
-    //sprite publica image de objeto activo
-    public Sprite objectIconSprite;
+	//sprite publica image de objeto activo
+	public Sprite objectIconSprite;
 
-    //sprite publica image de unidad de ataque
-    public Sprite objectIconAttack;
+	//sprite publica image de unidad de ataque
+	public Sprite objectIconAttack;
 
-    //sprite publica image de unidad de defensa
-    public Sprite objectIconDefense;
+	//sprite publica image de unidad de defensa
+	public Sprite objectIconDefense;
 
-    //sprite publica image de unidad de rango de ataque
-    public Sprite objectIconAttackRange;
+	//sprite publica image de unidad de rango de ataque
+	public Sprite objectIconAttackRange;
 
-    //sprite publica image de unidad de resoruce
-    public Sprite objectIconResource;
+	//sprite publica image de unidad de resoruce
+	public Sprite objectIconResource;
 
 
-    /*** Metodes per defecte de Unity ***/
+	/*** Metodes per defecte de Unity ***/
 
-    protected virtual void Awake()
-    {
+	protected virtual void Awake ()
+	{
 		audio = gameObject.AddComponent<AudioSource> ();
 		audio.volume = 0.4f;
 		rigbody = gameObject.AddComponent<Rigidbody> ();
 		rigbody.constraints = RigidbodyConstraints.FreezeAll;
 		ent = gameObject.AddComponent<LOSEntity> ();
-        objectIconSprite = Resources.Load<Sprite>("HUD/ObjectIcons/" + GetType().ToString());
-        objectIconAttack = Resources.Load<Sprite>("HUD/Unit/AttackStrengthIcon");
-        objectIconDefense = Resources.Load<Sprite>("HUD/Unit/DefenseIcon");
-        objectIconAttackRange = Resources.Load<Sprite>("HUD/Unit/AttackRangeIcon");
-        objectIconResource = Resources.Load<Sprite>("HUD/Unit/Resource");
-    }
+		objectIconSprite = Resources.Load<Sprite> ("HUD/ObjectIcons/" + GetType ().ToString ());
+		objectIconAttack = Resources.Load<Sprite> ("HUD/Unit/AttackStrengthIcon");
+		objectIconDefense = Resources.Load<Sprite> ("HUD/Unit/DefenseIcon");
+		objectIconAttackRange = Resources.Load<Sprite> ("HUD/Unit/AttackRangeIcon");
+		objectIconResource = Resources.Load<Sprite> ("HUD/Unit/Resource");
+	}
 
-    protected virtual void Start()
-    {
-    }
+	protected virtual void Start ()
+	{
+	}
 
-    protected virtual void Update()
-    {
-		if (currentlySelected) updateSelection ();
-        if (attacking) PerformAttack();
-        if (this != null && anim && anim.runtimeAnimatorController) Animating();
-		if (dying && UpdateDeadObject()) return;
-    }
+	protected virtual void Update ()
+	{
+		if (currentlySelected)
+			updateSelection ();
+		if (attacking)
+			PerformAttack ();
+		if (this != null && anim && anim.runtimeAnimatorController)
+			Animating ();
+		if (dying && UpdateDeadObject ())
+			return;
+	}
 
-    protected virtual void OnGUI()
-    {
-    }
+	protected virtual void OnGUI ()
+	{
+	}
 
-	private void OnMouseEnter() {
-		if (owner) {
-			if (owner.human == true) {
-				Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_select") as Texture2D;
-				if (owner.SelectedObject && owner.SelectedObject.CanBuild() && CanBeBuilt()){
-					cursorTexture = Resources.Load ("HUD/Cursors/cursor_construct") as Texture2D;
+	private void OnMouseOver ()
+	{
+		Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_normal") as Texture2D;
+		if (!EventSystem.current.IsPointerOverGameObject ()) {
+			if (owner) {
+				if (owner.human == true) {
+					cursorTexture = Resources.Load ("HUD/Cursors/cursor_select") as Texture2D;
+					if (owner.SelectedObject && owner.SelectedObject.CanBuild () && CanBeBuilt ()) {
+						cursorTexture = Resources.Load ("HUD/Cursors/cursor_construct") as Texture2D;
+					}
 					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+				} else {
+					Player humanPlayer = GameObject.Find ("Player").GetComponent<Player> ();
+					if (humanPlayer && humanPlayer.SelectedObject && humanPlayer.SelectedObject.CanAttack ()) {
+						if (CanBeAttacked ()) {
+							cursorTexture = Resources.Load ("HUD/Cursors/cursor_fight") as Texture2D;
+						} else {
+							cursorTexture = Resources.Load ("HUD/Cursors/cursor_none") as Texture2D;
+						}
+					}
 				}
-				Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
 			} else {
-				Player humanPlayer = GameObject.Find("Player").GetComponent<Player>();
-				if (humanPlayer && humanPlayer.SelectedObject && humanPlayer.SelectedObject.CanAttack()){
-					if (CanBeAttacked ()){
-						Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_fight") as Texture2D;
-						Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
-					} else {
-						Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_none") as Texture2D;
-						Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+				Player humanPlayer = GameObject.Find ("Player").GetComponent<Player> ();
+				if (humanPlayer && humanPlayer.SelectedObject && humanPlayer.SelectedObject.GetComponent<CivilUnit> ()) {
+					if (this.GetComponent<Food> ()) {
+						cursorTexture = Resources.Load ("HUD/Cursors/cursor_farm") as Texture2D;
+					} else if (this.GetComponent<Gold> ()) {
+						cursorTexture = Resources.Load ("HUD/Cursors/cursor_mine") as Texture2D;
+					} else if (this.GetComponent<Wood> ()) {
+						cursorTexture = Resources.Load ("HUD/Cursors/cursor_cut") as Texture2D;
 					}
 				}
 			}
-		} else {
-			Player humanPlayer = GameObject.Find("Player").GetComponent<Player>();
-			if (humanPlayer && humanPlayer.SelectedObject && humanPlayer.SelectedObject.GetComponent<CivilUnit>()){
-				if (this.GetComponent<Food>()){
-					Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_farm") as Texture2D;
-					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
-				} else if (this.GetComponent<Gold>()){
-					Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_mine") as Texture2D;
-					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
-				} else if (this.GetComponent<Wood>()){
-					Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_cut") as Texture2D;
-					Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
-				}
-			}
 		}
-	}
-	
-	private void OnMouseExit() {
-		Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
-		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+		Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
 	}
 
-    /*** Metodes publics ***/
+	private void OnMouseExit()
+	{
+		Texture2D cursorTexture = Resources.Load ("HUD/Cursors/cursor_normal") as Texture2D;
+		Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+	}
+
+	/*** Metodes publics ***/
 
 	// Metode per declarar la seleccio del objecte
-	public virtual void SetSelection(bool selected)
+	public virtual void SetSelection (bool selected)
 	{
 		currentlySelected = selected;
 	}
 
-    /// <summary>
-    /// Represents an action that can be done by an object.
-    /// </summary>
-    public class Action
-    {
-        /// <summary>Name of the action.</summary>
-        public string Name { get; set; }
-        /// <summary>Icon for the action.</summary>
-        public Sprite Icon { get; set; }
-        /// <summary>In which resource the cost of executing this action is paid.</summary>
-        public ResourceType CostResource { get; set; }
-        /// <summary>Cost of executing this action. </summary>
-        public int Cost { get; set; }
-    }
-    /// <summary>
-    /// Get the list of actions available for this object.
-    /// </summary>
-    /// <returns>A list of (action, cost) for this object.</returns>
-    public virtual Action[] GetActions()
-    {
-        return new Action[0];
-    }
+	/// <summary>
+	/// Represents an action that can be done by an object.
+	/// </summary>
+	public class Action
+	{
+		/// <summary>Name of the action.</summary>
+		public string Name { get; set; }
+		/// <summary>Icon for the action.</summary>
+		public Sprite Icon { get; set; }
+		/// <summary>In which resource the cost of executing this action is paid.</summary>
+		public ResourceType CostResource { get; set; }
+		/// <summary>Cost of executing this action. </summary>
+		public int Cost { get; set; }
+	}
+	/// <summary>
+	/// Get the list of actions available for this object.
+	/// </summary>
+	/// <returns>A list of (action, cost) for this object.</returns>
+	public virtual Action[] GetActions ()
+	{
+		return new Action[0];
+	}
 
-    // Metode per realitzar la accio corresponent
-    public virtual void PerformAction(string actionToPerform)
-    {
-    }
+	// Metode per realitzar la accio corresponent
+	public virtual void PerformAction (string actionToPerform)
+	{
+	}
 
-    // Metode per declarar accions al fer click al boto del ratoli
-    public virtual void MouseClick(GameObject hitObject, Vector3 hitPoint, Player controller)
-    {
-    }
+	// Metode per declarar accions al fer click al boto del ratoli
+	public virtual void MouseClick (GameObject hitObject, Vector3 hitPoint, Player controller)
+	{
+	}
 
-    // Metode per saber si el Player es el propietari del objecte
-    public bool IsOwnedBy(Player owner)
-    {
-        if (this.owner && this.owner.Equals(owner))
-            return true;
-        return false;
-    }
+	// Metode per saber si el Player es el propietari del objecte
+	public bool IsOwnedBy (Player owner)
+	{
+		if (this.owner && this.owner.Equals (owner))
+			return true;
+		return false;
+	}
 
 	/// <summary>
 	/// Tells if the object can change its position.
 	/// </summary>
 	/// <returns>Boolean saying if the object can move or not.</returns>
-    public virtual bool CanMove()
-    {
-        return (!dying && baseMoveSpeed != 0);
-    }
-
-    /// <summary>
-    /// Gets the movement speed of a object.
-    /// </summary>
-    /// <returns>The movement speed of a object.</returns>
-    public virtual float GetMovementSpeed()
-    {
-        if (!CanMove())
-            throw new InvalidOperationException("Called GetMovementSpeed over an object that can't move.");
-
-        return baseMoveSpeed;
-    }
-
-    /// <summary>
-    /// Tells the object to start a free (non-attack) movement to the
-    /// given position.
-    /// </summary>
-    /// <param name="target">The position we want the object to move to.</param>
-    public void MoveTo(Vector3 target, bool isRunning)
-    {
-        if (!CanMove())
-            throw new InvalidOperationException("Called MoveTo over an object that can't move.");
-
-        if (attacking)
-        {
-            EndAttack();
-        }
-
-        SetNewPath(target, isRunning);
-    }
-
-    /// <summary>
-    /// Tells the object to move to the given position, by generating and
-    /// following a route to the desired position.
-    /// </summary>
-    /// <param name="target">The position we want the object to move to.</param>
-    protected virtual void SetNewPath(Vector3 target, bool isRunning)
-    {
-        throw new NotImplementedException();
-    }
-
-    /// <summary>
-    /// Tell the object to cancel the movement path to the given position.
-    /// </summary>
-    protected virtual void CancelPath()
-    {
-        throw new NotImplementedException();
-    }
-
-    /// <summary>
-    /// Returns true if the unit has programmed a movement path to a given position.
-    /// </summary>
-    /// <returns>true if the unit has a movement path, false otherwise.</returns>
-    protected virtual bool HasPath()
-    {
-        throw new NotImplementedException();
-    }
-	
-	public virtual bool CanBuild()
+	public virtual bool CanMove ()
 	{
-		return (baseBuildFactor !=0);
+		return (!dying && baseMoveSpeed != 0);
 	}
 
-    /// <summary>
-    /// Checks if the object is currently building another object.
-    /// </summary>
-    /// <returns>true if this object is building, false otherwise.</returns>
-    public virtual bool IsBuilding()
-    {
-        if (!CanBuild())
-            return false;
-
-        throw new NotImplementedException();
-    }
-
-    /// <summary>
-    /// Assigns a new building project to this object.
-    /// </summary>
-    /// <param name="newProject">The new project to assign, or null to deassign the current project.</param>
-    /// <returns></returns>
-    public virtual void AssignBuildingProject(Building newProject)
-    {
-        throw new NotImplementedException();
-    }
-	
-	public virtual bool CanBeBuilt()
+	/// <summary>
+	/// Gets the movement speed of a object.
+	/// </summary>
+	/// <returns>The movement speed of a object.</returns>
+	public virtual float GetMovementSpeed ()
 	{
-        return false;
+		if (!CanMove ())
+			throw new InvalidOperationException ("Called GetMovementSpeed over an object that can't move.");
+
+		return baseMoveSpeed;
 	}
 
-    /// <summary>
-    /// Tells if the object can attack.
-    /// </summary>
-    /// <returns>Boolean saying if the object can attack or not.</returns>
-    public virtual bool CanAttack()
-    {
-        //return (!dying && baseAttackStrength != 0 && baseAttackSpeed != 0.0f);
-        return true;
-    }
+	/// <summary>
+	/// Tells the object to start a free (non-attack) movement to the
+	/// given position.
+	/// </summary>
+	/// <param name="target">The position we want the object to move to.</param>
+	public void MoveTo (Vector3 target, bool isRunning)
+	{
+		if (!CanMove ())
+			throw new InvalidOperationException ("Called MoveTo over an object that can't move.");
 
-    /// <summary>
-    /// Begins an attack on the given target object.
-    /// To stop the current attack sequence, pass null to this method.
-    /// </summary>
-    /// <param name="target">The target of the attack. If null is given, the attack will stop.</param>
-    public void AttackObject(RTSObject target)
-    {
-        if (!CanAttack())
-            throw new InvalidOperationException("Called AttackObject over an object that can't attack.");
+		if (attacking) {
+			EndAttack ();
+		}
 
-        if (target != null)
-        {
-            if (!target.CanBeAttacked())
-                throw new InvalidOperationException("Called AttackObject over a target object that can't defend.");
+		SetNewPath (target, isRunning);
+	}
 
-            BeginAttack(target);
-        }
-        else
-        {
-            EndAttack();
-        }
-    }
+	/// <summary>
+	/// Tells the object to move to the given position, by generating and
+	/// following a route to the desired position.
+	/// </summary>
+	/// <param name="target">The position we want the object to move to.</param>
+	protected virtual void SetNewPath (Vector3 target, bool isRunning)
+	{
+		throw new NotImplementedException ();
+	}
 
-    /// <summary>
-    /// Gets the attack strengh that the unit has when it is attacking.
-    /// </summary>
-    /// <returns>The number of attack strength points.</returns>
-    public virtual int GetAttackStrength()
-    {
-        if (!CanAttack())
-            throw new InvalidOperationException("Called GetAttackStrength over an object that can't attack.");
+	/// <summary>
+	/// Tell the object to cancel the movement path to the given position.
+	/// </summary>
+	protected virtual void CancelPath ()
+	{
+		throw new NotImplementedException ();
+	}
 
-        return baseAttackStrength;
-    }
+	/// <summary>
+	/// Returns true if the unit has programmed a movement path to a given position.
+	/// </summary>
+	/// <returns>true if the unit has a movement path, false otherwise.</returns>
+	protected virtual bool HasPath ()
+	{
+		throw new NotImplementedException ();
+	}
+	
+	public virtual bool CanBuild ()
+	{
+		return (baseBuildFactor != 0);
+	}
 
-    /// <summary>
-    /// Gets the attack strengh that the unit has when it is attacking, in attack/second.
-    /// </summary>
-    /// <returns>The number of attacks per second of this unit.</returns>
-    public virtual float GetAttackSpeed()
-    {
-        if (!CanAttack())
-            throw new InvalidOperationException("Called GetAttackStrength over an object that can't attack.");
+	/// <summary>
+	/// Checks if the object is currently building another object.
+	/// </summary>
+	/// <returns>true if this object is building, false otherwise.</returns>
+	public virtual bool IsBuilding ()
+	{
+		if (!CanBuild ())
+			return false;
 
-        return baseAttackSpeed;
-    }
+		throw new NotImplementedException ();
+	}
 
-    /// <summary>
-    /// Gets the distance at which the unit can attack, if it is a range unit (e.g. an archer).
-    /// Otherwise, returns zero if the unit is not a range unit.
-    /// </summary>
-    /// <returns>The distance at which the unit can attack, or zero.</returns>
-    public virtual float GetAttackRange()
-    {
-        if (!CanAttack())
-            throw new InvalidOperationException("Called GetAttackRange over an object that can't attack.");
+	/// <summary>
+	/// Assigns a new building project to this object.
+	/// </summary>
+	/// <param name="newProject">The new project to assign, or null to deassign the current project.</param>
+	/// <returns></returns>
+	public virtual void AssignBuildingProject (Building newProject)
+	{
+		throw new NotImplementedException ();
+	}
+	
+	public virtual bool CanBeBuilt ()
+	{
+		return false;
+	}
 
-        return baseAttackRange;
-    }
+	/// <summary>
+	/// Tells if the object can attack.
+	/// </summary>
+	/// <returns>Boolean saying if the object can attack or not.</returns>
+	public virtual bool CanAttack ()
+	{
+		//return (!dying && baseAttackStrength != 0 && baseAttackSpeed != 0.0f);
+		return true;
+	}
 
-    /// <summary>
-    /// Tell if the object can be attacked by military units.
-    /// </summary>
-    /// <returns>Boolean saying if the object can be attacked or not.</returns>
-    public virtual bool CanBeAttacked()
-    {
-        //return (!dying && baseDefense.HasValue);
-        return true;
-    }
+	/// <summary>
+	/// Begins an attack on the given target object.
+	/// To stop the current attack sequence, pass null to this method.
+	/// </summary>
+	/// <param name="target">The target of the attack. If null is given, the attack will stop.</param>
+	public void AttackObject (RTSObject target)
+	{
+		if (!CanAttack ())
+			throw new InvalidOperationException ("Called AttackObject over an object that can't attack.");
 
-    /// <summary>
-    /// Gets the defense points that the unit has when it is being attacked.
-    /// </summary>
-    /// <returns>The number of defense points.</returns>
-    public virtual int GetDefense()
-    {
-        if (!CanBeAttacked())
-            throw new InvalidOperationException("Called GetDefense over an object that can't defend.");
+		if (target != null) {
+			if (!target.CanBeAttacked ())
+				throw new InvalidOperationException ("Called AttackObject over a target object that can't defend.");
 
-        return baseDefense.Value;
-    }
+			BeginAttack (target);
+		} else {
+			EndAttack ();
+		}
+	}
 
-    /// <summary>
-    /// Check if the unit is currently harvesting.
-    /// </summary>
-    /// <returns>true if the unit is harvesting, false otherwise.</returns>
-    public virtual bool IsHarvesting()
-    {
-        return false;
-    }
+	/// <summary>
+	/// Gets the attack strengh that the unit has when it is attacking.
+	/// </summary>
+	/// <returns>The number of attack strength points.</returns>
+	public virtual int GetAttackStrength ()
+	{
+		if (!CanAttack ())
+			throw new InvalidOperationException ("Called GetAttackStrength over an object that can't attack.");
 
-    /// <summary>
-    /// Get the current type of resource that the unit is harvesting.
-    /// </summary>
-    /// <returns>The type of the resource being harvested.</returns>
-    public virtual ResourceType GetHarvestType()
-    {
-        throw new NotImplementedException();
-    }
+		return baseAttackStrength;
+	}
 
-    /// <summary>
-    /// Get the current amount of resource that the unit has harvested.
-    /// </summary>
-    /// <returns>The amount of resource that has been harvested.</returns>
-    public virtual float GetHarvestAmount()
-    {
-        throw new NotImplementedException();
-    }
+	/// <summary>
+	/// Gets the attack strengh that the unit has when it is attacking, in attack/second.
+	/// </summary>
+	/// <returns>The number of attacks per second of this unit.</returns>
+	public virtual float GetAttackSpeed ()
+	{
+		if (!CanAttack ())
+			throw new InvalidOperationException ("Called GetAttackStrength over an object that can't attack.");
 
-    /// <summary>
-    /// Substract health points from this object.
-    /// </summary>
-    /// <param name="damage">The number of health points to substract to this object.</param>
-    public virtual void TakeDamage(int damage)
-    {
-        hitPoints = Math.Max(hitPoints - damage, 0);
-        if (hitPoints == 0)
-        {
-            BeginDead();
-        }
-    }
+		return baseAttackSpeed;
+	}
 
-	public void makeCreationSound(){
+	/// <summary>
+	/// Gets the distance at which the unit can attack, if it is a range unit (e.g. an archer).
+	/// Otherwise, returns zero if the unit is not a range unit.
+	/// </summary>
+	/// <returns>The distance at which the unit can attack, or zero.</returns>
+	public virtual float GetAttackRange ()
+	{
+		if (!CanAttack ())
+			throw new InvalidOperationException ("Called GetAttackRange over an object that can't attack.");
+
+		return baseAttackRange;
+	}
+
+	/// <summary>
+	/// Tell if the object can be attacked by military units.
+	/// </summary>
+	/// <returns>Boolean saying if the object can be attacked or not.</returns>
+	public virtual bool CanBeAttacked ()
+	{
+		//return (!dying && baseDefense.HasValue);
+		return true;
+	}
+
+	/// <summary>
+	/// Gets the defense points that the unit has when it is being attacked.
+	/// </summary>
+	/// <returns>The number of defense points.</returns>
+	public virtual int GetDefense ()
+	{
+		if (!CanBeAttacked ())
+			throw new InvalidOperationException ("Called GetDefense over an object that can't defend.");
+
+		return baseDefense.Value;
+	}
+
+	/// <summary>
+	/// Check if the unit is currently harvesting.
+	/// </summary>
+	/// <returns>true if the unit is harvesting, false otherwise.</returns>
+	public virtual bool IsHarvesting ()
+	{
+		return false;
+	}
+
+	/// <summary>
+	/// Get the current type of resource that the unit is harvesting.
+	/// </summary>
+	/// <returns>The type of the resource being harvested.</returns>
+	public virtual ResourceType GetHarvestType ()
+	{
+		throw new NotImplementedException ();
+	}
+
+	/// <summary>
+	/// Get the current amount of resource that the unit has harvested.
+	/// </summary>
+	/// <returns>The amount of resource that has been harvested.</returns>
+	public virtual float GetHarvestAmount ()
+	{
+		throw new NotImplementedException ();
+	}
+
+	/// <summary>
+	/// Substract health points from this object.
+	/// </summary>
+	/// <param name="damage">The number of health points to substract to this object.</param>
+	public virtual void TakeDamage (int damage)
+	{
+		hitPoints = Math.Max (hitPoints - damage, 0);
+		if (hitPoints == 0) {
+			BeginDead ();
+		}
+	}
+
+	public void makeCreationSound ()
+	{
 		if (owner && owner.human && creationSound) {
 			audio.PlayOneShot (creationSound);
 		}
@@ -444,10 +449,9 @@ public class RTSObject : MonoBehaviour
 	// Funcio auxiliar per al calcul del BoxCollider i el CharacterController
 	protected void ExtendBounds (Transform t, ref Bounds b)
 	{
-        foreach (var rend in t.GetComponentsInChildren<Renderer>().Where(r => r != null && !r.name.StartsWith("Minimap")))
-        {
-            b.Encapsulate(rend.bounds.min);
-            b.Encapsulate(rend.bounds.max);
+		foreach (var rend in t.GetComponentsInChildren<Renderer>().Where(r => r != null && !r.name.StartsWith("Minimap"))) {
+			b.Encapsulate (rend.bounds.min);
+			b.Encapsulate (rend.bounds.max);
 		}
 		
 		foreach (Transform t2 in t) {
@@ -456,19 +460,19 @@ public class RTSObject : MonoBehaviour
 	}
 	
 	// Metode per calcular la vida actual del objecte
-	protected virtual void CalculateCurrentHealth()
+	protected virtual void CalculateCurrentHealth ()
 	{
 		healthPercentage = (float)hitPoints / (float)maxHitPoints;
 	}
 	
 	// Metode que usem per animar el objecte
-	protected virtual void Animating()
+	protected virtual void Animating ()
 	{
-		anim.SetBool("IsFighting", attacking);
-		anim.SetBool("IsDead", hitPoints <= 0);
+		anim.SetBool ("IsFighting", attacking);
+		anim.SetBool ("IsDead", hitPoints <= 0);
 	}
 	
-	protected virtual void chargeSounds(string objectName)
+	protected virtual void chargeSounds (string objectName)
 	{
 		creationSound = Resources.Load ("Sounds/" + objectName + "_Creation") as AudioClip;
 		fightSound = Resources.Load ("Sounds/" + objectName + "_Fight") as AudioClip;
@@ -476,240 +480,225 @@ public class RTSObject : MonoBehaviour
 	}
 	
 	// Metode per disparar
-	protected virtual void UseWeapon()
+	protected virtual void UseWeapon ()
 	{
 		currentWeaponChargeTime = 0.0f;
 	}
 	
 	// Metode per apuntar
-	protected virtual void AimAtTarget()
+	protected virtual void AimAtTarget ()
 	{
 		aiming = true;
 	}
 
-    /*** Metodes privats ***/
+	/*** Metodes privats ***/
 
 	// Metode que actualitza segons la posicio del objecte el indicador de seleccio
-	private void updateSelection(){
-		GameObject selArea = GameObject.Find("SelectedArea");
+	private void updateSelection ()
+	{
+		GameObject selArea = GameObject.Find ("SelectedArea");
 		if (selArea) {
-			float terrainY = Terrain.activeTerrain.SampleHeight(gameObject.GetComponent<Collider> ().bounds.center);
+			float terrainY = Terrain.activeTerrain.SampleHeight (gameObject.GetComponent<Collider> ().bounds.center);
 			selArea.transform.localPosition = new Vector3 (gameObject.GetComponent<Collider> ().bounds.center.x, terrainY + 0.01f, gameObject.GetComponent<Collider> ().bounds.center.z);
 			selArea.transform.localScale = new Vector3 (gameObject.GetComponent<Collider> ().bounds.size.x * 1.2f, 0.01f, gameObject.GetComponent<Collider> ().bounds.size.z * 1.2f);
 		}
 	}
 
-    /// <summary>
-    /// Since objects can't overlap, we have to give them some tolerance
-    /// for the attacks to be possible for non-range units.
-    /// </summary>
-    const float AttackRangeTolerance = 5;
+	/// <summary>
+	/// Since objects can't overlap, we have to give them some tolerance
+	/// for the attacks to be possible for non-range units.
+	/// </summary>
+	const float AttackRangeTolerance = 5;
 
-    /// <summary>
-    /// Begins an attack sequence on the given target.
-    /// </summary>
-    /// <param name="newTarget">The target of the attack.</param>
-    public void BeginAttack(RTSObject newTarget)
-    {
-        target = newTarget;
-        attacking = true;
-        remainingTimeToAttack = 0;
+	/// <summary>
+	/// Begins an attack sequence on the given target.
+	/// </summary>
+	/// <param name="newTarget">The target of the attack.</param>
+	public void BeginAttack (RTSObject newTarget)
+	{
+		target = newTarget;
+		attacking = true;
+		remainingTimeToAttack = 0;
 
-        PerformAttack();
-    }
+		PerformAttack ();
+	}
     
-    /// <summary>
-    /// Cancels an attack sequence on the given target.
-    /// </summary>
-    private void EndAttack()
-    {
-        // If we were moving to the target to attack it, cancel this move
-        if (CanMove() && HasPath())
-        {
-            CancelPath();
-        }
+	/// <summary>
+	/// Cancels an attack sequence on the given target.
+	/// </summary>
+	private void EndAttack ()
+	{
+		// If we were moving to the target to attack it, cancel this move
+		if (CanMove () && HasPath ()) {
+			CancelPath ();
+		}
 
-        // Disable the attack status
-        target = null;
-        attacking = false;
-        remainingTimeToAttack = 0;
-    }
+		// Disable the attack status
+		target = null;
+		attacking = false;
+		remainingTimeToAttack = 0;
+	}
     
-    /// <summary>
-    /// If the object is performing an attack, inflicts damage to the target according
-    /// to the attack speed, strength and target defense, or moves closer to the target
-    /// in order to perform the attack.
-    /// </summary>
-    private void PerformAttack()
-    {
-        // If the enemy is dead (or already destroyed), cancel the attack action
-        // http://answers.unity3d.com/questions/13840/how-to-detect-if-a-gameobject-has-been-destroyed.html
-        if (target == null || target.hitPoints == 0 || !target.CanBeAttacked())
-        {
-            EndAttack();
-            return;
-        }
+	/// <summary>
+	/// If the object is performing an attack, inflicts damage to the target according
+	/// to the attack speed, strength and target defense, or moves closer to the target
+	/// in order to perform the attack.
+	/// </summary>
+	private void PerformAttack ()
+	{
+		// If the enemy is dead (or already destroyed), cancel the attack action
+		// http://answers.unity3d.com/questions/13840/how-to-detect-if-a-gameobject-has-been-destroyed.html
+		if (target == null || target.hitPoints == 0 || !target.CanBeAttacked ()) {
+			EndAttack ();
+			return;
+		}
 
-        // Calculate the distance to the nearest point in the target
-        var targetAttackPosition = target.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-        var distanceToTarget = (targetAttackPosition - transform.position).magnitude;
-        var targetInRange = (distanceToTarget < GetAttackRange() + AttackRangeTolerance);
+		// Calculate the distance to the nearest point in the target
+		var targetAttackPosition = target.GetComponent<Collider> ().ClosestPointOnBounds (transform.position);
+		var distanceToTarget = (targetAttackPosition - transform.position).magnitude;
+		var targetInRange = (distanceToTarget < GetAttackRange () + AttackRangeTolerance);
 
-        if (targetInRange)
-        {
-			if (currentlySelected && fightSound && !audio.isPlaying)
-			{
+		if (targetInRange) {
+			if (currentlySelected && fightSound && !audio.isPlaying) {
 				audio.PlayOneShot (fightSound);
 			}
-            // Cancel movement if we've just reached the target
-            if (CanMove() && HasPath())
-            {
-                CancelPath();
-            }
-
-            // Check if enough time has passed to hit the object again
-            remainingTimeToAttack -= Time.deltaTime;
-            while (remainingTimeToAttack <= 0)
-            {
-                // Take damage according to the same formula used in AOE2
-                var finalAttackPointsPerSec = Math.Max(GetAttackStrength() - target.GetDefense(), 1);
-                target.TakeDamage(finalAttackPointsPerSec);
-
-                remainingTimeToAttack += 1.0f/GetAttackSpeed();
-            }
-        }
-        else
-        {
-            // If we need to and the unit can't move, warn the user that the attack can't be done
-            if (!CanMove())
-            {
-                HUDInfo.insertMessage(string.Format("{0} can't attack {1}, because it is {2}m away",
-                    objectName, target.objectName, distanceToTarget));
-                EndAttack();
-                return;
-            }
-
-            // If necessary, move closer to the attack target. We also need to periodically
-            // check if the target has moved and readjust our path accordingly
-            if (!HasPath() || (HasPath() && (programmedAttackPosition - targetAttackPosition).magnitude > 10))
-            {
-                // Move to a point near the target to attack
-                var attackPosition = targetAttackPosition - (targetAttackPosition -
-                    transform.position).normalized * AttackRangeTolerance / 4;
-                SetNewPath(attackPosition, false);
-                
-                programmedAttackPosition = attackPosition;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Begins the dead transition.
-    /// </summary>
-    private void BeginDead()
-    {
-        // Make sure that we don't attack while dying
-        if (attacking)
-        {
-            EndAttack();
-        }
-
-        if (!dying)
-        {
-            // Begin the "dying" state
-            dying = true;
-            remainingTimeToDead = DefaultDeadTime;
-			if (currentlySelected && dieSound)
-			{
-				audio.PlayOneShot (dieSound);
+			// Cancel movement if we've just reached the target
+			if (CanMove () && HasPath ()) {
+				CancelPath ();
 			}
 
-            // Enable alpha mode (transparency) for each material, for the fade-out animation
-            foreach (Renderer r in GetComponentsInChildren<Renderer>())
-            {
-                foreach (Material m in r.materials)
-                {
-                    // http://sassybot.com/blog/swapping-rendering-mode-in-unity-5-0/
-                    m.SetFloat("_Mode", 2);
-                    m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                    m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                    m.EnableKeyword("_ALPHABLEND_ON");
-                }
-            }
-        }
-    }
+			// Check if enough time has passed to hit the object again
+			remainingTimeToAttack -= Time.deltaTime;
+			while (remainingTimeToAttack <= 0) {
+				// Take damage according to the same formula used in AOE2
+				var finalAttackPointsPerSec = Math.Max (GetAttackStrength () - target.GetDefense (), 1);
+				target.TakeDamage (finalAttackPointsPerSec);
 
-    /// <summary>
-    /// Checks if the required time between the unit having zero health points and the unit disappearing has elapsed.
-    /// </summary>
-    private bool UpdateDeadObject()
-    {
-        remainingTimeToDead -= Time.deltaTime;
+				remainingTimeToAttack += 1.0f / GetAttackSpeed ();
+			}
+		} else {
+			// If we need to and the unit can't move, warn the user that the attack can't be done
+			if (!CanMove ()) {
+				HUDInfo.insertMessage (string.Format ("{0} can't attack {1}, because it is {2}m away",
+                    objectName, target.objectName, distanceToTarget));
+				EndAttack ();
+				return;
+			}
 
-        // Do a fade-out animation over the object
-        foreach (Renderer r in GetComponentsInChildren<Renderer>())
-        {
-            foreach (Material m in r.materials)
-            {
-                Color color = m.color;
-                color.a = (remainingTimeToDead / DefaultDeadTime);
-                m.color = color;
-            }
-        }
+			// If necessary, move closer to the attack target. We also need to periodically
+			// check if the target has moved and readjust our path accordingly
+			if (!HasPath () || (HasPath () && (programmedAttackPosition - targetAttackPosition).magnitude > 10)) {
+				// Move to a point near the target to attack
+				var attackPosition = targetAttackPosition - (targetAttackPosition -
+					transform.position).normalized * AttackRangeTolerance / 4;
+				SetNewPath (attackPosition, false);
+                
+				programmedAttackPosition = attackPosition;
+			}
+		}
+	}
 
-        // If the dead timer has elapsed, destroy the object
-        if (remainingTimeToDead <= 0)
-        {
-            Destroy(gameObject);
-            return true;
-        }
+	/// <summary>
+	/// Begins the dead transition.
+	/// </summary>
+	private void BeginDead ()
+	{
+		// Make sure that we don't attack while dying
+		if (attacking) {
+			EndAttack ();
+		}
 
-        return false;
-    }
+		if (!dying) {
+			// Begin the "dying" state
+			dying = true;
+			remainingTimeToDead = DefaultDeadTime;
+			if (currentlySelected && dieSound) {
+				audio.PlayOneShot (dieSound);
+			}
+			if (tag == "civilHouse") {
+				owner.maxPopulation -= 5;
+			} else if (tag == "civil" || tag == "mility") {
+				owner.population--;
+			}
 
-    /// <summary>
-    /// This method is called when the object is destroyed.
-    /// In this case, we need to update the paths for A* to no longer consider our destroyed object.
-    /// </summary>
-    public void OnDestroy()
-    {
-        // Calculate the bounds of our object and tell A*Pathfinder to update that area
-        Bounds bounds = new Bounds(transform.position, Vector3.zero);
-        ExtendBounds(transform, ref bounds);
-        if (AstarPath.active != null) // Can be null when the game is closed
-        {
-            AstarPath.active.UpdateGraphs(bounds);
-        }
-    }
+			// Enable alpha mode (transparency) for each material, for the fade-out animation
+			foreach (Renderer r in GetComponentsInChildren<Renderer>()) {
+				foreach (Material m in r.materials) {
+					// http://sassybot.com/blog/swapping-rendering-mode-in-unity-5-0/
+					m.SetFloat ("_Mode", 2);
+					m.SetInt ("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+					m.SetInt ("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+					m.EnableKeyword ("_ALPHABLEND_ON");
+				}
+			}
+		}
+	}
 
-    /// <summary>
-    /// Replaces all the child nodes of the GameObject associated with this object,
-    /// with the child nodes of the given GameObject template.
-    /// 
-    /// This can be used, for instance, to exchange the model that is used to
-    /// display the different versions (on construction, semidemolished, complete, ...) of a building.
-    /// </summary>
-    /// <param name="newGameObjectTemplate">The object to use as a template for the new child nodes.</param>
-    public void ReplaceChildWithChildFromGameObjectTemplate(GameObject newGameObjectTemplate)
-    {
-        // Remove all child nodes of the associated GameObject
-        // We use ToList() since we are changing the same structure we are enumerating
-        foreach (Transform child in transform.OfType<Transform>().ToList())
-        {
-            GameObject.Destroy(child.gameObject);
-        }
+	/// <summary>
+	/// Checks if the required time between the unit having zero health points and the unit disappearing has elapsed.
+	/// </summary>
+	private bool UpdateDeadObject ()
+	{
+		remainingTimeToDead -= Time.deltaTime;
 
-        // Instantiate the object at the same position as our object temporarily
-        var finishedBuilding = (GameObject)Instantiate(newGameObjectTemplate, transform.position, Quaternion.identity);
+		// Do a fade-out animation over the object
+		foreach (Renderer r in GetComponentsInChildren<Renderer>()) {
+			foreach (Material m in r.materials) {
+				Color color = m.color;
+				color.a = (remainingTimeToDead / DefaultDeadTime);
+				m.color = color;
+			}
+		}
 
-        // Reassociate all child nodes of the GameObject to our object
-        // We use ToList() since we are changing the same structure we are enumerating
-        foreach (Transform child in finishedBuilding.transform.OfType<Transform>().ToList())
-        {
-            child.parent = transform;
-        }
+		// If the dead timer has elapsed, destroy the object
+		if (remainingTimeToDead <= 0) {
+			Destroy (gameObject);
+			return true;
+		}
 
-        // Destroy the gameobject we've used to import its child
-        Destroy(finishedBuilding);
-    }
+		return false;
+	}
+
+	/// <summary>
+	/// This method is called when the object is destroyed.
+	/// In this case, we need to update the paths for A* to no longer consider our destroyed object.
+	/// </summary>
+	public void OnDestroy ()
+	{
+		// Calculate the bounds of our object and tell A*Pathfinder to update that area
+		Bounds bounds = new Bounds (transform.position, Vector3.zero);
+		ExtendBounds (transform, ref bounds);
+		if (AstarPath.active != null) { // Can be null when the game is closed
+			AstarPath.active.UpdateGraphs (bounds);
+		}
+	}
+
+	/// <summary>
+	/// Replaces all the child nodes of the GameObject associated with this object,
+	/// with the child nodes of the given GameObject template.
+	/// 
+	/// This can be used, for instance, to exchange the model that is used to
+	/// display the different versions (on construction, semidemolished, complete, ...) of a building.
+	/// </summary>
+	/// <param name="newGameObjectTemplate">The object to use as a template for the new child nodes.</param>
+	public void ReplaceChildWithChildFromGameObjectTemplate (GameObject newGameObjectTemplate)
+	{
+		// Remove all child nodes of the associated GameObject
+		// We use ToList() since we are changing the same structure we are enumerating
+		foreach (Transform child in transform.OfType<Transform>().ToList()) {
+			GameObject.Destroy (child.gameObject);
+		}
+
+		// Instantiate the object at the same position as our object temporarily
+		var finishedBuilding = (GameObject)Instantiate (newGameObjectTemplate, transform.position, Quaternion.identity);
+
+		// Reassociate all child nodes of the GameObject to our object
+		// We use ToList() since we are changing the same structure we are enumerating
+		foreach (Transform child in finishedBuilding.transform.OfType<Transform>().ToList()) {
+			child.parent = transform;
+		}
+
+		// Destroy the gameobject we've used to import its child
+		Destroy (finishedBuilding);
+	}
 }

@@ -8,6 +8,7 @@ public class Sumerian_CivilHouse : Building {
     {
 		base.Awake();
 		objectName = "Sumerian Civil House";
+		tag = "civilHouse";
 		cost = 50;
 		hitPoints = maxHitPoints = 200;
         baseDefense = 5;
