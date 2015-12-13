@@ -14,16 +14,17 @@ public class ADS : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (gameObject.GetComponent<RTSObject>().owner.human) {
-            GetComponent<ADS>().enabled = false;
-            GetComponent<MovimientoAleatorioCivil>().enabled = false;
-        }
-        else { 
+        if (this.gameObject.GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>()) {
+            GetComponent<ADS>().enabled = true;
+            GetComponent<MovimientoAleatorioCivil>().enabled = true;
             speed = 2;
             hit = new RaycastHit();
             estado = aiState.wandering;
-            GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
             enlace = GameObject.Find("EnemyPlayer1");
+        }
+        else {
+            GetComponent<ADS>().enabled = false;
+            GetComponent<MovimientoAleatorioCivil>().enabled = false;
         }
     }
 
@@ -90,8 +91,8 @@ public class ADS : MonoBehaviour
         {*/
         if (Physics.SphereCast(transform.position, 15f, transform.forward, out hit, 20))
         { 
-            //if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner.human)
-            //{ 
+            if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner != GameObject.Find("EnemyPlayer1").GetComponent<Player>())
+            { 
             
                 if (!enlace.GetComponent<Player>().objetivos.Contains(hit.collider.gameObject.GetComponent<RTSObject>())) // compruebo si el objetivo ya esta en la lista 
                 {
@@ -99,7 +100,7 @@ public class ADS : MonoBehaviour
                     Debug.Log("HE DETECTADO UN OBJETO DE CLASE: " + hit.collider.tag);
                     Debug.Log("TENGO EL TARGET AÑADIDO-->" + targetlocal);
                 }
-            //}
+            }
         }
     }
 
