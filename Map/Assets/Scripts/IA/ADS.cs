@@ -14,11 +14,9 @@ public class ADS : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //if (this.gameObject.GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>()) {
-        if (!this.gameObject.GetComponent<RTSObject>().owner.human) { 
+        if (!this.gameObject.GetComponent<RTSObject>().owner.human) {  //  Se comprueba si el propietario es el jugador(human)
             GetComponent<MovimientoAleatorioCivil>().enabled = true;
             GetComponent<ADS>().enabled = true;
-            
             speed = 2;
             hit = new RaycastHit();
             estado = aiState.wandering;
@@ -27,7 +25,6 @@ public class ADS : MonoBehaviour
         else {
             GetComponent<MovimientoAleatorioCivil>().enabled = false;
             GetComponent<ADS>().enabled = false;
-
         }
     }
 
@@ -54,7 +51,7 @@ public class ADS : MonoBehaviour
         //transform.Translate(0, 0, 1 * Time.deltaTime * Speed);
     }
 
-    public void Attack()
+    public void Attack() // funcion que controla el ataque
     {
         if (enlace.GetComponent<Player>().objetivos.Count > 0) {
             targetlocal = (RTSObject)enlace.GetComponent<Player>().objetivos[0];
@@ -87,21 +84,15 @@ public class ADS : MonoBehaviour
     public void detection()
     {
         //Debug.Log("VOY MIRANDO");
-        /*if ((Physics.Raycast(transform.position, transform.position + new Vector3(0, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(0, 0, -40), out hit, 10))
-            || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, 0), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, 0), out hit, 10))
-            || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, -40), out hit, 10))
-            || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, -40), out hit, 10)))
-        {*/
-        if (Physics.SphereCast(transform.position, 15f, transform.forward, out hit, 20))
+        if (Physics.SphereCast(transform.position, 15f, transform.forward, out hit, 20)) // sistema de deteccion en esfera
         { 
-            if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner != GameObject.Find("EnemyPlayer1").GetComponent<Player>())
+            if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner.human)
             { 
-            
-                if (!enlace.GetComponent<Player>().objetivos.Contains(hit.collider.gameObject.GetComponent<RTSObject>())) // compruebo si el objetivo ya esta en la lista 
+                if (!enlace.GetComponent<Player>().objetivos.Contains(hit.collider.gameObject.GetComponent<RTSObject>())) // compruebo si el objetivo ya esta en la lista de objetivos
                 {
                     enlace.GetComponent<Player>().objetivos.Add(hit.collider.gameObject.GetComponent<RTSObject>()); // añado el objetivo a la lista de objetivos
-                    Debug.Log("HE DETECTADO UN OBJETO DE CLASE: " + hit.collider.tag);
-                    Debug.Log("TENGO EL TARGET AÑADIDO-->" + targetlocal);
+                    //Debug.Log("HE DETECTADO UN OBJETO DE CLASE: " + hit.collider.tag);
+                    //Debug.Log("TENGO EL TARGET AÑADIDO-->" + targetlocal);
                 }
             }
         }
