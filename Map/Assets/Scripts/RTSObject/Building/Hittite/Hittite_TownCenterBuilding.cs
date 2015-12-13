@@ -15,7 +15,7 @@ public class Hittite_TownCenterBuilding : TownCenterBuilding {
 
 	/*** Metodes interns accessibles per les subclasses ***/
 	
-	protected override void CreateUnit (string unitName)
+	public override void CreateUnit (string unitName)
 	{
 		switch (unitName) {
 		case "Civil Unit":
