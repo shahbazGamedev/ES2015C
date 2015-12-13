@@ -16,7 +16,7 @@ public class Hittite_ArmyBuilding : ArmyBuilding
 
 	/*** Metodes interns accessibles per les subclasses ***/
 	
-	protected override void CreateUnit (string unitName)
+	public override void CreateUnit (string unitName)
 	{
 		switch (unitName) {
 		case "Archer":

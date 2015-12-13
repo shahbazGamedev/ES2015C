@@ -21,6 +21,24 @@ public class AI : MonoBehaviour
     private bool housesBuilt = false, armyBuilt=false, towerBuilt=false, academyBuilt=false;
     private PlayerCivilization civilitzation;
 
+    public int numberTownCenters = 0;
+    public int numberCivils = 0;
+    public int numberArmyBuilidngs = 0;
+    public int numberAcedemies = 0;
+    public int numberCivilHouse = 0;
+    public int numberWallTower = 0;
+    public int numberWall = 0;
+    public int numberWarrior = 0;
+    public int numberArcher = 0;
+    public int numberCavalry = 0;
+    public int numberWallEntrance = 0;
+    public int numberArcherAdvanced = 0;
+    public int numberCavalryAdvanced = 0;
+    public int numberWarriorAdvanced = 0;
+    public int numberUniversity = 0;
+
+
+
 
     //private GameObject menu;
 
@@ -36,7 +54,11 @@ public class AI : MonoBehaviour
         civils = new List<GameObject>();
         Vector3 coords = new Vector3(453.51f, 0f, 435.28f);        
         BuildTownCenter(coords,true);
-        CreateNewCivil(true);
+
+        coords = new Vector3(453.51f-10f, 0f, 435.28f-10f);
+        GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation), coords, Quaternion.identity) as GameObject;
+        civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
+        civils.Add(civil);
         spawnPos = townCenters[0].transform.position;
 
         //civils[0].GetComponent<CivilUnit>().StartHarvest(null, true,"food");
@@ -49,19 +71,26 @@ public class AI : MonoBehaviour
     {
         CivilsRecollect();
 
+        
         /*TownCenter*/
         if (townCenters.Count == 0)
             {
+                
+
                 GameObject townCenter = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilitzation);
                 townCenters.Add(townCenter);
                 spawnPos = new Vector3(450f,0,150f);
                 civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(townCenter, spawnPos);
 
+                
+
             }
 
             if (artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] >= 100 && civils.Count < 4)
             {
-            CreateNewCivil(false); ;
+
+                CreateNewCivil();
+
             }
 
             /*ArmyBuilding*/
@@ -72,7 +101,10 @@ public class AI : MonoBehaviour
                 armyBuilt = true;
                 armyPos = new Vector3(spawnPos.x, 0, spawnPos.z + 20);
                 GameObject armyBuilding = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingArmyBuilding, civilitzation);
-                civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(armyBuilding, armyPos);              
+                civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(armyBuilding, armyPos);  
+
+                //aumentamos numero de ArmyBuilidngs contruidas
+                numberArmyBuilidngs = numberArmyBuilidngs + 1;            
             }
 
 
@@ -88,6 +120,9 @@ public class AI : MonoBehaviour
                 spawnPos = new Vector3(townCenters[0].transform.position.x - 30, 0, townCenters[0].transform.position.z + 15);
                 GameObject armyBuilding = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingAcademy, civilitzation);
                 civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(armyBuilding, spawnPos);
+
+                //aumentamos numero de academys contruidas
+                numberAcedemies = numberAcedemies + 1;
             }
 
             /*houses*/
@@ -101,6 +136,10 @@ public class AI : MonoBehaviour
                 spawnPos = new Vector3(townCenters[0].transform.position.x + 70, -46, townCenters[0].transform.position.z + 100);
                 GameObject civilHouse = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingCivilHouse, civilitzation);
                 civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(civilHouse, spawnPos);
+
+
+                //aumentamos numero de civilhouse contruidas
+                numberCivilHouse = numberCivilHouse + 1;
 
             }
 
@@ -117,6 +156,9 @@ public class AI : MonoBehaviour
                 spawnPos = new Vector3(townCenters[0].transform.position.x - 25, 0, townCenters[0].transform.position.z - 25);
                 GameObject wallTower = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingWallTower, civilitzation);
                 civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(wallTower, spawnPos);
+
+                //aumentamos numero de wallTower contruidas
+                numberWallTower = numberWallTower + 1;
 
             }
 
@@ -143,6 +185,9 @@ public class AI : MonoBehaviour
                 GameObject wall = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingWall, civilitzation);
                 civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(wall, spawnPos);
 
+                //aumentamos numero de wall contruidas
+                numberWall = numberWall + 1;
+
             }
 
 
@@ -152,8 +197,11 @@ public class AI : MonoBehaviour
                 soldiers.Count<10 &&              
                 armyBuilt == true)
             {
-            CreateNewWarrior();
-            }
+
+                GameObject warrior = RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitWarrior, civilitzation);
+                CreateNewWarrior();
+        }
+
 
              /*Arquers*/
             if (civils.Count >=  4 &&
@@ -163,7 +211,9 @@ public class AI : MonoBehaviour
                  armyBuilt == true)
             {
 
-            CreateNewArcher();
+                GameObject archer = RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitArcher, civilitzation);
+                CreateNewArcher(); ;
+
             }
 
             /*Cavall*/
@@ -173,8 +223,11 @@ public class AI : MonoBehaviour
                  archers.Count >= 5 &&
                  armyBuilt == true)
             {
+                GameObject cavalry = RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCavalry, civilitzation);
                 CreateNewCavalry();
-            }
+
+        }
+
     
         //_______________________________
 
@@ -228,39 +281,37 @@ public class AI : MonoBehaviour
             artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] - 100; //resta fusta 
         }
         townCenters.Add(townCenter);
+
+        //aumentamos numero de numberTownCenters contruidas
+        numberTownCenters = numberTownCenters + 1;
+
     }
 
 
-    private void CreateNewCivil(Boolean resourceFree)
+    private void CreateNewCivil()
     {
-        if (civilian == 1) {
-            coords = new Vector3(townCenters[0].transform.position.x - 10, 0.4f, townCenters[0].transform.position.z - 10);
-            civilian = 2;
-        }
-        else if (civilian == 2){
-            coords = new Vector3(townCenters[0].transform.position.x - 15, 0.4f, townCenters[0].transform.position.z - 10);
-            civilian = 3;
-        }
-        else if (civilian == 3)
+        GameObject[] centers;
+        centers = GameObject.FindGameObjectsWithTag("townCenter");
+        foreach (GameObject army in centers)
         {
-            coords = new Vector3(townCenters[0].transform.position.x - 15, 0.4f, townCenters[0].transform.position.z - 15);
-            civilian = 4;
+            if (army.GetComponent<Building>().owner == artificialIntelligence)
+            {
+                GameObject civilUnit = RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation);
+                army.GetComponent<Building>().CreateUnitAI(civilUnit);
+            }
         }
 
-        else if (civilian == 4)
+        GameObject[] enemySoldiers = GameObject.FindGameObjectsWithTag("civil");
+        civils.Clear();
+        foreach (GameObject soldier in enemySoldiers)
         {
-            coords = new Vector3(townCenters[0].transform.position.x - 10, 0.4f, townCenters[0].transform.position.z - 15);
-            civilian = 1;
+            if (soldier.GetComponent<Unit>().owner == artificialIntelligence)
+            {
+                civils.Add(soldier);
+            }
         }
 
-        if (resourceFree == false) {
-            artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] - 100;
-        }
-        GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation), coords, Quaternion.identity) as GameObject;
-        civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
-        civils.Add(civil);      
     }
-
 
     private void CreateNewWarrior()
     {
@@ -270,14 +321,13 @@ public class AI : MonoBehaviour
 
         GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitWarrior, civilitzation), coords, Quaternion.identity) as GameObject;
         civil.GetComponent<Unit>().owner = artificialIntelligence;
-        civil.AddComponent<ADS>();
-        civil.AddComponent<MovimientoAleatorioCivil>();
         soldiers.Add(civil);
         if (z >= 10)
         {
             z = 0;
         }
-        else {
+        else
+        {
             z++;
         }
     }
