@@ -8,6 +8,7 @@ public class InfoEnemy : MonoBehaviour
 	private bool activated = false;
 	public Player artificialIntelligence;
 	public PlayerCivilization civilitzation;
+	public bool menu_created = false;
 
 	// Use this for initialization
 	//GameObject prefab;
@@ -19,16 +20,22 @@ public class InfoEnemy : MonoBehaviour
 	
 	
 	private void CreateMenu() {
-        menu = Instantiate(Resources.Load("HUDEnemy")) as GameObject;     
+        menu = Instantiate(Resources.Load("HUDEnemy")) as GameObject;    
     }
 
 	void Update() {
 
 		if (!activated) {
 			if (Input.GetKey (KeyCode.X)) {
-				activated=true;
-				CreateMenu();
-
+				if (menu_created) {
+					activated=true;
+					menu.active = true;
+				}
+				else {
+					activated=true;
+					CreateMenu();
+					menu_created = true; 
+				}
 			}
 		}
 

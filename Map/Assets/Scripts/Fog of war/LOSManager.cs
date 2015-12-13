@@ -55,6 +55,9 @@ public class LOSManager : MonoBehaviour {
     // List of entities that interact with LOS
     //[HideInInspector]
     public List<LOSEntity> Entities = new List<LOSEntity>();
+
+	
+	public List<LOSEntity> visibleEntities = new List<LOSEntity>();
     // List of entities currently animating their LOS
     [HideInInspector]
     public List<LOSEntity> AnimatingEntities = new List<LOSEntity>();
@@ -121,9 +124,15 @@ public class LOSManager : MonoBehaviour {
 			if (!revealed) {
 				if (this.Terrain.materialType != Terrain.MaterialType.BuiltInStandard) {
 					this.Terrain.materialType = Terrain.MaterialType.BuiltInStandard;
-					foreach (var entity in Entities)
+					foreach (var entity in Entities){
 						entity.reveal ();
+						if(entity.RevealState == LOSEntity.RevealStates.Unfogged && !entity.IsAlly){
+							visibleEntities.Add(entity);
+							Debug.Log("CACATUUUUUUUAA");
+						}
+					}
 				}
+
 				revealed = !revealed;
 			} else {
 				this.Terrain.materialTemplate = Resources.Load ("Materials/Terrain", typeof(Material)) as Material;
@@ -131,9 +140,18 @@ public class LOSManager : MonoBehaviour {
 				foreach (var entity in Entities) {
 					if (entity.IsAlly != true) {
 						entity.RevealState = LOSEntity.RevealStates.Fogged;
+						if (!visibleEntities.Contains(entity)){
+							entity.hide();
+							Debug.Log("MAMMMAMIA");
+						}
+					}
+					else{
+						entity.IsRevealer = true;
 					}
 				}
+			
 				revealed = !revealed;
+				visibleEntities.Clear();
 			}
 		}
 

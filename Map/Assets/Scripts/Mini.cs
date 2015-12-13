@@ -1,5 +1,6 @@
 using UnityEngine;
- 
+using UnityEngine.UI; 
+
 public class Mini : MonoBehaviour
 {
     public float dragSpeed = 2;
@@ -9,6 +10,9 @@ public class Mini : MonoBehaviour
 
     private Camera itsMinimapCamera;
     private Camera itsMainCamera;
+
+	RawImage image;
+	Canvas canvas;
 
 	public float y = 7.5f;
 	public float x = 12.5f;
@@ -62,6 +66,11 @@ public class Mini : MonoBehaviour
 		itsMinimapCamera = GameObject.Find("MiniMap").GetComponent<Camera>();
         itsMainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		cameraPoint = GameObject.Find ("CameraPoint");
+		image = GameObject.Find("HUDMiniMapImage").GetComponent<RawImage>();
+		canvas = GameObject.Find("HUD").GetComponent<Canvas>();
+		Vector2 origin = new Vector2 (image.transform.position.x - (image.GetPixelAdjustedRect ().width * canvas.scaleFactor) / 2, image.transform.position.y - (image.GetPixelAdjustedRect ().height * canvas.scaleFactor) / 2);
+		float miniscale = Terrain.activeTerrain.terrainData.heightmapHeight / (image.GetPixelAdjustedRect ().height*canvas.scaleFactor);
+		mp = new Vector2 (cameraPoint.transform.position.x / miniscale + origin.x, cameraPoint.transform.position.z / miniscale + origin.y);
         
     }
 
@@ -73,40 +82,23 @@ public class Mini : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)){ // if left button pressed...
+		Vector2 origin = new Vector2 (image.transform.position.x - (image.GetPixelAdjustedRect ().width * canvas.scaleFactor) / 2, image.transform.position.y - (image.GetPixelAdjustedRect ().height * canvas.scaleFactor) / 2);
+		float miniscale = Terrain.activeTerrain.terrainData.heightmapHeight / (image.GetPixelAdjustedRect ().height*canvas.scaleFactor);
+		mp = new Vector2 ((cameraPoint.transform.position.x / miniscale + origin.x)-x, (cameraPoint.transform.position.z / miniscale + origin.y)+y);
+	}
 
-            RaycastHit hit;
-            //Debug.Log("Step1");
-            Ray ray = itsMinimapCamera.ScreenPointToRay(Input.mousePosition);
-            //Debug.Log("Step2");
-            if (Physics.Raycast(ray, out hit)){
+	public void click(){
+		float miniscale = Terrain.activeTerrain.terrainData.heightmapHeight / (image.GetPixelAdjustedRect ().height * canvas.scaleFactor);
+		Vector2 origin = new Vector2 (image.transform.position.x - (image.GetPixelAdjustedRect ().width * canvas.scaleFactor) / 2, image.transform.position.y - (image.GetPixelAdjustedRect ().height * canvas.scaleFactor) / 2);
+		Vector2 mouse = Input.mousePosition;
+		Vector2 dif = mouse - origin;
+		Vector3 posicio = new Vector3 (dif.x*miniscale, 0, dif.y*miniscale);
+		float yPoint = itsMainCamera.transform.position.y;
+		Vector3 relacio = itsMainCamera.transform.position - cameraPoint.transform.position;
+		cameraPoint.transform.position = posicio;
+		itsMainCamera.transform.position = posicio + relacio;
 
-                float yPoint = itsMainCamera.transform.position.y;
-                Vector3 auxiliar = hit.point;
-                itsMainCamera.transform.position = auxiliar;
-				auxiliar = itsMainCamera.transform.position;
-				auxiliar.y = 0;
-				cameraPoint.transform.position = auxiliar;
-				auxiliar.y = yPoint;
-				auxiliar.z = auxiliar.z - 90f*Mathf.Cos((Camera.main.transform.eulerAngles.y * Mathf.PI)/180);
-				auxiliar.x = auxiliar.x - 90f*Mathf.Sin((Camera.main.transform.eulerAngles.y * Mathf.PI)/180);
-				itsMainCamera.transform.position = auxiliar;
-
-                //Debug.Log("Step3");
-                //Debug.Log(hit.point);
-            }  
-       }
-		//Vector3 aux = cameraPoint.transform.position;
-		//aux.z = aux.z + 120f;
-		//aux.x = aux.x - 50f;
-
-
-		Vector3 p;
-		p = itsMinimapCamera.WorldToScreenPoint(cameraPoint.transform.position);
-		p.y += y;
-		p.x -= x;
-		mp = p;
-
-    }
+		mp = new Vector2 ((cameraPoint.transform.position.x / miniscale + origin.x)-x, (cameraPoint.transform.position.z / miniscale + origin.y)+y);
+	}
 
  }

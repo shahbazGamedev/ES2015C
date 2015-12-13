@@ -432,27 +432,54 @@ public class CivilUnit : Unit
 
 
 
-    public void CreateBuildingIA(GameObject building, Vector3 coords)
+
+    public void CreateOnConstructionBuildingAI(GameObject building, Vector3 coords)
     {
-            creationBuilding = (GameObject)Instantiate(building, coords, Quaternion.identity);
-            creationBuildingConstruction = (GameObject)Instantiate(building, coords, Quaternion.identity);
-            creationBuildingConstruction.SetActive(false);
-            float wood = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
-            if (wood >= creationBuildingConstruction.GetComponent<Building>().cost)
-            {
-                Debug.Log("Tenemos suficiente madera");
-                creationBuildingConstruction.SetActive(true);
-                currentProject = creationBuildingConstruction.GetComponent<Building>();
-                currentProject.hitPoints = 0;
-                currentProject.needsBuilding = true;
-                currentProject.owner = owner;
-                var guo = new GraphUpdateObject(currentProject.GetComponent<BoxCollider>().bounds);
-                guo.updatePhysics = true;
-                AstarPath.active.UpdateGraphs(guo);
-                owner.resourceAmounts[RTSObject.ResourceType.Wood] -= currentProject.cost;
-                SetNewPath(coords,false);                    
+        // Initialize the object to build, so we can access its cost and colliders
+        var creationBuildingConstructionProject =
+            (GameObject)Instantiate(building, coords, Quaternion.identity);
+
+        // Check if there are enough resources available
+        float woodAvailable = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
+        float woodCost = creationBuildingConstructionProject.GetComponent<Building>().cost;
+
+        if (woodAvailable < woodCost)
+        {
+            Destroy(creationBuildingConstructionProject);
+            HUDInfo.insertMessage(string.Format("Not enough wood ({0}) to construct the {1}",
+                creationBuildingConstructionProject.GetComponent<Building>().cost,
+                creationBuildingConstructionProject.GetComponent<Building>().objectName));
+
+            return;
         }
+
+        // Start the building project
+        var newProject = creationBuildingConstructionProject.GetComponent<Building>();
+        newProject.hitPoints = 0;
+        newProject.needsBuilding = true;
+        newProject.owner = owner;
+        newProject.finishedModel = building;
+
+        if (newProject.constructionModel != null)
+        {
+            newProject.changeModel("construction");
+        }
+        else
+        {
+            HUDInfo.insertMessage("WARNING: No on-construction model for building " + newProject.objectName + ".");
+        }
+
+        // Update physics
+        var guo = new GraphUpdateObject(newProject.GetComponent<BoxCollider>().bounds);
+        guo.updatePhysics = true;
+        AstarPath.active.UpdateGraphs(guo);
+
+        // Substract resources needed for the building
+        owner.resourceAmounts[RTSObject.ResourceType.Wood] -= newProject.cost;
+        // Assign the building project to this unit
+        AssignBuildingProject(newProject);
     }
+
 
 
 
