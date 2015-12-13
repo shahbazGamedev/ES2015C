@@ -129,4 +129,18 @@ public class LOSEntity : MonoBehaviour {
 		}
 	}
 
+	public void hide(){
+		foreach (Renderer R in this.GetComponentsInChildren<Renderer>())
+			R.enabled = false;
+	}
+
+	public bool isRev(){
+		foreach (Renderer R in this.GetComponentsInChildren<Renderer>()) {
+			if (R.enabled)
+				return true;
+		}
+		return false;
+	}
+
+
 }
