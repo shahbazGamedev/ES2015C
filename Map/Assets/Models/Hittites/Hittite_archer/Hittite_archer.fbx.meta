@@ -452,7 +452,7 @@ ModelImporter:
       name: Armature.001|Hittite_archer_Idle
       takeName: Armature.001|Hittite_archer_Idle
       firstFrame: 0
-      lastFrame: 22
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
