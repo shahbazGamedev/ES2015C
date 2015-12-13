@@ -18,13 +18,15 @@ public class HUDNumberTownCenter : MonoBehaviour
 
     public int numberTownCenters2;
 
+	
+	AI aux;
     
     Text textComponent;
 
     void Start()
     {
         //numberTownCenters2 = 100;
-        AI aux = GetComponent<AI>();
+		aux = GameObject.Find("A.I").GetComponent<AI>();
         numberTownCenters2 = (int) aux.numberTownCenters;
         
         artificialIntelligence2 = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
@@ -47,6 +49,9 @@ public class HUDNumberTownCenter : MonoBehaviour
     /// </summary>
     void Update()
     {
+
+		numberTownCenters2 = (int) aux.numberTownCenters;
+
         if (textComponent == null)
             return;
 
