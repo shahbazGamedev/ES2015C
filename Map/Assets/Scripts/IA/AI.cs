@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -88,16 +88,9 @@ public class AI : MonoBehaviour
 
             if (artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] >= 100 && civils.Count < 4)
             {
-<<<<<<< HEAD
-            CreateNewCivil(false); ;
 
-            //aumentamos numero de numberCivils contruidas
-            numberCivils = numberCivils + 1;
-=======
-            Debug.Log("He creat un civil");
                 CreateNewCivil();
-            Debug.Log("A la llista hi ha "+civils.Count+"civils");
->>>>>>> issue#790
+
             }
 
             /*ArmyBuilding*/
@@ -204,19 +197,11 @@ public class AI : MonoBehaviour
                 soldiers.Count<10 &&              
                 armyBuilt == true)
             {
-<<<<<<< HEAD
-            CreateNewWarrior();
 
-            //aumentamos numero de warrior contruidas
-            numberWarrior = numberWarrior + 1;
-
-
-            }
-=======
                 GameObject warrior = RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitWarrior, civilitzation);
                 CreateNewWarrior();
         }
->>>>>>> issue#790
+
 
              /*Arquers*/
             if (civils.Count >=  4 &&
@@ -225,16 +210,10 @@ public class AI : MonoBehaviour
                  archers.Count<=5 &&
                  armyBuilt == true)
             {
-<<<<<<< HEAD
 
-            CreateNewArcher();
-
-            //aumentamos numero de Archer contruidas
-            numberArcher = numberArcher + 1;
-=======
                 GameObject archer = RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitArcher, civilitzation);
                 CreateNewArcher(); ;
->>>>>>> issue#790
+
             }
 
             /*Cavall*/
@@ -246,14 +225,9 @@ public class AI : MonoBehaviour
             {
                 GameObject cavalry = RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCavalry, civilitzation);
                 CreateNewCavalry();
-<<<<<<< HEAD
 
-                //aumentamos numero de Cavalry contruidas
-                numberCavalry = numberCavalry + 1;
-            }
-=======
         }
->>>>>>> issue#790
+
     
         //_______________________________
 
