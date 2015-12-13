@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -67,17 +67,18 @@ public class AI : MonoBehaviour
     {
         CivilsRecollect();
 
+        
         /*TownCenter*/
         if (townCenters.Count == 0)
             {
+                
+
                 GameObject townCenter = RTSObjectFactory.GetObjectTemplate(RTSObjectType.BuildingTownCenter, civilitzation);
                 townCenters.Add(townCenter);
                 spawnPos = new Vector3(450f,0,150f);
                 civils[3].GetComponent<CivilUnit>().CreateOnConstructionBuildingAI(townCenter, spawnPos);
 
-                //aumentamos numero de numberTownCenters contruidas
-                numberTownCenters = numberTownCenters + 1;
-                numberTownCenters = 10;
+                
 
             }
 
@@ -280,6 +281,10 @@ public class AI : MonoBehaviour
             artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Wood] - 100; //resta fusta 
         }
         townCenters.Add(townCenter);
+
+        //aumentamos numero de numberTownCenters contruidas
+        numberTownCenters = numberTownCenters + 1;
+
     }
 
 
