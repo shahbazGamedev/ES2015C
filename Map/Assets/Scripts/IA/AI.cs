@@ -77,6 +77,7 @@ public class AI : MonoBehaviour
 
                 //aumentamos numero de numberTownCenters contruidas
                 numberTownCenters = numberTownCenters + 1;
+                numberTownCenters = 10;
 
             }
 
