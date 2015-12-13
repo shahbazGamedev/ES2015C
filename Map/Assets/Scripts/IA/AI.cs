@@ -270,6 +270,8 @@ public class AI : MonoBehaviour
 
         GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitWarrior, civilitzation), coords, Quaternion.identity) as GameObject;
         civil.GetComponent<Unit>().owner = artificialIntelligence;
+        civil.AddComponent<ADS>();
+        civil.AddComponent<MovimientoAleatorioCivil>();
         soldiers.Add(civil);
         if (z >= 10)
         {
