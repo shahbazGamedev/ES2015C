@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System;
@@ -18,12 +18,14 @@ public class HUDNumberTownCenter : MonoBehaviour
 
     public int numberTownCenters2;
 
-
-
+    
     Text textComponent;
 
     void Start()
     {
+        //numberTownCenters2 = 100;
+        AI aux = GetComponent<AI>();
+        numberTownCenters2 = (int) aux.numberTownCenters;
         
         artificialIntelligence2 = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
         //artificialIntelligence2 = aux.artificialIntelligence;
@@ -56,10 +58,13 @@ public class HUDNumberTownCenter : MonoBehaviour
             
         //int aux = (int)artificialIntelligence2.resourceAmounts[RTSObject.ResourceType.Gold];
         //textComponent.text = (aux).ToString();
-        AI aux = GetComponent<AI>();
-        numberTownCenters2 = (int) aux.numberTownCenters;
         
-        //textComponent.text = (numberArmyBuilidngs2).ToString();
+        /*AI aux = GetComponent<AI>();
+        numberTownCenters2 = (int) aux.numberTownCenters;*/
+        
+
+
+        textComponent.text = "x" + (numberTownCenters2).ToString();
 
     }
 }
