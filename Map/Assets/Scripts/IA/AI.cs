@@ -56,9 +56,10 @@ public class AI : MonoBehaviour
         BuildTownCenter(coords,true);
 
         coords = new Vector3(453.51f-10f, 0f, 435.28f-10f);
-        GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation), coords, Quaternion.identity) as GameObject;
-        civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
-        civils.Add(civil);
+        //GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation), coords, Quaternion.identity) as GameObject;
+        //civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
+        //civils.Add(civil);
+        CreateNewCivil(true);
         spawnPos = townCenters[0].transform.position;
 
         //civils[0].GetComponent<CivilUnit>().StartHarvest(null, true,"food");
@@ -89,7 +90,7 @@ public class AI : MonoBehaviour
             if (artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] >= 100 && civils.Count < 4)
             {
 
-                CreateNewCivil();
+                CreateNewCivil(false);
 
             }
 
@@ -305,13 +306,47 @@ public class AI : MonoBehaviour
         civils.Clear();
         foreach (GameObject soldier in enemySoldiers)
         {
-            if (soldier.GetComponent<Unit>().owner == artificialIntelligence)
+            if (soldier.GetComponent<RTSObject>().owner == artificialIntelligence.GetComponent<Player>())
             {
                 civils.Add(soldier);
             }
         }
 
     }
+    private void CreateNewCivil(Boolean resourceFree)
+    {
+        if (civilian == 1)
+        {
+            coords = new Vector3(townCenters[0].transform.position.x - 10, 0.4f, townCenters[0].transform.position.z - 10);
+            civilian = 2;
+        }
+        else if (civilian == 2)
+        {
+            coords = new Vector3(townCenters[0].transform.position.x - 15, 0.4f, townCenters[0].transform.position.z - 10);
+            civilian = 3;
+        }
+        else if (civilian == 3)
+        {
+            coords = new Vector3(townCenters[0].transform.position.x - 15, 0.4f, townCenters[0].transform.position.z - 15);
+            civilian = 4;         
+        }
+        else if (civilian == 4)
+            
+        {
+        coords = new Vector3(townCenters[0].transform.position.x - 10, 0.4f, townCenters[0].transform.position.z - 15);
+         civilian = 1;
+           
+        }
+
+        if (resourceFree == false)
+        {
+         artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] = artificialIntelligence.resourceAmounts[RTSObject.ResourceType.Food] - 100;
+        }
+        GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation), coords, Quaternion.identity) as GameObject;
+        civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
+        civils.Add(civil);
+    }
+
 
     private void CreateNewWarrior()
     {
