@@ -29,13 +29,14 @@ public class VolumeControlAccess : MonoBehaviour
 		ambiente.Play();
 		GameObject menuVol;
 
-		volCont = GameObject.Find("ControlVolumen").GetComponent<VolumeControl>();
-        auxvolumen = (float) volCont.ambiente2.volume;
+
 	}
 	
 
 	public void CreateMenuVC() {
-        menuVol = Instantiate(Resources.Load("ControlVolumen")) as GameObject;  
+        menuVol = Instantiate(Resources.Load("ControlVolumen")) as GameObject; 
+		volCont = GameObject.Find("CanvasVolumen").GetComponent<VolumeControl>();
+		auxvolumen = (float) volCont.ambiente2.volume;
 
 
     /*
@@ -48,19 +49,22 @@ public class VolumeControlAccess : MonoBehaviour
     }
 	public void Update() {
 
-		auxvolumen = (float) volCont.ambiente2.volume;
-		ambiente.volume = auxvolumen;
+
 
 		if (!activated) {
 			if (Input.GetKey (KeyCode.V)) {
 				activated=true;
-				CreateMenuVC();
+				if (menuVol == null) {
+					CreateMenuVC ();
+				}
 				menuVol.active = true;
 
 			}
 		}
 
 		else {
+			auxvolumen = (float) volCont.ambiente2.volume;
+			ambiente.volume = auxvolumen;
 			if (Input.GetKey (KeyCode.V)) {
 				activated=false;
 				menuVol.active = false;
