@@ -309,6 +309,7 @@ public class AI : MonoBehaviour
             if (soldier.GetComponent<RTSObject>().owner == artificialIntelligence.GetComponent<Player>())
             {
                 civils.Add(soldier);
+
             }
         }
 
@@ -345,6 +346,8 @@ public class AI : MonoBehaviour
         GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation), coords, Quaternion.identity) as GameObject;
         civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
         civils.Add(civil);
+
+        numberCivils = numberCivils +1;
     }
 
 
@@ -359,6 +362,8 @@ public class AI : MonoBehaviour
         civil.AddComponent<ADS>();
         civil.AddComponent<MovimientoAleatorioCivil>();
         soldiers.Add(civil);
+
+        numberWarrior = numberWarrior + 1;
         if (z >= 10)
         {
             z = 0;
@@ -381,6 +386,8 @@ public class AI : MonoBehaviour
         civil.AddComponent<ADS>();
         civil.AddComponent<MovimientoAleatorioCivil>();
         archers.Add(civil);
+
+        numberArcher = numberArcher + 1;
         if (z >= 8)
         {
             z = 0;
@@ -402,6 +409,8 @@ public class AI : MonoBehaviour
         civil.AddComponent<ADS>();
         civil.AddComponent<MovimientoAleatorioCivil>();
         cavalry.Add(civil);
+
+        numberCavalry = numberCavalry + 1;
         if (z >= 8)
         {
             z = 0;
