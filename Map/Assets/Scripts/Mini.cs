@@ -108,8 +108,8 @@ public class Mini : MonoBehaviour
 		float miniscale = Terrain.activeTerrain.terrainData.heightmapHeight / (image.GetPixelAdjustedRect ().height*canvas.scaleFactor);
 		//Debug.Log ("dif "+difCamPos);
 		//Debug.Log ("mod "+modCamPos);
-		Debug.Log ("X" + direccioX);
-		Debug.Log ("Z" + direccioZ);
+		//Debug.Log ("X" + direccioX);
+		//Debug.Log ("Z" + direccioZ);
 		mp = new Vector2 ((modCamPos*direccioX / miniscale + center.x)-x, (modCamPos*direccioZ / miniscale + center.y)+y);
 		//mp = new Vector2 ((cameraPoint.transform.position.x / miniscale + origin.x)-x, (cameraPoint.transform.position.z / miniscale + origin.y)+y);
 		float camY = Camera.main.transform.eulerAngles.y;
