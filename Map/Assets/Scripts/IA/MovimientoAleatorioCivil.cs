@@ -8,6 +8,7 @@ public class MovimientoAleatorioCivil : MonoBehaviour
     public float speed = 1;
     public float directionChangeInterval = 6;
     public float maxHeadingChange = 500;
+    public Animator anim;
 
     CharacterController controller;
     float heading;
@@ -20,6 +21,7 @@ public class MovimientoAleatorioCivil : MonoBehaviour
 
     void Awake()
     {
+        anim = gameObject.GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
 
         // Set random initial rotation
@@ -33,6 +35,7 @@ public class MovimientoAleatorioCivil : MonoBehaviour
     {
         transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * directionChangeInterval);
         controller.SimpleMove(forward * speed);
+        anim.SetBool("IsWalking", true);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
