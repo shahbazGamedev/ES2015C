@@ -10,6 +10,7 @@ public class ADS : MonoBehaviour
     aiState estado;
     int speed;
     float dist;
+    public Animator anim;
 
     // Use this for initialization
     void Start()
@@ -21,6 +22,7 @@ public class ADS : MonoBehaviour
             hit = new RaycastHit();
             estado = aiState.wandering;
             enlace = GameObject.Find("EnemyPlayer1");
+            anim = gameObject.GetComponent<Animator>();
         }
         else {
             GetComponent<MovimientoAleatorioCivil>().enabled = false;
@@ -38,6 +40,7 @@ public class ADS : MonoBehaviour
         if (enlace.GetComponent<Player>().objetivos.Count > 0) //se mira si hay objetivos o no
         {
             estado = aiState.attacking; //estado de atacar
+            
         }
         else
         {
@@ -66,10 +69,12 @@ public class ADS : MonoBehaviour
                 if (dist > 2)
                 {
                     transform.Translate(0, 0, 1 * speed * Time.deltaTime);
+                    anim.SetBool("IsWalking", true);
                 }
                 else
                 {
                     transform.Translate(0, 0, 0);
+                    anim.SetBool("IsWalking", false);
                     GetComponent<RTSObject>().AttackObject(targetlocal);
                 }
             }
@@ -86,7 +91,7 @@ public class ADS : MonoBehaviour
         //Debug.Log("VOY MIRANDO");
         if (Physics.SphereCast(transform.position, 15f, transform.forward, out hit, 20)) // sistema de deteccion en esfera
         { 
-            if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner.human)
+            if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner == gameObject.GetComponent<RTSObject>().owner.human)
             { 
                 if (!enlace.GetComponent<Player>().objetivos.Contains(hit.collider.gameObject.GetComponent<RTSObject>())) // compruebo si el objetivo ya esta en la lista de objetivos
                 {
