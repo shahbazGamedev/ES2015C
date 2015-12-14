@@ -102,7 +102,7 @@ public class movimentCamera : MonoBehaviour {
 		recleft = new Rect (0, 0, wMargin, Screen.height);
 		recright = new Rect (Screen.width-wMargin, 0, wMargin, Screen.height);
 
-		if(Input.GetMouseButtonDown(2))
+		if(Input.GetMouseButtonDown(1) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
 		{
 			// Get mouse origin
 			mouseOrigin = Input.mousePosition;
@@ -121,7 +121,7 @@ public class movimentCamera : MonoBehaviour {
 			//obj.transform.position = auxiliar;
 		}
 
-		if (!Input.GetMouseButton(2)) isRotating=false;
+		if (!Input.GetMouseButton(1) || !Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl)) isRotating=false;
 		if (isRotating){
 
 			float turnSpeed = 4.0f;
@@ -130,7 +130,9 @@ public class movimentCamera : MonoBehaviour {
 
 			float mov = -pos.y * turnSpeed;
 
-			if (Camera.main.transform.eulerAngles.x+(mov) < 8 || Camera.main.transform.eulerAngles.x+mov > 90){
+			Debug.Log (-pos.y);
+
+			if (Camera.main.transform.eulerAngles.x+(mov) < 0 || Camera.main.transform.eulerAngles.x+mov > 90){
 				mov = 0;
 			}
 
@@ -142,7 +144,27 @@ public class movimentCamera : MonoBehaviour {
 			aux.y = 1.0f;
 			if (Camera.main.transform.position.y < 1) Camera.main.transform.position = aux;
 
+		}
 
+		if(Input.GetKey(KeyCode.W)){
+			float mov = 5;
+			if (Camera.main.transform.eulerAngles.x+mov > 90){
+				mov = 0;
+			}
+			transform.RotateAround(CameraPoint.transform.position, transform.right, mov);
+		}
+		if (Input.GetKey (KeyCode.S)) {
+			float mov = -5;
+			if (Camera.main.transform.eulerAngles.x+(mov) < 0){
+				mov = 0;
+			}
+			transform.RotateAround(CameraPoint.transform.position, transform.right, mov);
+		}
+		if (Input.GetKey (KeyCode.A)) {
+			transform.RotateAround(CameraPoint.transform.position, Vector3.up, 5);
+		}
+		if (Input.GetKey (KeyCode.D)) {
+			transform.RotateAround(CameraPoint.transform.position, Vector3.up, -5);
 		}
 
 		Vector3 posi = CameraPoint.transform.position;
