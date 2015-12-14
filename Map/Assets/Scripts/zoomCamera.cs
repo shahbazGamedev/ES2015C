@@ -8,9 +8,9 @@ public class zoomCamera : MonoBehaviour {
 	
 	}
 
-	float minFov = 15f;
+	float minFov = 2f;
 	float maxFov = 70f;
-	float speed = 5f;
+	float speed = 3f;
 	float fov = 0f;
 
 	// Update is called once per frame

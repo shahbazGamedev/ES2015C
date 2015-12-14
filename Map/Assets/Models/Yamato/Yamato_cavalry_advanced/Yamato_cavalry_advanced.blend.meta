@@ -52,6 +52,7 @@ ModelImporter:
     100088: TobilloTras_R
     100090: Yamato
     100092: //RootNode
+    100094: Sword
     400000: Abdomen
     400002: Abdomen_Yamato
     400004: Antebrazo_L
@@ -99,6 +100,7 @@ ModelImporter:
     400088: TobilloTras_R
     400090: Yamato
     400092: //RootNode
+    400094: Sword
     2300000: Cylinder
     3300000: Cylinder
     4300000: Cylinder
@@ -112,6 +114,11 @@ ModelImporter:
     7400006: Yamato_Cavalry_Idle
     7400008: Yamato_Cavalry_Run
     7400010: Yamato_Cavalry_Walk
+    7400012: Yamato_Cavalry_Advanced_Die
+    7400014: Yamato_Cavalry_Advanced_Fight
+    7400016: Yamato_Cavalry_Advanced_Idle
+    7400018: Yamato_Cavalry_Advanced_Run
+    7400020: Yamato_Cavalry_Advanced_Walk
     9500000: //RootNode
     13700000: Harness
     13700002: Horse
