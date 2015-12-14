@@ -9,8 +9,7 @@ public class Sumerian_ArmyBuilding : ArmyBuilding
 	{
 		base.Awake ();
 		objectName = "Sumerian Army Building";
-        spawnableUnits = new RTSObjectType[] { RTSObjectType.UnitArcher, RTSObjectType.UnitArcherAdvanced, RTSObjectType.UnitCavalry,
-            RTSObjectType.UnitCavalryAdvanced, RTSObjectType.UnitWarrior, RTSObjectType.UnitWarriorAdvanced };
+        spawnableUnits = new RTSObjectType[] { RTSObjectType.UnitArcher, RTSObjectType.UnitCavalry, RTSObjectType.UnitWarrior};
         baseDefense = 5;
 		getModels("Prefabs/Sumerian_ArmyBuilding", "Prefabs/Sumerian_ArmyBuilding_onConstruction", "Prefabs/Sumerian_ArmyBuilding_Semidemolished");
     }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Yamato_Academy : Building {
+public class Yamato_Academy : Academy {
 
     /*** Metodes per defecte de Unity ***/
 
@@ -11,6 +11,7 @@ public class Yamato_Academy : Building {
 		cost = 400;
 		hitPoints = maxHitPoints = 800;
         baseDefense = 5;
+        spawnableUnits = new RTSObjectType[] { RTSObjectType.UnitArcherAdvanced, RTSObjectType.UnitCavalryAdvanced, RTSObjectType.UnitWarriorAdvanced };
 		getModels("Prefabs/Yamato_Academy", "Prefabs/Yamato_Academy_onConstruction", "Prefabs/Yamato_Academy_Semidemolished");
     }
 }

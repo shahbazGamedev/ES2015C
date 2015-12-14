@@ -262,6 +262,12 @@ public class UserInput : MonoBehaviour
                 Destroy(army, 2);
             }
         }
+        games = GameObject.FindGameObjectsWithTag("academy");
+        foreach(var aca in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(aca.GetComponent<Academy>().owner==player){
+                Destroy(aca, 2);
+            }
+        }
     }
 
     //Funcion para que todos los objectos del enemigo mueran
@@ -289,6 +295,12 @@ public class UserInput : MonoBehaviour
         foreach(var army in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
             if(army.GetComponent<ArmyBuilding>().owner!=player){
                 Destroy(army, 2);
+            }
+        }
+        games = GameObject.FindGameObjectsWithTag("academy");
+        foreach(var aca in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(aca.GetComponent<Academy>().owner!=player){
+                Destroy(aca, 2);
             }
         }
     }
