@@ -8,10 +8,13 @@ public class UserInput : MonoBehaviour
     private Player player;
 	public GameObject SelectedArea;
 
+	private GameObject cameraPoint;
+
     // Inicialitzem
     void Start()
     {
         player = GetComponentInParent<Player>();
+		cameraPoint = GameObject.Find ("CameraPoint");
 		createSelectedArea ();
     }
 
@@ -31,6 +34,8 @@ public class UserInput : MonoBehaviour
             if (Input.GetKey (KeyCode.M)) morirEnemigos(); 
             if (Input.GetKey (KeyCode.P)) morirJugador();
 			if (Input.GetKeyUp("k")) demolishBuildings();
+			if (Input.GetKey (KeyCode.Space))
+				cameraToSelectedObject ();
 
             MoveCamera();
             RotateCamera();
@@ -258,6 +263,17 @@ public class UserInput : MonoBehaviour
 				b.changeModel("demolished");
 			}
         }
+	}
+
+	private void cameraToSelectedObject()
+	{
+		if (player.SelectedObject != null) {
+			Debug.Log (player.SelectedObject.name);
+			Vector3 posicio = player.SelectedObject.transform.position;
+			Vector3 relacio = Camera.main.transform.position - cameraPoint.transform.position;
+			cameraPoint.transform.position = posicio;
+			Camera.main.transform.position = posicio + relacio;
+		}
 	}
 
     private void MoveCamera()
