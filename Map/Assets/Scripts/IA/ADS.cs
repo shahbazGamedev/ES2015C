@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ADS : MonoBehaviour
 {
@@ -90,15 +91,23 @@ public class ADS : MonoBehaviour
     {
         //Debug.Log("VOY MIRANDO");
         if (Physics.SphereCast(transform.position, 15f, transform.forward, out hit, 20)) // sistema de deteccion en esfera
-        { 
-            if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner == gameObject.GetComponent<RTSObject>().owner.human)
-            { 
-                if (!enlace.GetComponent<Player>().objetivos.Contains(hit.collider.gameObject.GetComponent<RTSObject>())) // compruebo si el objetivo ya esta en la lista de objetivos
+        {
+            Debug.Log("HE DETECTADO ALGO DE OWNER---------------------------------------------->" + hit.collider.gameObject.GetComponent<RTSObject>().owner);
+            try
+            {
+                if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner.human == true)
                 {
-                    enlace.GetComponent<Player>().objetivos.Add(hit.collider.gameObject.GetComponent<RTSObject>()); // añado el objetivo a la lista de objetivos
-                    //Debug.Log("HE DETECTADO UN OBJETO DE CLASE: " + hit.collider.tag);
-                    //Debug.Log("TENGO EL TARGET AÑADIDO-->" + targetlocal);
+                    if (!enlace.GetComponent<Player>().objetivos.Contains(hit.collider.gameObject.GetComponent<RTSObject>())) // compruebo si el objetivo ya esta en la lista de objetivos
+                    {
+                        enlace.GetComponent<Player>().objetivos.Add(hit.collider.gameObject.GetComponent<RTSObject>()); // añado el objetivo a la lista de objetivos
+                        //Debug.Log("HE DETECTADO UN OBJETO DE CLASE: " + hit.collider.tag);
+                        //Debug.Log("TENGO EL TARGET AÑADIDO-->" + targetlocal);
+                    }
                 }
+            }
+            catch (NullReferenceException e)
+            {
+                Debug.Log("ERROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOORR!!!");
             }
         }
     }
