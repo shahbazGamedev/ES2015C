@@ -15,22 +15,28 @@ public class VolumeControl : MonoBehaviour
 	// Use this for initialization
 	//GameObject prefab;
 
-	public AudioSource ambiente;
+	public AudioSource ambiente2;
 
 	public Sprite myImage;
 	public Button myBtn;
 
 	void Start () {
-		ambiente = gameObject.AddComponent<AudioSource>();
-		ambiente.clip = Resources.Load("Sounds/music1") as AudioClip;
-		ambiente.volume = 0.0f;
-		ambiente.Play();
+
+		
+		ambiente2 = gameObject.AddComponent<AudioSource>();
+		//ambiente2.clip = Resources.Load("Sounds/music1") as AudioClip;
+		ambiente2.volume = 0.5f;
+		//ambiente2.Play();
 		GameObject menuVol;
 		myBtn = GameObject.Find("ButtonSound").GetComponent<Button>();;
 		myImage = Resources.Load<Sprite>("mute"); // Make sure not to include the file extension
 	    //Make sure it is added in the Inspector. Or reference it using GameObject.Find.
 	    myBtn.image.sprite = myImage; // That is right, no need to GetComponent.
 		
+		
+
+
+
 		//ambiente2.GetComponent.<VolumeControlAccess>().xxx = 2;
 		//artificialIntelligence = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
         //civilitzation = GameObject.Find("EnemyPlayer1").GetComponent<Player>().civilization;
@@ -38,7 +44,7 @@ public class VolumeControl : MonoBehaviour
 	
 	public void PonVolumen (float valor) {
 
-		ambiente.volume = valor/20f; //divido 20 porque hemos asginado que va entre 0 y 20
+		ambiente2.volume = valor/20f; //divido 20 porque hemos asginado que va entre 0 y 20
 		
 	}
 
@@ -50,7 +56,7 @@ public class VolumeControl : MonoBehaviour
 	        myBtn.image.sprite = myImage; // That is right, no need to GetComponent.
 
 
-      		ambiente.volume = auxiliar;
+      		ambiente2.volume = auxiliar;
       		is_mute = false;
 
 		}
@@ -59,9 +65,9 @@ public class VolumeControl : MonoBehaviour
 	        //Make sure it is added in the Inspector. Or reference it using GameObject.Find.
 	        myBtn.image.sprite = myImage; // That is right, no need to GetComponent.
 
-			auxiliar = ambiente.volume;
-			ambiente.volume = 0.0f;
-      		//ambiente.mute = true;
+			auxiliar = ambiente2.volume;
+			ambiente2.volume = 0.0f;
+      		//ambiente2.mute = true;
       		is_mute = true;
 		}
 		
