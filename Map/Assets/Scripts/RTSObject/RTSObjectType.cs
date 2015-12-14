@@ -24,8 +24,7 @@ public enum RTSObjectType
     BuildingTownCenter,
     BuildingWall,
     BuildingWallEntrance,
-    BuildingWallTower,
-    BuildingUniversity
+    BuildingWallTower
 };
 
 /// <summary>
@@ -54,8 +53,7 @@ public static class RTSObjectTypeExt
         { RTSObjectType.BuildingWallEntrance, "Wall Entrance" },
         { RTSObjectType.BuildingWall, "Wall" },
         { RTSObjectType.BuildingCivilHouse, "Civil House" },
-        { RTSObjectType.BuildingAcademy, "Academy" },
-        { RTSObjectType.BuildingUniversity, "University" }
+        { RTSObjectType.BuildingAcademy, "Academy" }
     };
     /// <summary>
     /// Mapping from names to their object types.
