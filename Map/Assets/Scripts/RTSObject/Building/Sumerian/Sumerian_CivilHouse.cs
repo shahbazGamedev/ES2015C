@@ -11,6 +11,5 @@ public class Sumerian_CivilHouse : Building {
 		cost = 50;
 		hitPoints = maxHitPoints = 200;
         baseDefense = 5;
-        getModels("Prefabs/Sumerian_CivilHouse", "Prefabs/Sumerian_CivilHouse_onConstruction", "Prefabs/Sumerian_CivilHouse_Semidemolished");
     }
 }

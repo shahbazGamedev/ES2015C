@@ -12,6 +12,5 @@ public class Sumerian_Wall : Building {
 		hitPoints = maxHitPoints = 500;
         baseDefense = 5;
         buildingTime = 1.0f;
-        getModels("Prefabs/Sumerian_Wall", "Prefabs/Sumerian_Wall_onConstruction", "Prefabs/Sumerian_Wall_Semidemolished");
     }
 }

@@ -11,6 +11,5 @@ public class Hittite_University : Building {
 		cost = 400;
 		hitPoints = maxHitPoints = 800;
         baseDefense = 5;
-        getModels("Prefabs/Hittite_University", "Prefabs/Hittite_University_onConstruction", "Prefabs/Hittite_University_Semidemolished");
     }
 }
