@@ -3,12 +3,12 @@ using Pathfinding;
 using System;
 using System.Linq;
 
-public class CivilUnit: Unit
+public class CivilUnit : Unit
 {
 
 	public float collectionAmount, capacity = 50.0f;		// Dades sobre la recolecció
 	private int harvestingState;                            // Estat recoleccio, 1: recolectant, 2: deixant
-	public int harvestingSpeed = 5;
+	
 	public bool harvesting = false;                         // Indicadors d'estat de la unitat
 	public bool collecting = false;
 
@@ -432,8 +432,8 @@ public void StopBuildingLocationSelection() {
 			harvestingState = 2;
 		} else if (resourceDeposit && !resourceDeposit.isEmpty ()) {
 			collecting = true;
-			resourceDeposit.Remove (harvestingSpeed * Time.deltaTime);
-			collectionAmount += (harvestingSpeed * Time.deltaTime);
+			resourceDeposit.Remove (5 * Time.deltaTime);
+			collectionAmount += (5 * Time.deltaTime);
 		}
 	}
 	
@@ -481,6 +481,53 @@ public void StopBuildingLocationSelection() {
 		return closest.GetComponent<Resource> ();
 	}
 
+    public void CreateOnConstructionBuildingAI(GameObject building, Vector3 coords)
+    {
+        // Initialize the object to build, so we can access its cost and colliders
+        var creationBuildingConstructionProject =
+            (GameObject)Instantiate(building, coords, Quaternion.identity);
+
+        // Check if there are enough resources available
+        float woodAvailable = owner.GetResourceAmount(RTSObject.ResourceType.Wood);
+        float woodCost = creationBuildingConstructionProject.GetComponent<Building>().cost;
+
+        if (woodAvailable < woodCost)
+        {
+            Destroy(creationBuildingConstructionProject);
+            HUDInfo.insertMessage(string.Format("Not enough wood ({0}) to construct the {1}",
+                creationBuildingConstructionProject.GetComponent<Building>().cost,
+                creationBuildingConstructionProject.GetComponent<Building>().objectName));
+
+            return;
+        }
+
+        // Start the building project
+        var newProject = creationBuildingConstructionProject.GetComponent<Building>();
+        newProject.hitPoints = 0;
+        newProject.needsBuilding = true;
+        newProject.owner = owner;
+        newProject.finishedModel = building;
+
+        if (newProject.constructionModel != null)
+        {
+            newProject.changeModel("construction");
+        }
+        else
+        {
+            HUDInfo.insertMessage("WARNING: No on-construction model for building " + newProject.objectName + ".");
+        }
+
+        // Update physics
+        var guo = new GraphUpdateObject(newProject.GetComponent<BoxCollider>().bounds);
+        guo.updatePhysics = true;
+        AstarPath.active.UpdateGraphs(guo);
+
+        // Substract resources needed for the building
+        owner.resourceAmounts[RTSObject.ResourceType.Wood] -= newProject.cost;
+        // Assign the building project to this unit
+        AssignBuildingProject(newProject);
+    }
+
 	public void CreateBuildingIA (GameObject building, Vector3 coords)
 	{
 		creationBuilding = (GameObject)Instantiate (building, coords, Quaternion.identity);
@@ -501,6 +548,7 @@ public void StopBuildingLocationSelection() {
 			SetNewPath (coords, false);                    
 		}
 	}
+
 
 
 
