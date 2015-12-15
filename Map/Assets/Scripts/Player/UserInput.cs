@@ -9,6 +9,7 @@ public class UserInput : MonoBehaviour
     private bool isPaused = false;
     private bool paused = true;
 	public GameObject SelectedArea;
+	private bool rotate = false;
 
     // Inicialitzem
     void Start()
@@ -42,6 +43,17 @@ public class UserInput : MonoBehaviour
 			if (Input.GetKey(KeyCode.Alpha1)) increaseFood();
 			if (Input.GetKey(KeyCode.Alpha2)) increaseWood();
 			if (Input.GetKey(KeyCode.Alpha3)) increaseGold();
+			if (Input.GetKey(KeyCode.Alpha4)) rotate = true;
+
+	    if (rotate == true && player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>()
+   		 	&& player.SelectedObject.GetComponent<CivilUnit>().waitingForBuildingLocationSelection)
+   		 {
+   			player.SelectedObject.GetComponent<CivilUnit>().RotateBuilding();
+   		 }
+   		 
+   	    rotate=false;
+
+
 
             MoveCamera();
             RotateCamera();

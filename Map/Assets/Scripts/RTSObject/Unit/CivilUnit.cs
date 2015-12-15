@@ -20,6 +20,7 @@ public class CivilUnit : Unit
 	/// </summary>
 	public bool waitingForBuildingLocationSelection = false;
 	protected Vector3 constructionPoint = Vector3.zero;
+	protected Quaternion constructionRotation =  Quaternion.identity;
 	protected GameObject creationBuilding = null;           // Objecte que anem a crear
 	protected GameObject creationBuildingConstruction = null;
 	/// <summary>
@@ -253,10 +254,11 @@ public class CivilUnit : Unit
 		HUDInfo.insertMessage ("Select the site where you want to build the selected building " + creationBuildingTmp.name);
 		waitingForBuildingLocationSelection = true;
 		constructionPoint = Vector3.zero;
+		constructionRotation = Quaternion.identity;
 		creationBuilding = creationBuildingTmp;
 
 		// Create the building preview and overlap detector object
-		creationCollisionDetectorObject = (GameObject)Instantiate (creationBuilding, Vector3.zero, Quaternion.identity);
+		creationCollisionDetectorObject = (GameObject)Instantiate (creationBuilding, Vector3.zero, constructionRotation);
 		creationCollisionDetectorObject.name = creationCollisionDetectorObject.name + "_CollisionDetector";
 		creationCollisionDetectorObject.AddComponent<BuildingOverlapDetector> ();
 
@@ -283,6 +285,8 @@ public class CivilUnit : Unit
 	{
 		if (creationCollisionDetectorObject.GetComponent<BuildingOverlapDetector> ().IsBuildable) {
 			constructionPoint = creationCollisionDetectorObject.transform.position;
+			constructionRotation = creationCollisionDetectorObject.transform.rotation;			
+
 			Destroy (creationCollisionDetectorObject); // To avoid collisions with the new object
 
 			// Create the "on construction" building
@@ -291,6 +295,7 @@ public class CivilUnit : Unit
 			// Exit location selection mode
 			waitingForBuildingLocationSelection = false;
 			constructionPoint = Vector3.zero;
+			constructionRotation = Quaternion.identity;
 			creationBuilding = null;
 			creationCollisionDetectorObject = null;
 		} else {
@@ -311,8 +316,17 @@ public void StopBuildingLocationSelection() {
    	 creationBuilding = null;
     	 creationCollisionDetectorObject = null;
    	 constructionPoint = Vector3.zero;
+	 constructionRotation = Quaternion.identity;
    	 waitingForBuildingLocationSelection = false;
     }
+
+	public void RotateBuilding() {
+		if (creationCollisionDetectorObject && waitingForBuildingLocationSelection && creationBuilding) {
+			creationCollisionDetectorObject.GetComponent<Transform>().Rotate(creationCollisionDetectorObject.GetComponent<Transform>().rotation.x,
+			creationCollisionDetectorObject.GetComponent<Transform>().rotation.y+90,
+			creationCollisionDetectorObject.GetComponent<Transform>().rotation.z);
+		}
+	}
 
 
 
@@ -321,7 +335,7 @@ public void StopBuildingLocationSelection() {
 	{
 		// Initialize the object to build, so we can access its cost and colliders
 		var creationBuildingConstructionProject =
-            (GameObject)Instantiate (creationBuilding, constructionPoint, Quaternion.identity);
+            (GameObject)Instantiate (creationBuilding, constructionPoint, constructionRotation);
 
 		// Check if there are enough resources available
 		float woodAvailable = owner.GetResourceAmount (RTSObject.ResourceType.Wood);

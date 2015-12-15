@@ -690,7 +690,7 @@ public class RTSObject : MonoBehaviour
 		}
 
 		// Instantiate the object at the same position as our object temporarily
-		var finishedBuilding = (GameObject)Instantiate (newGameObjectTemplate, transform.position, Quaternion.identity);
+		var finishedBuilding = (GameObject)Instantiate (newGameObjectTemplate, transform.position, transform.rotation);
 
 		// Reassociate all child nodes of the GameObject to our object
 		// We use ToList() since we are changing the same structure we are enumerating
