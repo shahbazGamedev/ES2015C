@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 50c906323d886bb4eb2e6d565fc08316
-timeCreated: 1448847143
+timeCreated: 1449846999
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -184,14 +184,6 @@ ModelImporter:
     7400004: Armature|Hittite_Cavalry_Advanced_Idle
     7400006: Armature|Hittite_Cavalry_Advanced_Run
     7400008: Armature|Hittite_Cavalry_Advanced_Walk
-    7400010: Armature|Untitled
-    7400012: Armature|Untitled.001
-    7400014: Armature|Untitled.002
-    7400016: Armature|Untitled.003
-    7400018: Armature|Untitled.004
-    7400020: Hittite|Untitled.002
-    7400022: Horse|Hittite_Cavalry_Advanced_Fight
-    7400024: Horse|Untitled.002
     9500000: //RootNode
     13700000: Hittite
     13700002: Horse
@@ -813,7 +805,7 @@ ModelImporter:
       name: Armature|Hittite_Cavalry_Advanced_Run
       takeName: Armature|Hittite_Cavalry_Advanced_Run
       firstFrame: 0
-      lastFrame: 59
+      lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

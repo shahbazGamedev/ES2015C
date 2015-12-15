@@ -11,5 +11,6 @@ public class Persian_WallTower : Building {
 		cost = 250;
 		hitPoints = maxHitPoints = 900;
         baseDefense = 5;
+        getModels("Prefabs/Persian_WallTower", "Prefabs/Persian_WallTower_onConstruction", "Prefabs/Persian_WallTower_Semidemolished");
     }
 }

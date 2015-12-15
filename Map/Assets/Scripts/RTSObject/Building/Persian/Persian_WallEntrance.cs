@@ -11,5 +11,6 @@ public class Persian_WallEntrance : Building {
 		cost = 100;
 		hitPoints = maxHitPoints = 700;
         baseDefense = 5;
+        getModels("Prefabs/Persian_WallEntrance", "Prefabs/Persian_WallEntrance_onConstruction", "Prefabs/Persian_WallEntrance_Semidemolished");
     }
 }

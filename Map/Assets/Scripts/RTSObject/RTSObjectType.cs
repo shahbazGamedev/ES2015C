@@ -7,7 +7,9 @@ using System.Collections;
 public enum RTSObjectType
 {
     UnitArcher,
+    UnitArcherAdvanced,
     UnitCavalry,
+    UnitCavalryAdvanced,
     UnitCivil,
     UnitCivilAxe,
     UnitCivilPick,

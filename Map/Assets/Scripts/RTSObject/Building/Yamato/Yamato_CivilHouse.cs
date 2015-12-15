@@ -11,6 +11,6 @@ public class Yamato_CivilHouse : Building {
 		cost = 50;
 		hitPoints = maxHitPoints = 200;
         baseDefense = 5;
-		getModels("Prefabs/Yamato_CivilHouse", "Prefabs/Yamato_CivilHouse_onConstruction", "Prefabs/Yamato_civilHouseSemiDemolished");
+		getModels("Prefabs/Yamato_CivilHouse", "Prefabs/Yamato_CivilHouse_onConstruction", "Prefabs/Yamato_CivilHouse_Semidemolished");
     }
 }
