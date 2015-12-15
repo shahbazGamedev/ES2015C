@@ -304,4 +304,42 @@ public class Building : RTSObject
 		}
 	}
 
+
+    public virtual void CreateUnitAI(GameObject unit)
+    {
+        if (unit != null)
+        {
+            bool spawned = false;
+            int maximumSpawn = 5; //tenemos cinco intentos para instanciar una unidad. si no se instancian hay que mover las viejas 
+            Vector3 point = spawnPoint;
+
+            while (spawned == false && maximumSpawn > 0)
+            {
+                if (Physics.CheckSphere(point, 0.4f, mask))
+                {
+                    point = new Vector3(point.x - 5, 0.0f, point.z); //si ya hay algo provamos en otra posicion
+                }
+                else
+                {
+                    spawned = true;
+                    GameObject unitClone = (GameObject)Instantiate(unit, point, Quaternion.identity);
+                    unitClone.SetActive(false);
+                    float food = owner.GetResourceAmount(RTSObject.ResourceType.Food);
+                    if (food >= unitClone.GetComponent<Unit>().cost)
+                    {
+                        unitClone.SetActive(true);
+                        unitClone.GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>(); 
+                        owner.resourceAmounts[RTSObject.ResourceType.Food] -= unitClone.GetComponent<Unit>().cost;
+                    }
+                    else
+                    {
+                        HUDInfo.insertMessage("Not enough food (" + unitClone.GetComponent<Unit>().cost + ") to create a new " + unitClone.GetComponent<Unit>().name);
+                        Destroy(unitClone);
+                    }
+                }
+                maximumSpawn--;
+            }
+            unit = null;
+        }
+    }
 }
