@@ -106,13 +106,20 @@ public class UserInput : MonoBehaviour
             RTSObject targetRtsElement = (hit.collider != null)
                 ? hit.collider.gameObject.GetComponent<RTSObject>() : null;
 
-            if (player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>()
+            if (leftClick && player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>()
 			    && player.SelectedObject.GetComponent<CivilUnit>().waitingForBuildingLocationSelection)
 			{
                 player.SelectedObject.GetComponent<CivilUnit>().SetBuildingLocation();
 			}
 
-			else if (leftClick)
+			
+	    else if(rightClick && player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>() && player.SelectedObject.IsOwnedBy(player)
+   		 	&& player.SelectedObject.GetComponent<CivilUnit>().waitingForBuildingLocationSelection) {
+   				 player.SelectedObject.GetComponent<CivilUnit>().StopBuildingLocationSelection();
+  } 
+
+
+		else if (leftClick)
             {
 				object[] obj = GameObject.FindSceneObjectsOfType(typeof (RTSObject));
 				foreach (object o in obj)

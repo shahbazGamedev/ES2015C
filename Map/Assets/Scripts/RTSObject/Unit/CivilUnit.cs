@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Pathfinding;
 using System;
 using System.Linq;
@@ -297,6 +297,25 @@ public class CivilUnit : Unit
 			HUDInfo.insertMessage ("The building cannot be placed in the selected location.");
 		}
 	}
+
+
+public void StopBuildingLocationSelection() {
+    	if (creationCollisionDetectorObject != null)
+	
+    	{
+
+        	creationCollisionDetectorObject.tag = "Untagged";
+        	Destroy(creationCollisionDetectorObject);
+    	}   	 
+    
+   	 creationBuilding = null;
+    	 creationCollisionDetectorObject = null;
+   	 constructionPoint = Vector3.zero;
+   	 waitingForBuildingLocationSelection = false;
+    }
+
+
+
 
 	public void CreateOnConstructionBuilding ()
 	{
