@@ -101,6 +101,11 @@ ModelImporter:
     7400006: Hittite_Cavalry_Idle
     7400008: Hittite_Cavalry_Run
     7400010: Hittite_Cavalry_Walk
+    7400012: Hittite_Cavalry_Advanced_Die
+    7400014: Hittite_Cavalry_Advanced_Fight
+    7400016: Hittite_Cavalry_Advanced_Idle
+    7400018: Hittite_Cavalry_Advanced_Run
+    7400020: Hittite_Cavalry_Advanced_Walk
     9500000: //RootNode
     13700000: Hittite
     13700002: Horse
