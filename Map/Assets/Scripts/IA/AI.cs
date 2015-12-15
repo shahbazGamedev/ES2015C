@@ -61,9 +61,7 @@ public class AI : MonoBehaviour
         //civils.Add(civil);
         CreateNewCivil(true);
         spawnPos = townCenters[0].transform.position;
-
-        //civils[0].GetComponent<CivilUnit>().StartHarvest(null, true,"food");
-
+	
     }
 
 
@@ -425,21 +423,21 @@ public class AI : MonoBehaviour
         int len = civils.Count;     
         switch (len) {
             case 1:                 
-                civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+			civils[0].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
                 break;
             case 2:
-                civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                civils[1].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+			civils[0].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
+			civils[1].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
                 break;
             case 3:
-                civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                civils[1].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                civils[2].GetComponent<CivilUnit>().StartHarvest(null, true, "wood");
+			civils[0].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
+			civils[1].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
+            civils[2].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 1;
                 break;
             case 4:
-                civils[0].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                civils[1].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
-                civils[2].GetComponent<CivilUnit>().StartHarvest(null, true, "wood");
+			civils[0].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
+			civils[1].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
+			civils[2].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 1;
                 //civils[3].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
                 break;
             }
