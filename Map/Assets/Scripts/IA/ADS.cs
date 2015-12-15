@@ -107,7 +107,6 @@ public class ADS : MonoBehaviour
             }
             catch (NullReferenceException e)
             {
-                Debug.Log("ERROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOORR!!!");
             }
         }
     }
