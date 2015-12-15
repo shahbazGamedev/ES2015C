@@ -9,35 +9,8 @@ public class Hittite_ArmyBuilding : ArmyBuilding
 	{
 		base.Awake ();
 		objectName = "Hittite Army Building";
-		actions = new string[] {"Archer", "Archer Advanced", "Cavalry","Cavalry Advanced", "Warrior", "Warrior Advanced"};
+        spawnableUnits = new RTSObjectType[] { RTSObjectType.UnitArcher, RTSObjectType.UnitCavalry, RTSObjectType.UnitWarrior};
         baseDefense = 5;
 		getModels("Prefabs/Hittite_ArmyBuilding", "Prefabs/Hittite_ArmyBuilding_onConstruction", "Prefabs/Hittite_ArmyBuilding_Semidemolished");
     }
-
-	/*** Metodes interns accessibles per les subclasses ***/
-	
-	public override void CreateUnit (string unitName)
-	{
-		switch (unitName) {
-		case "Archer":
-			creationUnit = Resources.Load ("Prefabs/Hittite_archer") as GameObject;
-			break;
-		case "Archer Advanced":
-			creationUnit = Resources.Load ("Prefabs/Hittite_archer_advanced") as GameObject;
-			break;
-		case "Cavalry":
-			creationUnit = Resources.Load ("Prefabs/Hittite_cavalry") as GameObject;
-			break;
-		case "Cavalry Advanced":
-			creationUnit = Resources.Load ("Prefabs/Hittite_cavalry_advanced") as GameObject;
-			break;
-		case "Warrior":
-			creationUnit = Resources.Load ("Prefabs/Hittite_warrior") as GameObject;
-			break;
-		case "Warrior Advanced":
-			creationUnit = Resources.Load ("Prefabs/Hittite_warrior_advanced") as GameObject;
-			break;
-		}
-		base.CreateUnit (unitName);
-	}
 }

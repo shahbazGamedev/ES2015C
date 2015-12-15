@@ -14,6 +14,8 @@ public class Unit : RTSObject
 	private int currentWaypoint = 0;
 	public float visibility = 20f;
 
+	protected AudioClip idleSound;
+	protected AudioClip doSound;
 	protected AudioClip walkingSound;
 	protected AudioClip runningSound;
 
@@ -63,6 +65,13 @@ public class Unit : RTSObject
 	protected override void OnGUI ()
 	{
 		base.OnGUI ();
+	}
+
+	protected virtual void OnMouseDown() {
+		if (owner && owner.human && !moving && !aiming && !attacking && idleSound && !audio.isPlaying)
+		{
+			audio.PlayOneShot (idleSound);
+		}
 	}
 
 	/*** Metodes publics ***/
@@ -136,6 +145,12 @@ public class Unit : RTSObject
         return nearestObj;
     }
 
+	public void makeDoSound(){
+		if (owner && owner.human && doSound && !audio.isPlaying) {
+			audio.PlayOneShot (doSound);
+		}
+	}
+
 
 	/*** Metodes interns accessibles per les subclasses ***/
 
@@ -152,6 +167,15 @@ public class Unit : RTSObject
 		{
 			audio.PlayOneShot (runningSound);
 		}
+	}
+
+	protected virtual void chargeSounds(string objectName)
+	{
+		base.chargeSounds (objectName);
+		idleSound = Resources.Load ("Sounds/" + objectName + "_Idle") as AudioClip;
+		doSound = Resources.Load ("Sounds/" + objectName + "_Do") as AudioClip;
+		walkingSound = Resources.Load ("Sounds/" + objectName + "_Walk") as AudioClip;
+		runningSound = Resources.Load ("Sounds/" + objectName + "_Run") as AudioClip;
 	}
 	
 	// Metode per disparar

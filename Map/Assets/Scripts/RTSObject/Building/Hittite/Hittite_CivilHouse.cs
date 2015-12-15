@@ -8,6 +8,7 @@ public class Hittite_CivilHouse : Building {
     {
 		base.Awake();
 		objectName = "Hittite Civil House";
+		tag = "civilHouse";
 		cost = 50;
 		hitPoints = maxHitPoints = 200;
         baseDefense = 5;

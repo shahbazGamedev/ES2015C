@@ -6,7 +6,10 @@ public class UserInput : MonoBehaviour
 {
 
     private Player player;
+    private bool isPaused = false;
+    private bool paused = true;
 	public GameObject SelectedArea;
+	private bool rotate = false;
 
 	private GameObject cameraPoint;
 
@@ -23,8 +26,14 @@ public class UserInput : MonoBehaviour
     {
         if (player && player.human)
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) OpenPauseMenu();
-
+            if (Input.GetKeyDown(KeyCode.Escape)) OpenPauseMenu(); //Activar o desactivar modo Pausa
+            //if (Input.GetKey (KeyCode.Space)) gamePause(); //Activar o desactivar modo Pausa opcion 2
+            //Comprueva si el modo pausa esta activado
+            if(isPaused){
+                Time.timeScale = 0.0f; //Para el juego
+            }else{
+                Time.timeScale = 1.0f; //Continua jugando
+            }
             bool leftClick = Input.GetMouseButtonDown(0);
             bool rightClick = Input.GetMouseButtonDown(1);
 			bool middleClick = Input.GetMouseButtonDown(2);
@@ -36,6 +45,18 @@ public class UserInput : MonoBehaviour
 			if (Input.GetKeyUp("k")) demolishBuildings();
 			if (Input.GetKey (KeyCode.Space))
 				cameraToSelectedObject ();
+			if (Input.GetKey(KeyCode.Alpha1)) increaseFood();
+			if (Input.GetKey(KeyCode.Alpha2)) increaseWood();
+			if (Input.GetKey(KeyCode.Alpha3)) increaseGold();
+			if (Input.GetKey(KeyCode.Alpha4)) rotate = true;
+
+	    if (rotate == true && player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>()
+   		 	&& player.SelectedObject.GetComponent<CivilUnit>().waitingForBuildingLocationSelection)
+   		 {
+   			player.SelectedObject.GetComponent<CivilUnit>().RotateBuilding();
+   		 }
+   		 
+   	    rotate=false;
 
             MoveCamera();
             RotateCamera();
@@ -44,8 +65,41 @@ public class UserInput : MonoBehaviour
 
     }
 
-    private void OpenPauseMenu()
-    {
+    //Funcion para activar o descativar el modo Pausa
+    private void OpenPauseMenu() {
+        Debug.Log("GamePause");
+        isPaused = !isPaused;
+    }
+    //Funcion para activar o descativar el modo Pausa opcion 2
+    /*public void gamePause(){
+        Debug.Log("GamePausev2");
+        if(paused){
+            paused=false;
+            Time.timeScale = 0;
+            Application.LoadLevel("pauseGame");
+        }else{
+            Application.LoadLevel("map");
+            paused=true;
+            Time.timeScale = 1;
+        }
+    }*/
+
+    //Funcion que cuando esta en modo pausa, enseña 3 botones (continuar jugando, menu principal, quitar juego)
+    private void OnGUI (){
+        if(isPaused){ //Modo pausa activado
+            // Boton para seguir el juego, "despausarlo"
+            if(GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 60, 100, 40), "Continue")){
+                isPaused = !isPaused;
+            }
+            // Boton para volver al menu principal
+            if(GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 + 00, 100, 40), "Main Menu")){
+                Application.LoadLevel("menu");
+            }
+            //Boton para quitar el juego
+            if(GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height / 2 + 60, 100, 40), "Quit Game")){
+                Application.Quit(); 
+            }
+        }
     }
 
 	private void createSelectedArea()
@@ -67,13 +121,20 @@ public class UserInput : MonoBehaviour
             RTSObject targetRtsElement = (hit.collider != null)
                 ? hit.collider.gameObject.GetComponent<RTSObject>() : null;
 
-            if (player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>()
+            if (leftClick && player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>()
 			    && player.SelectedObject.GetComponent<CivilUnit>().waitingForBuildingLocationSelection)
 			{
                 player.SelectedObject.GetComponent<CivilUnit>().SetBuildingLocation();
 			}
 
-			else if (leftClick)
+			
+	    else if(rightClick && player.SelectedObject && player.SelectedObject.GetComponent<CivilUnit>() && player.SelectedObject.IsOwnedBy(player)
+   		 	&& player.SelectedObject.GetComponent<CivilUnit>().waitingForBuildingLocationSelection) {
+   				 player.SelectedObject.GetComponent<CivilUnit>().StopBuildingLocationSelection();
+  } 
+
+
+		else if (leftClick)
             {
 				object[] obj = GameObject.FindSceneObjectsOfType(typeof (RTSObject));
 				foreach (object o in obj)
@@ -99,12 +160,17 @@ public class UserInput : MonoBehaviour
 					SelectedArea.GetComponent<MeshRenderer>().enabled = false;
 				}
             }
-            else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player))
+            else if (rightClick && player.SelectedObject != null && player.SelectedObject.IsOwnedBy(player) && Input.GetKey(KeyCode.RightControl)==false && Input.GetKey(KeyCode.LeftControl)==false)
             {
-				if (player.SelectedObject.GetComponent<CivilUnit>() && player.SelectedObject.GetComponent<CivilUnit>().harvesting)
-                {
-                    player.SelectedObject.GetComponent<CivilUnit>().harvesting = false;
-                }
+				if (player.SelectedObject.GetComponent<Unit>())
+				{
+					player.SelectedObject.GetComponent<Unit>().makeDoSound();
+				}
+
+				if (player.SelectedObject.GetComponent<CivilUnit>() && player.SelectedObject.GetComponent<CivilUnit>().IsHarvesting())
+				{
+					player.SelectedObject.GetComponent<CivilUnit>().StopHarvest();
+				}
 
                 // If there is any building project for this object, deassign it before assigning other actions
                 if (player.SelectedObject.IsBuilding())
@@ -130,12 +196,7 @@ public class UserInput : MonoBehaviour
                 //Recolecto
 				else if (player.SelectedObject.tag == "civil" && targetRtsElement != null && targetRtsElement.GetComponent<Resource>())
 				{
-                    //player.SelectedObject.MoveTo(hit.point);
-                    player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>(),false,null);//, Building store)
-                    //player.SelectedObject.GetComponent<CivilUnit>().harvesting=true; //el civilunit es recolector
-                    //player.SelectedObject.GetComponent<CivilUnit>().resourceDeposit = targetRtsElement.GetComponent<Resource>(); //este es tu recurso
-                    //player.SelectedObject.GetComponent<CivilUnit>().harvestType = targetRtsElement.GetComponent<Resource>().GetResourceType();
-                    //player.SelectedObject.GetComponent<CivilUnit>().state = 2;
+                    player.SelectedObject.GetComponent<CivilUnit>().StartHarvest(targetRtsElement.GetComponent<Resource>(), null);
                 }
                 else if (player.SelectedObject.CanMove())
                 {
@@ -147,6 +208,7 @@ public class UserInput : MonoBehaviour
 			{
 				if (player.SelectedObject.CanMove())
                 {
+					player.SelectedObject.GetComponent<Unit>().makeDoSound();
                     player.SelectedObject.MoveTo(hit.point, true);
                 }
 			}
@@ -222,6 +284,12 @@ public class UserInput : MonoBehaviour
                 Destroy(army, 2);
             }
         }
+        games = GameObject.FindGameObjectsWithTag("academy");
+        foreach(var aca in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(aca.GetComponent<Academy>().owner==player){
+                Destroy(aca, 2);
+            }
+        }
     }
 
     //Funcion para que todos los objectos del enemigo mueran
@@ -251,6 +319,12 @@ public class UserInput : MonoBehaviour
                 Destroy(army, 2);
             }
         }
+        games = GameObject.FindGameObjectsWithTag("academy");
+        foreach(var aca in games){ //Miro todos los Unit y si hay alguno de owner lo sumo
+            if(aca.GetComponent<Academy>().owner!=player){
+                Destroy(aca, 2);
+            }
+        }
     }
 	
 	private void demolishBuildings() {
@@ -263,6 +337,18 @@ public class UserInput : MonoBehaviour
 				b.changeModel("demolished");
 			}
         }
+	}
+	
+	private void increaseGold() {
+		player.resourceAmounts[RTSObject.ResourceType.Gold] += 1000;
+	}
+	
+	private void increaseFood() {
+		player.resourceAmounts[RTSObject.ResourceType.Food] += 1000;
+	}
+	
+	private void increaseWood() {
+		player.resourceAmounts[RTSObject.ResourceType.Wood] += 1000;
 	}
 
 	private void cameraToSelectedObject()
