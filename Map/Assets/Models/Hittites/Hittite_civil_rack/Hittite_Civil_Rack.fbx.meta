@@ -168,6 +168,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
+      - path: Armature.001
       name: Armature.001|Hittite_Civil_Rack_Building
       takeName: Armature.001|Hittite_Civil_Rack_Building
       firstFrame: 0
