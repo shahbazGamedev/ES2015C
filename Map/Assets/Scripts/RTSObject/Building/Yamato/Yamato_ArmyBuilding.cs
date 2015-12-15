@@ -9,9 +9,9 @@ public class Yamato_ArmyBuilding : ArmyBuilding
 	{
 		base.Awake ();
 		objectName = "Yamato Army Building";
-		actions = new string[] {"Archer", "Archer Advanced", "Cavalry", "Cavalry Advanced", "Samurai", "Samurai Advanced"};
+		actions = new string[] {"Archer", "Cavalry", "Samurai", "Samurai Advanced"};
         baseDefense = 5;
-		getModels("Prefabs/Yamato_ArmyBuilding", "Prefabs/Yamato_ArmyBuilding_onConstruction", "Prefabs/Yamato_ArmyBuilding_Semidemolished");
+		getModels("Prefabs/Yamato_ArmyBuilding", "Prefabs/Yamato_ArmyBuilding_onConstruction", "Prefabs/Yamato Army Semidemolished");
     }
 
 	/*** Metodes interns accessibles per les subclasses ***/
@@ -22,14 +22,8 @@ public class Yamato_ArmyBuilding : ArmyBuilding
 		case "Archer":
 			creationUnit = Resources.Load ("Prefabs/Yamato_archer") as GameObject;
 			break;
-		case "Archer Advanced":
-			creationUnit = Resources.Load ("Prefabs/Yamato_archer_advanced") as GameObject;
-			break;
 		case "Cavalry":
 			creationUnit = Resources.Load ("Prefabs/Yamato_cavalry") as GameObject;
-			break;
-		case "Cavalry Advanced":
-			creationUnit = Resources.Load ("Prefabs/Yamato_cavalry_advanced") as GameObject;
 			break;
 		case "Samurai":
 			creationUnit = Resources.Load ("Prefabs/Yamato_samurai") as GameObject;

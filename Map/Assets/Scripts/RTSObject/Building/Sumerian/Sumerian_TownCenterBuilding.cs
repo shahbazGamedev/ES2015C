@@ -9,7 +9,7 @@ public class Sumerian_TownCenterBuilding : TownCenterBuilding {
 		base.Awake();
 		objectName = "Sumerian Town Center";
         baseDefense = 5;
-		actions = new string[] { "Civil Unit", "Civil Unit Axe", "Civil Unit Pick", "Civil Unit Rack"};
+		actions = new string[] { "Civil Unit", "Civil Unit Axe"};
 		getModels("Prefabs/Sumerian_TownCenter", "Prefabs/Sumerian_TownCenter_onConstruction", "Prefabs/Sumerian_TownCenter_Semidemolished");
     }
 
@@ -23,12 +23,6 @@ public class Sumerian_TownCenterBuilding : TownCenterBuilding {
 			break;
 		case "Civil Unit Axe":
 			creationUnit = Resources.Load ("Prefabs/Sumerian_civil_axe") as GameObject;
-			break;
-		case "Civil Unit Pick":
-			creationUnit = Resources.Load ("Prefabs/Sumerian_civil_pick") as GameObject;
-			break;
-		case "Civil Unit Rack":
-			creationUnit = Resources.Load ("Prefabs/Sumerian_civil_rack") as GameObject;
 			break;
 		}
 		base.CreateUnit (unitName);

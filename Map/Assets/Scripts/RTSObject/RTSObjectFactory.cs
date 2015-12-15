@@ -22,26 +22,12 @@ public static class RTSObjectFactory
                 { PlayerCivilization.Sumerians, "Prefabs/Sumerian_archer" },
                 { PlayerCivilization.Yamato, "Prefabs/Yamato_archer" },
             } },
-            { RTSObjectType.UnitArcherAdvanced, new Dictionary<PlayerCivilization, string>()
-            {
-                { PlayerCivilization.Hittites, "Prefabs/Hittite_archer_advanced" },
-                { PlayerCivilization.Persians, "Prefabs/Persian_archer_advanced" },
-                { PlayerCivilization.Sumerians, "Prefabs/Sumerian_archer_advanced" },
-                { PlayerCivilization.Yamato, "Prefabs/Yamato_archer_advanced" },
-            } },
             { RTSObjectType.UnitCavalry, new Dictionary<PlayerCivilization, string>()
             {
                 { PlayerCivilization.Hittites, "Prefabs/Hittite_cavalry" },
                 { PlayerCivilization.Persians, "Prefabs/Persian_cavalry" },
                 { PlayerCivilization.Sumerians, "Prefabs/Sumerian_cavalry" },
                 { PlayerCivilization.Yamato, "Prefabs/Yamato_cavalry" },
-            } },
-            { RTSObjectType.UnitCavalryAdvanced, new Dictionary<PlayerCivilization, string>()
-            {
-                { PlayerCivilization.Hittites, "Prefabs/Hittite_cavalry_advanced" },
-                { PlayerCivilization.Persians, "Prefabs/Persian_cavalry_advanced" },
-                { PlayerCivilization.Sumerians, "Prefabs/Sumerian_cavalry_advanced" },
-                { PlayerCivilization.Yamato, "Prefabs/Yamato_cavalry_advanced" },
             } },
             { RTSObjectType.UnitCivil, new Dictionary<PlayerCivilization, string>()
             {
@@ -88,10 +74,10 @@ public static class RTSObjectFactory
 
             { RTSObjectType.BuildingAcademy, new Dictionary<PlayerCivilization, string>()
             {
-                { PlayerCivilization.Hittites, "Prefabs/Hittite_Academy" },
-                { PlayerCivilization.Persians, "Prefabs/Persian_Academy" },
-                { PlayerCivilization.Sumerians, "Prefabs/Sumerian_Academy" },
-                { PlayerCivilization.Yamato, "Prefabs/Yamato_Academy" },
+                { PlayerCivilization.Hittites, "Prefabs/Hittite_academy" },
+                { PlayerCivilization.Persians, "Prefabs/Persian_academy" },
+                { PlayerCivilization.Sumerians, "Prefabs/Sumerian_academy" },
+                { PlayerCivilization.Yamato, "Prefabs/Yamato_academy" },
             } },
             { RTSObjectType.BuildingArmyBuilding, new Dictionary<PlayerCivilization, string>()
             {
@@ -137,10 +123,10 @@ public static class RTSObjectFactory
             } },
             { RTSObjectType.BuildingUniversity, new Dictionary<PlayerCivilization, string>()
             {
-                { PlayerCivilization.Hittites, "Prefabs/Hittite_University" },
-                { PlayerCivilization.Persians, "Prefabs/Persian_university" }, //No tiene
-                { PlayerCivilization.Sumerians, "Prefabs/Sumerian_university" },//No tiene
-                { PlayerCivilization.Yamato, "Prefabs/Yamato_university" },//No tiene
+                { PlayerCivilization.Hittites, "Prefabs/Hittite_university" },
+                { PlayerCivilization.Persians, "Prefabs/Persian_university" },
+                { PlayerCivilization.Sumerians, "Prefabs/Sumerian_university" },
+                { PlayerCivilization.Yamato, "Prefabs/Yamato_university" },
             } }
         };
 

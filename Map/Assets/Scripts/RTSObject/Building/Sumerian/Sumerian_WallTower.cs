@@ -11,6 +11,5 @@ public class Sumerian_WallTower : Building {
 		cost = 250;
 		hitPoints = maxHitPoints = 900;
         baseDefense = 5;
-        getModels("Prefabs/Sumerian_WallTower", "Prefabs/Sumerian_WallTower_onConstruction", "Prefabs/Sumerian_WallTower_Semidemolished");
     }
 }
