@@ -43,10 +43,6 @@ public class Building : RTSObject
 	/// <summary>While building, number of "partial" hit points, to build at a consistent rate.</summary>
 	private float fractionalHitPoints = 0.0f;
 
-	// Para el clip
-	
-
-
 	/*** Metodes per defecte de Unity ***/
 
 	protected override void Awake ()
@@ -263,24 +259,15 @@ public class Building : RTSObject
 	
 	public void changeModel (string estat)
 	{
-
-
-
 		if (estat == "finished") {
 			ReplaceChildWithChildFromGameObjectTemplate (finishedModel);
-			AudioClip normal = Resources.Load ("Sounds/Building/Ta_Da") as AudioClip;
-			audio.PlayOneShot (normal);
 		} else if (estat == "demolished") {
 			//var exp = demolishedModel.GetComponent<ParticleSystem>();
 			ReplaceChildWithChildFromGameObjectTemplate (demolishedModel);
-			AudioClip semi = Resources.Load ("Sounds/Building/Pickaxe" ) as AudioClip;
-			audio.PlayOneShot (semi);
 			//exp.Play();
 			//Destroy(gameObject, exp.duration);
 		} else if (estat == "construction") {
 			ReplaceChildWithChildFromGameObjectTemplate (constructionModel);
-			AudioClip onconst = Resources.Load ("Sounds/Building/Fire_Burning") as AudioClip;
-			audio.PlayOneShot (onconst);
 		}
 
 		var guo = new GraphUpdateObject (this.GetComponent<BoxCollider> ().bounds);

@@ -77,7 +77,7 @@ public class Mini : MonoBehaviour
         itsMainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		cameraPoint = GameObject.Find ("CameraPoint");
 		image = GameObject.Find("HUDMiniMapImage").GetComponent<RawImage>();
-		canvas = GameObject.Find("HUD").GetComponent<Canvas>();
+		canvas = GameObject.Find("CanvasHUD").GetComponent<Canvas>();
 		Vector2 origin = new Vector2 (image.transform.position.x - (image.GetPixelAdjustedRect ().width * canvas.scaleFactor) / 2, image.transform.position.y - (image.GetPixelAdjustedRect ().height * canvas.scaleFactor) / 2);
 		float miniscale = Terrain.activeTerrain.terrainData.heightmapHeight / (image.GetPixelAdjustedRect ().height*canvas.scaleFactor);
 		mp = new Vector2 (cameraPoint.transform.position.x / miniscale + origin.x, cameraPoint.transform.position.z / miniscale + origin.y);
