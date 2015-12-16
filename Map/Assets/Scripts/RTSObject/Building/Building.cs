@@ -261,13 +261,20 @@ public class Building : RTSObject
 	{
 		if (estat == "finished") {
 			ReplaceChildWithChildFromGameObjectTemplate (finishedModel);
+			AudioClip normal = Resources.Load ("Sounds/Building/Ta_Da") as AudioClip;
+			audio.PlayOneShot (normal);
 		} else if (estat == "demolished") {
 			//var exp = demolishedModel.GetComponent<ParticleSystem>();
 			ReplaceChildWithChildFromGameObjectTemplate (demolishedModel);
+			AudioClip semi = Resources.Load ("Sounds/Building/Pickaxe" ) as AudioClip;
+			audio.PlayOneShot (semi);
+			
 			//exp.Play();
 			//Destroy(gameObject, exp.duration);
 		} else if (estat == "construction") {
 			ReplaceChildWithChildFromGameObjectTemplate (constructionModel);
+			AudioClip onconst = Resources.Load ("Sounds/Building/Fire_Burning") as AudioClip;
+			audio.PlayOneShot (onconst);
 		}
 
 		var guo = new GraphUpdateObject (this.GetComponent<BoxCollider> ().bounds);
