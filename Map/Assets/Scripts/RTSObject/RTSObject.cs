@@ -12,7 +12,7 @@ public class RTSObject : MonoBehaviour
 	public string objectName = "Generic RTS Object";     // Nom del objecte
 	public int cost = 50, hitPoints = 100, maxHitPoints = 100; // Cost, punts de vida i vida maxima
 	/// <summary>Default movement speed. Leave at zero if the object can't move.</summary>
-	public float baseMoveSpeed = 0;
+	protected float baseMoveSpeed = 0;
 	
 	/// <summary>Default speed factor of building (x1 = default building time, x2 = half building time, etc). Leave at zero if the unit can't build.</summary>
 	protected float baseBuildFactor = 0;

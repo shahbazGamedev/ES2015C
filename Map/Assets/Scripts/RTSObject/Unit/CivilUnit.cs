@@ -8,7 +8,7 @@ public class CivilUnit : Unit
 
 	public float collectionAmount, capacity = 50.0f;		// Dades sobre la recolecció
 	private int harvestingState;                            // Estat recoleccio, 1: recolectant, 2: deixant
-	public int harvestingSpeed = 5;
+	
 	public bool harvesting = false;                         // Indicadors d'estat de la unitat
 	public bool collecting = false;
 
@@ -432,8 +432,8 @@ public void StopBuildingLocationSelection() {
 			harvestingState = 2;
 		} else if (resourceDeposit && !resourceDeposit.isEmpty ()) {
 			collecting = true;
-			resourceDeposit.Remove (harvestingSpeed * Time.deltaTime);
-			collectionAmount += (harvestingSpeed * Time.deltaTime);
+			resourceDeposit.Remove (5 * Time.deltaTime);
+			collectionAmount += (5 * Time.deltaTime);
 		}
 	}
 	

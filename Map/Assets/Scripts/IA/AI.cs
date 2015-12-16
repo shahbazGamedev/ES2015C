@@ -343,7 +343,6 @@ public class AI : MonoBehaviour
         }
         GameObject civil = Instantiate(RTSObjectFactory.GetObjectTemplate(RTSObjectType.UnitCivil, civilitzation), coords, Quaternion.identity) as GameObject;
         civil.GetComponent<CivilUnit>().owner = artificialIntelligence;
-		civil.AddComponent<CitizenAI> ();
         civils.Add(civil);
 
         numberCivils = numberCivils +1;
@@ -426,25 +425,21 @@ public class AI : MonoBehaviour
             case 1:                 
 			civils[0].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
                 break;
-            
-			case 2:
+            case 2:
 			civils[0].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
-			civils[1].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 1;
+			civils[1].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
                 break;
-			// Así solo se "dominan" 2 unidades. El resto está libre para recolectar.
-			// ya que tal y como está esto, no se crea ninguna más.
-            /*case 3:
+            case 3:
 			civils[0].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
-			civils[1].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 1;
-            civils[2].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 3;
+			civils[1].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
+            civils[2].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 1;
                 break;
             case 4:
 			civils[0].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
-			civils[1].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 1;
-			civils[2].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 3;
-
-            //civils[3].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 0;
-                break;*/
+			civils[1].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 2;
+			civils[2].GetComponent<CivilUnit>().GetComponent<CitizenAI> ().AIState = 1;
+                //civils[3].GetComponent<CivilUnit>().StartHarvest(null, true, "food");
+                break;
             }
         }
    
