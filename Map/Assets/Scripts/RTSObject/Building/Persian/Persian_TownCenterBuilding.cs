@@ -9,21 +9,8 @@ public class Persian_TownCenterBuilding : TownCenterBuilding {
 		base.Awake();
 		objectName = "Persian Town Center";
         baseDefense = 5;
-		actions = new string[] { "Civil Unit", "Civil Unit Axe" };
+        spawnableUnits = new RTSObjectType[] { RTSObjectType.UnitCivil, RTSObjectType.UnitCivilAxe,
+            RTSObjectType.UnitCivilPick, RTSObjectType.UnitCivilRack };
+        getModels("Prefabs/Persian_TownCenter", "Prefabs/Persian_TownCenter_onConstruction", "Prefabs/Persian_TownCenter_Semidemolished");
     }
-
-	/*** Metodes interns accessibles per les subclasses ***/
-	
-	protected override void CreateUnit (string unitName)
-	{
-		switch (unitName) {
-		case "Civil Unit":
-			creationUnit = Resources.Load ("Prefabs/Persian_civil") as GameObject;
-			break;
-		case "Civil Unit Axe":
-			creationUnit = Resources.Load ("Prefabs/Persian_civil_axe") as GameObject;
-			break;
-		}
-		base.CreateUnit (unitName);
-	}
 }

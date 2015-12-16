@@ -15,9 +15,6 @@ public class Persian_warrior_advanced : Unit
         baseDefense = 10;
         baseAttackSpeed = 2.0f;
 		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Persian_warrior_advanced_AC") as RuntimeAnimatorController;
-		walkingSound = Resources.Load ("Sounds/Persian_warrior_Walk") as AudioClip;
-		runningSound = Resources.Load ("Sounds/Persian_warrior_Run") as AudioClip;
-		fightSound = Resources.Load ("Sounds/Persian_warrior_Fight") as AudioClip;
-		dieSound = Resources.Load ("Sounds/Persian_warrior_Die") as AudioClip;
+		chargeSounds ("Persian_warrior");
     }
 }

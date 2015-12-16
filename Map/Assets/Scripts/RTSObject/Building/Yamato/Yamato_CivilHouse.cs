@@ -8,6 +8,7 @@ public class Yamato_CivilHouse : Building {
     {
 		base.Awake();
 		objectName = "Yamato Civil House";
+		tag = "civilHouse";
 		cost = 50;
 		hitPoints = maxHitPoints = 200;
         baseDefense = 5;

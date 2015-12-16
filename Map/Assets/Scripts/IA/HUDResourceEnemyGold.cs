@@ -47,6 +47,7 @@ public class HUDResourceEnemyGold : HUDElementEnemy
         // TODO: Find the quantity of the resource in the player and update it
         //textComponent.text = EnemyPlayer1.GetResourceAmount(resourceType).ToString();
         //int myInt = (int)Math.Ceiling(artificialIntelligence2.resourceAmounts[RTSObject.ResourceType.Wood]);
+            
         int aux = (int)artificialIntelligence2.resourceAmounts[RTSObject.ResourceType.Gold];
         textComponent.text = (aux).ToString();
 

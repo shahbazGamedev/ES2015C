@@ -43,6 +43,40 @@ ModelImporter:
     100070: Upper_Leg_L
     100072: Upper_Leg_R
     100074: //RootNode
+    100076: abdomen
+    100078: antebrazo_L
+    100080: antebrazo_R
+    100082: Arrow
+    100084: brazo_L
+    100086: brazo_R
+    100088: cabeza
+    100090: cuello
+    100092: dedos_mano2_L
+    100094: dedos_mano2_R
+    100096: dedos_mano_L
+    100098: dedos_mano_R
+    100100: dedos_pie_L
+    100102: dedos_pie_R
+    100104: femur_L
+    100106: femur_R
+    100108: Hacha
+    100110: mano_L
+    100112: mano_R
+    100114: Martillo
+    100116: pecho
+    100118: Pick
+    100120: pie_L
+    100122: pie_L_control
+    100124: pie_R
+    100126: pie_R_control
+    100128: pulga2_L
+    100130: pulga2_R
+    100132: pulgar1_L
+    100134: pulgar1_R
+    100136: root
+    100138: String
+    100140: tibia_L
+    100142: tibia_R
     400000: Armature
     400002: Body
     400004: Bone
@@ -81,6 +115,40 @@ ModelImporter:
     400070: Upper_Leg_L
     400072: Upper_Leg_R
     400074: //RootNode
+    400076: abdomen
+    400078: antebrazo_L
+    400080: antebrazo_R
+    400082: Arrow
+    400084: brazo_L
+    400086: brazo_R
+    400088: cabeza
+    400090: cuello
+    400092: dedos_mano2_L
+    400094: dedos_mano2_R
+    400096: dedos_mano_L
+    400098: dedos_mano_R
+    400100: dedos_pie_L
+    400102: dedos_pie_R
+    400104: femur_L
+    400106: femur_R
+    400108: Hacha
+    400110: mano_L
+    400112: mano_R
+    400114: Martillo
+    400116: pecho
+    400118: Pick
+    400120: pie_L
+    400122: pie_L_control
+    400124: pie_R
+    400126: pie_R_control
+    400128: pulga2_L
+    400130: pulga2_R
+    400132: pulgar1_L
+    400134: pulgar1_R
+    400136: root
+    400138: String
+    400140: tibia_L
+    400142: tibia_R
     4300000: Bow
     4300002: Body
     7400000: Default Take

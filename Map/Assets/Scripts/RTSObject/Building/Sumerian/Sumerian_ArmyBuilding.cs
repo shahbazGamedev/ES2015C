@@ -9,29 +9,8 @@ public class Sumerian_ArmyBuilding : ArmyBuilding
 	{
 		base.Awake ();
 		objectName = "Sumerian Army Building";
-		actions = new string[] {"Archer", "Cavalry", "Warrior", "Warrior Advanced"};
+        spawnableUnits = new RTSObjectType[] { RTSObjectType.UnitArcher, RTSObjectType.UnitCavalry, RTSObjectType.UnitWarrior};
         baseDefense = 5;
-		getModels("Prefabs/Sumerian_ArmyBuilding", "Prefabs/Sumerian_ArmyBuilding_onConstruction", "Prefabs/Sumerian_army_building_semidemolished");
+		getModels("Prefabs/Sumerian_ArmyBuilding", "Prefabs/Sumerian_ArmyBuilding_onConstruction", "Prefabs/Sumerian_ArmyBuilding_Semidemolished");
     }
-
-	/*** Metodes interns accessibles per les subclasses ***/
-	
-	protected override void CreateUnit (string unitName)
-	{
-		switch (unitName) {
-		case "Archer":
-			creationUnit = Resources.Load ("Prefabs/Sumerian_archer") as GameObject;
-			break;
-		case "Cavalry":
-			creationUnit = Resources.Load ("Prefabs/Sumerian_cavalry") as GameObject;
-			break;
-		case "Warrior":
-			creationUnit = Resources.Load ("Prefabs/Sumerian_warrior") as GameObject;
-			break;
-		case "Warrior Advanced":
-			creationUnit = Resources.Load ("Prefabs/Sumerian_warrior_advanced") as GameObject;
-			break;
-		}
-		base.CreateUnit (unitName);
-	}
 }

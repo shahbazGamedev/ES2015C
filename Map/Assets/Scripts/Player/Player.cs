@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     public bool human;
     public float initialFood, initialGold, initialWood;
     public PlayerCivilization civilization;
-
+	public int population = 0, maxPopulation = 20;
     private bool findingPlacement = false;
 
     public ArrayList objetivos;
@@ -37,20 +37,11 @@ public class Player : MonoBehaviour {
     /// </summary>
     public Dictionary<RTSObject.ResourceType, float> resourceAmounts;
 
-    void Start ()
+    void Awake()
     {
-        this.objetivos = new ArrayList();
-
-        // Set the initial resource amounts
-        resourceAmounts = new Dictionary<RTSObject.ResourceType, float>();
-        resourceAmounts[RTSObject.ResourceType.Food] = initialFood;
-        resourceAmounts[RTSObject.ResourceType.Gold] = initialGold;
-        resourceAmounts[RTSObject.ResourceType.Wood] = initialWood;
-        
-        Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
-		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
-
         // Load player civilization from menu parameters
+        // We have to do this in Awake() and not in Start() because some scripts
+        // may depend on the player civilization on their initialization routines
         var menuGameParametersObject = GameObject.Find("MenuGameParameters");
         var menuGameParameters = (menuGameParametersObject != null) ?
             menuGameParametersObject.GetComponent<MenuGameParameters>() : null;
@@ -69,13 +60,28 @@ public class Player : MonoBehaviour {
             Debug.Log("Can't find the menu game parameters object (either it's not correctly " +
                 "configured, or you launched the game directly from the campaign scene). Setting defaults.");
         }
+    }
+
+    void Start ()
+    {
+        this.objetivos = new ArrayList();
+
+        // Set the initial resource amounts
+        resourceAmounts = new Dictionary<RTSObject.ResourceType, float>();
+        resourceAmounts[RTSObject.ResourceType.Food] = initialFood;
+        resourceAmounts[RTSObject.ResourceType.Gold] = initialGold;
+        resourceAmounts[RTSObject.ResourceType.Wood] = initialWood;
+        
+        Texture2D cursorTexture = Resources.Load("HUD/Cursors/cursor_normal") as Texture2D;
+		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
 
         // Spawn initial elements
         if (human==true) {
             SpawnInitialTownCenter();
             SpawnInitialCivilUnit();
             SpawnInitialMilitaryUnit();
-
+			PlaceResources pr = new PlaceResources();
+			pr.Start();
         }
     }
 
@@ -127,6 +133,7 @@ public class Player : MonoBehaviour {
         var civilUnit = (GameObject)Instantiate(civilUnitTemplate, civilUnitSpawnPoint, Quaternion.identity);
         civilUnit.GetComponent<RTSObject>().owner = this;
         civilUnit.transform.parent = transform; // Should have no effect, but easier for debugging
+		population++;
     }
 
 
@@ -152,6 +159,7 @@ public class Player : MonoBehaviour {
         var militaryUnit = (GameObject)Instantiate(militaryUnitTemplate, militaryUnitSpawnPoint, Quaternion.identity);
         militaryUnit.GetComponent<RTSObject>().owner = this;
         militaryUnit.transform.parent = transform; // Should have no effect, but easier for debugging
+		population++;
     }
 
     /// <summary>

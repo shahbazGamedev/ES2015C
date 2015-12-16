@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ADS : MonoBehaviour
 {
@@ -10,22 +11,23 @@ public class ADS : MonoBehaviour
     aiState estado;
     int speed;
     float dist;
+    public Animator anim;
 
     // Use this for initialization
     void Start()
     {
-        if (GetComponent<RTSObject>().owner != GameObject.Find("EnemyPlayer1").GetComponent<Player>())
-        {
-            GetComponent<ADS>().enabled = false;
-            GetComponent<MovimientoAleatorioCivil>().enabled = false;
-        }
-        else
-        {
+        if (!this.gameObject.GetComponent<RTSObject>().owner.human) {  //  Se comprueba si el propietario es el jugador(human)
+            GetComponent<MovimientoAleatorioCivil>().enabled = true;
+            GetComponent<ADS>().enabled = true;
             speed = 2;
             hit = new RaycastHit();
             estado = aiState.wandering;
-            GetComponent<RTSObject>().owner = GameObject.Find("EnemyPlayer1").GetComponent<Player>();
             enlace = GameObject.Find("EnemyPlayer1");
+            anim = gameObject.GetComponent<Animator>();
+        }
+        else {
+            GetComponent<MovimientoAleatorioCivil>().enabled = false;
+            GetComponent<ADS>().enabled = false;
         }
     }
 
@@ -39,6 +41,7 @@ public class ADS : MonoBehaviour
         if (enlace.GetComponent<Player>().objetivos.Count > 0) //se mira si hay objetivos o no
         {
             estado = aiState.attacking; //estado de atacar
+            
         }
         else
         {
@@ -52,25 +55,29 @@ public class ADS : MonoBehaviour
         //transform.Translate(0, 0, 1 * Time.deltaTime * Speed);
     }
 
-    public void Attack()
+    public void Attack() // funcion que controla el ataque
     {
-        if (enlace.GetComponent<Player>().objetivos.Count > 0) { 
+        if (enlace.GetComponent<Player>().objetivos.Count > 0) {
             targetlocal = (RTSObject)enlace.GetComponent<Player>().objetivos[0];
-            transform.LookAt(targetlocal.transform);
-            GetComponent<MovimientoAleatorioCivil>().enabled = false; // desactivo el movimiento aleatorio
-            dist = Vector3.Distance(transform.position, targetlocal.transform.position);
-            if (targetlocal.GetComponent<RTSObject>().hitPoints == 0)
-            {
-                enlace.GetComponent<Player>().objetivos.Remove(targetlocal);
-            }
-            if (dist > 2)
-            {
-                transform.Translate(0, 0, 1 * speed * Time.deltaTime);
-            }
-            else
-            {
-                transform.Translate(0, 0, 0);
-                GetComponent<RTSObject>().AttackObject(targetlocal);
+            if (targetlocal != null) { 
+                transform.LookAt(targetlocal.transform);
+                GetComponent<MovimientoAleatorioCivil>().enabled = false; // desactivo el movimiento aleatorio
+                dist = Vector3.Distance(transform.position, targetlocal.transform.position);
+                if (targetlocal.GetComponent<RTSObject>().hitPoints == 0)
+                {
+                    enlace.GetComponent<Player>().objetivos.Remove(targetlocal);
+                }
+                if (dist > 2)
+                {
+                    transform.Translate(0, 0, 1 * speed * Time.deltaTime);
+                    anim.SetBool("IsWalking", true);
+                }
+                else
+                {
+                    transform.Translate(0, 0, 0);
+                    anim.SetBool("IsWalking", false);
+                    GetComponent<RTSObject>().AttackObject(targetlocal);
+                }
             }
         }
     }
@@ -83,19 +90,23 @@ public class ADS : MonoBehaviour
     public void detection()
     {
         //Debug.Log("VOY MIRANDO");
-        if ((Physics.Raycast(transform.position, transform.position + new Vector3(0, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(0, 0, -40), out hit, 10))
-            || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, 0), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, 0), out hit, 10))
-            || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(40, 0, -40), out hit, 10))
-            || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, 40), out hit, 10)) || (Physics.Raycast(transform.position, transform.position + new Vector3(-40, 0, -40), out hit, 10)))
+        if (Physics.SphereCast(transform.position, 15f, transform.forward, out hit, 20)) // sistema de deteccion en esfera
         {
-            if (hit.collider.gameObject.GetComponent<RTSObject>().owner != GetComponent<RTSObject>().owner)
-            { // compruebo si el owner es de otro equipo
-                if (!enlace.GetComponent<Player>().objetivos.Contains(hit.collider.gameObject.GetComponent<RTSObject>())) // compruebo si el objetivo ya esta en la lista 
+            Debug.Log("HE DETECTADO ALGO DE OWNER---------------------------------------------->" + hit.collider.gameObject.GetComponent<RTSObject>().owner);
+            try
+            {
+                if (hit.collider != null && hit.collider.gameObject.GetComponent<RTSObject>().owner.human == true)
                 {
-                    enlace.GetComponent<Player>().objetivos.Add(hit.collider.gameObject.GetComponent<RTSObject>()); // añado el objetivo a la lista de objetivos
-                    Debug.Log("HE DETECTADO UN OBJETO DE CLASE: " + hit.collider.tag);
-                    Debug.Log("TENGO EL TARGET AÑADIDO-->" + targetlocal);
+                    if (!enlace.GetComponent<Player>().objetivos.Contains(hit.collider.gameObject.GetComponent<RTSObject>())) // compruebo si el objetivo ya esta en la lista de objetivos
+                    {
+                        enlace.GetComponent<Player>().objetivos.Add(hit.collider.gameObject.GetComponent<RTSObject>()); // añado el objetivo a la lista de objetivos
+                        //Debug.Log("HE DETECTADO UN OBJETO DE CLASE: " + hit.collider.tag);
+                        //Debug.Log("TENGO EL TARGET AÑADIDO-->" + targetlocal);
+                    }
                 }
+            }
+            catch (NullReferenceException e)
+            {
             }
         }
     }

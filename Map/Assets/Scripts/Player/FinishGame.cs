@@ -59,7 +59,6 @@ int quienQueda(){
 		}
 	}
 	games = GameObject.FindGameObjectsWithTag("armyBuilding");
-
 	foreach(var army in games){ //Miro todos los TownCenterBuilding y si hay alguno de owner lo sumo
 		if(army.GetComponent<ArmyBuilding>().owner.human){
 			sumaH += 1;
@@ -68,7 +67,15 @@ int quienQueda(){
 			sumaE1 += 1;
 		}
 	}
-
+	games = GameObject.FindGameObjectsWithTag("academy");
+	foreach(var aca in games){ //Miro todos los TownCenterBuilding y si hay alguno de owner lo sumo
+		if(aca.GetComponent<Academy>().owner.human){
+			sumaH += 1;
+		}
+		else{
+			sumaE1 += 1;
+		}
+	}
 	if(sumaE1 == 0){ //Si no e sumado ningun enemigo HE GANADO
 		return 1;
 	}
