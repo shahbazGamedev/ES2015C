@@ -450,8 +450,11 @@ public class RTSObject : MonoBehaviour
 	protected void ExtendBounds (Transform t, ref Bounds b)
 	{
 		foreach (var rend in t.GetComponentsInChildren<Renderer>().Where(r => r != null && !r.name.StartsWith("Minimap"))) {
-			b.Encapsulate (rend.bounds.min);
-			b.Encapsulate (rend.bounds.max);
+            if (rend.bounds.min != Vector3.zero && rend.bounds.max != Vector3.zero)
+            {
+                b.Encapsulate(rend.bounds.min);
+                b.Encapsulate(rend.bounds.max);
+            }
 		}
 		
 		foreach (Transform t2 in t) {
