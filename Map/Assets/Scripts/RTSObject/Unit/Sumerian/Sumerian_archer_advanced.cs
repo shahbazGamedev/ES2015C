@@ -14,6 +14,7 @@ public class Sumerian_archer_advanced : Unit
 		hitPoints = maxHitPoints = 125;
 		baseAttackStrength = 25;
         baseDefense = 5;
+        baseAttackRange = 10;
         baseAttackSpeed = 2.0f;
 		anim.runtimeAnimatorController = Resources.Load ("AnimatorControllers/Sumerian_archer_advanced_AC") as RuntimeAnimatorController;
 		chargeSounds ("Sumerian_archer");
