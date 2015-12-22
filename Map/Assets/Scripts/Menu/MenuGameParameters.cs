@@ -29,6 +29,13 @@ public class MenuGameParameters : MonoBehaviour
 
     void Start ()
     {
+        // Destroy previous instances of this object
+        foreach (var mgp in GameObject.FindObjectsOfType<MenuGameParameters>())
+        {
+            if (mgp != this)
+                Destroy(mgp.gameObject);
+        }
+
         // Make sure this object is kept between scenes
         DontDestroyOnLoad(this);
 	}
