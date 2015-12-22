@@ -8,7 +8,9 @@ using System.Collections.Generic;
 public enum RTSObjectType
 {
     UnitArcher,
+    UnitArcherAdvanced,
     UnitCavalry,
+    UnitCavalryAdvanced,
     UnitCivil,
     UnitCivilAxe,
     UnitCivilPick,
